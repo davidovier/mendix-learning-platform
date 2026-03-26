@@ -1,0 +1,2064 @@
+{
+  "domain-model": [
+    {
+      "id": "domain-model-0",
+      "topicId": "domain-model",
+      "front": "Overview",
+      "back": "A domain model consists of entities and associations that define an application's data layer. Mendix automatically manages the underlying database, eliminating manual table creation and query writing.\n\n---",
+      "tags": [
+        "domain-model"
+      ]
+    },
+    {
+      "id": "domain-model-1",
+      "topicId": "domain-model",
+      "front": "Entities",
+      "back": "An entity represents a class of real-world objects (customers, invoices, etc.). Instances of entities are called objects. Entities are defined by their properties, described using **attributes**, which store small pieces of information like names or dates.",
+      "tags": [
+        "domain-model"
+      ]
+    },
+    {
+      "id": "domain-model-2",
+      "topicId": "domain-model",
+      "front": "Entity Types",
+      "back": "Mendix supports four entity types:\n\n| Type | Description | Color |\n|------|-------------|-------|\n| **Persistable Entity** | Creates a database table | Blue |\n| **Non-Persistable Entity** | Stored in runtime memory only, never committed to database | Orange |\n| **External Entity** | Links to datasets from shared data sources in Mendix Catalog | Purple |\n| **View Entity** | Read-only result sets from OQL queries | Green |",
+      "tags": [
+        "domain-model"
+      ]
+    },
+    {
+      "id": "domain-model-3",
+      "topicId": "domain-model",
+      "front": "General Section",
+      "back": "- **Name**: Unique within a module's domain model; used in forms, microflows, queries, and constraints\n- **Export Level**: Controls access for add-on/solution modules (Hidden or Usable)\n- **Generalization**: Enables inheritance - specialized entity inherits attributes, associations, events, and properties from its generalized entity\n- **Image**: Associates a visual representation displayed in domain model\n- **Persistable**: Defines whether instances can be stored in the database",
+      "tags": [
+        "domain-model"
+      ]
+    },
+    {
+      "id": "domain-model-4",
+      "topicId": "domain-model",
+      "front": "System Members",
+      "back": "Entities can optionally store automatic system information:\n\n- **createdDate**: Records when objects were created\n- **changedDate**: Records when objects were last committed\n- **owner**: Association to the User entity that created the object\n- **changedBy**: Association to the User entity that last modified the object",
+      "tags": [
+        "domain-model"
+      ]
+    },
+    {
+      "id": "domain-model-5",
+      "topicId": "domain-model",
+      "front": "Entity Dialog Tabs",
+      "back": "- Attributes\n- Associations\n- Validation Rules\n- Event Handlers\n- Indexes\n- Access Rules\n- Documentation\n\n---",
+      "tags": [
+        "domain-model"
+      ]
+    },
+    {
+      "id": "domain-model-6",
+      "topicId": "domain-model",
+      "front": "Attributes",
+      "back": "Attributes are characteristics that describe and identify entities in Mendix.",
+      "tags": [
+        "domain-model"
+      ]
+    },
+    {
+      "id": "domain-model-7",
+      "topicId": "domain-model",
+      "front": "Attribute Types",
+      "back": "| Type | Description | Notes |\n|------|-------------|-------|\n| **AutoNumber** | Automatically generated numbers | Default value determines first number |\n| **Binary** | File or raw data storage | Only for persistable entities |\n| **Boolean** | True or false values | |\n| **Date and time** | Point in time accurate to milliseconds | |\n| **Decimal** | High-precision calculations | Use for money amounts |\n| **Enumeration** | List of predefined attributes | |\n| **Hashed string** | Hashed using app settings algorithm | |\n| **Integer** | Whole numbers | Max 2^31-1, Min -2^31 |\n| **Long** | Whole numbers | Max 2^63-1, Min -2^63 |\n| **String** | Text containing letters, spaces, numbers | |",
+      "tags": [
+        "domain-model"
+      ]
+    },
+    {
+      "id": "domain-model-8",
+      "topicId": "domain-model",
+      "front": "Attribute Properties",
+      "back": "- **Name**: Identifies the attribute throughout the application\n- **Export Level**: Hidden (default) or Usable\n- **Localization** (Date and time): Converts to UTC before sending to server\n- **String Length**: Limited (default 200) or Unlimited",
+      "tags": [
+        "domain-model"
+      ]
+    },
+    {
+      "id": "domain-model-9",
+      "topicId": "domain-model",
+      "front": "Stored vs Calculated Attributes",
+      "back": "**Stored**: Value persists in the database with configurable default value\n\n**Calculated**: Calculated via microflow each time object is retrieved\n- Not stored in database\n- Cannot be sorted on\n- Uncommitted associated objects cannot be retrieved",
+      "tags": [
+        "domain-model"
+      ]
+    },
+    {
+      "id": "domain-model-10",
+      "topicId": "domain-model",
+      "front": "Attribute Limitations",
+      "back": "- **Non-sortable**: Cannot be used in sort bars\n- **Non-filterable**: Cannot be used in XPath constraints\n- Hashed string: non-filterable\n- Binary: non-sortable and non-filterable\n- Calculated: non-sortable and non-filterable\n\n---",
+      "tags": [
+        "domain-model"
+      ]
+    },
+    {
+      "id": "domain-model-11",
+      "topicId": "domain-model",
+      "front": "Associations",
+      "back": "An association describes a relationship between entities in the domain model, represented by a line or arrow between two entities.",
+      "tags": [
+        "domain-model"
+      ]
+    },
+    {
+      "id": "domain-model-12",
+      "topicId": "domain-model",
+      "front": "One-to-Many",
+      "back": "\"One customer is associated with many orders\" - the owner (Order) stores the association reference. Created by default when drawing associations.",
+      "tags": [
+        "domain-model"
+      ]
+    },
+    {
+      "id": "domain-model-13",
+      "topicId": "domain-model",
+      "front": "Many-to-Many with Default Ownership",
+      "back": "Created by setting type property to `Reference set` with owner as `Default`. Association stored only in owning entity.",
+      "tags": [
+        "domain-model"
+      ]
+    },
+    {
+      "id": "domain-model-14",
+      "topicId": "domain-model",
+      "front": "One-to-One",
+      "back": "Created by setting owner property to `Both`. Both entities refer to each other.",
+      "tags": [
+        "domain-model"
+      ]
+    },
+    {
+      "id": "domain-model-15",
+      "topicId": "domain-model",
+      "front": "Many-to-Many with Dual Ownership",
+      "back": "Both entities are owners. Association stored in both entities, enabling bidirectional navigation.",
+      "tags": [
+        "domain-model"
+      ]
+    },
+    {
+      "id": "domain-model-16",
+      "topicId": "domain-model",
+      "front": "Multiplicity",
+      "back": "Indicated by `1` or `*` at either side:\n- `1` - One object\n- `*` - Many objects",
+      "tags": [
+        "domain-model"
+      ]
+    },
+    {
+      "id": "domain-model-17",
+      "topicId": "domain-model",
+      "front": "Ownership",
+      "back": "- **Single ownership**: Arrow points from owner to non-owner\n- **Dual ownership**: No arrow (both entities own)\n- Ownership allows dynamic relationship changes without rebuilding databases",
+      "tags": [
+        "domain-model"
+      ]
+    },
+    {
+      "id": "domain-model-18",
+      "topicId": "domain-model",
+      "front": "Key Constraints",
+      "back": "- Associations between persistable and non-persistable entities must start from non-persistable entity\n- External entities cannot own associations with local entities\n- Reversing association direction results in data loss\n\n---",
+      "tags": [
+        "domain-model"
+      ]
+    },
+    {
+      "id": "domain-model-19",
+      "topicId": "domain-model",
+      "front": "Basic Process",
+      "back": "1. Open your domain model\n2. Drag an **Entity** from the Toolbox into the model\n3. Name the entity (e.g., \"Customer\")\n4. Double-click to add attributes\n5. Specify attribute name and data type",
+      "tags": [
+        "domain-model"
+      ]
+    },
+    {
+      "id": "domain-model-20",
+      "topicId": "domain-model",
+      "front": "Adding Enumerations",
+      "back": "1. Right-click module and select \"Add other\" > \"Enumeration\"\n2. Name the enumeration (e.g., \"OrderStatus\")\n3. Click \"New\" to add values (Open, Processing, Complete)\n4. In entity, add enumeration attribute and select type\n5. Set default value if needed",
+      "tags": [
+        "domain-model"
+      ]
+    },
+    {
+      "id": "domain-model-21",
+      "topicId": "domain-model",
+      "front": "Creating Associations",
+      "back": "**Key Principle**: \"Always start with the entity that can have more instances in the system\"\n\nDraw a line from one entity's border to another's to establish the relationship.",
+      "tags": [
+        "domain-model"
+      ]
+    },
+    {
+      "id": "domain-model-22",
+      "topicId": "domain-model",
+      "front": "Multiplicity Configuration",
+      "back": "- **One-to-Many [1 - *]**: Default setting\n- **One-to-One [1 - 1]**: Single instances connect\n- **Many-to-Many [* - *]**: Multiple instances on both sides\n\n---",
+      "tags": [
+        "domain-model"
+      ]
+    },
+    {
+      "id": "domain-model-23",
+      "topicId": "domain-model",
+      "front": "Delete Behavior Configuration",
+      "back": "Control what happens when associated objects are deleted:\n\n- **Cascading Delete**: \"Delete 'Order' object(s) as well\" - removes related objects automatically\n- **Prevention of Delete**: \"Delete 'Customer' object only if not associated with 'Order' object(s)\" - prevents deletion and displays error\n\n**Important**: Delete behavior applies to objects in memory, even before committed to database.\n\n---",
+      "tags": [
+        "domain-model"
+      ]
+    },
+    {
+      "id": "domain-model-24",
+      "topicId": "domain-model",
+      "front": "Data Structure",
+      "back": "- **Customer**: Name, address, email, date of birth\n- **Product**: Name, description, price, vendor, availability\n- **Order**: Status, order number, customer details\n- **Order_Line**: Quantity and price per item\n- **Order_Confirmation**: Confirmation details and purchase date",
+      "tags": [
+        "domain-model"
+      ]
+    },
+    {
+      "id": "domain-model-25",
+      "topicId": "domain-model",
+      "front": "Association Map",
+      "back": "- Product_Image <-> Product: One-to-One\n- Order <-> Customer: One-to-Many\n- Product <-> Order_Line: One-to-Many\n- Order <-> Order_Line: One-to-Many\n- Order <-> Order_Confirmation: One-to-One\n\n---",
+      "tags": [
+        "domain-model"
+      ]
+    },
+    {
+      "id": "domain-model-26",
+      "topicId": "domain-model",
+      "front": "Sources",
+      "back": "- [Configuring a Domain Model](https://docs.mendix.com/refguide/configuring-a-domain-model/)\n- [Entities](https://docs.mendix.com/refguide/entities/)\n- [Attributes](https://docs.mendix.com/refguide/attributes/)\n- [Associations](https://docs.mendix.com/refguide/associations/)",
+      "tags": [
+        "domain-model"
+      ]
+    }
+  ],
+  "microflows": [
+    {
+      "id": "microflows-0",
+      "topicId": "microflows",
+      "front": "Overview",
+      "back": "Microflows enable developers to express application logic visually rather than through traditional code. They allow you to perform actions like creating/updating objects, displaying pages, and making conditional choices.\n\n**Key Constraint**: Microflows execute on the runtime server and cannot function in offline applications. For offline logic, use Nanoflows instead.\n\n---",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-1",
+      "topicId": "microflows",
+      "front": "Microflow Notation",
+      "back": "Microflows use Business Process Model and Notation (BPMN), a standardized graphical format.",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-2",
+      "topicId": "microflows",
+      "front": "Events",
+      "back": "| Event | Description |\n|-------|-------------|\n| **Start Event** | Single entry point for every microflow |\n| **End Event** | Defines where microflows terminate; may require return values |\n| **Error Event** | Stops execution and throws accumulated errors |\n| **Continue Event** | Skips current loop iteration (loop-only) |\n| **Break Event** | Exits loops entirely (loop-only) |",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-3",
+      "topicId": "microflows",
+      "front": "Flows & Connections",
+      "back": "- **Sequence Flow**: Arrows connecting elements, defining execution order\n- **Annotation Flow**: Dashed lines linking comments to elements",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-4",
+      "topicId": "microflows",
+      "front": "Decisions",
+      "back": "| Decision Type | Description |\n|---------------|-------------|\n| **Decision** | Branches based on conditions; follows one path only |\n| **Object Type Decision** | Branches by object specialization |\n| **Merge** | Combines multiple paths into one |",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-5",
+      "topicId": "microflows",
+      "front": "Core Components",
+      "back": "- **Activities**: Executable actions within microflows\n- **Loop**: Iterates over object lists\n- **Parameter**: Input data for microflows\n- **Annotation**: Comments within microflows\n\n---",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-6",
+      "topicId": "microflows",
+      "front": "Object Activities",
+      "back": "| Activity | Description |\n|----------|-------------|\n| **Create Object** | Creates a new entity instance |\n| **Change Object** | Changes the members of an object |\n| **Commit Object(s)** | Stores objects persistently in database |\n| **Delete Object(s)** | Removes objects permanently |\n| **Retrieve Object(s)** | Gets objects from database |\n| **Rollback Object** | Undoes uncommitted changes |\n| **Cast Object** | Changes object type from generalized to specialized |",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-7",
+      "topicId": "microflows",
+      "front": "List Activities",
+      "back": "| Activity | Description |\n|----------|-------------|\n| **Aggregate List** | Calculates aggregated values over a list |\n| **Change List** | Adds/removes objects from a list |\n| **Create List** | Creates an empty list |\n| **List Operation** | Performs actions on a list |",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-8",
+      "topicId": "microflows",
+      "front": "Variable Activities",
+      "back": "| Activity | Description |\n|----------|-------------|\n| **Create Variable** | Initialize new variable with initial value |\n| **Change Variable** | Modify existing variable's value |",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-9",
+      "topicId": "microflows",
+      "front": "Call Activities",
+      "back": "- Call Java Action\n- Call JavaScript Action\n- Call Microflow",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-10",
+      "topicId": "microflows",
+      "front": "Client Activities",
+      "back": "- Call Nanoflow\n- Show Message\n- Close Page\n- Download File\n- Show Page\n- Synchronization operations\n- Validation Feedback",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-11",
+      "topicId": "microflows",
+      "front": "Integration Activities",
+      "back": "- REST/Web Service calls\n- External database queries\n- File imports/exports\n- Document generation",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-12",
+      "topicId": "microflows",
+      "front": "Specialized Activities",
+      "back": "- Log Message\n- Metrics operations\n- ML Model calls\n- Workflow activities\n\n---",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-13",
+      "topicId": "microflows",
+      "front": "Loops",
+      "back": "Loops execute repeated actions and iterate either over a list or based on a Boolean condition.",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-14",
+      "topicId": "microflows",
+      "front": "Loop Variable",
+      "back": "Within loops, `$currentIndex` contains the current iteration number, starting at zero.",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-15",
+      "topicId": "microflows",
+      "front": "For Each (Item in the List)",
+      "back": "Iterates over list objects. Configure:\n- **Iterate over**: Specifies the list\n- **Loop object name**: Renames the iterator\n\n**Example**: Set purchase date for every OrderLine object.",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-16",
+      "topicId": "microflows",
+      "front": "While (Condition Is True)",
+      "back": "Repeats until condition evaluates to `false`, evaluated before each iteration.\n\n**Example**: Log numbers between 1 and 5.",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-17",
+      "topicId": "microflows",
+      "front": "Loop Constraints",
+      "back": "- Loops cannot contain start or end events\n- Only loops can contain break and continue events\n- Condition expressions must return Boolean values\n\n---",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-18",
+      "topicId": "microflows",
+      "front": "Decisions",
+      "back": "Decisions are elements that split or merge sequence flows based on conditions. They have a diamond shape.",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-19",
+      "topicId": "microflows",
+      "front": "Decision Types",
+      "back": "1. **Decision**: Makes a choice based on a condition and follows one path only\n2. **Object Type Decision**: Makes a choice based on the type of an object\n3. **Merge**: Merges incoming flows into single path\n\n---",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-20",
+      "topicId": "microflows",
+      "front": "Parameters & Return Values",
+      "back": "**Parameters**: Data that serves as input for a microflow. Populated when microflows are triggered from other locations.\n\n**Return Values**: Depend on microflow configuration. End events may require specified return values based on the microflow's return type.\n\n---",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-21",
+      "topicId": "microflows",
+      "front": "1. Rollback (Default)",
+      "back": "All changes revert to savepoint created at microflow start, flow aborts, system error message displays.",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-22",
+      "topicId": "microflows",
+      "front": "2. Custom with Rollback",
+      "back": "Create error handling flows that execute when failures occur. Everything rolls back to savepoint.",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-23",
+      "topicId": "microflows",
+      "front": "3. Custom without Rollback",
+      "back": "Preserves data changes made before the failure point.",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-24",
+      "topicId": "microflows",
+      "front": "4. Continue",
+      "back": "Available only for Call Microflow activities and loops. Execution proceeds as if no error occurred.\n\n**Warning**: \"You should be very careful with using the Continue option since it can make it very difficult to understand when something goes wrong.\"",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-25",
+      "topicId": "microflows",
+      "front": "Error Inspection Variables",
+      "back": "| Variable | Description |\n|----------|-------------|\n| `$latestError` | Contains ErrorType, Message, and Stacktrace |\n| `$latestSoapFault` | Specific to SOAP faults with Code, Reason, Node, Role, Detail |\n| `$latestHttpResponse` | Available for REST errors |",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-26",
+      "topicId": "microflows",
+      "front": "Best Practices",
+      "back": "1. **Always log errors**: Use a log activity to print error message and stack trace\n2. **Target third-party integrations**: Add custom handling to external system activities\n3. **Prefer Custom without Rollback**: Where feasible, instead of Continue\n4. **Avoid complexity**: Excessive error handling makes behavior harder to predict\n\n---",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-27",
+      "topicId": "microflows",
+      "front": "Three Main Debugging Panes",
+      "back": "1. **Breakpoints Pane**: Displays all microflows containing breakpoints\n2. **Debugger Pane**: Walks through microflow step by step during execution\n3. **Variables Pane**: Shows all variables, objects, and lists involved",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-28",
+      "topicId": "microflows",
+      "front": "Using Breakpoints",
+      "back": "1. Run your application locally\n2. Open target microflow in Studio Pro\n3. Right-click any activity and select \"Add breakpoint\" (red dot)\n\n**Limitation**: \"Debugging with breakpoints is not supported for microflows executed during application startup.\"",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-29",
+      "topicId": "microflows",
+      "front": "Debugger Controls",
+      "back": "| Control | Action |\n|---------|--------|\n| **Step Into** | Enter sub-microflows or loops |\n| **Step Over** | Move to next step without entering sub-flows |\n| **Step Out** | Exit current sub-flow or loop |\n| **Continue** | Resume until next breakpoint |\n| **Continue All** | Resume all paused flows |",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-30",
+      "topicId": "microflows",
+      "front": "Breakpoint Conditions",
+      "back": "Configure conditions using expressions to break only when specific criteria are met.\n\n**Example**: `$currentUser/name = 'YourUserName'`\n\n---",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-31",
+      "topicId": "microflows",
+      "front": "Best Practices",
+      "back": "- Follow standardized naming conventions\n- Create maintainable, efficient logic\n- Optimize microflow design for performance\n- Leverage proven community patterns\n\n---",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-32",
+      "topicId": "microflows",
+      "front": "Additional Features",
+      "back": "**Format Conversion**: Microflows can be converted to Nanoflows through \"Duplicate as nanoflow\" or \"Convert to nanoflow\" options.\n\n**Export**: Microflows can be exported as PNG images via File > Export as image.\n\n---",
+      "tags": [
+        "microflows"
+      ]
+    },
+    {
+      "id": "microflows-33",
+      "topicId": "microflows",
+      "front": "Sources",
+      "back": "- [Microflows](https://docs.mendix.com/refguide/microflows/)\n- [Debugging Microflows and Nanoflows](https://docs.mendix.com/refguide/debug-microflows-and-nanoflows/)\n- [Error Handling in Microflows](https://docs.mendix.com/refguide/error-handling-in-microflows/)\n- [Decisions](https://docs.mendix.com/refguide/decisions/)\n- [Loop](https://docs.mendix.com/refguide/loop/)",
+      "tags": [
+        "microflows"
+      ]
+    }
+  ],
+  "nanoflows": [
+    {
+      "id": "nanoflows-0",
+      "topicId": "nanoflows",
+      "front": "Overview",
+      "back": "Nanoflows are application logic flows similar to microflows that execute directly in the browser or device rather than on a server. This fundamental difference enables them to function in offline environments and provides performance benefits for logic that doesn't require server access.\n\n---",
+      "tags": [
+        "nanoflows"
+      ]
+    },
+    {
+      "id": "nanoflows-1",
+      "topicId": "nanoflows",
+      "front": "Key Differences from Microflows",
+      "back": "| Aspect | Microflows | Nanoflows |\n|--------|------------|-----------|\n| **Execution Location** | Server-side | Client-side (browser/device) |\n| **Offline Capability** | No | Yes |\n| **Performance** | Requires server round-trip | Faster for non-server logic |\n| **Database Operations** | Direct database access | Each activity creates network request |\n\n---",
+      "tags": [
+        "nanoflows"
+      ]
+    },
+    {
+      "id": "nanoflows-2",
+      "topicId": "nanoflows",
+      "front": "1. Offline Mobile Applications",
+      "back": "Designed specifically for offline-first apps where database operations execute against local offline databases, delivering fast performance.",
+      "tags": [
+        "nanoflows"
+      ]
+    },
+    {
+      "id": "nanoflows-3",
+      "topicId": "nanoflows",
+      "front": "2. Online Applications Without Database Operations",
+      "back": "Work well for:\n- UI logic\n- Validations\n- Calculations\n- Navigation\n\nWhen they contain no database-related activities.",
+      "tags": [
+        "nanoflows"
+      ]
+    },
+    {
+      "id": "nanoflows-4",
+      "topicId": "nanoflows",
+      "front": "Database Activities That Create Network Requests",
+      "back": "These activities trigger network calls in online apps:\n- Create object\n- Commit object(s)\n- Retrieve object(s)\n- Rollback object",
+      "tags": [
+        "nanoflows"
+      ]
+    },
+    {
+      "id": "nanoflows-5",
+      "topicId": "nanoflows",
+      "front": "Best Practice Exception",
+      "back": "You can use Create object activity with non-persistable entities (NPEs) if they lack:\n- Event handlers\n- Calculated attributes\n- Read-only attributes\n\nThese create client-side objects without network requests.\n\n---",
+      "tags": [
+        "nanoflows"
+      ]
+    },
+    {
+      "id": "nanoflows-6",
+      "topicId": "nanoflows",
+      "front": "Nanoflow Elements and Structure",
+      "back": "Nanoflows use BPMN (Business Process Model and Notation) graphical notation.",
+      "tags": [
+        "nanoflows"
+      ]
+    },
+    {
+      "id": "nanoflows-7",
+      "topicId": "nanoflows",
+      "front": "Components",
+      "back": "| Component | Description |\n|-----------|-------------|\n| **Events** | Start/end points and loop operations |\n| **Flows** | Connections defining execution order |\n| **Decisions** | Conditional branching and path merging |\n| **Activities** | Actions executed within the flow |\n| **Loops** | Iteration over object lists |\n| **Parameters** | Input data for the nanoflow |\n| **Annotations** | Comments within the flow |\n\n---",
+      "tags": [
+        "nanoflows"
+      ]
+    },
+    {
+      "id": "nanoflows-8",
+      "topicId": "nanoflows",
+      "front": "Activities Available",
+      "back": "Nanoflows support various activity categories:\n\n- **Object operations**: create, retrieve, commit, rollback\n- **List operations**: aggregate, change, create list\n- **Variable management**: create variable, change variable\n- **Client-specific actions**: showing messages, showing pages\n\n---",
+      "tags": [
+        "nanoflows"
+      ]
+    },
+    {
+      "id": "nanoflows-9",
+      "topicId": "nanoflows",
+      "front": "Security",
+      "back": "**Important**: \"Nanoflows are executed in the context of the current user. Any operation for which the user is unauthorized will fail.\"\n\n---",
+      "tags": [
+        "nanoflows"
+      ]
+    },
+    {
+      "id": "nanoflows-10",
+      "topicId": "nanoflows",
+      "front": "Converting Nanoflows",
+      "back": "You can convert nanoflows to microflows through right-click context menu options:\n- \"Duplicate as microflow\"\n- \"Convert to microflow\"\n\nWarnings will appear about non-replaceable usages.\n\n---",
+      "tags": [
+        "nanoflows"
+      ]
+    },
+    {
+      "id": "nanoflows-11",
+      "topicId": "nanoflows",
+      "front": "Best Practices",
+      "back": "1. **Use for offline apps**: Primary purpose is offline-first applications\n2. **Avoid database operations in online apps**: Each creates a network request\n3. **Use for UI logic**: Validations, calculations, navigation\n4. **Consider NPEs**: Non-persistable entities without handlers don't create network calls\n\n---",
+      "tags": [
+        "nanoflows"
+      ]
+    },
+    {
+      "id": "nanoflows-12",
+      "topicId": "nanoflows",
+      "front": "When to Choose Microflows vs Nanoflows",
+      "back": "| Scenario | Use |\n|----------|-----|\n| Server-side business logic | Microflow |\n| Database-heavy operations | Microflow |\n| Offline application logic | Nanoflow |\n| Quick UI validations | Nanoflow |\n| Client-side calculations | Nanoflow |\n| Integration with external services | Microflow |\n\n---",
+      "tags": [
+        "nanoflows"
+      ]
+    },
+    {
+      "id": "nanoflows-13",
+      "topicId": "nanoflows",
+      "front": "Sources",
+      "back": "- [Nanoflows](https://docs.mendix.com/refguide/nanoflows/)\n- [Microflows and Nanoflows](https://docs.mendix.com/refguide/microflows-and-nanoflows/)",
+      "tags": [
+        "nanoflows"
+      ]
+    }
+  ],
+  "modules": [
+    {
+      "id": "modules-0",
+      "topicId": "modules",
+      "front": "Overview",
+      "back": "Modules are fundamental organizational units in Mendix applications. A Mendix app consists of modules: a **System** module, a UI resources package, one or more user-defined **app modules**, Marketplace modules, add-on modules, and solution modules.\n\n---",
+      "tags": [
+        "modules"
+      ]
+    },
+    {
+      "id": "modules-1",
+      "topicId": "modules",
+      "front": "Primary Purpose",
+      "back": "Modules enable developers to partition application functionality into separate, manageable components.\n\n**Example**: \"A web shop can put order management in a different module than customer and product management.\"\n\n---",
+      "tags": [
+        "modules"
+      ]
+    },
+    {
+      "id": "modules-2",
+      "topicId": "modules",
+      "front": "Module Types",
+      "back": "When creating a module, developers can choose from three distinct types:\n\n| Type | Description |\n|------|-------------|\n| **App modules** | Standard modules for primary application development |\n| **Add-on modules** | Designed for publishing reusable functionality |\n| **Solution modules** | Specialized modules for packaged solutions |\n\nThese types can be configured anytime through Module Settings.\n\n---",
+      "tags": [
+        "modules"
+      ]
+    },
+    {
+      "id": "modules-3",
+      "topicId": "modules",
+      "front": "Module Contents",
+      "back": "Modules can contain various document types organized into categories:",
+      "tags": [
+        "modules"
+      ]
+    },
+    {
+      "id": "modules-4",
+      "topicId": "modules",
+      "front": "Common Documents",
+      "back": "- **Pages**: User interfaces with widgets\n- **Microflows**: Application logic\n- **Enumerations**: Predefined value sets",
+      "tags": [
+        "modules"
+      ]
+    },
+    {
+      "id": "modules-5",
+      "topicId": "modules",
+      "front": "Resources",
+      "back": "- Constants\n- Datasets\n- Java actions\n- Rules\n- Scheduled events",
+      "tags": [
+        "modules"
+      ]
+    },
+    {
+      "id": "modules-6",
+      "topicId": "modules",
+      "front": "Services",
+      "back": "- Consumed and published REST services\n- OData services\n- Web services\n- GraphQL services\n\n---",
+      "tags": [
+        "modules"
+      ]
+    },
+    {
+      "id": "modules-7",
+      "topicId": "modules",
+      "front": "Module Security",
+      "back": "Modules feature a dedicated security model. Developers can \"define module security via module roles and specify the security settings of those module roles for pages, microflows, entities, and datasets.\"\n\nThis portable security model enables secure component reuse across applications.\n\n---",
+      "tags": [
+        "modules"
+      ]
+    },
+    {
+      "id": "modules-8",
+      "topicId": "modules",
+      "front": "Technical Note",
+      "back": "Mendix modules differ fundamentally from React Native modules, which expose native code objects for device capabilities rather than representing application structure.\n\n---",
+      "tags": [
+        "modules"
+      ]
+    },
+    {
+      "id": "modules-9",
+      "topicId": "modules",
+      "front": "Sources",
+      "back": "- [Modules](https://docs.mendix.com/refguide/modules/)",
+      "tags": [
+        "modules"
+      ]
+    }
+  ],
+  "security": [
+    {
+      "id": "security-0",
+      "topicId": "security",
+      "front": "Overview",
+      "back": "App Security in Mendix allows you to toggle security on or off and configure authentication settings. Access it via **App Explorer > App > Security**.\n\n---",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "security-1",
+      "topicId": "security",
+      "front": "Security Levels",
+      "back": "Three security levels define how comprehensively security is applied:\n\n| Level | Description | Usage |\n|-------|-------------|-------|\n| **Off** | No security applied. Users don't sign in and can access everything | Local testing and Free Apps only |\n| **Prototype/Demo** | Security applies to authentication, forms, and microflows. Users can access all data | Development/testing |\n| **Production** | Full security across all areas | Required for licensed Mendix Cloud |\n\n---",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "security-2",
+      "topicId": "security",
+      "front": "User Roles",
+      "back": "User roles aggregate access rights across data, forms, and microflows. Administrators assign roles to end-users.\n\n**User Roles vs Module Roles**: Each user role contains one or more module roles, enabling modules to remain self-contained and reusable.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "security-3",
+      "topicId": "security",
+      "front": "Role Properties",
+      "back": "- **Name**: Displayed to administrators\n- **Documentation**: Additional descriptive information\n- **Module Roles**: List of module roles with accumulated access rights\n- **Check Security**: Whether security consistency is verified",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "security-4",
+      "topicId": "security",
+      "front": "User Management Properties",
+      "back": "- **All**: End-users can manage all users and assign any role\n- **Selected**: End-users manage only users with specified roles\n\n**Important**: \"The effects of changes to user roles are not immediate.\"",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "security-5",
+      "topicId": "security",
+      "front": "Administrator",
+      "back": "Configure default credentials and assign a user role specifically for the administrator account.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "security-6",
+      "topicId": "security",
+      "front": "Demo Users",
+      "back": "\"Demo users are a demonstration of each user role existing in your app.\" Enable testing how the application appears for different roles.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "security-7",
+      "topicId": "security",
+      "front": "Anonymous Users",
+      "back": "Allow unauthenticated access while restricting data through assigned user roles. Users bypass sign-in but operate within role-based constraints.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "security-8",
+      "topicId": "security",
+      "front": "Password Policy",
+      "back": "Define password requirements including:\n- Minimum length\n- Required character types (digits, uppercase)\n\n---",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "security-9",
+      "topicId": "security",
+      "front": "Module Roles",
+      "back": "Module roles are custom roles created within a module to define access permissions.\n\nProperties:\n- **Name**: Identifies the module role\n- **Documentation**: For Studio Pro users only\n\n\"You can assign multiple module roles to a user role under **App Security** > **User roles** tab.\"",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "security-10",
+      "topicId": "security",
+      "front": "Page Access",
+      "back": "Defines visibility of pages to different roles through a matrix display.\n\n\"A page that is not visible for a specific role will not show up in navigation structures.\"\n\n**Important**: Page access settings don't prevent access through deeplinks or forced-visible buttons. Use entity and microflow access for data restriction.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "security-11",
+      "topicId": "security",
+      "front": "Microflow Access",
+      "back": "Controls which microflows users with specific roles can execute.\n\n\"A microflow is always allowed to call another microflow and these roles are not checked then.\" Role checking only applies to client-side execution.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "security-12",
+      "topicId": "security",
+      "front": "Nanoflow Access",
+      "back": "Similar to microflows, defines execution permissions based on user roles.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "security-13",
+      "topicId": "security",
+      "front": "Entity Access",
+      "back": "\"**Entity Access** defines for each module role whether users are authorized to **Create**, **Read**, **Write** and/or **Delete** objects of the entity.\"\n\nXPath constraints can restrict access to specific object sets.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "security-14",
+      "topicId": "security",
+      "front": "OData/GraphQL & REST Access",
+      "back": "Controls service access per role.\n\nREST access is only visible when authentication is required.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "security-15",
+      "topicId": "security",
+      "front": "Data Set Access",
+      "back": "Three access levels:\n- **Full access**: No constraints apply\n- **Limited access**: At least one constraint applies\n- **No access**: Users cannot access the dataset\n\n---",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "security-16",
+      "topicId": "security",
+      "front": "Access Rules",
+      "back": "Access rules define what end-users can do with entity objects:\n- Creating objects\n- Deleting objects\n- Viewing member values\n- Editing member values",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "security-17",
+      "topicId": "security",
+      "front": "Key Principles",
+      "back": "**Additive Rules**: \"If multiple access rules apply to the same module role, all access rights of those rules are combined.\"\n\n**No Inheritance**: Access rules are not inherited from parent entities. Security must be explicitly specified for each entity.\n\n**Production Mode Required**: Access rules editor only appears when App Security is set to Production mode.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "security-18",
+      "topicId": "security",
+      "front": "XPath Constraints",
+      "back": "Limit which objects users can access:\n\n**Owner Constraint**: `[System.owner='[%CurrentUser%]']`\n\n**Path to User**: Access based on associated User objects\n\n**Important**: XPath constraints only apply to persistable entities and are database-enforced.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "security-19",
+      "topicId": "security",
+      "front": "Member Rights Configuration",
+      "back": "| Level | Description |\n|-------|-------------|\n| None | No access |\n| Read | Read-only access |\n| Read and Write | Full access |\n\n**Note**: \"You cannot set Write access to attributes which are calculated.\"\n\n---",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "security-20",
+      "topicId": "security",
+      "front": "Entity Access Rules",
+      "back": "- **System-determined attributes** (like order status) should never be writable\n- Anonymous users should be constrained to objects they own\n- Avoid default read-write access; explicitly configure each attribute\n- Use entity-level constraints rather than page-level widget restrictions",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "security-21",
+      "topicId": "security",
+      "front": "HTML/JavaScript Content",
+      "back": "Sanitize user input using XSSSanitize action from Community Commons.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "security-22",
+      "topicId": "security",
+      "front": "Database Queries",
+      "back": "Use prepared statements or validate input against strict patterns.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "security-23",
+      "topicId": "security",
+      "front": "API Security Configuration",
+      "back": "For REST/OData endpoints:\n1. **Username/Password Authentication**: Basic auth validated against System.User\n2. **Active Session**: CSRF tokens via `mx.session.getConfig(\"csrftoken\")`\n3. **Custom Authentication**: Microflow validates headers (JWT, API keys)",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "security-24",
+      "topicId": "security",
+      "front": "Production Hardening",
+      "back": "- Rename default MxAdmin administrator account\n- Disable unused endpoints (ws-doc, rest-doc)\n- Apply IP restrictions and certificates to sensitive endpoints\n- Use SSL for all consumed web services\n- Configure HTTP headers to prevent clickjacking\n- Enforce strong password policies\n- Use third-party identity providers (SAML)",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "security-25",
+      "topicId": "security",
+      "front": "Additional Protections",
+      "back": "- Encrypt sensitive data at rest using Encryption module\n- Maintain high app hygiene by removing unused modules\n- Scan uploaded files for malware\n- Configure user roles restrictively\n- Disable anonymous access when unused\n\n---",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "security-26",
+      "topicId": "security",
+      "front": "Sources",
+      "back": "- [App Security](https://docs.mendix.com/refguide/app-security/)\n- [Module Security](https://docs.mendix.com/refguide/module-security/)\n- [Access Rules](https://docs.mendix.com/refguide/access-rules/)\n- [User Roles](https://docs.mendix.com/refguide/user-roles/)\n- [Best Practices Security](https://docs.mendix.com/howto9/security/best-practices-security/)",
+      "tags": [
+        "security"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "id": "pages-0",
+      "topicId": "pages",
+      "front": "Overview",
+      "back": "In Mendix, \"A page is the basic end-user interface of a Mendix application. It is used to display information to the end-user, allow end-users to create and edit information, and enable end-users to trigger additional automated processing.\"\n\nThe platform functions as a Single Page Application (SPA), meaning all interactions occur within a single browser tab or window.\n\n---",
+      "tags": [
+        "pages"
+      ]
+    },
+    {
+      "id": "pages-1",
+      "topicId": "pages",
+      "front": "Page Structure",
+      "back": "Every page requires two foundational components:\n\n1. **Layout**: \"A frame you put your page in\" - provides consistent structure across pages\n2. **Page Template**: A basis with predefined elements that simplifies initial page creation\n\n---",
+      "tags": [
+        "pages"
+      ]
+    },
+    {
+      "id": "pages-2",
+      "topicId": "pages",
+      "front": "Page Resources",
+      "back": "| Resource | Purpose |\n|----------|---------|\n| **Layout** | Frame providing unified look and feel across platforms |\n| **Page Template** | Predefined structure simplifying common design patterns |\n| **Snippet** | Reusable interface parts used on pages and layouts |\n| **Building Block** | Pre-styled widget sets appearing in editor toolbox |\n| **Menu** | Defines menu structures for navigation widgets |\n| **Image Collection** | Stores custom images for application use |\n\n---",
+      "tags": [
+        "pages"
+      ]
+    },
+    {
+      "id": "pages-3",
+      "topicId": "pages",
+      "front": "Widget Categories",
+      "back": "Pages are constructed using widgets organized into:\n\n| Category | Description |\n|----------|-------------|\n| **Data Containers** | Central to forms; enable viewing and editing data |\n| **Text Widgets** | Display textual information |\n| **Structure Widgets** | Contain other widgets |\n| **Input Elements** | Show and edit attribute values |\n| **Images, Videos, Files** | Handle multimedia and file management |\n| **Buttons** | Trigger actions |\n| **Menus and Navigation** | Enable application navigation |\n| **Authentication** | Implement user verification |\n| **Charts** | Graphically represent data (add-on widgets) |\n\n---",
+      "tags": [
+        "pages"
+      ]
+    },
+    {
+      "id": "pages-4",
+      "topicId": "pages",
+      "front": "Data View",
+      "back": "A data view is a container widget designed to display the contents of exactly one object.",
+      "tags": [
+        "pages"
+      ]
+    },
+    {
+      "id": "pages-5",
+      "topicId": "pages",
+      "front": "Data Source Options",
+      "back": "| Source | Description |\n|--------|-------------|\n| **Context** | Uses already-available objects from page parameters |\n| **Microflow** | Executes microflow and displays return value |\n| **Nanoflow** | Runs nanoflow client-side and displays results |\n| **Listen to Widget** | Displays details from selected objects in list widgets |",
+      "tags": [
+        "pages"
+      ]
+    },
+    {
+      "id": "pages-6",
+      "topicId": "pages",
+      "front": "General Section",
+      "back": "- **Form Orientation**: Controls label positioning (horizontal/vertical)\n- **Label Width**: Bootstrap grid column weight (default: 3)\n- **Show Footer**: Toggle footer visibility\n- **Empty Entity Message**: Message when no source data available",
+      "tags": [
+        "pages"
+      ]
+    },
+    {
+      "id": "pages-7",
+      "topicId": "pages",
+      "front": "Editability Section",
+      "back": "- **Default**: Inherits from containing data container\n- **Inherited from snippet call**: Matches parent snippet\n- **Never**: Permanently read-only\n- **Conditionally**: Based on attribute values or expressions",
+      "tags": [
+        "pages"
+      ]
+    },
+    {
+      "id": "pages-8",
+      "topicId": "pages",
+      "front": "Nested Data Views",
+      "back": "Data views can contain complex structures including tab containers with nested data grids.\n\n**Note**: \"The footer of nested data views is always invisible.\"\n\n---",
+      "tags": [
+        "pages"
+      ]
+    },
+    {
+      "id": "pages-9",
+      "topicId": "pages",
+      "front": "Data Grid",
+      "back": "The data grid displays data in table format.\n\n**Note**: Not supported on native mobile pages or React client. Use Gallery or List View for mobile, Data Grid 2 for React.",
+      "tags": [
+        "pages"
+      ]
+    },
+    {
+      "id": "pages-10",
+      "topicId": "pages",
+      "front": "Components",
+      "back": "1. **Search Bar**: Enables users to search for objects\n2. **Control Bar**: Provides buttons to control displayed objects\n3. **Grid Columns**: Allows column property configuration",
+      "tags": [
+        "pages"
+      ]
+    },
+    {
+      "id": "pages-11",
+      "topicId": "pages",
+      "front": "Data Source Types",
+      "back": "| Type | Description |\n|------|-------------|\n| **Database source** | Retrieves objects directly; supports searching and sorting |\n| **Microflow source** | Executes microflow to calculate object list |\n| **Association source** | Follows associations to retrieve objects |",
+      "tags": [
+        "pages"
+      ]
+    },
+    {
+      "id": "pages-12",
+      "topicId": "pages",
+      "front": "Key Properties",
+      "back": "| Property | Description | Default |\n|----------|-------------|---------|\n| Show Control Bar Buttons | Controls visibility | True |\n| Show Paging Bar | Yes (with/without count) or No | Yes (with count) |\n| Number of Rows | Rows per page | 20 |\n| Show Empty Rows | Displays empty rows for consistent height | False |\n| Selection Mode | Single, multi, or no selection | Single |\n| Default Button Trigger | Single or double-click | Double click |\n| Refresh Time | Auto-refresh interval (seconds) | 0 |",
+      "tags": [
+        "pages"
+      ]
+    },
+    {
+      "id": "pages-13",
+      "topicId": "pages",
+      "front": "Selection Modes",
+      "back": "- No selection\n- Single selection (default)\n- Single selection with mandatory selection\n- Multi-selection (Ctrl+click)\n- Simple multi-selection (click to toggle)\n\n---",
+      "tags": [
+        "pages"
+      ]
+    },
+    {
+      "id": "pages-14",
+      "topicId": "pages",
+      "front": "Snippets",
+      "back": "Snippets are reusable interface components that can be incorporated into pages, layouts, and other snippets.",
+      "tags": [
+        "pages"
+      ]
+    },
+    {
+      "id": "pages-15",
+      "topicId": "pages",
+      "front": "Creating Snippets",
+      "back": "1. **Add new empty snippet** via Page Resources section\n2. **Extract from existing content** by right-clicking widget and selecting \"Extract snippet\"",
+      "tags": [
+        "pages"
+      ]
+    },
+    {
+      "id": "pages-16",
+      "topicId": "pages",
+      "front": "Snippet Parameters",
+      "back": "- Work similarly to page parameters with restrictions\n- \"Snippet parameters do not support primitive types and cannot be made optional\"\n- Configure through **Parameters** button in top bar",
+      "tags": [
+        "pages"
+      ]
+    },
+    {
+      "id": "pages-17",
+      "topicId": "pages",
+      "front": "Designer Properties",
+      "back": "- **Canvas Width**: Default 800 pixels (editing only)\n- **Canvas Height**: Default 600 pixels (editing only)",
+      "tags": [
+        "pages"
+      ]
+    },
+    {
+      "id": "pages-18",
+      "topicId": "pages",
+      "front": "Benefits",
+      "back": "\"By centralizing interface logic in snippets, developers can make changes in fewer places when modifying the interface.\"\n\n---",
+      "tags": [
+        "pages"
+      ]
+    },
+    {
+      "id": "pages-19",
+      "topicId": "pages",
+      "front": "Navigation and Interaction",
+      "back": "Pages can be linked to pass data between them. When a second page contains a data widget with a page parameter data source, objects can be passed from current to new page.\n\nPages open either in current browser pane or popup windows, depending on layout type.\n\n---",
+      "tags": [
+        "pages"
+      ]
+    },
+    {
+      "id": "pages-20",
+      "topicId": "pages",
+      "front": "Design Principles",
+      "back": "- Layouts support structure-defining widgets but exclude data display widgets\n- Snippets can be placed in layouts as indirect method for including additional widget types\n- The platform optimizes navigation by refreshing only page data when layouts match\n\n---",
+      "tags": [
+        "pages"
+      ]
+    },
+    {
+      "id": "pages-21",
+      "topicId": "pages",
+      "front": "Sources",
+      "back": "- [Pages](https://docs.mendix.com/refguide/pages/)\n- [Data View](https://docs.mendix.com/refguide/data-view/)\n- [Data Grid](https://docs.mendix.com/refguide/data-grid/)\n- [Snippet](https://docs.mendix.com/refguide/snippet/)",
+      "tags": [
+        "pages"
+      ]
+    }
+  ],
+  "xpath": [
+    {
+      "id": "xpath-0",
+      "topicId": "xpath",
+      "front": "Expressions Overview",
+      "back": "Expressions in Mendix modify values using functions or combinations of functions. They enable dynamic calculations and conditional logic throughout your application.\n\n---",
+      "tags": [
+        "xpath"
+      ]
+    },
+    {
+      "id": "xpath-1",
+      "topicId": "xpath",
+      "front": "Named Items and Variables",
+      "back": "- Objects, lists, and variables: `$customer`\n- Attributes and associations: `$customer/Name`\n- Nested access: `$customer/CRM.Customer_Order/CRM.Order/Number`",
+      "tags": [
+        "xpath"
+      ]
+    },
+    {
+      "id": "xpath-2",
+      "topicId": "xpath",
+      "front": "Example Calculation",
+      "back": "---",
+      "codeExample": "```\n$CurrentPrice/Price - (($CurrentPrice/Price div 100) * $OrderLine/Discount)\n```",
+      "tags": [
+        "xpath"
+      ]
+    },
+    {
+      "id": "xpath-3",
+      "topicId": "xpath",
+      "front": "System Items",
+      "back": "Mendix provides built-in session variables:\n\n| Variable | Description |\n|----------|-------------|\n| `$currentUser` | System.User object with current user attributes |\n| `$currentSession` | System.Session object with session information |\n\n**Note**: Both are cached for performance; refresh from database if values change during sessions.\n\n---",
+      "tags": [
+        "xpath"
+      ]
+    },
+    {
+      "id": "xpath-4",
+      "topicId": "xpath",
+      "front": "Arithmetic Operators",
+      "back": "| Operator | Description |\n|----------|-------------|\n| `*` | Multiplication |\n| `div` or `:` | Division |\n| `mod` | Modulo |\n| `+` | Addition |\n| `-` | Subtraction |",
+      "tags": [
+        "xpath"
+      ]
+    },
+    {
+      "id": "xpath-5",
+      "topicId": "xpath",
+      "front": "Relational Operators",
+      "back": "| Operator | Description |\n|----------|-------------|\n| `<` | Less than |\n| `>` | Greater than |\n| `<=` | Less than or equal |\n| `>=` | Greater than or equal |\n| `=` | Equal |\n| `!=` | Not equal |",
+      "tags": [
+        "xpath"
+      ]
+    },
+    {
+      "id": "xpath-6",
+      "topicId": "xpath",
+      "front": "Boolean Logic",
+      "back": "| Operator | Description |\n|----------|-------------|\n| `and` | Logical conjunction |\n| `or` | Logical disjunction |\n| `not` | Logical negation |",
+      "tags": [
+        "xpath"
+      ]
+    },
+    {
+      "id": "xpath-7",
+      "topicId": "xpath",
+      "front": "Special Checks",
+      "back": "- Empty object detection\n- Empty object member checking\n- `isNew` - Identifies newly created objects\n- `isSynced` - Confirms object synchronization status\n- `isSyncing` - Detects active synchronization",
+      "tags": [
+        "xpath"
+      ]
+    },
+    {
+      "id": "xpath-8",
+      "topicId": "xpath",
+      "front": "Conditional Execution",
+      "back": "**If Expressions**: \"Performs a conditional action\" enabling branches based on evaluation results.\n\n---",
+      "tags": [
+        "xpath"
+      ]
+    },
+    {
+      "id": "xpath-9",
+      "topicId": "xpath",
+      "front": "Mathematical Functions",
+      "back": "| Function | Purpose |\n|----------|---------|\n| `max`, `min` | Extrema from number lists |\n| `round` | Floating-point rounding with optional precision |\n| `floor`, `ceil` | Directional rounding |\n| `random` | Random number generation |\n| `pow` | Exponentiation |\n| `abs` | Absolute value |\n| `sqrt` | Square root |\n\n---",
+      "tags": [
+        "xpath"
+      ]
+    },
+    {
+      "id": "xpath-10",
+      "topicId": "xpath",
+      "front": "String Functions",
+      "back": "| Function | Purpose |\n|----------|---------|\n| `toLowerCase`, `toUpperCase` | Case conversion |\n| `substring` | Extract string portions |\n| `find`, `findLast` | Locate substrings |\n| `contains`, `startsWith`, `endsWith` | String matching |\n| `trim` | Remove whitespace |\n| `replaceAll`, `replaceFirst` | Text substitution |\n| `isMatch` | Regular expression matching |\n| `urlEncode`, `urlDecode` | URL encoding/decoding |\n| `+` | String concatenation |\n\n---",
+      "tags": [
+        "xpath"
+      ]
+    },
+    {
+      "id": "xpath-11",
+      "topicId": "xpath",
+      "front": "Creation",
+      "back": "- `dateTime` (server calendar)\n- `dateTimeUTC` (UTC calendar)",
+      "tags": [
+        "xpath"
+      ]
+    },
+    {
+      "id": "xpath-12",
+      "topicId": "xpath",
+      "front": "Beginning/End Calculations",
+      "back": "Functions like `beginOfDay`, `endOfMonth` establish temporal boundaries.",
+      "tags": [
+        "xpath"
+      ]
+    },
+    {
+      "id": "xpath-13",
+      "topicId": "xpath",
+      "front": "Adjustments",
+      "back": "- `addDays`, `addMonths`, `addYears`\n- Corresponding `subtract` variants",
+      "tags": [
+        "xpath"
+      ]
+    },
+    {
+      "id": "xpath-14",
+      "topicId": "xpath",
+      "front": "Formatting",
+      "back": "- `parseDateTime`\n- `formatDateTime`\n- `formatDate`\n- `formatTime`",
+      "tags": [
+        "xpath"
+      ]
+    },
+    {
+      "id": "xpath-15",
+      "topicId": "xpath",
+      "front": "Data Type Functions",
+      "back": "| Function | Purpose |\n|----------|---------|\n| `toString` | Convert values to text |\n| `length` | String/list size |\n| `parseInteger` | Text to integer conversion |\n| `parseDecimal`, `formatDecimal` | Decimal formatting |\n| `getCaption`, `getKey` | Enumeration operations |\n\n---",
+      "tags": [
+        "xpath"
+      ]
+    },
+    {
+      "id": "xpath-16",
+      "topicId": "xpath",
+      "front": "Error Handling in Expressions",
+      "back": "When objects are empty, accessing their attributes creates an exception, returning `false`.\n\n**Problematic**:\n\n(Second statement never evaluates)\n\n**Better**:\n```\n$emptyObject = empty or $emptyObject/attribute != $validObject/attribute\n```\n(Ensures first check occurs)\n\n---",
+      "codeExample": "```\n$emptyObject/attribute != $validObject/attribute or $emptyObject = empty\n```",
+      "tags": [
+        "xpath"
+      ]
+    },
+    {
+      "id": "xpath-17",
+      "topicId": "xpath",
+      "front": "Common Use Cases",
+      "back": "- **Conditional pricing**: \"If weight < 1kg then 0.00 else 5.00\"\n- **Date calculations**: Finding dates between intervals\n- **String manipulation**: Extracting, formatting, or validating text\n- **Business logic**: Multi-condition branching with boolean operators\n\n---",
+      "tags": [
+        "xpath"
+      ]
+    },
+    {
+      "id": "xpath-18",
+      "topicId": "xpath",
+      "front": "What is XPath?",
+      "back": "Mendix XPath is a query language designed to retrieve data from Mendix objects and their attributes or associations.\n\n---",
+      "tags": [
+        "xpath"
+      ]
+    },
+    {
+      "id": "xpath-19",
+      "topicId": "xpath",
+      "front": "Basic Syntax",
+      "back": "XPath queries consist of up to four elements:\n\n1. **Aggregate Function (Optional)**: `avg`, `count`, `max`, `min`, `sum` (Java only)\n2. **Entity to Retrieve (Required)**: Starts with `//` followed by module and entity name\n3. **Constraint (Optional)**: Restrictions in brackets to filter results\n4. **Attribute to Retrieve (Optional)**: Specific attribute from retrieved entities",
+      "tags": [
+        "xpath"
+      ]
+    },
+    {
+      "id": "xpath-20",
+      "topicId": "xpath",
+      "front": "Example Structure",
+      "back": "---",
+      "codeExample": "```\navg(//Sales.Order[IsPaid = true()]/TotalPrice)\n```",
+      "tags": [
+        "xpath"
+      ]
+    },
+    {
+      "id": "xpath-21",
+      "topicId": "xpath",
+      "front": "Key Differences: Studio Pro vs Java",
+      "back": "| Context | Approach |\n|---------|----------|\n| **Studio Pro** | Write only constraints; entity path determined by context |\n| **Java** | Complete queries including `//` and entity names |",
+      "tags": [
+        "xpath"
+      ]
+    },
+    {
+      "id": "xpath-22",
+      "topicId": "xpath",
+      "front": "Examples",
+      "back": "**Studio Pro**: `[Name='Jansen']`\n\n**Java**: `//Sales.Customer[Name='Jansen']`\n\n---",
+      "tags": [
+        "xpath"
+      ]
+    },
+    {
+      "id": "xpath-23",
+      "topicId": "xpath",
+      "front": "Common Examples",
+      "back": "| Purpose | XPath |\n|---------|-------|\n| Retrieve all customers | `//Sales.Customer` |\n| Customers named 'Jansen' | `//Sales.Customer[Name='Jansen']` |\n| Calculate averages | `avg(//Sales.Order/TotalPrice)` |\n\n---",
+      "tags": [
+        "xpath"
+      ]
+    },
+    {
+      "id": "xpath-24",
+      "topicId": "xpath",
+      "front": "Operators",
+      "back": "Logical and comparison operations for building complex queries.",
+      "tags": [
+        "xpath"
+      ]
+    },
+    {
+      "id": "xpath-25",
+      "topicId": "xpath",
+      "front": "Functions",
+      "back": "| Type | Availability |\n|------|--------------|\n| Aggregate functions | Java only |\n| Constraint functions | Both Java and Studio Pro |\n\n---",
+      "tags": [
+        "xpath"
+      ]
+    },
+    {
+      "id": "xpath-26",
+      "topicId": "xpath",
+      "front": "Sources",
+      "back": "- [Expressions](https://docs.mendix.com/refguide/expressions/)\n- [XPath](https://docs.mendix.com/refguide/xpath/)",
+      "tags": [
+        "xpath"
+      ]
+    }
+  ],
+  "integration": [
+    {
+      "id": "integration-0",
+      "topicId": "integration",
+      "front": "Overview",
+      "back": "Mendix supports multiple integration approaches for connecting applications and sharing data.\n\n\"Integration with other applications can be done using REST, OData, GraphQL, SOAP/Web Services, or Business Events.\"\n\n---",
+      "tags": [
+        "integration"
+      ]
+    },
+    {
+      "id": "integration-1",
+      "topicId": "integration",
+      "front": "REST Services",
+      "back": "REST services enable API-based communication between applications.",
+      "tags": [
+        "integration"
+      ]
+    },
+    {
+      "id": "integration-2",
+      "topicId": "integration",
+      "front": "Consumed REST Services",
+      "back": "Call external REST APIs from your Mendix application.\n\n**Key Features**:\n- Import OpenAPI/Swagger contracts to auto-generate service definitions\n- Use \"Call REST Service\" action in microflows\n- HttpRequest and HttpResponse System Entities handle communication",
+      "tags": [
+        "integration"
+      ]
+    },
+    {
+      "id": "integration-3",
+      "topicId": "integration",
+      "front": "Published REST Services",
+      "back": "Expose your application's functionality as REST endpoints.\n\n**Creating REST Resources**:\n- Right-click entity in domain model: \"Expose as REST resource\"\n- Right-click in editor: \"Publish as REST service operation\"\n\n**Authentication Methods**:\n\n| Method | Description |\n|--------|-------------|\n| Basic & Active Session | Default when security is Prototype/demo or Production |\n| No Authentication | For specific services |\n| Anonymous User | When enabled app-wide |\n| Custom Microflow | JWT, API keys, etc. |\n\n**Note**: \"Web service users cannot access REST services.\"\n\n**Auto-Generated Documentation**:\n- Accessible at `http://yourapp.com/rest-doc/`\n- Features interactive Swagger UI\n- Available in OpenAPI 3.0 and 2.0 formats\n\n**Monitoring**:\nSet log level of REST Publish log node to Trace for detailed logging.\n\n---",
+      "tags": [
+        "integration"
+      ]
+    },
+    {
+      "id": "integration-4",
+      "topicId": "integration",
+      "front": "OData Services",
+      "back": "OData provides a standardized protocol for data access and manipulation.",
+      "tags": [
+        "integration"
+      ]
+    },
+    {
+      "id": "integration-5",
+      "topicId": "integration",
+      "front": "Published OData/GraphQL Services",
+      "back": "Share your data through OData or GraphQL (experimental).\n\nOData services are viewable and manageable through Mendix Connect Catalog.\n\n---",
+      "tags": [
+        "integration"
+      ]
+    },
+    {
+      "id": "integration-6",
+      "topicId": "integration",
+      "front": "Web Services (SOAP)",
+      "back": "Traditional SOAP-based web services for legacy system integration.\n\n- Consume and publish web services\n- Comprehensive XML schema handling\n\n---",
+      "tags": [
+        "integration"
+      ]
+    },
+    {
+      "id": "integration-7",
+      "topicId": "integration",
+      "front": "Additional Capabilities",
+      "back": "- **Business Event Services**: Event-driven architecture\n- **Data Import/Export**: XML and JSON\n- **Machine Learning Model Integration**: ML model calls\n- **External Database Connectivity**: Downloadable connectors\n\n---",
+      "tags": [
+        "integration"
+      ]
+    },
+    {
+      "id": "integration-8",
+      "topicId": "integration",
+      "front": "Mendix Connect Integration",
+      "back": "Data integration features are part of \"Mendix Connect, a collection of functionalities that allows people in your organization to discover, understand, connect, and govern data securely.\"\n\nThe Catalog component enables registration, management, and governance of data assets.\n\n---",
+      "tags": [
+        "integration"
+      ]
+    },
+    {
+      "id": "integration-9",
+      "topicId": "integration",
+      "front": "Configuration",
+      "back": "1. Open microflow where you need REST call\n2. Add \"Call REST Service\" activity\n3. Configure:\n   - URL/endpoint\n   - HTTP method\n   - Headers\n   - Request body\n   - Response handling",
+      "tags": [
+        "integration"
+      ]
+    },
+    {
+      "id": "integration-10",
+      "topicId": "integration",
+      "front": "Request/Response Handling",
+      "back": "- Use HttpRequest system entity for outgoing requests\n- Use HttpResponse system entity for incoming responses\n- Parse JSON/XML responses into domain model objects\n\n---",
+      "tags": [
+        "integration"
+      ]
+    },
+    {
+      "id": "integration-11",
+      "topicId": "integration",
+      "front": "Security",
+      "back": "1. Use SSL for all consumed web services\n2. Implement proper authentication\n3. Validate input at system boundaries\n4. Apply IP restrictions for sensitive endpoints",
+      "tags": [
+        "integration"
+      ]
+    },
+    {
+      "id": "integration-12",
+      "topicId": "integration",
+      "front": "Error Handling",
+      "back": "1. Handle HTTP error codes appropriately\n2. Log integration failures\n3. Implement retry logic for transient failures\n4. Use timeouts to prevent hanging connections",
+      "tags": [
+        "integration"
+      ]
+    },
+    {
+      "id": "integration-13",
+      "topicId": "integration",
+      "front": "Performance",
+      "back": "1. Cache responses when appropriate\n2. Use pagination for large datasets\n3. Minimize number of API calls\n4. Consider asynchronous processing for long-running operations\n\n---",
+      "tags": [
+        "integration"
+      ]
+    },
+    {
+      "id": "integration-14",
+      "topicId": "integration",
+      "front": "Sources",
+      "back": "- [Integration](https://docs.mendix.com/refguide/integration/)\n- [Consumed REST Services](https://docs.mendix.com/refguide/consumed-rest-services/)\n- [Published REST Services](https://docs.mendix.com/refguide/published-rest-services/)",
+      "tags": [
+        "integration"
+      ]
+    }
+  ],
+  "java": [
+    {
+      "id": "java-0",
+      "topicId": "java",
+      "front": "Overview",
+      "back": "Mendix allows developers to extend microflow functionality with custom Java code through Java actions.\n\n\"Most application logic can be developed using microflows and nanoflows. If there is a feature missing you can extend Mendix microflows with the use of Java actions.\"\n\n---",
+      "tags": [
+        "java"
+      ]
+    },
+    {
+      "id": "java-1",
+      "topicId": "java",
+      "front": "Basic Setup",
+      "back": "1. Right-click the module and select **Add other** > **Java action**\n2. Enter a name for the action\n3. Configure parameters and return types through properties pane\n4. Save and deploy for Eclipse to generate the Java class",
+      "tags": [
+        "java"
+      ]
+    },
+    {
+      "id": "java-2",
+      "topicId": "java",
+      "front": "Parameters and Return Types",
+      "back": "Java actions support:\n- **Object parameters**: Accepts specific entity types from domain model\n- **String/primitive parameters**: Basic data types\n- **Return types**: Strings, objects, lists, or other data types",
+      "tags": [
+        "java"
+      ]
+    },
+    {
+      "id": "java-3",
+      "topicId": "java",
+      "front": "Code Generation",
+      "back": "Studio Pro generates Java code with designated areas for custom code:\n- Between `//BEGIN USER CODE` and `//END USER CODE` comments\n- Implementation goes in the `executeAction()` method\n\n---",
+      "tags": [
+        "java"
+      ]
+    },
+    {
+      "id": "java-4",
+      "topicId": "java",
+      "front": "Implementation in Eclipse",
+      "back": "After deploying for Eclipse, developers edit the generated Java class.",
+      "tags": [
+        "java"
+      ]
+    },
+    {
+      "id": "java-5",
+      "topicId": "java",
+      "front": "Example: String Manipulation",
+      "back": "---",
+      "codeExample": "```java\nString productName = this.productParameter.getName(this.getContext());\nreturn new StringBuilder(productName).reverse().toString();\n```",
+      "tags": [
+        "java"
+      ]
+    },
+    {
+      "id": "java-6",
+      "topicId": "java",
+      "front": "Integration Steps",
+      "back": "1. Open the microflow where you need the Java action\n2. Drag the Java action from **App Explorer** into the microflow\n3. Configure input parameters by selecting appropriate variables\n4. Use the output variable in subsequent activities\n\n---",
+      "tags": [
+        "java"
+      ]
+    },
+    {
+      "id": "java-7",
+      "topicId": "java",
+      "front": "Data Retrieval with XPath",
+      "back": "Java actions can retrieve database objects using the Mendix Runtime API.\n\n**Recommendation**: Use \"proxy classes generated by Mendix Studio Pro\" to avoid raw string XPath queries, ensuring type safety when domain models change.\n\n---",
+      "tags": [
+        "java"
+      ]
+    },
+    {
+      "id": "java-8",
+      "topicId": "java",
+      "front": "Input Validation",
+      "back": "\"This simplified approach should be made more robust in a real app by checking and sanitizing the inputs to prevent exceptions or attempts at hacking.\"",
+      "tags": [
+        "java"
+      ]
+    },
+    {
+      "id": "java-9",
+      "topicId": "java",
+      "front": "Using Community Commons",
+      "back": "For complex XPath operations, consider the Community Commons module which \"provides a powerful way of working with XPaths and performs checks automatically.\"",
+      "tags": [
+        "java"
+      ]
+    },
+    {
+      "id": "java-10",
+      "topicId": "java",
+      "front": "Deployment Workflow",
+      "back": "Always use **Deploy for Eclipse** to ensure generated code stays synchronized with action configurations.\n\n---",
+      "tags": [
+        "java"
+      ]
+    },
+    {
+      "id": "java-11",
+      "topicId": "java",
+      "front": "Troubleshooting",
+      "back": "| Issue | Solution |\n|-------|----------|\n| **UnsupportedClassVersionError** | Clean deployment directory and match JDK versions |\n| **Compile Errors** | Studio Pro identifies syntax errors during deployment |\n| **Runtime Errors** | Check Studio Pro console for stack traces |\n\n---",
+      "tags": [
+        "java"
+      ]
+    },
+    {
+      "id": "java-12",
+      "topicId": "java",
+      "front": "Sources",
+      "back": "- [Extending Your Application with Custom Java](https://docs.mendix.com/refguide/extending-your-application-with-custom-java/)",
+      "tags": [
+        "java"
+      ]
+    }
+  ],
+  "events": [
+    {
+      "id": "events-0",
+      "topicId": "events",
+      "front": "Event Handlers Overview",
+      "back": "Event handlers define microflows that automatically execute in response to specific entity-related events.\n\n\"Event handlers define microflows that handle certain events related to the entity.\"\n\n---",
+      "tags": [
+        "events"
+      ]
+    },
+    {
+      "id": "events-1",
+      "topicId": "events",
+      "front": "Event Types",
+      "back": "| Event | Description |\n|-------|-------------|\n| **Create** | Microflow executes when object is created |\n| **Commit** | Microflow executes when object is committed |\n| **Delete** | Microflow executes when object is deleted |\n| **Rollback** | Microflow executes when object is rolled back |\n\n---",
+      "tags": [
+        "events"
+      ]
+    },
+    {
+      "id": "events-2",
+      "topicId": "events",
+      "front": "Timing: Before and After",
+      "back": "| Timing | Description |\n|--------|-------------|\n| **Before** | Executes prior to event; must return Boolean to permit (true) or prevent (false) |\n| **After** | Executes following event; cannot prevent action |\n\n---",
+      "tags": [
+        "events"
+      ]
+    },
+    {
+      "id": "events-3",
+      "topicId": "events",
+      "front": "Parameter Passing",
+      "back": "- Before Create handlers cannot receive the object as parameter\n- All other event handlers can receive the object",
+      "tags": [
+        "events"
+      ]
+    },
+    {
+      "id": "events-4",
+      "topicId": "events",
+      "front": "Return Values",
+      "back": "\"Microflows that are executed _before_ the event should return a Boolean value that specifies whether the event should continue (true) or be cancelled (false).\"",
+      "tags": [
+        "events"
+      ]
+    },
+    {
+      "id": "events-5",
+      "topicId": "events",
+      "front": "Error Handling",
+      "back": "Before event handlers can raise errors when returning false, allowing validation-like behavior.\n\n---",
+      "tags": [
+        "events"
+      ]
+    },
+    {
+      "id": "events-6",
+      "topicId": "events",
+      "front": "Usage Recommendations",
+      "back": "\"Event handlers should be used moderately, as they will be triggered every time the corresponding event occurs, so they must be for things you want always to happen.\"\n\n---",
+      "tags": [
+        "events"
+      ]
+    },
+    {
+      "id": "events-7",
+      "topicId": "events",
+      "front": "Overview",
+      "back": "Validation rules enforce data integrity by defining conditions that objects must satisfy before being committed to the database.\n\nWhen violated, they generate error messages for end-users or exceptions in microflows.\n\n---",
+      "tags": [
+        "events"
+      ]
+    },
+    {
+      "id": "events-8",
+      "topicId": "events",
+      "front": "Creating Validation Rules",
+      "back": "Define validation rules through the entity dialog box in the domain model editor.\n\nEach rule includes:\n- **Attribute**: The field to validate\n- **Error Message**: User-facing text when validation fails\n- **Rule Type**: The condition to enforce\n\n---",
+      "tags": [
+        "events"
+      ]
+    },
+    {
+      "id": "events-9",
+      "topicId": "events",
+      "front": "Rule Types",
+      "back": "| Rule Type | Description |\n|-----------|-------------|\n| **Required** (default) | Attribute needs a value; cannot be empty |\n| **Unique** | Attribute values must differ across all objects |\n| **Equals** | Compares to fixed value or another attribute |\n| **Range** | Values must fall within specified bounds |\n| **Regular Expression** | Matches against stored regex pattern |\n| **Maximum Length** | Restricts character count |\n\n---",
+      "tags": [
+        "events"
+      ]
+    },
+    {
+      "id": "events-10",
+      "topicId": "events",
+      "front": "Non-Persistable Entities",
+      "back": "Validation rules are disabled for non-persistable entities since they're designed for database integrity.",
+      "tags": [
+        "events"
+      ]
+    },
+    {
+      "id": "events-11",
+      "topicId": "events",
+      "front": "Uniqueness with Generalizations",
+      "back": "You cannot define unique validation rules on inherited attributes in specialized entities.",
+      "tags": [
+        "events"
+      ]
+    },
+    {
+      "id": "events-12",
+      "topicId": "events",
+      "front": "Rule Ordering",
+      "back": "Rules execute in defined order, with all violations recorded and displayed together. Uniqueness constraints execute separately after other validations pass.\n\n---",
+      "tags": [
+        "events"
+      ]
+    },
+    {
+      "id": "events-13",
+      "topicId": "events",
+      "front": "Sources",
+      "back": "- [Event Handlers](https://docs.mendix.com/refguide/event-handlers/)\n- [Validation Rules](https://docs.mendix.com/refguide/validation-rules/)",
+      "tags": [
+        "events"
+      ]
+    }
+  ],
+  "enumerations": [
+    {
+      "id": "enumerations-0",
+      "topicId": "enumerations",
+      "front": "Enumerations Overview",
+      "back": "An enumeration defines \"a list of predefined values\" used for enumeration attribute types.\n\n**Example**: An order status might have values like _Open_, _Closed_, or _In Progress_.\n\n---",
+      "tags": [
+        "enumerations"
+      ]
+    },
+    {
+      "id": "enumerations-1",
+      "topicId": "enumerations",
+      "front": "Enumeration Properties",
+      "back": "| Property | Description |\n|----------|-------------|\n| **Name** | The enumeration identifier |\n| **Documentation** | Information for developers (not visible to end-users) |\n| **Export level** | For add-on modules (Hidden or Usable) |\n| **Enumeration values** | One or more options representing choices |\n\n---",
+      "tags": [
+        "enumerations"
+      ]
+    },
+    {
+      "id": "enumerations-2",
+      "topicId": "enumerations",
+      "front": "Caption",
+      "back": "\"The text the end-user sees for this enumeration value.\"\n- Translatable\n- Can contain any character including spaces",
+      "tags": [
+        "enumerations"
+      ]
+    },
+    {
+      "id": "enumerations-3",
+      "topicId": "enumerations",
+      "front": "Name",
+      "back": "The technical identifier:\n- Must start with a letter\n- Can only contain letters, digits, and underscores\n- Reserved words cannot be used (`abstract`, `boolean`, `class`, `enum`, etc.)\n\n**Critical**: Changing a value's name is prohibited since it would \"invalidate the data in your database.\"",
+      "tags": [
+        "enumerations"
+      ]
+    },
+    {
+      "id": "enumerations-4",
+      "topicId": "enumerations",
+      "front": "Image",
+      "back": "Optional image displayed in data grid columns when enumeration format is set to **Image**.\n\n---",
+      "tags": [
+        "enumerations"
+      ]
+    },
+    {
+      "id": "enumerations-5",
+      "topicId": "enumerations",
+      "front": "Creating an Enumeration",
+      "back": "1. Right-click in App Explorer and select **Add other** > **Enumeration**\n2. Name the enumeration\n3. Click **New** to add enumeration values with Name, Caption, and optional Image\n4. Save each value and the enumeration\n\n---",
+      "tags": [
+        "enumerations"
+      ]
+    },
+    {
+      "id": "enumerations-6",
+      "topicId": "enumerations",
+      "front": "Localization",
+      "back": "Captions are translatable text, accessible through the Language Menu for multiple language support.\n\n---",
+      "tags": [
+        "enumerations"
+      ]
+    },
+    {
+      "id": "enumerations-7",
+      "topicId": "enumerations",
+      "front": "Overview",
+      "back": "Constants define configuration values that can vary per environment. They're accessible in expressions, web services, and can be configured differently across deployments.\n\n---",
+      "tags": [
+        "enumerations"
+      ]
+    },
+    {
+      "id": "enumerations-8",
+      "topicId": "enumerations",
+      "front": "Environment-Specific Configuration",
+      "back": "| Platform | Method |\n|----------|--------|\n| Licensed Mendix Cloud, SAP BTP, Kubernetes | \"Model Options\" tab in Environment Details |\n| Other Cloud Foundry platforms | Environment variables using `module.constant` format |\n| Local/Free App | Values defined in Studio Pro |",
+      "tags": [
+        "enumerations"
+      ]
+    },
+    {
+      "id": "enumerations-9",
+      "topicId": "enumerations",
+      "front": "Local Overrides",
+      "back": "Constants can be overridden in configurations for local testing without modifying defaults.\n\n---",
+      "tags": [
+        "enumerations"
+      ]
+    },
+    {
+      "id": "enumerations-10",
+      "topicId": "enumerations",
+      "front": "Key Properties",
+      "back": "| Property | Description |\n|----------|-------------|\n| **Name** | Identifier used to reference the constant |\n| **Documentation** | Development purposes only |\n| **Export Level** | Hidden (default) or Usable |\n| **Data Types** | String, Boolean, date/time, decimal, integer/long |\n| **Default Value** | Used when running locally or in Free App |\n| **Exposed to Client** | When \"Yes\", constant is accessible in nanoflows and page expressions |\n\n---",
+      "tags": [
+        "enumerations"
+      ]
+    },
+    {
+      "id": "enumerations-11",
+      "topicId": "enumerations",
+      "front": "Critical Security Consideration",
+      "back": "**\"When a constant is exposed to the client...you should not use sensitive data or secrets such as passwords.\"**\n\nThis applies to:\n- Web apps\n- Offline-first PWAs\n- Native applications\n\n---",
+      "tags": [
+        "enumerations"
+      ]
+    },
+    {
+      "id": "enumerations-12",
+      "topicId": "enumerations",
+      "front": "Use Cases",
+      "back": "Constants work in:\n- Expressions (prefixed with `@`)\n- Consumed web services (specifying environment-specific URLs)\n- Configuration values that change between environments\n\n---",
+      "tags": [
+        "enumerations"
+      ]
+    },
+    {
+      "id": "enumerations-13",
+      "topicId": "enumerations",
+      "front": "Sources",
+      "back": "- [Enumerations](https://docs.mendix.com/refguide/enumerations/)\n- [Constants](https://docs.mendix.com/refguide/constants/)",
+      "tags": [
+        "enumerations"
+      ]
+    }
+  ],
+  "scheduled-events": [
+    {
+      "id": "scheduled-events-0",
+      "topicId": "scheduled-events",
+      "front": "Overview",
+      "back": "Scheduled events enable you to run microflows automatically on a regular basis without requiring end-user interaction.\n\nThey're managed through the task queue mechanism and added to modules as documents.\n\n**Note**: \"Scheduled events can be tested locally, but they will not be run if your app is deployed as a Free App.\"\n\n---",
+      "tags": [
+        "scheduled-events"
+      ]
+    },
+    {
+      "id": "scheduled-events-1",
+      "topicId": "scheduled-events",
+      "front": "Creating Scheduled Events",
+      "back": "Access scheduled events by right-clicking your module and selecting \"Add other.\"\n\n---",
+      "tags": [
+        "scheduled-events"
+      ]
+    },
+    {
+      "id": "scheduled-events-2",
+      "topicId": "scheduled-events",
+      "front": "Common Properties",
+      "back": "| Property | Description |\n|----------|-------------|\n| **Name** | Identifies the scheduled event in `System.ProcessedQueueTask` at runtime |\n| **Documentation** | For model documentation only |\n| **Microflow** | Operation triggered by the event (no parameters, runs with all rights) |\n| **Enabled** | Controls whether microflow executes |\n\n---",
+      "tags": [
+        "scheduled-events"
+      ]
+    },
+    {
+      "id": "scheduled-events-3",
+      "topicId": "scheduled-events",
+      "front": "Timing Options",
+      "back": "The system supports six interval types:\n\n| Interval | Description |\n|----------|-------------|\n| **Yearly** | Run on specific dates or weekdays (e.g., first Monday in April) |\n| **Monthly** | Execute on particular days or specific weekdays |\n| **Weekly** | Run on selected days (Monday, Wednesday, Friday) |\n| **Daily** | Execute at a specified time |\n| **Hourly** | Run every N hours with optional minute offset |\n| **Minutes** | Execute every N minutes |\n\nEach option allows UTC or server-based time zone specification.\n\n---",
+      "tags": [
+        "scheduled-events"
+      ]
+    },
+    {
+      "id": "scheduled-events-4",
+      "topicId": "scheduled-events",
+      "front": "Handling Long-Running Events",
+      "back": "When events exceed their interval duration, choose an overlap strategy:\n\n| Strategy | Behavior |\n|----------|----------|\n| **Skip next** (default) | Subsequent events skipped until completion, resuming at next scheduled time |\n| **Delay next** | Next event starts immediately after previous finishes, potentially drifting from schedule |\n\n---",
+      "tags": [
+        "scheduled-events"
+      ]
+    },
+    {
+      "id": "scheduled-events-5",
+      "topicId": "scheduled-events",
+      "front": "Key Operational Limits",
+      "back": "- Maximum of ten scheduled events can run concurrently per cluster node\n- Hour and minute intervals must be integer divisors of 24 or 60 respectively\n- All Mendix Cloud servers operate on UTC time\n\n---",
+      "tags": [
+        "scheduled-events"
+      ]
+    },
+    {
+      "id": "scheduled-events-6",
+      "topicId": "scheduled-events",
+      "front": "Database Management",
+      "back": "Each execution creates entries in `System.ProcessedQueueTask`.\n\n**Important**: Implement cleanup procedures to manage table growth over time.\n\n---",
+      "tags": [
+        "scheduled-events"
+      ]
+    },
+    {
+      "id": "scheduled-events-7",
+      "topicId": "scheduled-events",
+      "front": "Best Practices",
+      "back": "1. **Use meaningful names** for easy identification\n2. **Set appropriate intervals** based on task requirements\n3. **Handle errors gracefully** within the microflow\n4. **Monitor execution** through logs and system entities\n5. **Implement cleanup** for ProcessedQueueTask table\n\n---",
+      "tags": [
+        "scheduled-events"
+      ]
+    },
+    {
+      "id": "scheduled-events-8",
+      "topicId": "scheduled-events",
+      "front": "Sources",
+      "back": "- [Scheduled Events](https://docs.mendix.com/refguide/scheduled-events/)",
+      "tags": [
+        "scheduled-events"
+      ]
+    }
+  ]
+}

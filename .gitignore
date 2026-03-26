@@ -40,5 +40,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# generated content
-/content/*.json
+# Note: content/*.json are committed for deployment
+# They are generated from documentation by running: npm run process-content

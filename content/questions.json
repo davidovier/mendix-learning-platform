@@ -1,0 +1,3370 @@
+[
+  {
+    "id": "q-0",
+    "category": "pages",
+    "knowledgePath": "Building an Event App Using Microflows",
+    "question": "What is the easiest way to collect feedback from users from within your app?",
+    "options": [
+      "Use the Feedback widget.",
+      "Provide a Contact Us link in your app.",
+      "Make a page that allows users to write and submit feedback.",
+      "Feedback functionality is automatically included in all Mendix apps."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-1",
+    "category": "microflows",
+    "knowledgePath": "Building an Event App Using Microflows",
+    "question": "What would be a reasonable validation rule to use for AllowedNumberOfVisitorsPerDay?",
+    "options": [
+      "Range <= 1000",
+      "Maximum length: 20",
+      "Regular Expression: numeric characters only",
+      "Unique"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-2",
+    "category": "modules",
+    "knowledgePath": "Building an Event App Using Microflows",
+    "question": "How can you easily manage accounts for your app?",
+    "options": [
+      "Connect navigation to the built-in Account_Overview page",
+      "Always log in as a superuser.",
+      "Edit the database manually",
+      "Make login and account management pages."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-3",
+    "category": "domain-model",
+    "knowledgePath": "Building an Event App Using Microflows",
+    "question": "Is it possible to limit an entity to only one object?",
+    "options": [
+      "Yes, through a Microflow",
+      "Yes, through the Module Security",
+      "No, this is not possible",
+      "Yes, through the Entity Properties"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-4",
+    "category": "microflows",
+    "knowledgePath": "Building an Event App Using Microflows",
+    "question": "What is a limitation of a sub-microflow compared to a regular microflow?",
+    "options": [
+      "None. Sub-microflows are equally capable.",
+      "A sub-microflow may only return a Boolean.",
+      "Branching is not possible.",
+      "You have a smaller selection of activities."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-5",
+    "category": "microflows",
+    "knowledgePath": "Building an Event App Using Microflows",
+    "question": "What main benefit do sub-microflows offer?",
+    "options": [
+      "Better maintainability",
+      "Improved performance",
+      "Smaller memory usage",
+      "Increased logical capability"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-6",
+    "category": "microflows",
+    "knowledgePath": "Building an Event App Using Microflows",
+    "question": "If you want to leave notes for future developers (or yourself) in a microflow, what can you use?",
+    "options": [
+      "Annotations",
+      "Comments",
+      "Captions",
+      "Sticky notes"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-7",
+    "category": "microflows",
+    "knowledgePath": "Building an Event App Using Microflows",
+    "question": "What is a limitation of a rule compared to a microflow?",
+    "options": [
+      "You have a smaller selection of activities.",
+      "Branching is not possible.",
+      "A rule may only return a Boolean.",
+      "None. Rules are equally capable."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-8",
+    "category": "modules",
+    "knowledgePath": "Building an Event App Using Microflows",
+    "question": "You’ve replaced a microflow with newer functionality and want to test it. However, you don’t want to delete the old microflow permanently in case something goes wrong. How can you do this?",
+    "options": [
+      "Exclude it from the project.",
+      "Rename it.",
+      "Deactivate it.",
+      "Soft delete to the recycle bin and restore later."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-9",
+    "category": "security",
+    "knowledgePath": "Building an Event App Using Microflows",
+    "question": "How can you allow users to access parts of an app (like a login page) without needing to log in?",
+    "options": [
+      "Set up anonymous users.",
+      "Set account security accordingly.",
+      "Relax security for whichever pages need to be accessed.",
+      "Set up trial users."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-10",
+    "category": "microflows",
+    "knowledgePath": "Building an Event App Using Microflows",
+    "question": "In a microflow, what is a token?",
+    "options": [
+      "A system-generated value.",
+      "A hash string used in user account validation.",
+      "A value determining how many sub-microflows may be called in the current microflow.",
+      "A placeholder variable defined by the developer."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-11",
+    "category": "microflows",
+    "knowledgePath": "Building an Event App Using Microflows",
+    "question": "In a microflow expression, “toUpperCase” is an example of what?",
+    "options": [
+      "A function",
+      "An operation",
+      "A string transform",
+      "A cast"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-12",
+    "category": "microflows",
+    "knowledgePath": "Building an Event App Using Microflows",
+    "question": "In a microflow, what would be an example of a variable?",
+    "options": [
+      "$Customer",
+      "formatDateTime",
+      "Empty",
+      "Round"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-13",
+    "category": "microflows",
+    "knowledgePath": "Building an Event App Using Microflows",
+    "question": "You need to debug a microflow in production but don’t want to impact your users. How can you trigger debugging only when you personally are running the microflow?",
+    "options": [
+      "Set a breakpoint condition.",
+      "Write a microflow expression.",
+      "Add a decision to the microflow",
+      "Adjust security accordingly."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-14",
+    "category": "modules",
+    "knowledgePath": "Building an Event App Using Microflows",
+    "question": "How can you have a microflow automatically run at a specific moment in time?",
+    "options": [
+      "Create and enable a scheduled event",
+      "Create it as a nanoflow",
+      "Have it called as a sub-microflow",
+      "Use the [%CurrentDateTime%] token."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-15",
+    "category": "microflows",
+    "knowledgePath": "Building an Event App Using Microflows",
+    "question": "What can you use to exit a loop early, instead of finishing the entire list of iterator objects?",
+    "options": [
+      "A break event",
+      "An exit event",
+      "A continue event",
+      "A go-to event"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-16",
+    "category": "microflows",
+    "knowledgePath": "Building an Event App Using Microflows",
+    "question": "You want to find the total number of objects in a list. What can you easily use to do this?",
+    "options": [
+      "Use an aggregate list function",
+      "Retrieve the value from the iterator object.",
+      "Use the [%total%] token.",
+      "Create a loop with a counter variable."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-17",
+    "category": "microflows",
+    "knowledgePath": "Building an Event App Using Microflows",
+    "question": "What are batches used for?",
+    "options": [
+      "Processing large amounts of data.",
+      "Running nightly cycles.",
+      "Hotfixing errors in production.",
+      "Duplicating datasets."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-18",
+    "category": "microflows",
+    "knowledgePath": "Building an Event App Using Microflows",
+    "question": "What is the list object in a loop called?",
+    "options": [
+      "An iterator",
+      "A looped list",
+      "A retrieval list",
+      "An aggregate list"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-19",
+    "category": "agile",
+    "knowledgePath": "Unlocking True Collaboration",
+    "question": "Which event is performed at the beginning of the sprint?",
+    "options": [
+      "Sprint planning",
+      "Daily scrum",
+      "Sprint retrospective",
+      "Sprint review"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-20",
+    "category": "agile",
+    "knowledgePath": "Unlocking True Collaboration",
+    "question": "What happens in the daily scrum?",
+    "options": [
+      "Team members share their progress, plans, and issues.",
+      "Instructions from the scrum master are delivered.",
+      "Team members chat about non-work subjects to decompress.",
+      "Development progress is presented to the stakeholders."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-21",
+    "category": "agile",
+    "knowledgePath": "Unlocking True Collaboration",
+    "question": "What do Story Points associated with a user story indicate?",
+    "options": [
+      "The difficulty of the user story.",
+      "The velocity of the team.",
+      "The number of tasks in the user story.",
+      "The priority of the user story."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-22",
+    "category": "agile",
+    "knowledgePath": "Unlocking True Collaboration",
+    "question": "During which of the Sprint Events does the development team determine user stories that will be finished in the sprint?",
+    "options": [
+      "Sprint Planning",
+      "Daily Scrum",
+      "Sprint Review",
+      "Product Backlog Refinement"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-23",
+    "category": "modules",
+    "knowledgePath": "Unlocking True Collaboration",
+    "question": "Which folders contain source information tied to a specific module enabling reuse of this module in another app?",
+    "options": [
+      "Javascriptsource and Javasource folders",
+      "All folders within App Directory",
+      "Only Javascriptsource folder",
+      "Only Javasource folder"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-24",
+    "category": "modules",
+    "knowledgePath": "Unlocking True Collaboration",
+    "question": "The VerifyPassword.java file in the System module is stored in which of the JavaSource sub-folders?",
+    "options": [
+      "Actions",
+      "Root folder",
+      "Datasets",
+      "Proxies"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-25",
+    "category": "modules",
+    "knowledgePath": "Unlocking True Collaboration",
+    "question": "The Microflows.java file is stored in which sub-folder of JavaSource directory?",
+    "options": [
+      "Proxies",
+      "Root folder",
+      "Datasets",
+      "Actions"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-26",
+    "category": "modules",
+    "knowledgePath": "Unlocking True Collaboration",
+    "question": "Which of the following sources are typically stored in the Resources folder of the App Directory?",
+    "options": [
+      "Configuration files, HTML and Java files",
+      "Microflows and constants",
+      "Datasets",
+      "Proxies"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-27",
+    "category": "modules",
+    "knowledgePath": "Unlocking True Collaboration",
+    "question": "Files and folders that form the styling of your application are typically stored in which of the following folders?",
+    "options": [
+      "Theme",
+      "JavaScript",
+      "Userlib",
+      "Resources"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-28",
+    "category": "agile",
+    "knowledgePath": "Unlocking True Collaboration",
+    "question": "When working in an app with version control, which concept would you use to share your database with your team?",
+    "options": [
+      "By creating a data snapshot and adding it to the deployment directory of your app.",
+      "By exporting a app package and sharing it with your team.",
+      "Simply by committing the app to Team Server.",
+      "By creating a dataset."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-29",
+    "category": "agile",
+    "knowledgePath": "Unlocking True Collaboration",
+    "question": "What type of conflict occurs when you and your colleague both modified the microflow implementing the delete behavior?",
+    "options": [
+      "Modify-Modify",
+      "Modify-Delete",
+      "Delete-Delete",
+      "Delete-Modify"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-30",
+    "category": "agile",
+    "knowledgePath": "Unlocking True Collaboration",
+    "question": "What is a tagged version?",
+    "options": [
+      "A revision that has been used to build a Mx deployment package.",
+      "A revision of another branch line",
+      "A branch created from the current app revision.",
+      "A revision of the main line."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-31",
+    "category": "agile",
+    "knowledgePath": "Unlocking True Collaboration",
+    "question": "Which function is used to merge a complete branch into the mainline and is only available on the main line?",
+    "options": [
+      "Merge feature branch",
+      "Port fix",
+      "Advanced merge",
+      "Quick fix"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-32",
+    "category": "agile",
+    "knowledgePath": "Unlocking True Collaboration",
+    "question": "Which of the below mentioned options can be used to merge revisions into and from all lines, main line or branch line?",
+    "options": [
+      "Advanced merge",
+      "Merge feature branch",
+      "Port fix",
+      "Quick fix"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-33",
+    "category": "xpath",
+    "knowledgePath": "Constrain Your Data Using XPath",
+    "question": "Where in Mendix Studio Pro can you configure XPaths?",
+    "options": [
+      "List Views",
+      "Page building",
+      "Page access rules",
+      "Text widgets"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-34",
+    "category": "xpath",
+    "knowledgePath": "Constrain Your Data Using XPath",
+    "question": "Which Widget feature utilizes XPaths?",
+    "options": [
+      "Selectable data constraints on Reference Selectors",
+      "The tab index of a Group Box",
+      "Styling properties of Action Buttons",
+      "Dynamic text in Labels"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-35",
+    "category": "xpath",
+    "knowledgePath": "Constrain Your Data Using XPath",
+    "question": "Where can you utilize XPaths in microflows?",
+    "options": [
+      "In the ‘Retrieve’ action",
+      "In the ‘Open page’ action",
+      "In the ‘Commit’ action",
+      "In the input parameter"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-36",
+    "category": "xpath",
+    "knowledgePath": "Constrain Your Data Using XPath",
+    "question": "How do you begin typing an XPath?",
+    "options": [
+      "[",
+      "<",
+      "'",
+      "("
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-37",
+    "category": "xpath",
+    "knowledgePath": "Constrain Your Data Using XPath",
+    "question": "If you want to open the XPath auto-complete menu, you need to press:",
+    "options": [
+      "Ctrl + Space",
+      "Ctrl + O",
+      "Shift+Space",
+      "Ctrl + Shift"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-38",
+    "category": "xpath",
+    "knowledgePath": "Constrain Your Data Using XPath",
+    "question": "Say you are writing an XPath in a Retrieve action for the VacationRequest entity in a Microflow. If you write in the XPath window [Status = ‘Cancelled’], what will be returned?",
+    "options": [
+      "A list of all requests with the status set to ‘Cancelled’.",
+      "A list of all requests except the ones that are cancelled.",
+      "A new list of requests where the Status will not be ‘Cancelled’.",
+      "A new object with Status = ‘Cancelled’."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-39",
+    "category": "xpath",
+    "knowledgePath": "Constrain Your Data Using XPath",
+    "question": "Say you are writing an XPath in a Retrieve action on the VacationRequest entity in a Microflow. If you write in the XPath window [VacationRequest.VacationRequest_Submitter='[%CurrentUser%]'], what will be returned?",
+    "options": [
+      "A list of all vacation requests submitted by the current user.",
+      "The earliest Vacation Request that the current user has submitted.",
+      "A list of all the vacation requests submitted by the current user where the status is ‘Approved’.",
+      "A list of all the vacation requests submitted by the current user that have yet to be approved."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-40",
+    "category": "xpath",
+    "knowledgePath": "Constrain Your Data Using XPath",
+    "question": "Let’s assume you add a new decimal attribute to the VacationRequest entity called ‘DaysUsed’. The value represents the total amount of days used for the requested vacation. If you write a microflow with a Retrieve action, what will be the return if we use the following XPath\r\n[DaysUsed < 4.5\r\nand\r\nnot(VacationManagement.VacationRequest_Submitter/Administration.Account)]",
+    "options": [
+      "A list of all VacationRequests that are shorter than 4.5 days and do not have a Submitter assigned",
+      "A list of all VacationRequests that are longer than 4.5 days",
+      "A list of all VacationRequests that are shorter than 4.5 days and have a Submitter assigned",
+      "A list of all VacationRequests that have been approved and are shorter than 4.5 days"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-41",
+    "category": "xpath",
+    "knowledgePath": "Constrain Your Data Using XPath",
+    "question": "If we populate a DataGrid of VacationRequest entities with the following XPath constraint, what will happen? [StartDate = empty]",
+    "options": [
+      "The grid will show All VacationRequests where the StartDate is not populated.",
+      "The grid will show All VacationRequests where the StartDate is greater than the current date.",
+      "This XPath will throw an error in Mendix Studio Pro. DateTimes cannot be empty.",
+      "The grid will show the VacationRequest with the oldest StartDate."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-42",
+    "category": "modules",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "What is the correct way of structuring resources within the App Explorer?",
+    "options": [
+      "Manually",
+      "By switching to Structuring mode",
+      "Automatically",
+      "By downloading App Explorer Structure app"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-43",
+    "category": "modules",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "When structuring the App Explorer, which of the following subfolders would be the best choice to store things like Enumerations and Regular Expressions?",
+    "options": [
+      "Resources",
+      "Pages",
+      "Domain pages",
+      "Microflows"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-44",
+    "category": "domain-model",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "How can you connect a profile picture to the account of a team member in a way that allows the picture to be altered?",
+    "options": [
+      "Create a ProfilePicture entity and configuring Image entity in the System module as its generalization.",
+      "Directly use the Image entity of the System module in the Domain Model of your module.",
+      "Copy the Image entity from the System module to the Domain Model of your module."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-45",
+    "category": "pages",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "Which widget needs to be used inside of a List View for visualizing a dynamic image?",
+    "options": [
+      "Dynamic Image",
+      "Image Uploader",
+      "File Uploader",
+      "Image"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-46",
+    "category": "pages",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "Which of the following options is used for featuring the navigation menu in a sidebar?",
+    "options": [
+      "Atlas Default",
+      "Popup",
+      "Atlas Sidebar",
+      "Atlas Topbar"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-47",
+    "category": "pages",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "Which of the following terms refers to the empty areas that form the canvas for any pages that make use of the layout?",
+    "options": [
+      "Placeholders",
+      "Scroll containers",
+      "Contents",
+      "Layout grid"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-48",
+    "category": "pages",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "When a layout is based on another layout, which of the mentioned option refers to the parent layout?",
+    "options": [
+      "Master layout",
+      "Main layout",
+      "Placeholder layout",
+      "Template layout"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-49",
+    "category": "modules",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "Which of the principles needs to be utilized to reduce duplication of already created elements?",
+    "options": [
+      "DRY",
+      "FLY",
+      "TRY",
+      "BUY"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-50",
+    "category": "pages",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "You want to re-use a header on multiple pages, which of the following options can you use to ensure that the content of the header throughout the app automatically changes after you modify its content?",
+    "options": [
+      "Snippet",
+      "Widget",
+      "Building block",
+      "Template"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-51",
+    "category": "pages",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "Which of the following widgets can be used to select associated objects, when multiple select is possible?",
+    "options": [
+      "Reference set selector",
+      "Reference selector",
+      "Drop-down",
+      "Check boxes"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-52",
+    "category": "pages",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "From the buttons on a Data Grid widget that work with single select mode, which ones need to be configured with multi-select mode?",
+    "options": [
+      "Edit, Delete",
+      "New, Delete",
+      "New, Edit",
+      "New, Edit, Delete"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-53",
+    "category": "security",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "Where should you configure that only selected roles are allowed to see a container on a page?",
+    "options": [
+      "In the Conditional visibility property of the container.",
+      "In the Navigation visibility property of the Page.",
+      "In the User tab of the Project security.",
+      "In the Page Access tab of the Module Security."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-54",
+    "category": "pages",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "How is the size of popup windows set to fixed?",
+    "options": [
+      "By setting the resizable property of the page to No.",
+      "By selecting Atlas_Fixed layout.",
+      "By manually setting the size of page columns.",
+      "Automatically."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-55",
+    "category": "pages",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "How can you ensure that the buttons in the footer area of the relatively long and scrollable pop-up page are always visible?",
+    "options": [
+      "By removing the outer layout grid.",
+      "By setting floating property of the footer to No.",
+      "By removing a scroll container.",
+      "By fixing the size of the scroll container."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-56",
+    "category": "pages",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "What constraint can you use to show the most recently created items at the top of the page?",
+    "options": [
+      "createdDate (descending)",
+      "createdAscend (descending)",
+      "createdDescend (date created)",
+      "dateCreated (descending)"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-57",
+    "category": "pages",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "What are the default Mendix options for the popups?",
+    "options": [
+      "Resizable with size determined automatically, with layout grid as the most outer layer of the page.",
+      "Fixed size determined automatically, with layout grid as the most outer layer of the page.",
+      "Fixed size determined automatically, with layout grid as the most inner layer of the page.",
+      "Resizable with size determined automatically, with layout grid as the most inner layer of the page."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-58",
+    "category": "pages",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "How to make the popup window always visible?",
+    "options": [
+      "Remove the outer layer grid.",
+      "Add a button to “glue” them.",
+      "Choose a different popup style.",
+      "Change the layer grid."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-59",
+    "category": "security",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "Which of the following options provides an easy way to limit access rights for a given role to a specific functionality within an app?",
+    "options": [
+      "By adding a separate module.",
+      "By creating a package.",
+      "By creating a snippet.",
+      "By creating a separate domain model."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-60",
+    "category": "pages",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "Where on the page can the Menu document be displayed in an app?",
+    "options": [
+      "Anywhere",
+      "Only on a page",
+      "Only inside of a menu widget",
+      "Only in a navigation layout"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-61",
+    "category": "domain-model",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "What alternative to drawing an association between two entities can you use to connect two entities, each located in a separate domain model?",
+    "options": [
+      "By right-clicking in an entity and selecting Add>Association.",
+      "By copying entities from one domain model to another.",
+      "By setting the 'Specialization' setting of one entity to the other.",
+      "By writing Java code."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-62",
+    "category": "xpath",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "Which of the following XPath constraints should be used to allow users to only see their own notifications?",
+    "options": [
+      "[Notifications.Notification_Account='[%CurrentUser%]']",
+      "Notifications.Notification_Account=ID']",
+      "[Notifications.Notification_Account=System.User']",
+      "Notifications.Notification_Account='[%CurrentSession%]']"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-63",
+    "category": "pages",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "What can you use whenever you wish to display a navigation menu, but not the main navigation tree?",
+    "options": [
+      "Menu",
+      "External icons",
+      "Javascript",
+      "Modules from the App Store"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-64",
+    "category": "misc",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "How many source and destination languages can you specify?",
+    "options": [
+      "One source, one destination",
+      "Many sources, many destinations",
+      "Many sources, one destination",
+      "One source, many destinations"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-65",
+    "category": "misc",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "What does default project language define?",
+    "options": [
+      "The language which users will see when using your app.",
+      "The language selected for the given user at the moment of account creation.",
+      "The language in which project content is visualized in Studio Pro.",
+      "The language which will be selected by the user at the first log-in."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-66",
+    "category": "misc",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "When and how a default language of an app needs to be selected?",
+    "options": [
+      "Automatically at the moment of app creation.",
+      "Automatically when opening an app in Studio Pro.",
+      "Manually when opening an app in Studio Pro.",
+      "Manually at the moment of app creation."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-67",
+    "category": "misc",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "Where can you choose the development language?",
+    "options": [
+      "In the toolbar of Studio Pro",
+      "In the language library",
+      "In the system texts",
+      "In the project folder"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-68",
+    "category": "misc",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "Which of the following functionalities do you need to use to show a complete list of all translatable texts of a source and destination language?",
+    "options": [
+      "Batch translation",
+      "Occurance window",
+      "Import translation",
+      "Export translation"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-69",
+    "category": "domain-model",
+    "knowledgePath": "Expand Your Domain Modeling Skills",
+    "question": "What is another way of calling an association?",
+    "options": [
+      "Reference",
+      "Link",
+      "Dependence",
+      "Arrow"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-70",
+    "category": "domain-model",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "How many associations can you add between two entities?",
+    "options": [
+      "Many associations of various multiplicity.",
+      "Two associations, one from each entity.",
+      "Multiple One-to-One associations.",
+      "Only one association."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-71",
+    "category": "domain-model",
+    "knowledgePath": "Expand Your Domain Modeling Skills",
+    "question": "What is a good reason to choose to use an Information Entity instead of multiple associations?",
+    "options": [
+      "You want to display additional information about an association",
+      "You want it to be clear that only one object can have a specific qualification",
+      "You want to optimize the app’s performance",
+      "You want clear Entity names"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-72",
+    "category": "domain-model",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "Which of the event handlers does always need to return a boolean return value?",
+    "options": [
+      "The before commit.",
+      "The after create.",
+      "Both the before commit and after create.",
+      "Not the before commit and after create."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-73",
+    "category": "domain-model",
+    "knowledgePath": "Expand Your Domain Modeling Skills",
+    "question": "Where do you define the \"persistable\" property of an entity?",
+    "options": [
+      "In the domain model",
+      "In the widget property",
+      "In the page property",
+      "In the Microflow"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-74",
+    "category": "domain-model",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "For which of the following entity types does Mendix create a database table?",
+    "options": [
+      "For persistable entities",
+      "For none of them",
+      "For non-persistable entities",
+      "For both persistable and non-persistable entities"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-75",
+    "category": "domain-model",
+    "knowledgePath": "Expand Your Domain Modeling Skills",
+    "question": "What happens on commit of a non-persistable entity?",
+    "options": [
+      "Current attribute values and association values are stored in memory.",
+      "Current attributes are stored in the database and associations are stored in memory.",
+      "Current attributes are stored in memory and associations are stored in the database.",
+      "Current attributes and association values are stored in the database."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-76",
+    "category": "domain-model",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "What would be a good situation to use a calculated attribute?",
+    "options": [
+      "When a value changes more often than it is viewed",
+      "You should avoid using calculated attributes at all costs",
+      "It is generally preferable to use a calculated attribute",
+      "When a value is viewed more often than it changes"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-77",
+    "category": "domain-model",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "When connecting 2 entities of 2 different modules, how do we typically call that association?",
+    "options": [
+      "Cross-module association",
+      "Bi-module association",
+      "Cross-reference association",
+      "Cross-functional association"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-78",
+    "category": "domain-model",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "You connected two entities by a cross-module association. You want Studio Pro to take you to the associated entity in the other module - which option do you need to choose when you right click the association?",
+    "options": [
+      "Go to the other side",
+      "Go to the other domain model",
+      "Go to the associated entity",
+      "Go to the other module"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-79",
+    "category": "domain-model",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "Which of the following options list system members that can be stored as indicated in the properties of an entity?",
+    "options": [
+      "Created Date, Changed Date, Owner, ChangedBy",
+      "Created Date, Modified Date, Creator, ModifiedBy",
+      "Created Date, Shifted Date, Originator, ModifiedBy",
+      "Created Date, Altered Date, Initiator, ChangedBy"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-80",
+    "category": "domain-model",
+    "knowledgePath": "Create an App with Advanced Page Building",
+    "question": "Which of the following terms is used to indicate a user that created the object of the given entity?",
+    "options": [
+      "Owner",
+      "Creator",
+      "Originator",
+      "Initiator"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-81",
+    "category": "agile",
+    "knowledgePath": "Exam preparation video from 14-01-2025",
+    "question": "How long does the daily scrum meeting usually take?",
+    "options": [
+      "15 minutes",
+      "30 minutes",
+      "5 minutes",
+      "As long as you need"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-82",
+    "category": "agile",
+    "knowledgePath": "Exam preparation video from 14-01-2025",
+    "question": "Who should be participating in the review meeting?",
+    "options": [
+      "PO, SCRUM master, Developers & Management",
+      "Developers & SCRUM master",
+      "PO, SCRUM master & Management",
+      "PO & Management"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-83",
+    "category": "domain-model",
+    "knowledgePath": "Exam preparation video from 14-01-2025",
+    "question": "Given a helper non-persistable entity with an association to a persistent entity. If I want to make sure that when I delete the persistent object, the non-persistable entity will also be deleted, what should I do?",
+    "options": [
+      "Configure the delete behaviour in the association properties",
+      "Make sure that every microflow deletes the persistent entity & non-persistent entity",
+      "Configure the delete behaviour in the NPE properties"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-84",
+    "category": "modules",
+    "knowledgePath": "Exam preparation video from 14-01-2025",
+    "question": "When do you create a new module?",
+    "options": [
+      "It is up to you to choose logical modules for your application",
+      "When a module has more than 15 entities in the domain model",
+      "For every main functionality",
+      "Whenever a module exceeds 35 mbs in size"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-85",
+    "category": "modules",
+    "knowledgePath": "Exam preparation video from 14-01-2025",
+    "question": "When can you add version numbers to your module?",
+    "options": [
+      "After enabling an add-on module, in the module settings",
+      "After enabling an add-on module, then in your project's app settings",
+      "Directly in the module settings",
+      "Directly in the module’s security settings"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-86",
+    "category": "pages",
+    "knowledgePath": "Exam preparation video from 14-01-2025",
+    "question": "How many ‘Main’ placeholders can be put into a layout?",
+    "options": [
+      "1",
+      "As many as you want",
+      "2",
+      "You can only put a ‘Main’ placeholder in the Master Layout"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-87",
+    "category": "modules",
+    "knowledgePath": "Exam preparation video from 14-01-2025",
+    "question": "If I want to expand the Atlas UI layout to add a navigation element, what should I do?",
+    "options": [
+      "Create a new layout and set the Atlas UI layout as the master layout.",
+      "Directly go to the Atlas UI layout in the marketplace module and change it",
+      "Copy the layout from the marketplace module and change the copy"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-88",
+    "category": "microflows",
+    "knowledgePath": "Exam preparation video from 14-01-2025",
+    "question": "Which of these system variables does NOT exist?",
+    "options": [
+      "[%currentPage%]",
+      "[%currentUser%]",
+      "[%currentObject%]",
+      "[%currentDateTime%]"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-89",
+    "category": "xpath",
+    "knowledgePath": "Exam preparation video from 14-01-2025",
+    "question": "Which of these Xpaths is correct?",
+    "options": [
+      "[Event_Customer/Customer[Name = \"James\"][Name=\"Thomas\"]]",
+      "[Event_Customer/Customer[if name=\"James\" or name=\"Thomas\" then true else false]]"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-90",
+    "category": "microflows",
+    "knowledgePath": "Exam preparation video from 14-01-2025",
+    "question": "In my app where I keep track of events hosted by the cluster, I have an ACT nanoflow that sorts a list of event participants. In this flow, I can add a decision and an activity to rollback this sort. True or false?",
+    "options": [
+      "False",
+      "True"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-91",
+    "category": "security",
+    "knowledgePath": "Exam preparation video from 14-01-2025",
+    "question": "Where in Studio Pro can you assign access to pages?",
+    "options": [
+      "Module security",
+      "App security",
+      "Within Sprintr",
+      "App>Tools > Properties"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-92",
+    "category": "security",
+    "knowledgePath": "Exam preparation video from 14-01-2025",
+    "question": "Do you need to configure entity access rules for anonymous users?",
+    "options": [
+      "Yes",
+      "No",
+      "Only if you have a demo user for the anonymous user"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-93",
+    "category": "misc",
+    "knowledgePath": "Exam preparation video from 14-01-2025",
+    "question": "You have 2 languages set up in your app, English (default) and Russian. You create a text field. What happens if you don’t put a Russian translation in the text field?",
+    "options": [
+      "Text field displays the text in English",
+      "Text field is blank/empty",
+      "Text field displays the standard Russian text",
+      "The app gives an error"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-94",
+    "category": "misc",
+    "knowledgePath": "Exam preparation video from 14-01-2025",
+    "question": "Your app has 2 languages, English (default) and French. You notice that some of the French translation is incorrect and you want to fix this. What should you do?",
+    "options": [
+      "All of the above",
+      "Use batch translate and replace the incorrect text",
+      "Export the Excel, change the translation and then import the Excel back",
+      "Use batch replace in French and replace the incorrect text"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-95",
+    "category": "pages",
+    "knowledgePath": "Importing and Exporting Your Data",
+    "question": "What is the fastest way to create overview pages for all of the entities in your domain model?",
+    "options": [
+      "Right click an Entity and select “Generate overview pages...” for all entities.",
+      "Create the first one and then use the “Duplicate page” option to create the rest.",
+      "Create a microflow using the “Generate overview pages” activity.",
+      "Each page must be created manually"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-96",
+    "category": "pages",
+    "knowledgePath": "Importing and Exporting Your Data",
+    "question": "How can you show data from multiple entities in the same data grid?",
+    "options": [
+      "Add columns which use associations.",
+      "Drag one data grid on top of another.",
+      "Put two data grids next to each other; Mendix will join them.",
+      "Select multiple data sources for the data grid."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-97",
+    "category": "security",
+    "knowledgePath": "Importing and Exporting Your Data",
+    "question": "Where do you connect User roles to Module roles?",
+    "options": [
+      "App security",
+      "Prototype/demo security",
+      "Module security",
+      "Production security"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-98",
+    "category": "misc",
+    "knowledgePath": "Importing and Exporting Your Data",
+    "question": "What does your app need in order to import Excel data into a Mendix app?",
+    "options": [
+      "The Excel Importer module from the Marketplace.",
+      "The Import XLS microflow activity from the toolbox.",
+      "A data grid with data source “.xls.”",
+      "The Excel Importer data grid widget from the Marketplace."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-99",
+    "category": "misc",
+    "knowledgePath": "Importing and Exporting Your Data",
+    "question": "What does the Mx Model Reflection module do?",
+    "options": [
+      "It shows the configuration of your domain model in the client.",
+      "It allows you to easily create duplicates of entities.",
+      "It imports Excel files into your app.",
+      "It creates a second domain model for testing."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-100",
+    "category": "modules",
+    "knowledgePath": "Importing and Exporting Your Data",
+    "question": "Why shouldn't you make changes to Marketplace modules?",
+    "options": [
+      "Updating to a new version of the module erases your changes.",
+      "This violates the intellectual property rights of the module’s creator.",
+      "Mendix owns all Marketplace modules, so you do not have access to edit them.",
+      "Your edits will affect the version of the app on the Marketplace for everyone using it."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-101",
+    "category": "agile",
+    "knowledgePath": "pytania.txt",
+    "question": "What are the five values of scrum",
+    "options": [
+      "Focus, Courage, Openness, Commitment & Respect",
+      "Boldness, Honesty, Trust, Freedom, Fun",
+      "Functionality, Open Source, Testing, Version Control, Iterative production",
+      "Focus, Courage, Cooperation, Commitment & Communication"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-102",
+    "category": "agile",
+    "knowledgePath": "pytania.txt",
+    "question": "Scrum Team consist of",
+    "options": [
+      "Scrum Master, Product Owner & Dev Team",
+      "Product Manager, Team Lead, Developers",
+      "Business Analyst, QA Engineer, Project Manager",
+      "Stakeholders, Users, Sponsors"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-103",
+    "category": "agile",
+    "knowledgePath": "Quizlet",
+    "question": "Name 4 scrum events",
+    "options": [
+      "Planning, Retrospective, Review en Daily Scrum/Daily Standup",
+      "Brainstorming, Coding, Testing, Deployment",
+      "Design, Development, Quality Assurance, Release",
+      "Kick-off, Mid-sprint Check, Bug Fixing, Go-live"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-104",
+    "category": "security",
+    "knowledgePath": "pytania.txt",
+    "question": "After selecting the allow anonymous user do we require to set the username and password",
+    "options": [
+      "no",
+      "yes"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-105",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "Where can published data be found?",
+    "options": [
+      "Data Hub Catalog",
+      "App Explorer",
+      "Domain Model",
+      "Project Security"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-106",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "What is a piece of data from the data hub called?",
+    "options": [
+      "External Entity",
+      "Data Object",
+      "Published Item",
+      "Hub Record"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-107",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "Why is the version number assigned to Odata service important?",
+    "options": [
+      "There can be multiple versions of a service and users can connect to a specific one using it.",
+      "It indicates the stability of the service.",
+      "It helps in tracking changes made to the service over time.",
+      "It's used for licensing purposes."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-108",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "What is an external entity?",
+    "options": [
+      "An entity that is connected to a dataset in Data Hub.",
+      "An entity that resides outside the current application's database.",
+      "A non-persistable entity used for external integrations.",
+      "An entity that directly consumes data from an external API."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-109",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "What source type is used within Microsoft Excel to connect to a dataset in Data Hub?",
+    "options": [
+      "OData Feed",
+      "CSV File",
+      "REST API",
+      "SQL Query"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-110",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "Where can you edit the properties (i.e. attributes, name, etc.) of an External Entity?",
+    "options": [
+      "In the domain model of the app where the External Entity is defined.",
+      "In the Data Hub Catalog.",
+      "Through a dedicated external entity editor.",
+      "In the External Entity's properties dialog within Studio Pro."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-111",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "What would you use to save changes to an external entity?",
+    "options": [
+      "A Send external object activity",
+      "A Commit object activity",
+      "A Synchronize with Data Hub action",
+      "An Update entity microflow"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-112",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "Can you modify data in an External Entity?",
+    "options": [
+      "Yes, if the Updateable(write) property of its public resource settings is checked.",
+      "No, external entities are read-only.",
+      "Only if you have administrative privileges in Data Hub.",
+      "Only via custom Java actions."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-113",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "How do you get the Data Hub Landscape?",
+    "options": [
+      "Clicking the Landscape tab.",
+      "From the Project Explorer.",
+      "By navigating to the 'Data' section in the Mendix Portal.",
+      "Using the 'View Data Hub' option in Studio Pro."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-114",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "An app connected by a grey dotted line to your service in the Data Hub Landscape means what?",
+    "options": [
+      "The app is consuming data from your service.",
+      "The app is providing data to your service.",
+      "The app is synchronized with your service.",
+      "The app is independent of your service."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-115",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "An app connected by a grey solid line to your service in the Data Hub Landscape means what?",
+    "options": [
+      "The app is providing data to your service.",
+      "The app is consuming data from your service.",
+      "The app has a broken connection to your service.",
+      "The app is an administrative tool for your service."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-116",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "What does the D in CRUD stand for?",
+    "options": [
+      "Delete",
+      "Develop",
+      "Deploy",
+      "Duplicate"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-117",
+    "category": "security",
+    "knowledgePath": "Quizlet",
+    "question": "As Users by default always have multiple UserRoles, which of the following options can you put in place to ensure a user gets restricted to only one user role?",
+    "options": [
+      "Adding the microflow logic.",
+      "Configuring the user role properties to allow only one.",
+      "Adjusting the project security settings.",
+      "Using a marketplace module for user management."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-118",
+    "category": "domain-model",
+    "knowledgePath": "Quizlet",
+    "question": "Can you add an error message in the domain model?",
+    "options": [
+      "Yes",
+      "No",
+      "Only in microflows.",
+      "Only in pages."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-119",
+    "category": "pages",
+    "knowledgePath": "Quizlet",
+    "question": "What CSS technology is a layout grid based on?",
+    "options": [
+      "Bootstrap Framework",
+      "Flexbox",
+      "CSS Grid",
+      "Material Design"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-120",
+    "category": "microflows",
+    "knowledgePath": "Quizlet",
+    "question": "What is the prefix for the datasource Microflows?",
+    "options": [
+      "DS",
+      "ACT",
+      "DL",
+      "RET"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-121",
+    "category": "modules",
+    "knowledgePath": "Quizlet",
+    "question": "Why does Mendix use modules?",
+    "options": [
+      "To be able to reuse them in other projects",
+      "To improve application performance.",
+      "To enforce strict security boundaries.",
+      "To simplify database management."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-122",
+    "category": "modules",
+    "knowledgePath": "Quizlet",
+    "question": "Where does Mendix store your Java libraries?",
+    "options": [
+      "userlib",
+      "javasource",
+      "resources",
+      "deployment"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-123",
+    "category": "modules",
+    "knowledgePath": "Quizlet",
+    "question": "What is best practice if you want to customize a page from a downloaded module from the marketplace?",
+    "options": [
+      "Copy the contents of the Marketplace module to another module in your app and use that module instead (remember that your app will no longer reflect updates to the original Marketplace module)",
+      "Directly modify the page within the Marketplace module.",
+      "Mark any changes you make explicitly and clearly, and perform them again when the module is updated",
+      "Always avoid modifying Marketplace modules."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-124",
+    "category": "agile",
+    "knowledgePath": "Quizlet",
+    "question": "What is the purpose of a product backlog meeting?",
+    "options": [
+      "adding detail, estimation and structure to the Product Backlog.",
+      "To assign tasks to the development team.",
+      "To prepare for the Sprint Review.",
+      "To collect feedback from stakeholders."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-125",
+    "category": "security",
+    "knowledgePath": "Quizlet",
+    "question": "What is best practice for securely creating a user account?",
+    "options": [
+      "The best practice when setting security rules to new entities is to keep the option 'Default rights for new members' set to 'None'.",
+      "Always assign the highest possible access rights by default.",
+      "Allow new members to inherit rights from existing roles.",
+      "Do not set any default rights for new members."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-126",
+    "category": "agile",
+    "knowledgePath": "Quizlet",
+    "question": "Who is responsible for the daily stand-up?",
+    "options": [
+      "Scrum Master",
+      "Product Owner",
+      "Development Team",
+      "Project Manager"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-127",
+    "category": "agile",
+    "knowledgePath": "Quizlet",
+    "question": "Which of the following approaches needs to be used to sort items in the product backlog from top to bottom?",
+    "options": [
+      "Based on the descending priority.",
+      "Alphabetically by user story title.",
+      "By the estimated story points (ascending).",
+      "Randomly to ensure fairness."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-128",
+    "category": "pages",
+    "knowledgePath": "Quizlet",
+    "question": "A page is taking forever to load. Who's responsibility is it to solve this?",
+    "options": [
+      "The Frontend developer",
+      "The database administrator",
+      "The network engineer",
+      "The project manager"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-129",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "What is the most suitable technique if you want to have an overview of what a user feels and experiences while using an application?",
+    "options": [
+      "Empathy Map",
+      "User Flow Diagram",
+      "Wireframing",
+      "A/B Testing"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-130",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "What is the main aim of using Customer Value Curve?",
+    "options": [
+      "To find out what shortcomings there are in the general market that you can improve on",
+      "To analyze customer demographics.",
+      "To forecast future market trends.",
+      "To measure customer satisfaction."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-131",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "What qualitative technique focuses on how users group different items?",
+    "options": [
+      "Card Sorting",
+      "Usability Testing",
+      "A/B Testing",
+      "Surveys"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-132",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "Which of the following are considered qualitative research methods?",
+    "options": [
+      "Competitor Analysis, Card Sorting, Expert Review",
+      "Surveys, Analytics, A/B Testing",
+      "Heatmaps, Session Recordings, Funnel Analysis",
+      "Eye Tracking, Clickstream Analysis, Interviews"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-133",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "A client wants their application to have a very specific color scheme. Who's work is most likely to be affected?",
+    "options": [
+      "The UX/UIer",
+      "The backend developer",
+      "The project manager",
+      "The data modeler"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-134",
+    "category": "pages",
+    "knowledgePath": "Quizlet",
+    "question": "You want to allow the end-users to delete some extracted result. How can you achieve this?",
+    "options": [
+      "Create a microflow which will delete selected rows and configure a delete button to call this microflow",
+      "Enable cascading delete on the entity.",
+      "Provide direct database access to users.",
+      "Use a specialized delete widget."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-135",
+    "category": "domain-model",
+    "knowledgePath": "Quizlet",
+    "question": "What is the best alternative to process something immediately after an object is committed?",
+    "options": [
+      "Event Handler",
+      "Scheduled Event",
+      "After Commit Microflow",
+      "Calling a microflow from the UI element."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-136",
+    "category": "security",
+    "knowledgePath": "Quizlet",
+    "question": "What may cause the error - \"Creating Object of type MyReceiptModule.InputImages Receipt failed for Security Reasons\"?",
+    "options": [
+      "Access rules for Entity not configured properly",
+      "Insufficient database permissions.",
+      "Incorrect data type for the input image.",
+      "The module is not deployed correctly."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-137",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "How can you export columns in a data grid without showing them to the user?",
+    "options": [
+      "By setting the class on the column to display: none",
+      "By hiding the column in the data grid properties.",
+      "By removing the attribute from the entity.",
+      "By using a separate export microflow."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-138",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "What are HTTP headers?",
+    "options": [
+      "HTTP headers are used to pass meta-data in the REST calls",
+      "They are the main content of an HTTP request or response.",
+      "They define the structure of the URL.",
+      "They are used only for error reporting."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-139",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "What is JSON and what does it stand for?",
+    "options": [
+      "JavaScript Object Notation, is a lightweight format for storing and transporting data.",
+      "Java Standard Object Notation, a language for object-oriented programming.",
+      "Joined String Object Network, used for secure data transmission.",
+      "Javascript Online Navigator, a tool for web browsing."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-140",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "What does a JSON structure document do?",
+    "options": [
+      "It stores a JSON snippet and converts it into a schema structure that can be used in Import/Export mappings to convert JSON into Mendix",
+      "It validates incoming JSON against a predefined schema.",
+      "It automatically generates a domain model from a JSON file.",
+      "It provides a visual representation of JSON data."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-141",
+    "category": "modules",
+    "knowledgePath": "Quizlet",
+    "question": "How many modules does an app have when you build it?",
+    "options": [
+      "3: Administration (everything that has to do with account) System (What makes your app run, users, files, sessions) and MyFirstModule",
+      "One, the main module.",
+      "As many as you define.",
+      "Two: System and MyFirstModule."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-142",
+    "category": "domain-model",
+    "knowledgePath": "Quizlet",
+    "question": "If you were building an app with stock prices, would you make the stock value a calculated or a stored attribute?",
+    "options": [
+      "Calculated attritbute;",
+      "Stored attribute, because it needs to be persisted in the database.",
+      "It depends on the frequency of data updates."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-143",
+    "category": "domain-model",
+    "knowledgePath": "Quizlet",
+    "question": "Name 2 limitations of non persistable entities.:",
+    "options": [
+      "No indexes and not possible to use validation in the domain model.",
+      "Cannot be used in microflows and cannot have associations.",
+      "Cannot be displayed on pages and cannot be exported.",
+      "Limited number of attributes and fixed data types."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-144",
+    "category": "domain-model",
+    "knowledgePath": "Quizlet",
+    "question": "Who is the owner of an association between non-persistable entity and persistable entity?",
+    "options": [
+      "Non-persistable entity",
+      "Persistable entity",
+      "Neither, the association is independent.",
+      "The entity with the many-side multiplicity."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-145",
+    "category": "domain-model",
+    "knowledgePath": "Quizlet",
+    "question": "When should you use multiple associations between 2 entities?",
+    "options": [
+      "When there are different relationships between two entities.",
+      "To improve data retrieval performance.",
+      "To enforce data integrity.",
+      "Only when working with external entities."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-146",
+    "category": "microflows",
+    "knowledgePath": "Quizlet",
+    "question": "With what sign is variable indicated in a microflow?",
+    "options": [
+      "Dollar",
+      "@",
+      "#",
+      "%"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-147",
+    "category": "microflows",
+    "knowledgePath": "Quizlet",
+    "question": "What is the outcome of a Rule?",
+    "options": [
+      "Boolean or enumeration",
+      "Any Mendix object type.",
+      "A list of objects.",
+      "A string or integer."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-148",
+    "category": "microflows",
+    "knowledgePath": "Quizlet",
+    "question": "Max how many levels should you go with sub microflows?",
+    "options": [
+      "2 tot 3 levels max is best practice.",
+      "Unlimited levels, as long as it's logical.",
+      "1 level for simplicity.",
+      "As many as necessary for complex logic."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-149",
+    "category": "microflows",
+    "knowledgePath": "Quizlet",
+    "question": "It is not possible to change primitive input parameters (Boolean, Integer, DateTime) in a sub-microflow. True or False:",
+    "options": [
+      "True",
+      "False"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-150",
+    "category": "microflows",
+    "knowledgePath": "Quizlet",
+    "question": "What are the 2 prefixes for microflows that are called within a microflow?",
+    "options": [
+      "SUB and VAL",
+      "ACT and DS",
+      "O_ and S_",
+      "M_ and MF_"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-151",
+    "category": "microflows",
+    "knowledgePath": "Quizlet",
+    "question": "What are 3 advantages of sub-microflows:",
+    "options": [
+      "Improves readability, maintain- ability and reusability",
+      "Faster execution, lower memory usage, simpler debugging",
+      "Enhanced security, automatic error handling, direct UI interaction",
+      "Easier deployment, less code, native mobile support"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-152",
+    "category": "security",
+    "knowledgePath": "Quizlet",
+    "question": "The default home page does not need to have a module role set. True or false?",
+    "options": [
+      "True",
+      "False"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-153",
+    "category": "domain-model",
+    "knowledgePath": "Quizlet",
+    "question": "What is the difference between a persistable and non-persistable entity?",
+    "options": [
+      "Non-persistable entities are not stored in the database, persistent ones are.",
+      "Persistable entities are faster to retrieve.",
+      "Non-persistable entities can only be used in nanoflows.",
+      "Persistable entities have more attributes."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-154",
+    "category": "security",
+    "knowledgePath": "Quizlet",
+    "question": "Is it possible to run a Mendix app locally when App security level is NOT set to production?",
+    "options": [
+      "Yes.",
+      "Yes, but with limited functionality.",
+      "No",
+      "It depends on the specific license type."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-155",
+    "category": "modules",
+    "knowledgePath": "Quizlet",
+    "question": "To make entire notifications functionality unavailable to a user role, what is best practice?",
+    "options": [
+      "Build it in a seperate module",
+      "Apply page access security to the notification page.",
+      "Use conditional visibility on all notification widgets.",
+      "Delete the notification module for that user role."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-156",
+    "category": "pages",
+    "knowledgePath": "Quizlet",
+    "question": "What two options do you have of showing the objects in a reference set selector?",
+    "options": [
+      "Select page and Dropdown.",
+      "Radio buttons and Checkboxes.",
+      "List view and Data grid."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-157",
+    "category": "pages",
+    "knowledgePath": "Quizlet",
+    "question": "What association do you need between two entities in order to be able to use the reference set selector?",
+    "options": [
+      "Many to many",
+      "One to one",
+      "One to many",
+      "Zero to many"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-158",
+    "category": "pages",
+    "knowledgePath": "Quizlet",
+    "question": "Is it possible to add dynamic data directly to the navigation layout?",
+    "options": [
+      "No, only via a snippet it is possible",
+      "Yes, by binding directly to attributes.",
+      "Only for static text.",
+      "Yes, using JavaScript."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-159",
+    "category": "security",
+    "knowledgePath": "Quizlet",
+    "question": "When one userrole is allowed, what is best practice when creating a new team member?",
+    "options": [
+      "A before commit event handler to check whether one user role is selected. If not, it stops the commit and gives a validation feedback message.",
+      "Manually ensure only one user role is selected.",
+      "Restrict user role selection at the UI level."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-160",
+    "category": "pages",
+    "knowledgePath": "Quizlet",
+    "question": "What is the correct naming convention for pages?",
+    "options": [
+      "Entity_PageType_User-Role",
+      "PageName_Entity_Role",
+      "Role_PageType_Entity",
+      "DescriptiveName"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-161",
+    "category": "pages",
+    "knowledgePath": "Quizlet",
+    "question": "Which of the following options indicates a default configuration of a page created using the Wizard Progress page template, consisting of 4 page template steps?",
+    "options": [
+      "Step 2 is active, Step 1 is visited",
+      "All steps are active.",
+      "Only Step 1 is active.",
+      "No steps are active by default."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-162",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "If you need to import data regularly, what is the best way to do so?",
+    "options": [
+      "Services such as SOAP, REST, and oData",
+      "Manual Excel import",
+      "Direct database connection",
+      "Through the Mendix UI import function"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-163",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "What are some alternative methods for importing files into a Mendix app?",
+    "options": [
+      "Flat files, CSV, Excel",
+      "PDF, Word Documents, Images",
+      "Database backups, log files",
+      "Proprietary Mendix file formats"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-164",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "When transforming, why should you import large datasets into a flat structure before running the transformation?",
+    "options": [
+      "To not overrun available memory",
+      "To speed up the import process.",
+      "To comply with data privacy regulations.",
+      "To simplify error handling."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-165",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "What does your app need in order to import Excel data into a Mendix app?",
+    "options": [
+      "The Excel Importer module from the Marketplace.",
+      "A built-in Excel import wizard.",
+      "A custom Java action for parsing Excel files.",
+      "Direct access to the Excel file system."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-166",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "What are JSON structures converted to in Mendix?",
+    "options": [
+      "Objects",
+      "XML documents",
+      "Flat files",
+      "Strings"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-167",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "What do you use to interpret XML or JSON into Mendix objects?",
+    "options": [
+      "Import/Export data",
+      "Export mappings",
+      "Schema definitions",
+      "Data transformations"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-168",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "How do you get REST data using a microflow?",
+    "options": [
+      "Use a Call REST Service action.",
+      "Use a Consume Web Service action.",
+      "Directly fetch from a URL using JavaScript.",
+      "Access it via an external entity."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-169",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "What are export mappings used to accomplish?",
+    "options": [
+      "Converting Mendix objects to XML or JSON",
+      "Importing external data into Mendix.",
+      "Defining the structure of incoming messages.",
+      "Transforming data within Mendix."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-170",
+    "category": "pages",
+    "knowledgePath": "Quizlet",
+    "question": "Which page template did you use to set up the layout of the question and answer page, and the confirmation page?",
+    "options": [
+      "Wizard Form",
+      "Data Grid Overview",
+      "Empty Page",
+      "List View Page"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-171",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "Which one is the correct language format for American English?",
+    "options": [
+      "en-US",
+      "us-EN",
+      "ENG-US",
+      "US-ENG"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-172",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "How do you add downloaded JSON structure to your app?",
+    "options": [
+      "Right click on folder or module, add other, and select JSON structure",
+      "Drag and drop the JSON file into the Project Explorer.",
+      "Import it via the 'Import Project Package' option.",
+      "Copy the JSON content into a constant."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-173",
+    "category": "microflows",
+    "knowledgePath": "Quizlet",
+    "question": "When do you use Loop activity in your microflow?",
+    "options": [
+      "When we want to allow certain activities in our microflow to be executed repeatedly",
+      "To handle conditional logic.",
+      "To retrieve data from the database.",
+      "To commit changes to an object."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-174",
+    "category": "domain-model",
+    "knowledgePath": "Quizlet",
+    "question": "What would you do if you want to call a microflow on completion of commit operation of an entity?",
+    "options": [
+      "Use Event Handlers",
+      "Call it directly from the save button.",
+      "Create a scheduled event.",
+      "Configure an After Save microflow."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-175",
+    "category": "modules",
+    "knowledgePath": "Quizlet",
+    "question": "Where can you download File Dropper widget for your app?",
+    "options": [
+      "Marketplace",
+      "Mendix App Store",
+      "GitHub",
+      "Mendix Studio Pro built-in tools"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-176",
+    "category": "security",
+    "knowledgePath": "Quizlet",
+    "question": "Module Roles can be used to grant access on:",
+    "options": [
+      "Pages, Microflows, Entities defined in the module",
+      "Project-level settings only.",
+      "Only pages and microflows.",
+      "Only entities and their attributes."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-177",
+    "category": "security",
+    "knowledgePath": "Quizlet",
+    "question": "How can you configure different home pages for different users?",
+    "options": [
+      "You can configure Role-based home pages",
+      "By creating a separate app for each user role.",
+      "Using conditional visibility on the home page.",
+      "Through microflow logic at login."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-178",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "What is the most appropriate prefix for Import Mapping name?",
+    "options": [
+      "ImM_",
+      "Imp_",
+      "Map_",
+      "IM_"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-179",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "What should you always do in your wireframe?",
+    "options": [
+      "Add annotations.",
+      "Add full styling and graphics.",
+      "Implement all interactive elements.",
+      "Connect to live data."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-180",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "What is the purpose of a prototype? It should be a representation of...",
+    "options": [
+      "your application to test with.",
+      "the final product's database structure.",
+      "the complete business logic.",
+      "the deployment pipeline."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-181",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "What type of prototype can you do on paper?",
+    "options": [
+      "Low fidelity.",
+      "High fidelity.",
+      "Interactive.",
+      "Digital."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-182",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "You want to use a different styling for different parts of the app, what is probably the best setting for this?",
+    "options": [
+      "Show styling for...: App and all modules",
+      "Apply inline CSS to individual widgets.",
+      "Use separate theme files for each page.",
+      "Modify the global theme settings."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-183",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "What is the Styling Editor used for?",
+    "options": [
+      "Styling and JavaScript actions.",
+      "Creating new pages.",
+      "Managing security settings.",
+      "Defining domain models."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-184",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "What part of the CSS syntax references the object that is to be styled?",
+    "options": [
+      "Selector",
+      "Property",
+      "Value",
+      "Declaration"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-185",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "What is the correct naming convention for Sass partials?",
+    "options": [
+      "_partial-name.scss",
+      "partial-name.sass",
+      "partial_name.scss",
+      ".partial-name.scss"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-186",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "In the Atlas framework, under which folder should you add partials to customize your app's design?",
+    "options": [
+      "Web",
+      "Styles",
+      "Theme",
+      "Custom"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-187",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "Where should $variables be kept according to Mendix best practices?",
+    "options": [
+      "In any partial with the name variable.",
+      "In the main theme file.",
+      "Directly in the widget properties.",
+      "As constants in the domain model."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-188",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "According to best practices, how should you change the font side of H1 headers?",
+    "options": [
+      "By changing the variable in custom-variable.scss.",
+      "By applying inline styling to each H1 header.",
+      "By overriding the default CSS in your main stylesheet.",
+      "Through a specific property in the H1 widget."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-189",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "You notice that a property in the inspector has been crossed through, what does this mean?",
+    "options": [
+      "The property has been overwritten.",
+      "The property is deprecated.",
+      "The property has an error.",
+      "The property is read-only."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-190",
+    "category": "xpath",
+    "knowledgePath": "Quizlet",
+    "question": "What is this called: [year-from-dateTime(StartDate)=2020]?",
+    "options": [
+      "An XPath constraint",
+      "An Xpath Function",
+      "A microflow expression",
+      "A variable declaration"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-191",
+    "category": "xpath",
+    "knowledgePath": "Quizlet",
+    "question": "This is a written syntax that specifies relationships between data properties",
+    "options": [
+      "Xpath",
+      "Domain Model",
+      "Microflows",
+      "Object Relational Mapping (ORM)"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-192",
+    "category": "modules",
+    "knowledgePath": "Quizlet",
+    "question": "What is a best practice for your userlib?",
+    "options": [
+      "Clean up manually after deleting a module",
+      "Automatically synchronize with external libraries.",
+      "Never modify the contents of userlib.",
+      "Regularly back up the entire userlib folder."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-193",
+    "category": "agile",
+    "knowledgePath": "Quizlet",
+    "question": "What does SME mean?",
+    "options": [
+      "Subject Matter Expert ",
+      "Scrum Master Expert",
+      "Software Module Engineer",
+      "System Management Entity"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-194",
+    "category": "agile",
+    "knowledgePath": "Quizlet",
+    "question": "What is a burndown chart?",
+    "options": [
+      "A list of items planned versus items done.",
+      "A chart showing the team's velocity over sprints.",
+      "A diagram of the project's dependencies.",
+      "A tool for tracking individual developer progress."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-195",
+    "category": "agile",
+    "knowledgePath": "Quizlet",
+    "question": "What is an offshore model?",
+    "options": [
+      "A model based on collaboration between multi- ple time zones.",
+      "A development approach where all team members are in the same location.",
+      "A model focused on rapid prototyping and deployment.",
+      "A method for deploying applications to cloud environments."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-196",
+    "category": "modules",
+    "knowledgePath": "Quizlet",
+    "question": "Where are enumerations located in the app directory?",
+    "options": [
+      "Proxies",
+      "Resources",
+      "Domain Models",
+      "Best Practice"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-197",
+    "category": "modules",
+    "knowledgePath": "Quizlet",
+    "question": "What is in the deployment folder?",
+    "options": [
+      "Deployment files needed to run locally.",
+      "Source code of the application.",
+      "User documentation.",
+      "Project backup files."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-198",
+    "category": "agile",
+    "knowledgePath": "Quizlet",
+    "question": "Why do we use branches?",
+    "options": [
+      "This will allow you to continue the development of functionality without affecting the running app.",
+      "To create separate versions for different customers.",
+      "To isolate security settings for different modules.",
+      "To manage multiple database connections."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-199",
+    "category": "agile",
+    "knowledgePath": "Quizlet",
+    "question": "Why do you seperate hot fixes from the development of new functional- ity?",
+    "options": [
+      "Because you don't want to push hotfixes together with features that haven't been completed yet.",
+      "To ensure hotfixes are always developed by a senior team.",
+      "Hotfixes require a different deployment process.",
+      "New functionality can introduce more bugs to hotfixes."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-200",
+    "category": "domain-model",
+    "knowledgePath": "Quizlet",
+    "question": "Name a reason why you would use a generalization of the account entity instead of using the account entity itself (in system module):",
+    "options": [
+      "Because you cannot change access rights in the system module.",
+      "Because market place modules can change, and then you loose all your changes.",
+      "To improve performance.",
+      "To simplify debugging."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-201",
+    "category": "xpath",
+    "knowledgePath": "Quizlet",
+    "question": "What is an Xpath operator?",
+    "options": [
+      "<, >, =, !=, and, or",
+      "+, -, *, /",
+      "if, then, else",
+      "count, sum, avg"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-202",
+    "category": "security",
+    "knowledgePath": "Quizlet",
+    "question": "How many user roles can a user have in a mendix application?",
+    "options": [
+      "Unlimited",
+      "Only one.",
+      "A maximum of two.",
+      "Depends on the license."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-203",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "You want to manipulate your data as you import it. What method would be best suited to accomplish this?",
+    "options": [
+      "Excel Importer module",
+      "Manual data entry.",
+      "Direct database manipulation.",
+      "Using a simple CSV import."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-204",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "What are the limitations of the export to excel button in a data grid?",
+    "options": [
+      "Only possible to export the data that is accesible to the data grid, you cannot manipulate the data to be exported, you can only use it on an Xpath data source data grid.",
+      "It can only export a limited number of rows.",
+      "It doesn't support complex data types.",
+      "It requires a paid license."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-205",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "What are the 2 ways to export data with excel?",
+    "options": [
+      "You can use the excel button in a data grid or use the excel exporter module.",
+      "Export to CSV and then convert to Excel, or use a custom Java action.",
+      "Directly from the database, or via a REST service.",
+      "Generate a report and then save it as Excel, or print to PDF and convert."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-206",
+    "category": "modules",
+    "knowledgePath": "Quizlet",
+    "question": "What are constants?",
+    "options": [
+      "Constants are used to define configuration values that can differ per environment, and this will allow you to change the service location without having to deploy the app again",
+      "Variables that store dynamic data within a microflow.",
+      "Fixed values embedded directly into the application code.",
+      "Attributes of entities that never change."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-207",
+    "category": "misc",
+    "knowledgePath": "Quizlet",
+    "question": "What are import mappings?",
+    "options": [
+      "Import mappings are used to define how in- coming XML or JSON is converted into Mendix objects according to a specific XML schema or JSON structure.",
+      "They define how Mendix objects are converted to external formats.",
+      "They are used to map user roles to module roles.",
+      "They define the navigation paths within an application."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-208",
+    "category": "microflows",
+    "knowledgePath": "Quizlet",
+    "question": "Which 3 items you can't select when extracting a Sub Microflow?",
+    "options": [
+      "Start event, end event, parameter.",
+      "Decision, loop, exclusive merge.",
+      "Create object, change object, delete object.",
+      "Retrieve, commit, rollback."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-209",
+    "category": "domain-model",
+    "knowledgePath": "pytania",
+    "question": "Can we use space in enum name ?",
+    "options": [
+      "no.",
+      "yes"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-210",
+    "category": "modules",
+    "knowledgePath": "Custom",
+    "question": "What is the recommended naming convention for Modules in Mendix?",
+    "options": [
+      "UpperCamelCase",
+      "lowerCamelCase",
+      "snake_case",
+      "kebab-case"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-211",
+    "category": "domain-model",
+    "knowledgePath": "Custom",
+    "question": "What is the default naming convention for Associations between two entities in Mendix?",
+    "options": [
+      "Automatic {entity1}_{entity2}",
+      "{entity1}To{entity2}",
+      "Assoc_{entity1}_{entity2}",
+      "Link_{entity1}And{entity2}"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-212",
+    "category": "domain-model",
+    "knowledgePath": "Custom",
+    "question": "When there are multiple associations between the same two entities, what naming convention should be used?",
+    "options": [
+      "{entity1}_{entity2}_{recongizable purpose}",
+      "{entity1}_{entity2}_Multi",
+      "{entity1}_{entity2}2",
+      "Just {entity1}_{entity2}"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-213",
+    "category": "domain-model",
+    "knowledgePath": "Custom",
+    "question": "What is the recommended naming convention for Entities in Mendix?",
+    "options": [
+      "UpperCamelCase",
+      "lowerCamelCase",
+      "entity_name",
+      "ENTITY_NAME"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-214",
+    "category": "microflows",
+    "knowledgePath": "Custom",
+    "question": "What is the general naming convention for Microflows in Mendix?",
+    "options": [
+      "{PREFIX}_{Entity}_{Operation}",
+      "{Operation}_{Entity}_{PREFIX}",
+      "{Entity}_{Operation}_MF",
+      "MF_{Operation}_{Entity}"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-215",
+    "category": "microflows",
+    "knowledgePath": "Custom",
+    "question": "What is the recommended prefix for a Microflows that perform before/after Commit operation?",
+    "options": [
+      "BCO_/ACO_",
+      "CMT_",
+      "COMM_",
+      "MCF_Commit"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-216",
+    "category": "microflows",
+    "knowledgePath": "Custom",
+    "question": "What is the recommended prefix for a Microflows that perform before/after Create operation?",
+    "options": [
+      "BCR_/ACR_",
+      "CRT_",
+      "NEW_",
+      "MCF_Create"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-217",
+    "category": "microflows",
+    "knowledgePath": "Custom",
+    "question": "What is the recommended prefix for a Microflows that perform before/after Delete operation?",
+    "options": [
+      "BDE_/ADE_",
+      "DEL_",
+      "RMV_",
+      "MCF_Delete"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-218",
+    "category": "microflows",
+    "knowledgePath": "Custom",
+    "question": "What is the recommended prefix for a Microflows that perform before/after Rollback operation?",
+    "options": [
+      "BRO_/ARO_",
+      "RBK_",
+      "RLL_",
+      "MCF_Rollback"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-219",
+    "category": "microflows",
+    "knowledgePath": "Custom",
+    "question": "What is the recommended prefix for Microflows used for calculated attributes?",
+    "options": [
+      "CAL_",
+      "CALC_",
+      "ATTR_",
+      "GET"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-220",
+    "category": "microflows",
+    "knowledgePath": "Custom",
+    "question": "What is the recommended prefix for a Page-based microflow that triggers on an 'on enter' event?",
+    "options": [
+      "OEN_{Purpose}",
+      "ON_ENTER_{Purpose}",
+      "ENT_{Purpose}",
+      "PEN_{Purpose}"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-221",
+    "category": "microflows",
+    "knowledgePath": "Custom",
+    "question": "What is the recommended prefix for a Page-based microflow that triggers on an 'on change' event?",
+    "options": [
+      "OCH_{Purpose}",
+      "ON_CHANGE_{Purpose}",
+      "CHG_{Purpose}",
+      "PCH_{Purpose}"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-222",
+    "category": "microflows",
+    "knowledgePath": "Custom",
+    "question": "What is the recommended prefix for a Page-based microflow that triggers on an 'on leave' event?",
+    "options": [
+      "OLE_{Purpose}",
+      "ON_LEAVE_{Purpose}",
+      "LV_{Purpose}",
+      "PLE_{Purpose}"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-223",
+    "category": "microflows",
+    "knowledgePath": "Custom",
+    "question": "What is the recommended prefix for a Page-based data source microflow?",
+    "options": [
+      "DS_{Purpose}",
+      "DTS_{Purpose}",
+      "SRC_{Purpose}",
+      "PDS_{Purpose}"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-224",
+    "category": "microflows",
+    "knowledgePath": "Custom",
+    "question": "What is the recommended prefix for a Page-based action microflow?",
+    "options": [
+      "ACT_{Purpose}",
+      "ACTION_{Purpose}",
+      "PAG_ACT_{Purpose}",
+      "DO_{Purpose}"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-225",
+    "category": "microflows",
+    "knowledgePath": "Custom",
+    "question": "What is the recommended prefix for a Validation microflow?",
+    "options": [
+      "VAL_",
+      "VLD_",
+      "CHK_",
+      "ERR"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-226",
+    "category": "domain-model",
+    "knowledgePath": "Custom",
+    "question": " \"How will the association appearance change after you configure cascade delete?\"",
+    "options": [
+      " \"The border around the association name with become red\"",
+      " \"Changing delete settings does not change the visuals in domain model\"",
+      " \"The border around the association name with become blue\"",
+      " \"The border around the association name with become yellow\""
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-227",
+    "category": "domain-model",
+    "knowledgePath": "Custom",
+    "question": " \"How will the association appearance change after you configure conditional delete?\"",
+    "options": [
+      " \"The border around the association name with become blue\"",
+      " \"Changing delete settings does not change the visuals in domain model\"",
+      " \"The border around the association name with become red\"",
+      " \"The border around the association name with become yellow\""
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-228",
+    "category": "domain-model",
+    "knowledgePath": "Custom",
+    "question": "Can you use XPath in Access rules?",
+    "options": [
+      "Yes, but it wont apply to create action",
+      "No",
+      "Yes, it will apply to every possible action"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-229",
+    "category": "domain-model",
+    "knowledgePath": "Custom",
+    "question": "Can you connect annotation to entity in domain model?",
+    "options": [
+      "No",
+      "Yes"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-230",
+    "category": "microflows",
+    "knowledgePath": "Custom",
+    "question": "Can you connect annotation to element in microflow?",
+    "options": [
+      "Yes, to multiple ones",
+      "Yes, but only to one element",
+      "No"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-231",
+    "category": "pages",
+    "knowledgePath": "Custom",
+    "question": "Can you add a validation rule in a page?",
+    "options": [
+      "Yes, to an input widgets",
+      "Yes, to a parameter",
+      "No"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-232",
+    "category": "security",
+    "knowledgePath": "Custom",
+    "question": "Where can you configure page access?",
+    "options": [
+      "In page properties and module security",
+      "In module security.",
+      "In page properties.",
+      "In page properties, module security and app security"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-233",
+    "category": "security",
+    "knowledgePath": "Custom",
+    "question": "How are unused paged displayed in the page access tab?",
+    "options": [
+      "They are only if they are set to be visible for some role.",
+      "They arent.",
+      "Orange, but only if they are set to be visible for some role."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-234",
+    "category": "security",
+    "knowledgePath": "Custom",
+    "question": "How are unused microflow displayed in the microflow access tab?",
+    "options": [
+      "Orange, but only if they are set to be visible for some role.",
+      "They arent.",
+      "They are only if they are set to be visible for some role."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-235",
+    "category": "domain-model",
+    "knowledgePath": "Custom",
+    "question": "Validation types available in domain model ",
+    "options": [
+      "\"Maximum length, Unique, Required, Range, Equals, RegEx\"",
+      "Required, Custom",
+      "\"Unique, Required, Range, Equals\"",
+      "\" Required, Unique \""
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-236",
+    "category": "pages",
+    "knowledgePath": "Custom",
+    "question": "Validation types available in input widgets",
+    "options": [
+      "Required, Custom",
+      "\"Maximum length, Unique, Required, Range, Equals, RegEx\"",
+      "\"Unique, Required, Range, Equals,\"",
+      "\" Required, Unique \""
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-237",
+    "category": "microflows",
+    "knowledgePath": "Quizlet",
+    "question": "Name 3 list operations:",
+    "options": [
+      "Equals, Sort, Filter",
+      "Create, Update, Delete",
+      "Commit, Rollback, Retrieve",
+      "Show, Hide, Toggle"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-238",
+    "category": "microflows",
+    "knowledgePath": "Similar to the exam",
+    "question": "Which operations can be performed on a list in a microflow?",
+    "options": [
+      "Union, Intersect, Subtract",
+      "Find, Filter, Project",
+      "Select, Filter, Union",
+      "Find, NotEquals, Sort"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-239",
+    "category": "agile",
+    "knowledgePath": "Similar to the exam",
+    "question": "Which of the following is one of the Scrum values?",
+    "options": [
+      "Openness",
+      "Communication",
+      "Iterative work",
+      "Collaboration"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-240",
+    "category": "microflows",
+    "knowledgePath": "Custom",
+    "question": "What will return head list operation?",
+    "options": [
+      "First object of a list",
+      "First 5 objects of a list",
+      "All elements of a list except last five",
+      "All elements of a list except last one"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-241",
+    "category": "microflows",
+    "knowledgePath": "Similar to the exam",
+    "question": "What will return tail list operation?",
+    "options": [
+      "Returns list that contains all elements of the list except first one",
+      "Returns last element of a list",
+      "Returns last five elements of a list"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-242",
+    "category": "microflows",
+    "knowledgePath": "Custom",
+    "question": "How does list intersection work?",
+    "options": [
+      "Returns list containing elements that appear in both parameters",
+      "Returns list containing combination of two lists without duplicates",
+      "Returns list containing combination of two lists with duplicates"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-243",
+    "category": "microflows",
+    "knowledgePath": "Custom",
+    "question": "How does list subtract work?",
+    "options": [
+      "Returns first parameter list without elements of second parameter list",
+      "Returns list of elements that are in both parameter lists",
+      "Returns intersection of lists"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-244",
+    "category": "microflows",
+    "knowledgePath": "Custom",
+    "question": "How does list contains operation work? ",
+    "options": [
+      "Checks if list contains all elements from another list",
+      "Checks if list contains particular element",
+      "Checks if list contains particular object or list"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-245",
+    "category": "microflows",
+    "knowledgePath": "Custom",
+    "question": "What equals list operation does return?",
+    "options": [
+      "Boolean",
+      "List of objects",
+      "Object"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-246",
+    "category": "microflows",
+    "knowledgePath": "Custom",
+    "question": "Can you use associations of objects to sort list?",
+    "options": [
+      "No",
+      "Yes"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-247",
+    "category": "microflows",
+    "knowledgePath": "Custom",
+    "question": "What does find list operation does return?",
+    "options": [
+      "First object that has given value",
+      "Any object that has given value",
+      "List of objects"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-248",
+    "category": "microflows",
+    "knowledgePath": "Custom",
+    "question": "Is there any difference between return values of find and filter list operation?",
+    "options": [
+      "Find returns object and filter returns list",
+      "Filter returns object and find returns list",
+      "There is no difference in the return value"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-249",
+    "category": "misc",
+    "knowledgePath": "Similar to the exam",
+    "question": "Which languages are supported in Mendix Applications?",
+    "options": [
+      "Languages from ISO 639",
+      "Languages specified in settings.json",
+      "Languages installed on your computer"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-250",
+    "category": "domain-model",
+    "knowledgePath": "Similar to the exam",
+    "question": "Can you change name or caption of enum value after creation?",
+    "options": [
+      "Caption of enum value can be modified and name can't be modified",
+      "Name of enum value can be modified and caption can't be modified",
+      "Both can be modified",
+      "None of them can be modified"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-251",
+    "category": "microflows",
+    "knowledgePath": "Similar to the exam",
+    "question": "Which function can you use to display DateTime 05/05/2025 as 'Mon, 5 May of 2025'? ",
+    "options": [
+      "formatDateTime",
+      "parseDateTimeToString",
+      "parseString",
+      "parseDateTime"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-252",
+    "category": "microflows",
+    "knowledgePath": "Similar to the exam",
+    "question": "According to best practices, what will be executed as optimized retrieve?",
+    "options": [
+      "Retrieve by association, then count list operation",
+      "Retrieve from database, then sum operation",
+      "Retrieve by association, then sum operation"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-253",
+    "category": "domain-model",
+    "knowledgePath": "Similar to the exam",
+    "question": "For which delete operation can you set error message for user?",
+    "options": [
+      "Conditional delete",
+      "Cascading delete",
+      "You can't set such message",
+      "For any delete operation"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-254",
+    "category": "microflows",
+    "knowledgePath": "Similar to the exam",
+    "question": "Which function can you use to parse String 05.05.2025 to DateTime? ",
+    "options": [
+      "parseDateTime",
+      "formatDateTime",
+      "parseString",
+      "parseStringToDateTime"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-255",
+    "category": "microflows",
+    "knowledgePath": "Similar to the exam",
+    "question": "Which function can you use to get first letter of a String in expression?",
+    "options": [
+      "startsWith",
+      "first",
+      "charAt",
+      "elementAt"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-256",
+    "category": "pages",
+    "knowledgePath": "Similar to the exam",
+    "question": "Which widget can use menu document?",
+    "options": [
+      "Navigation tree",
+      "Navigation list",
+      "Menu list"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-257",
+    "category": "security",
+    "knowledgePath": "Similar to the exam",
+    "question": "Which of the following statements are true?\r\nA. To open a page with microflow, user has to be given access to this page in security tab\r\nB. To open sub-microflow within a microflow, user has to be given access to that sub-microflow in security tab",
+    "options": [
+      "None of them",
+      "Only A",
+      "Only B",
+      "A and B"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-258",
+    "category": "microflows",
+    "knowledgePath": "Similar to the exam",
+    "question": "Which all three elements can be used inside a loop?",
+    "options": [
+      "Retrieve object, list operation, change variable",
+      "Start event, change variable, change object",
+      "Change object, end event, decision",
+      "change variable, merge, error event"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-259",
+    "category": "security",
+    "knowledgePath": "Similar to the exam",
+    "question": "What pages need to be changed after allowing anonymous users?",
+    "options": [
+      "None",
+      "Home page",
+      "Account page",
+      "All pages"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-260",
+    "category": "security",
+    "knowledgePath": "Similar to the exam",
+    "question": "How many user roles can anonymous user have?",
+    "options": [
+      "One",
+      "Unlimited",
+      "Two",
+      "None"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "q-261",
+    "category": "microflows",
+    "knowledgePath": "Similar to the exam",
+    "question": "Which function can you use to parse integer into string?",
+    "options": [
+      "toString()",
+      "intToString",
+      "integerToString",
+      "parseString"
+    ],
+    "correctIndex": 0
+  }
+]
