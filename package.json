@@ -7,8 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "process-content": "npx tsx scripts/process-content.ts",
-    "prebuild": "npm run process-content"
+    "process-content": "npx tsx scripts/process-content.ts"
   },
   "dependencies": {
     "@ai-sdk/react": "^3.0.140",
