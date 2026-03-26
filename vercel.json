@@ -1,4 +1,1 @@
-{
-  "framework": "nextjs",
-  "installCommand": "node --version && npm --version && npm install --legacy-peer-deps && echo 'Install complete' && ls -la"
-}
+{}
