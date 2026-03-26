@@ -47,6 +47,7 @@ export const Context = ({
   maxTokens,
   usage,
   modelId,
+  children,
   ...props
 }: ContextProps) => {
   const contextValue = useMemo(
@@ -56,7 +57,7 @@ export const Context = ({
 
   return (
     <ContextContext.Provider value={contextValue}>
-      <HoverCard closeDelay={0} openDelay={0} {...props} />
+      <HoverCard {...props}>{children}</HoverCard>
     </ContextContext.Provider>
   );
 };
