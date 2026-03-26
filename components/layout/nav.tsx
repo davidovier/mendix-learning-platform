@@ -8,7 +8,6 @@ const navItems = [
   { href: "/study", label: "Study" },
   { href: "/practice", label: "Practice" },
   { href: "/exam", label: "Exam" },
-  { href: "/tutor", label: "AI Tutor" },
   { href: "/progress", label: "Progress" },
 ];
 

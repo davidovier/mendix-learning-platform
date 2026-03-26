@@ -117,23 +117,23 @@ export function QuestionCard({
             className={cn(
               "p-5 rounded-lg space-y-4",
               isCorrect
-                ? "bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-900"
-                : "bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900"
+                ? "bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-900"
+                : "bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700"
             )}
           >
             {/* Result header */}
             <div className="flex items-center gap-2">
               {isCorrect ? (
                 <>
-                  <CheckCircle className="h-5 w-5 text-green-600" />
-                  <span className="font-semibold text-green-800 dark:text-green-400">
+                  <CheckCircle className="h-5 w-5 text-emerald-600" />
+                  <span className="font-semibold text-emerald-700 dark:text-emerald-400">
                     Correct!
                   </span>
                 </>
               ) : (
                 <>
-                  <XCircle className="h-5 w-5 text-amber-600" />
-                  <span className="font-semibold text-amber-800 dark:text-amber-400">
+                  <XCircle className="h-5 w-5 text-rose-500" />
+                  <span className="font-semibold text-slate-700 dark:text-slate-300">
                     Not quite right
                   </span>
                 </>
@@ -143,22 +143,22 @@ export function QuestionCard({
             {/* Detailed explanation */}
             <div className="space-y-3 text-sm">
               {/* Show correct answer */}
-              <div className="p-3 bg-green-100 dark:bg-green-900/40 rounded-md">
-                <p className="font-medium text-green-800 dark:text-green-300 mb-1">
+              <div className="p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-md">
+                <p className="font-medium text-emerald-700 dark:text-emerald-300 mb-1">
                   Correct Answer:
                 </p>
-                <p className="text-green-900 dark:text-green-200">
+                <p className="text-emerald-800 dark:text-emerald-200">
                   {correctAnswer}
                 </p>
               </div>
 
               {/* If wrong, show what they selected */}
               {!isCorrect && selectedAnswer && (
-                <div className="p-3 bg-red-100 dark:bg-red-900/40 rounded-md">
-                  <p className="font-medium text-red-800 dark:text-red-300 mb-1">
+                <div className="p-3 bg-rose-50 dark:bg-rose-900/20 rounded-md">
+                  <p className="font-medium text-rose-700 dark:text-rose-300 mb-1">
                     Your Answer:
                   </p>
-                  <p className="text-red-900 dark:text-red-200">
+                  <p className="text-rose-800 dark:text-rose-200">
                     {selectedAnswer}
                   </p>
                 </div>
@@ -166,13 +166,13 @@ export function QuestionCard({
 
               {/* Why this matters - context hint */}
               {generateExplanation() && (
-                <div className="flex gap-2 p-3 bg-blue-50 dark:bg-blue-950/40 rounded-md">
-                  <Lightbulb className="h-4 w-4 text-blue-600 flex-shrink-0 mt-0.5" />
+                <div className="flex gap-2 p-3 bg-indigo-50 dark:bg-indigo-950/30 rounded-md">
+                  <Lightbulb className="h-4 w-4 text-indigo-600 flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-medium text-blue-800 dark:text-blue-300 mb-1">
+                    <p className="font-medium text-indigo-700 dark:text-indigo-300 mb-1">
                       Key Concept:
                     </p>
-                    <p className="text-blue-900 dark:text-blue-200">
+                    <p className="text-indigo-800 dark:text-indigo-200">
                       {generateExplanation()}
                     </p>
                   </div>
@@ -181,7 +181,7 @@ export function QuestionCard({
 
               {/* Explain why other options are wrong */}
               {!isCorrect && (
-                <div className="pt-2 border-t border-amber-200 dark:border-amber-800">
+                <div className="pt-2 border-t border-slate-200 dark:border-slate-700">
                   <p className="text-muted-foreground">
                     <strong>Tip:</strong> Review the{" "}
                     <span className="font-medium">{question.category}</span>{" "}

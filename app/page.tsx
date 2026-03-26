@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { BookOpen, PenLine, Timer, Bot, Check, ArrowRight } from "lucide-react";
+import { BookOpen, PenLine, Timer, BarChart3, Check, ArrowRight } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -25,10 +25,10 @@ const features = [
     icon: Timer,
   },
   {
-    title: "AI Tutor",
-    description: "Ask questions, get explanations, generate practice",
-    href: "/tutor",
-    icon: Bot,
+    title: "Progress",
+    description: "Track your learning journey and mastery",
+    href: "/progress",
+    icon: BarChart3,
   },
 ];
 
@@ -47,8 +47,8 @@ export default function HomePage() {
           Master the Mendix Intermediate Certification
         </h1>
         <p className="text-lg text-muted-foreground leading-relaxed">
-          Study smarter with AI-powered learning, 268 real exam questions, and
-          spaced repetition to help you pass on your first try.
+          Study smarter with 268 real exam questions, interactive flashcards,
+          and exam simulations to help you pass on your first try.
         </p>
         <div className="flex gap-3 justify-center pt-2">
           <Link href="/study" className={cn(buttonVariants({ size: "lg" }), "gap-2")}>
