@@ -2,6 +2,7 @@
 
 import { useState, use } from "react";
 import { useRouter } from "next/navigation";
+import { ArrowLeft, Trophy } from "lucide-react";
 import { getTopicById } from "@/lib/content/topics";
 import { Flashcard } from "@/components/study/flashcard";
 import { FlashcardControls } from "@/components/study/flashcard-controls";
@@ -63,17 +64,18 @@ export default function TopicStudyPage({ params }: PageProps) {
 
   const isComplete = currentIndex === cards.length - 1 && masteredCount === cards.length;
 
+  const Icon = topic.icon;
+
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       <div className="flex items-center justify-between">
-        <div>
-          <Button variant="ghost" onClick={() => router.push("/study")}>
-            ← Back
-          </Button>
-        </div>
-        <div className="text-right">
-          <div className="text-2xl">{topic.icon}</div>
-          <h1 className="text-xl font-bold">{topic.name}</h1>
+        <Button variant="ghost" onClick={() => router.push("/study")}>
+          <ArrowLeft className="h-4 w-4 mr-1" />
+          Back
+        </Button>
+        <div className="flex items-center gap-2">
+          <Icon className="h-5 w-5 text-primary" />
+          <h1 className="text-xl font-semibold">{topic.name}</h1>
         </div>
       </div>
 
@@ -87,8 +89,8 @@ export default function TopicStudyPage({ params }: PageProps) {
 
       {isComplete ? (
         <div className="text-center py-12 space-y-4">
-          <div className="text-6xl">🎉</div>
-          <h2 className="text-2xl font-bold">Topic Complete!</h2>
+          <Trophy className="h-16 w-16 text-primary mx-auto" />
+          <h2 className="text-2xl font-semibold">Topic Complete</h2>
           <p className="text-muted-foreground">
             You&apos;ve mastered all {cards.length} cards in {topic.name}
           </p>

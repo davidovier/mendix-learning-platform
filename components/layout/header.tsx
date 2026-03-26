@@ -1,13 +1,14 @@
 import Link from "next/link";
+import { GraduationCap } from "lucide-react";
 import { Nav } from "./nav";
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="text-2xl">🎓</span>
-          <span className="font-bold text-xl">Mendix Prep</span>
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container flex h-14 items-center justify-between">
+        <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+          <GraduationCap className="h-6 w-6 text-primary" />
+          <span className="font-semibold text-lg tracking-tight">Mendix Prep</span>
         </Link>
         <Nav />
       </div>

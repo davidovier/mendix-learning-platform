@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { BookOpen, ArrowLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -99,66 +99,61 @@ export default function PracticePage() {
 
   if (view === "select") {
     return (
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold mb-2">Practice Mode</h1>
+          <div className="text-center mb-10">
+            <h1 className="text-2xl font-semibold mb-2">Practice Mode</h1>
             <p className="text-muted-foreground">
               Select a topic to practice or test your knowledge across all topics
             </p>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {/* All Topics Card */}
-            <Card
-              className="cursor-pointer transition-all hover:ring-2 hover:ring-primary"
+            <button
+              className="text-left p-5 rounded-lg border border-border bg-card hover:border-primary/50 hover:bg-accent/30 transition-all duration-200"
               onClick={() => handleTopicSelect("all")}
             >
-              <CardHeader>
-                <div className="flex items-center gap-3">
-                  <span className="text-2xl">📚</span>
-                  <div>
-                    <CardTitle>All Topics</CardTitle>
-                    <CardDescription>
-                      20 random questions from all categories
-                    </CardDescription>
-                  </div>
+              <div className="flex items-start gap-3">
+                <BookOpen className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                <div className="min-w-0">
+                  <h3 className="font-medium text-foreground">All Topics</h3>
+                  <p className="text-sm text-muted-foreground mt-0.5">
+                    20 random questions from all categories
+                  </p>
+                  <Badge variant="secondary" className="mt-3 text-xs">
+                    {(questions as Question[]).length} questions
+                  </Badge>
                 </div>
-              </CardHeader>
-              <CardContent>
-                <Badge variant="secondary">
-                  {(questions as Question[]).length} questions total
-                </Badge>
-              </CardContent>
-            </Card>
+              </div>
+            </button>
 
             {/* Individual Topic Cards */}
             {availableTopics.map((topic) => {
+              const Icon = topic.icon;
               const questionCount = (questions as Question[]).filter(
                 (q) => q.category === topic.id
               ).length;
 
               return (
-                <Card
+                <button
                   key={topic.id}
-                  className="cursor-pointer transition-all hover:ring-2 hover:ring-primary"
+                  className="text-left p-5 rounded-lg border border-border bg-card hover:border-primary/50 hover:bg-accent/30 transition-all duration-200"
                   onClick={() => handleTopicSelect(topic.id)}
                 >
-                  <CardHeader>
-                    <div className="flex items-center gap-3">
-                      <span className="text-2xl">{topic.icon}</span>
-                      <div>
-                        <CardTitle>{topic.name}</CardTitle>
-                        <CardDescription>{topic.description}</CardDescription>
-                      </div>
+                  <div className="flex items-start gap-3">
+                    <Icon className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                    <div className="min-w-0">
+                      <h3 className="font-medium text-foreground">{topic.name}</h3>
+                      <p className="text-sm text-muted-foreground mt-0.5">
+                        {topic.description}
+                      </p>
+                      <Badge variant="secondary" className="mt-3 text-xs">
+                        {questionCount} questions
+                      </Badge>
                     </div>
-                  </CardHeader>
-                  <CardContent>
-                    <Badge variant="secondary">
-                      {questionCount} questions
-                    </Badge>
-                  </CardContent>
-                </Card>
+                  </div>
+                </button>
               );
             })}
           </div>
@@ -207,12 +202,13 @@ export default function PracticePage() {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-md mx-auto">
-          <Card>
-            <CardHeader className="text-center">
-              <CardTitle className="text-2xl">Quiz Complete!</CardTitle>
-              <CardDescription>{topicName}</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
+          <div className="p-6 rounded-lg border border-border bg-card">
+            <div className="text-center mb-6">
+              <h2 className="text-2xl font-semibold mb-1">Quiz Complete</h2>
+              <p className="text-muted-foreground">{topicName}</p>
+            </div>
+
+            <div className="space-y-6">
               <div className="text-center">
                 <div className="text-5xl font-bold mb-2">{scorePercentage}%</div>
                 <Badge variant={isPassing ? "default" : "destructive"}>
@@ -239,10 +235,7 @@ export default function PracticePage() {
                 </div>
               </div>
 
-              <Progress
-                value={scorePercentage}
-                className="h-3"
-              />
+              <Progress value={scorePercentage} className="h-3" />
 
               <div className="flex flex-col gap-2">
                 <Button onClick={handleRetry} className="w-full">
@@ -256,8 +249,8 @@ export default function PracticePage() {
                   Choose Different Topic
                 </Button>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
       </div>
     );

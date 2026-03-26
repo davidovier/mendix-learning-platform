@@ -169,13 +169,14 @@ export default function ExamPage() {
                     );
                     const topicPassed = topicPercentage >= PASS_PERCENTAGE;
 
+                    const TopicIcon = topic?.icon;
                     return (
                       <div
                         key={category}
                         className="flex items-center justify-between p-3 bg-muted rounded-lg"
                       >
                         <div className="flex items-center gap-2">
-                          <span>{topic?.icon || "?"}</span>
+                          {TopicIcon && <TopicIcon className="h-4 w-4 text-primary" />}
                           <span className="text-sm font-medium">
                             {topic?.name || category}
                           </span>

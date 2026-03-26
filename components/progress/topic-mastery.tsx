@@ -14,11 +14,12 @@ export function TopicMastery({ masteryData }: TopicMasteryProps) {
       <div className="space-y-3">
         {topics.map((topic) => {
           const mastery = masteryData[topic.id] ?? 0;
+          const Icon = topic.icon;
           return (
             <div key={topic.id} className="space-y-1">
               <div className="flex justify-between text-sm">
                 <span className="flex items-center gap-2">
-                  <span>{topic.icon}</span>
+                  <Icon className="h-4 w-4 text-primary" />
                   <span>{topic.name}</span>
                 </span>
                 <span className="font-medium">{mastery}%</span>
