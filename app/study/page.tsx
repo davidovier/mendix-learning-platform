@@ -6,7 +6,7 @@ export default function StudyPage() {
   const flashcards = flashcardsData as Record<string, unknown[]>;
 
   return (
-    <div className="container py-8 space-y-8">
+    <div className="container mx-auto px-4 py-8 space-y-8">
       <div>
         <h1 className="text-3xl font-bold">Study Mode</h1>
         <p className="text-muted-foreground mt-2">
