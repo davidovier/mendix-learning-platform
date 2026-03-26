@@ -5,9 +5,10 @@ import { MessageResponse } from "@/components/ai-elements/message";
 async function getCheatsheetContent() {
   const filePath = path.join(
     process.cwd(),
-    "..",
-    "documentation",
-    "20-quick-reference-cheatsheet.md"
+    "lib",
+    "content",
+    "docs",
+    "cheatsheet.md"
   );
 
   return fs.readFileSync(filePath, "utf-8");
