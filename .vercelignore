@@ -1,0 +1,19 @@
+# Vercel ignore file
+# Explicitly include content directory by NOT listing it here
+
+# Dependencies
+node_modules
+
+# Build output
+.next
+out
+build
+
+# Environment
+.env*
+
+# Misc
+.DS_Store
+*.pem
+.vercel
+*.tsbuildinfo
