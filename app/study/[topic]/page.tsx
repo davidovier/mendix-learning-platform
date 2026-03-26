@@ -7,7 +7,7 @@ import { Flashcard } from "@/components/study/flashcard";
 import { FlashcardControls } from "@/components/study/flashcard-controls";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import flashcardsData from "@/content/flashcards.json";
+import flashcardsData from "@/lib/content/flashcards.json";
 
 interface PageProps {
   params: Promise<{ topic: string }>;

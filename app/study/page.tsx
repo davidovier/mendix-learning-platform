@@ -1,6 +1,6 @@
 import { topics } from "@/lib/content/topics";
 import { TopicCard } from "@/components/study/topic-card";
-import flashcardsData from "@/content/flashcards.json";
+import flashcardsData from "@/lib/content/flashcards.json";
 
 export default function StudyPage() {
   const flashcards = flashcardsData as Record<string, unknown[]>;

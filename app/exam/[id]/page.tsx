@@ -10,7 +10,7 @@ import { AnswerOption } from "@/components/practice/answer-option";
 import { ExamTimer } from "@/components/exam/exam-timer";
 import { topics } from "@/lib/content/topics";
 import { cn } from "@/lib/utils";
-import questions from "@/content/questions.json";
+import questions from "@/lib/content/questions.json";
 
 interface Question {
   id: string;

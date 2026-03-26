@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { QuestionCard } from "@/components/practice/question-card";
 import { topics } from "@/lib/content/topics";
-import questions from "@/content/questions.json";
+import questions from "@/lib/content/questions.json";
 
 type ViewState = "select" | "quiz" | "results";
 
