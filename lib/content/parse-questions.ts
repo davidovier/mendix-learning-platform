@@ -50,7 +50,7 @@ export function parseQuestionsFromCSV(): Question[] {
   const questions: Question[] = [];
 
   for (let i = 0; i < records.length; i++) {
-    const row = records[i];
+    const row = records[i] as Record<string, string>;
 
     const options = [
       row.answer_1,
