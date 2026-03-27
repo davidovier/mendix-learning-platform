@@ -67,7 +67,7 @@ export default function TopicStudyPage({ params }: PageProps) {
   const Icon = topic.icon;
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <div className="container mx-auto max-w-2xl px-4 py-8 space-y-6">
       <div className="flex items-center justify-between">
         <Button variant="ghost" onClick={() => router.push("/study")}>
           <ArrowLeft className="h-4 w-4 mr-1" />

@@ -18,7 +18,7 @@ export default async function CheatsheetPage() {
   const content = await getCheatsheetContent();
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="container mx-auto max-w-4xl px-4 py-8">
       <div className="mb-8">
         <h1 className="text-3xl font-bold">Quick Reference Cheatsheet</h1>
         <p className="text-muted-foreground mt-2">

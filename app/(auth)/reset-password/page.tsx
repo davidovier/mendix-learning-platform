@@ -136,7 +136,7 @@ function ResetPasswordFallback() {
 
 export default function ResetPasswordPage() {
   return (
-    <div className="container flex items-center justify-center min-h-[calc(100vh-4rem)] py-8">
+    <div className="container mx-auto flex items-center justify-center min-h-[calc(100vh-4rem)] py-8">
       <Suspense fallback={<ResetPasswordFallback />}>
         <ResetPasswordForm />
       </Suspense>

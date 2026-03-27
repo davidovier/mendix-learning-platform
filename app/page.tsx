@@ -41,7 +41,7 @@ const examFacts = [
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col items-center gap-16 py-16 px-4">
+    <div className="container mx-auto flex flex-col items-center gap-16 py-16 px-4">
       <div className="text-center space-y-6 max-w-2xl">
         <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl text-foreground">
           Master the Mendix Intermediate Certification
