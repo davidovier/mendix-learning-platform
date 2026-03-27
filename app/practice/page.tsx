@@ -8,6 +8,7 @@ import { Progress } from "@/components/ui/progress";
 import { QuestionCard } from "@/components/practice/question-card";
 import { topics } from "@/lib/content/topics";
 import questions from "@/lib/content/questions.json";
+import { trackAttempt } from "@/lib/db/actions";
 
 type ViewState = "select" | "quiz" | "results";
 
@@ -49,11 +50,26 @@ export default function PracticePage() {
     setView("quiz");
   };
 
-  const handleAnswer = (correct: boolean) => {
+  const handleAnswer = async (correct: boolean, questionId: string) => {
     if (correct) {
       setCorrectAnswers((prev) => prev + 1);
     }
     setAnsweredQuestions((prev) => prev + 1);
+
+    // Track attempt in database
+    const topicId = selectedTopic === "all"
+      ? currentQuestion.category
+      : selectedTopic;
+    const topic = topics.find((t) => t.id === topicId);
+
+    if (topic) {
+      trackAttempt({
+        question_id: questionId,
+        topic_id: topicId!,
+        topic_name: topic.name,
+        is_correct: correct,
+      });
+    }
   };
 
   const handleNext = () => {

@@ -20,7 +20,7 @@ interface QuestionCardProps {
   question: Question;
   questionNumber: number;
   totalQuestions: number;
-  onAnswer: (correct: boolean) => void;
+  onAnswer: (correct: boolean, questionId: string) => void;
   onNext: () => void;
   showExplanation?: boolean;
 }
@@ -39,7 +39,7 @@ export function QuestionCard({
   const handleSubmit = () => {
     if (selectedIndex === null) return;
     setSubmitted(true);
-    onAnswer(selectedIndex === question.correctIndex);
+    onAnswer(selectedIndex === question.correctIndex, question.id);
   };
 
   const handleNext = () => {
