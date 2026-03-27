@@ -20,6 +20,7 @@ import { resetProgress } from "@/lib/db/actions";
 export function ResetProgressButton() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
 
   async function handleReset() {
     setLoading(true);
@@ -27,12 +28,13 @@ export function ResetProgressButton() {
     setLoading(false);
 
     if (result.success) {
+      setOpen(false);
       router.refresh();
     }
   }
 
   return (
-    <AlertDialog>
+    <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
         <Button variant="outline" size="sm" className="text-muted-foreground">
           <RotateCcw className="h-4 w-4 mr-2" />
