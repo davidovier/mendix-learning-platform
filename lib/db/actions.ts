@@ -206,3 +206,29 @@ export async function completeExamSession(data: CompleteExamData) {
 
   return { success: true, passed };
 }
+
+export async function resetProgress() {
+  const user = await getUser();
+  if (!user) {
+    return { error: "Not authenticated" };
+  }
+
+  const supabase = await createClient();
+
+  // Delete all user data in parallel
+  const [progressResult, attemptsResult, streaksResult, examsResult] = await Promise.all([
+    supabase.from("progress").delete().eq("user_id", user.id),
+    supabase.from("question_attempts").delete().eq("user_id", user.id),
+    supabase.from("streaks").delete().eq("user_id", user.id),
+    supabase.from("exam_sessions").delete().eq("user_id", user.id),
+  ]);
+
+  const errors = [progressResult.error, attemptsResult.error, streaksResult.error, examsResult.error].filter(Boolean);
+
+  if (errors.length > 0) {
+    console.error("Errors resetting progress:", errors);
+    return { error: "Failed to reset some data" };
+  }
+
+  return { success: true };
+}

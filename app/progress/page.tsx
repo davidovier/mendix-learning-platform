@@ -7,6 +7,7 @@ import { getUser } from "@/lib/supabase/actions";
 import { getUserProgress, getDashboardStats, getRecommendations, getExamHistory } from "@/lib/db/queries";
 import { topics } from "@/lib/content/topics";
 import { cn } from "@/lib/utils";
+import { ResetProgressButton } from "@/components/progress/reset-progress-button";
 
 export default async function ProgressPage() {
   const user = await getUser();
@@ -29,11 +30,14 @@ export default async function ProgressPage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-5xl mx-auto space-y-8">
-        <div>
-          <h1 className="text-2xl font-semibold mb-2">Your Progress</h1>
-          <p className="text-muted-foreground">
-            Track your learning journey and focus on areas that need improvement
-          </p>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h1 className="text-2xl font-semibold mb-1">Your Progress</h1>
+            <p className="text-muted-foreground text-sm sm:text-base">
+              Track your learning journey and focus on areas that need improvement
+            </p>
+          </div>
+          <ResetProgressButton />
         </div>
 
         {/* Stats Cards */}
