@@ -63,7 +63,7 @@ export default function PracticePage() {
     const topic = topics.find((t) => t.id === topicId);
 
     if (topic) {
-      trackAttempt({
+      await trackAttempt({
         question_id: questionId,
         topic_id: topicId!,
         topic_name: topic.name,
