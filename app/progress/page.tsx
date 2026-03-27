@@ -186,7 +186,9 @@ export default async function ProgressPage() {
                           ? "[&>div]:bg-emerald-500"
                           : mastery >= 50
                             ? "[&>div]:bg-amber-500"
-                            : "[&>div]:bg-rose-500"
+                            : mastery > 0
+                              ? "[&>div]:bg-rose-500"
+                              : "[&>div]:bg-transparent"
                       )}
                     />
                     <p className="text-xs text-muted-foreground mt-2">
