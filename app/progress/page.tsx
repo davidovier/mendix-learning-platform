@@ -89,9 +89,9 @@ export default async function ProgressPage() {
 
         {/* Recommendations */}
         {(recommendations.weak.length > 0 || recommendations.unexplored.length > 0) && (
-          <Card className="border-amber-200 bg-amber-50/50 dark:border-amber-900 dark:bg-amber-950/20">
+          <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-amber-800 dark:text-amber-200">
+              <CardTitle className="flex items-center gap-2">
                 <Lightbulb className="h-5 w-5" />
                 Recommendations
               </CardTitle>
@@ -99,7 +99,7 @@ export default async function ProgressPage() {
             <CardContent className="space-y-4">
               {recommendations.weak.length > 0 && (
                 <div>
-                  <p className="text-sm font-medium mb-2 text-amber-900 dark:text-amber-100">
+                  <p className="text-sm font-medium mb-2">
                     Focus on these weak topics:
                   </p>
                   <div className="flex flex-wrap gap-2">
@@ -117,7 +117,7 @@ export default async function ProgressPage() {
               )}
               {recommendations.unexplored.length > 0 && (
                 <div>
-                  <p className="text-sm font-medium mb-2 text-amber-900 dark:text-amber-100">
+                  <p className="text-sm font-medium mb-2">
                     Start learning these topics:
                   </p>
                   <div className="flex flex-wrap gap-2">

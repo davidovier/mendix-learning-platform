@@ -53,17 +53,17 @@ export default function ExamStartPage() {
           </CardContent>
         </Card>
 
-        <Card className="mb-6 border-amber-200 bg-amber-50">
+        <Card className="mb-6">
           <CardHeader>
-            <CardTitle className="text-amber-800 flex items-center gap-2">
-              <span>Warning</span>
-              <Badge variant="outline" className="border-amber-500 text-amber-700">
+            <CardTitle className="flex items-center gap-2">
+              <span>Before You Start</span>
+              <Badge variant="outline">
                 Exam Mode
               </Badge>
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <ul className="space-y-2 text-sm text-amber-900">
+            <ul className="space-y-2 text-sm text-muted-foreground">
               <li>- You will not receive feedback on your answers until the exam is complete</li>
               <li>- The timer will continue running even if you navigate away</li>
               <li>- Questions are randomly selected from the entire question pool</li>

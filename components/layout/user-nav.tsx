@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Flame, LogOut, User } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -37,13 +36,11 @@ export async function UserNav() {
       )}
 
       <DropdownMenu>
-        <DropdownMenuTrigger>
-          <Button variant="ghost" size="sm" className="gap-2">
-            <User className="h-4 w-4" />
-            <span className="hidden sm:inline-block max-w-[150px] truncate">
-              {user.email}
-            </span>
-          </Button>
+        <DropdownMenuTrigger className="inline-flex h-8 items-center justify-center rounded-lg px-3 text-sm font-medium hover:bg-muted transition-colors gap-2">
+          <User className="h-4 w-4" />
+          <span className="hidden sm:inline-block max-w-[150px] truncate">
+            {user.email}
+          </span>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuItem>
