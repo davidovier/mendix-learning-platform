@@ -34,12 +34,12 @@ const features = [
 
 export default function HomePage() {
   return (
-    <div className="container mx-auto flex flex-col items-center justify-center min-h-[calc(100vh-3.5rem)] px-4 py-12">
-      <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl text-foreground mb-3">
+    <div className="container mx-auto flex flex-col items-center px-4 pt-12 pb-16">
+      <div className="text-center mb-12">
+        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl text-foreground">
           Mendix Intermediate Certification
         </h1>
-        <p className="text-lg text-muted-foreground">
+        <p className="text-lg text-muted-foreground mt-4">
           Practice questions and flashcards to help you pass.
         </p>
       </div>
