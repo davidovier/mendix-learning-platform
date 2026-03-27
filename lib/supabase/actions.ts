@@ -4,14 +4,21 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 
 export async function signInWithEmail(formData: FormData) {
-  const email = formData.get("email") as string;
-  const password = formData.get("password") as string;
-  const redirectTo = formData.get("redirectTo") as string | null;
+  const email = formData.get("email");
+  const password = formData.get("password");
+  const redirectTo = formData.get("redirectTo");
+
+  if (typeof email !== "string" || !email.trim()) {
+    return { error: "Email is required" };
+  }
+  if (typeof password !== "string" || !password) {
+    return { error: "Password is required" };
+  }
 
   const supabase = await createClient();
 
   const { error } = await supabase.auth.signInWithPassword({
-    email,
+    email: email.trim(),
     password,
   });
 
@@ -19,17 +26,29 @@ export async function signInWithEmail(formData: FormData) {
     return { error: error.message };
   }
 
-  redirect(redirectTo || "/");
+  // Validate redirect to prevent open redirect attacks
+  const safeRedirect =
+    typeof redirectTo === "string" && redirectTo.startsWith("/")
+      ? redirectTo
+      : "/";
+  redirect(safeRedirect);
 }
 
 export async function signUpWithEmail(formData: FormData) {
-  const email = formData.get("email") as string;
-  const password = formData.get("password") as string;
+  const email = formData.get("email");
+  const password = formData.get("password");
+
+  if (typeof email !== "string" || !email.trim()) {
+    return { error: "Email is required" };
+  }
+  if (typeof password !== "string" || !password) {
+    return { error: "Password is required" };
+  }
 
   const supabase = await createClient();
 
   const { error } = await supabase.auth.signUp({
-    email,
+    email: email.trim(),
     password,
     options: {
       emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`,
@@ -45,17 +64,28 @@ export async function signUpWithEmail(formData: FormData) {
 
 export async function signOut() {
   const supabase = await createClient();
-  await supabase.auth.signOut();
+  const { error } = await supabase.auth.signOut();
+
+  if (error) {
+    return { error: error.message };
+  }
+
   redirect("/");
 }
 
 export async function signInWithGoogle(redirectTo?: string) {
   const supabase = await createClient();
 
+  // Validate redirect to prevent open redirect attacks
+  const safeRedirect =
+    typeof redirectTo === "string" && redirectTo.startsWith("/")
+      ? redirectTo
+      : "/";
+
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {
-      redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback?next=${redirectTo || "/"}`,
+      redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback?next=${safeRedirect}`,
     },
   });
 
@@ -66,14 +96,20 @@ export async function signInWithGoogle(redirectTo?: string) {
   if (data.url) {
     redirect(data.url);
   }
+
+  return { error: "Failed to get OAuth redirect URL" };
 }
 
 export async function resetPassword(formData: FormData) {
-  const email = formData.get("email") as string;
+  const email = formData.get("email");
+
+  if (typeof email !== "string" || !email.trim()) {
+    return { error: "Email is required" };
+  }
 
   const supabase = await createClient();
 
-  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+  const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
     redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/reset-password`,
   });
 
@@ -85,7 +121,11 @@ export async function resetPassword(formData: FormData) {
 }
 
 export async function updatePassword(formData: FormData) {
-  const password = formData.get("password") as string;
+  const password = formData.get("password");
+
+  if (typeof password !== "string" || !password) {
+    return { error: "Password is required" };
+  }
 
   const supabase = await createClient();
 
