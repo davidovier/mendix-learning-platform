@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -11,6 +11,7 @@ import { ExamTimer } from "@/components/exam/exam-timer";
 import { topics } from "@/lib/content/topics";
 import { cn } from "@/lib/utils";
 import questions from "@/lib/content/questions.json";
+import { createExamSession, completeExamSession } from "@/lib/db/actions";
 
 interface Question {
   id: string;
@@ -31,12 +32,26 @@ export default function ExamPage() {
   const [examState, setExamState] = useState<ExamState>("active");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, number>>({});
+  const [sessionId, setSessionId] = useState<string | null>(null);
+  const startTimeRef = useRef<number>(Date.now());
 
   // Shuffle and select 50 random questions
   const examQuestions = useMemo(() => {
     return [...(questions as Question[])]
       .sort(() => Math.random() - 0.5)
       .slice(0, EXAM_QUESTIONS);
+  }, []);
+
+  // Create exam session on mount
+  useEffect(() => {
+    async function initSession() {
+      const result = await createExamSession("simulation");
+      if (result.sessionId) {
+        setSessionId(result.sessionId);
+      }
+    }
+    initSession();
+    startTimeRef.current = Date.now();
   }, []);
 
   const currentQuestion = examQuestions[currentQuestionIndex];
@@ -64,13 +79,37 @@ export default function ExamPage() {
     setCurrentQuestionIndex(index);
   };
 
-  const handleSubmitExam = useCallback(() => {
-    setExamState("results");
-  }, []);
+  const handleSubmitExam = useCallback(async () => {
+    // Calculate results
+    let correctCount = 0;
+    const answersRecord: Record<string, boolean> = {};
 
-  const handleTimeUp = useCallback(() => {
+    examQuestions.forEach((question, index) => {
+      const userAnswer = answers[index];
+      const isCorrect = userAnswer === question.correctIndex;
+      answersRecord[question.id] = isCorrect;
+      if (isCorrect) correctCount++;
+    });
+
+    // Save to database if we have a session
+    if (sessionId) {
+      const timeSpent = Math.round((Date.now() - startTimeRef.current) / 1000);
+      await completeExamSession({
+        sessionId,
+        score: correctCount,
+        totalQuestions: examQuestions.length,
+        answers: answersRecord,
+        timeSpentSeconds: timeSpent,
+      });
+    }
+
     setExamState("results");
-  }, []);
+  }, [sessionId, examQuestions, answers]);
+
+  const handleTimeUp = useCallback(async () => {
+    // Auto-submit when time runs out
+    await handleSubmitExam();
+  }, [handleSubmitExam]);
 
   const handleReturnHome = () => {
     router.push("/exam");
