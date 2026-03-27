@@ -1,183 +1,229 @@
+import Link from "next/link";
+import { Flame, Target, TrendingUp, Calendar, Lightbulb } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { XPCounter } from "@/components/progress/xp-counter";
-import { StreakFlame } from "@/components/progress/streak-flame";
-import { TopicMastery } from "@/components/progress/topic-mastery";
-import {
-  Target,
-  Baby,
-  PenLine,
-  Flame,
-  GraduationCap,
-  Award,
-  BookOpen,
-  FileText,
-  type LucideIcon,
-} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { getUser } from "@/lib/supabase/actions";
+import { getUserProgress, getDashboardStats, getRecommendations, getExamHistory } from "@/lib/db/queries";
+import { topics } from "@/lib/content/topics";
+import { cn } from "@/lib/utils";
 
-interface Achievement {
-  id: string;
-  name: string;
-  icon: LucideIcon;
-  earned: boolean;
-}
+export default async function ProgressPage() {
+  const user = await getUser();
 
-interface StudyActivity {
-  type: "study";
-  topic: string;
-  xp: number;
-  time: string;
-}
+  if (!user) {
+    return null; // Middleware should have redirected
+  }
 
-interface PracticeActivity {
-  type: "practice";
-  topic: string;
-  xp: number;
-  time: string;
-}
+  const [progress, stats, examHistory] = await Promise.all([
+    getUserProgress(user.id),
+    getDashboardStats(user.id),
+    getExamHistory(user.id),
+  ]);
 
-interface ExamActivity {
-  type: "exam";
-  score: number;
-  time: string;
-}
+  const recommendations = getRecommendations(progress);
 
-type Activity = StudyActivity | PracticeActivity | ExamActivity;
+  // Create a map for easy lookup
+  const progressMap = new Map(progress.map((p) => [p.topic_id, p]));
 
-const mockProgress = {
-  xp: 1250,
-  level: 5,
-  xpToNextLevel: 500,
-  streak: 7,
-  examReadiness: 65,
-  topicMastery: {
-    "domain-model": 80,
-    "microflows": 70,
-    "security": 55,
-    "pages": 45,
-    "xpath": 60,
-  },
-  achievements: [
-    { id: "first-card", name: "First Steps", icon: Baby, earned: true },
-    { id: "quiz-starter", name: "Quiz Starter", icon: PenLine, earned: true },
-    { id: "week-streak", name: "Week Streak", icon: Flame, earned: true },
-    { id: "topic-master", name: "Topic Master", icon: GraduationCap, earned: false },
-    { id: "perfect-exam", name: "Perfect Score", icon: Award, earned: false },
-  ] as Achievement[],
-  recentActivity: [
-    { type: "study", topic: "Domain Model", xp: 50, time: "2h ago" },
-    { type: "practice", topic: "Security", xp: 30, time: "5h ago" },
-    { type: "exam", score: 72, time: "1d ago" },
-  ] as Activity[],
-};
-
-export default function ProgressPage() {
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
-      <h1 className="text-3xl font-bold mb-8">Your Progress</h1>
-
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-        <XPCounter
-          xp={mockProgress.xp}
-          level={mockProgress.level}
-          xpToNextLevel={mockProgress.xpToNextLevel}
-        />
-        <StreakFlame days={mockProgress.streak} />
-        <div className="flex items-center gap-4 p-4 border border-border bg-card rounded-lg">
-          <Target className="h-10 w-10 text-primary" />
-          <div>
-            <div className="text-2xl font-bold">{mockProgress.examReadiness}%</div>
-            <p className="text-sm text-muted-foreground">Exam Readiness</p>
-          </div>
+    <div className="container mx-auto px-4 py-8">
+      <div className="max-w-5xl mx-auto space-y-8">
+        <div>
+          <h1 className="text-2xl font-semibold mb-2">Your Progress</h1>
+          <p className="text-muted-foreground">
+            Track your learning journey and focus on areas that need improvement
+          </p>
         </div>
-      </div>
 
-      {/* Two Column Layout */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        {/* Topic Mastery */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Topic Progress</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <TopicMastery masteryData={mockProgress.topicMastery} />
-          </CardContent>
-        </Card>
+        {/* Stats Cards */}
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium text-muted-foreground">
+                Questions Answered
+              </CardTitle>
+              <Target className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats.totalQuestions}</div>
+            </CardContent>
+          </Card>
 
-        {/* Achievements */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Achievements</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-5 gap-2">
-              {mockProgress.achievements.map((achievement) => {
-                const AchievementIcon = achievement.icon;
-                return (
-                  <div
-                    key={achievement.id}
-                    className={`flex flex-col items-center p-2 rounded-lg ${
-                      achievement.earned
-                        ? "bg-accent"
-                        : "bg-muted opacity-50"
-                    }`}
-                    title={achievement.name}
-                  >
-                    <AchievementIcon className={`h-6 w-6 ${achievement.earned ? "text-primary" : "text-muted-foreground"}`} />
-                    <span className="text-xs text-center mt-1 truncate w-full">
-                      {achievement.name}
-                    </span>
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium text-muted-foreground">
+                Overall Accuracy
+              </CardTitle>
+              <TrendingUp className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats.accuracy}%</div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium text-muted-foreground">
+                Current Streak
+              </CardTitle>
+              <Flame className="h-4 w-4 text-orange-500" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats.currentStreak} days</div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium text-muted-foreground">
+                Study Days
+              </CardTitle>
+              <Calendar className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats.totalStudyDays}</div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Recommendations */}
+        {(recommendations.weak.length > 0 || recommendations.unexplored.length > 0) && (
+          <Card className="border-amber-200 bg-amber-50/50 dark:border-amber-900 dark:bg-amber-950/20">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-amber-800 dark:text-amber-200">
+                <Lightbulb className="h-5 w-5" />
+                Recommendations
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {recommendations.weak.length > 0 && (
+                <div>
+                  <p className="text-sm font-medium mb-2 text-amber-900 dark:text-amber-100">
+                    Focus on these weak topics:
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {recommendations.weak.map((topic) => (
+                      <Badge
+                        key={topic.topic_id}
+                        variant="outline"
+                        className="border-rose-300 text-rose-700 dark:border-rose-800 dark:text-rose-300"
+                      >
+                        {topic.topic_name} ({topic.mastery_level}%)
+                      </Badge>
+                    ))}
                   </div>
-                );
-              })}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Recent Activity */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Recent Activity</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-3">
-            {mockProgress.recentActivity.map((activity, index) => {
-              const ActivityIcon =
-                activity.type === "study"
-                  ? BookOpen
-                  : activity.type === "practice"
-                  ? PenLine
-                  : FileText;
-              return (
-                <div
-                  key={index}
-                  className="flex items-center justify-between p-3 bg-muted/50 rounded-lg"
-                >
-                  <div className="flex items-center gap-3">
-                    <ActivityIcon className="h-5 w-5 text-primary" />
-                    <div>
-                      <p className="font-medium">
-                        {activity.type === "exam"
-                          ? `Practice Exam - ${activity.score}%`
-                          : `${activity.type === "study" ? "Studied" : "Practiced"} ${activity.topic}`}
-                      </p>
-                      <p className="text-sm text-muted-foreground">
-                        {activity.time}
-                      </p>
-                    </div>
-                  </div>
-                  {"xp" in activity && (
-                    <span className="text-sm font-medium text-primary">
-                      +{activity.xp} XP
-                    </span>
-                  )}
                 </div>
+              )}
+              {recommendations.unexplored.length > 0 && (
+                <div>
+                  <p className="text-sm font-medium mb-2 text-amber-900 dark:text-amber-100">
+                    Start learning these topics:
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {recommendations.unexplored.slice(0, 3).map((topic) => (
+                      <Badge key={topic.id} variant="secondary">
+                        {topic.name}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {recommendations.suggested && (
+                <Button asChild className="mt-2">
+                  <Link href={`/practice?topic=${recommendations.suggested.id}`}>
+                    Practice {recommendations.suggested.name}
+                  </Link>
+                </Button>
+              )}
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Topic Progress Grid */}
+        <div>
+          <h2 className="text-lg font-semibold mb-4">Topic Mastery</h2>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {topics.map((topic) => {
+              const topicProgress = progressMap.get(topic.id);
+              const mastery = topicProgress?.mastery_level || 0;
+              const completed = topicProgress?.completed_questions || 0;
+              const correct = topicProgress?.correct_answers || 0;
+
+              return (
+                <Card key={topic.id}>
+                  <CardContent className="pt-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <topic.icon className="h-4 w-4 text-primary" />
+                        <span className="font-medium">{topic.name}</span>
+                      </div>
+                      <span
+                        className={cn(
+                          "text-sm font-medium",
+                          mastery >= 70
+                            ? "text-emerald-600"
+                            : mastery >= 50
+                              ? "text-amber-600"
+                              : mastery > 0
+                                ? "text-rose-600"
+                                : "text-muted-foreground"
+                        )}
+                      >
+                        {mastery}%
+                      </span>
+                    </div>
+                    <Progress
+                      value={mastery}
+                      className={cn(
+                        "h-2",
+                        mastery >= 70
+                          ? "[&>div]:bg-emerald-500"
+                          : mastery >= 50
+                            ? "[&>div]:bg-amber-500"
+                            : "[&>div]:bg-rose-500"
+                      )}
+                    />
+                    <p className="text-xs text-muted-foreground mt-2">
+                      {completed > 0
+                        ? `${correct}/${completed} correct`
+                        : "Not started"}
+                    </p>
+                  </CardContent>
+                </Card>
               );
             })}
           </div>
-        </CardContent>
-      </Card>
+        </div>
+
+        {/* Exam History */}
+        {examHistory.length > 0 && (
+          <div>
+            <h2 className="text-lg font-semibold mb-4">Exam History</h2>
+            <div className="space-y-3">
+              {examHistory.slice(0, 5).map((exam) => (
+                <Card key={exam.id}>
+                  <CardContent className="flex items-center justify-between py-4">
+                    <div>
+                      <p className="font-medium">
+                        Score: {exam.score}/{exam.total_questions} (
+                        {Math.round((exam.score / exam.total_questions) * 100)}%)
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        {new Date(exam.completed_at!).toLocaleDateString()}
+                      </p>
+                    </div>
+                    <Badge variant={exam.passed ? "default" : "destructive"}>
+                      {exam.passed ? "PASSED" : "FAILED"}
+                    </Badge>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
