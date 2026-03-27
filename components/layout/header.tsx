@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { GraduationCap } from "lucide-react";
 import { Nav } from "./nav";
+import { UserNav } from "./user-nav";
 
 export function Header() {
   return (
@@ -10,7 +11,10 @@ export function Header() {
           <GraduationCap className="h-6 w-6 text-primary" />
           <span className="font-semibold text-lg tracking-tight">Mendix Prep</span>
         </Link>
-        <Nav />
+        <div className="flex items-center gap-6">
+          <Nav />
+          <UserNav />
+        </div>
       </div>
     </header>
   );
