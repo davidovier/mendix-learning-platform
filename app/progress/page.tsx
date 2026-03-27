@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Flame, Target, TrendingUp, Calendar, Lightbulb } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { getUser } from "@/lib/supabase/actions";
@@ -131,11 +130,12 @@ export default async function ProgressPage() {
                 </div>
               )}
               {recommendations.suggested && (
-                <Button asChild className="mt-2">
-                  <Link href={`/practice?topic=${recommendations.suggested.id}`}>
-                    Practice {recommendations.suggested.name}
-                  </Link>
-                </Button>
+                <Link
+                  href={`/practice?topic=${recommendations.suggested.id}`}
+                  className="inline-flex h-8 items-center justify-center rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground hover:bg-primary/80 mt-2"
+                >
+                  Practice {recommendations.suggested.name}
+                </Link>
               )}
             </CardContent>
           </Card>

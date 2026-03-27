@@ -16,9 +16,12 @@ export async function UserNav() {
 
   if (!user) {
     return (
-      <Button asChild variant="outline" size="sm">
-        <Link href="/login">Sign in</Link>
-      </Button>
+      <Link
+        href="/login"
+        className="inline-flex h-8 items-center justify-center rounded-lg border border-border bg-background px-3 text-sm font-medium hover:bg-muted transition-colors"
+      >
+        Sign in
+      </Link>
     );
   }
 
@@ -34,7 +37,7 @@ export async function UserNav() {
       )}
 
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
+        <DropdownMenuTrigger>
           <Button variant="ghost" size="sm" className="gap-2">
             <User className="h-4 w-4" />
             <span className="hidden sm:inline-block max-w-[150px] truncate">
@@ -43,12 +46,12 @@ export async function UserNav() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuItem asChild>
-            <Link href="/progress">My Progress</Link>
+          <DropdownMenuItem>
+            <Link href="/progress" className="w-full">My Progress</Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem asChild>
-            <form action={signOut}>
+          <DropdownMenuItem>
+            <form action={async () => { "use server"; await signOut(); }}>
               <button type="submit" className="flex items-center gap-2 w-full">
                 <LogOut className="h-4 w-4" />
                 Sign out
