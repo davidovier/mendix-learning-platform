@@ -6,10 +6,12 @@ export default function StudyPage() {
   const flashcards = flashcardsData as Record<string, unknown[]>;
 
   return (
-    <div className="container mx-auto px-4 py-8 space-y-8">
-      <div>
-        <h1 className="text-3xl font-bold">Study Mode</h1>
-        <p className="text-muted-foreground mt-2">
+    <div className="container mx-auto px-4 py-8">
+      <div className="text-center mb-10 sm:mb-12">
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3 sm:mb-4">
+          Study Mode
+        </h1>
+        <p className="text-muted-foreground">
           Choose a topic to study with interactive flashcards
         </p>
       </div>

@@ -122,10 +122,12 @@ export default function PracticePage() {
 
   if (view === "select") {
     return (
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-10">
-            <h1 className="text-2xl font-semibold mb-2">Practice Mode</h1>
+          <div className="text-center mb-10 sm:mb-12">
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3 sm:mb-4">
+              Practice Mode
+            </h1>
             <p className="text-muted-foreground">
               Select a topic to practice or test your knowledge across all topics
             </p>
