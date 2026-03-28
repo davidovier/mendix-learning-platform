@@ -79,6 +79,12 @@ export default function ExamPage() {
     setCurrentQuestionIndex(index);
   };
 
+  // Get local date in YYYY-MM-DD format for streak calculation
+  const getLocalDate = () => {
+    const now = new Date();
+    return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+  };
+
   const handleSubmitExam = useCallback(async () => {
     // Calculate results
     let correctCount = 0;
@@ -100,6 +106,7 @@ export default function ExamPage() {
         totalQuestions: examQuestions.length,
         answers: answersRecord,
         timeSpentSeconds: timeSpent,
+        localDate: getLocalDate(),
       });
     }
 

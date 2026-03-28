@@ -11,6 +11,7 @@ interface TrackAttemptData {
   topic_name: string;
   is_correct: boolean;
   time_spent_seconds?: number;
+  localDate?: string; // YYYY-MM-DD format from client's local timezone
 }
 
 export async function trackAttempt(data: TrackAttemptData) {
@@ -69,14 +70,15 @@ export async function trackAttempt(data: TrackAttemptData) {
     });
   }
 
-  // 3. Update streak
+  // 3. Update streak using client's local date
   const streak = await getUserStreak(user.id);
   const streakUpdate = calculateStreakUpdate(
     streak?.current_streak || 0,
     streak?.longest_streak || 0,
     streak?.last_activity_date || null,
     streak?.streak_start_date || null,
-    streak?.total_study_days || 0
+    streak?.total_study_days || 0,
+    data.localDate
   );
 
   if (streakUpdate.changed) {
@@ -141,6 +143,7 @@ interface CompleteExamData {
   totalQuestions: number;
   answers: Record<string, boolean>;
   timeSpentSeconds: number;
+  localDate?: string; // YYYY-MM-DD format from client's local timezone
 }
 
 export async function completeExamSession(data: CompleteExamData) {
@@ -170,14 +173,15 @@ export async function completeExamSession(data: CompleteExamData) {
     return { error: "Failed to save exam results" };
   }
 
-  // Update streak (exam counts as study activity)
+  // Update streak using client's local date (exam counts as study activity)
   const streak = await getUserStreak(user.id);
   const streakUpdate = calculateStreakUpdate(
     streak?.current_streak || 0,
     streak?.longest_streak || 0,
     streak?.last_activity_date || null,
     streak?.streak_start_date || null,
-    streak?.total_study_days || 0
+    streak?.total_study_days || 0,
+    data.localDate
   );
 
   if (streakUpdate.changed) {

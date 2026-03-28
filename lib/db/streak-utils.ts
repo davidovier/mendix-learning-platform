@@ -26,10 +26,12 @@ export function calculateStreakUpdate(
   longestStreak: number,
   lastActivityDate: string | null,
   streakStartDate: string | null,
-  totalStudyDays: number
+  totalStudyDays: number,
+  localDateStr?: string // YYYY-MM-DD format from client's local timezone
 ): StreakUpdate {
-  const today = new Date();
-  const todayStr = today.toISOString().split("T")[0];
+  // Use client's local date if provided, otherwise fall back to server date
+  const todayStr = localDateStr || new Date().toISOString().split("T")[0];
+  const today = new Date(todayStr + "T12:00:00"); // Noon to avoid timezone edge cases
 
   if (lastActivityDate) {
     const lastDate = new Date(lastActivityDate);
