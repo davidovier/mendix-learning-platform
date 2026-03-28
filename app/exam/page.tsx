@@ -19,8 +19,8 @@ export default function ExamStartPage() {
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-4xl mx-auto">
         {/* Page Header */}
-        <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-2">
+        <div className="text-center mb-10 sm:mb-12">
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3 sm:mb-4">
             Ready for the Challenge?
           </h1>
           <p className="text-muted-foreground">
