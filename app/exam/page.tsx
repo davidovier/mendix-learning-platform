@@ -18,16 +18,14 @@ export default function ExamStartPage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-4xl mx-auto">
-        {/* Header matching exam page style */}
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-4">
-            <h1 className="text-xl font-bold">Exam</h1>
-            <Badge variant="outline">Simulation</Badge>
-          </div>
-          <div className="flex items-center gap-2 text-muted-foreground">
-            <Clock className="h-4 w-4" />
-            <span className="text-sm font-medium">90:00</span>
-          </div>
+        {/* Page Header */}
+        <div className="mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-2">
+            Ready for the Challenge?
+          </h1>
+          <p className="text-muted-foreground">
+            Test your Mendix knowledge under real exam conditions
+          </p>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[1fr_250px]">
