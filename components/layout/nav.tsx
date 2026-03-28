@@ -15,7 +15,7 @@ export function Nav() {
   const pathname = usePathname();
 
   return (
-    <nav className="hidden sm:flex items-center gap-4 md:gap-6">
+    <nav className="hidden sm:flex items-center gap-2 sm:gap-3 md:gap-4">
       {navItems.map((item) => (
         <Link
           key={item.href}

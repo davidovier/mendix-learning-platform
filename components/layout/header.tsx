@@ -11,7 +11,7 @@ export function Header() {
           <GraduationCap className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
           <span className="font-semibold text-base sm:text-lg tracking-tight whitespace-nowrap">Mendix Prep</span>
         </Link>
-        <div className="flex items-center gap-4 sm:gap-6">
+        <div className="flex items-center gap-3 sm:gap-4">
           <Nav />
           <UserNav />
         </div>
