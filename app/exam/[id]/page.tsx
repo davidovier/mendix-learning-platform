@@ -152,105 +152,87 @@ export default function ExamPage() {
   const answeredCount = Object.keys(answers).length;
 
   if (examState === "results") {
-    const { correctCount, totalQuestions, percentage, passed, categoryResults } = calculateResults;
+    const { correctCount, totalQuestions, percentage, passed } = calculateResults;
 
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-2xl mx-auto">
-          <Card>
-            <CardHeader className="text-center">
-              <CardTitle className="text-2xl">Exam Complete!</CardTitle>
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold mb-2">Exam Complete</h1>
+            <p className="text-muted-foreground">
+              Your results are ready
+            </p>
+          </div>
+
+          <Card className="mb-6">
+            <CardHeader>
+              <CardTitle>Your Score</CardTitle>
               <CardDescription>
-                Here are your results
+                {passed ? "Congratulations, you passed!" : "Keep practicing and try again"}
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="text-center">
-                <div className="text-5xl font-bold mb-2">{percentage}%</div>
-                <Badge
-                  variant={passed ? "default" : "destructive"}
-                  className="text-lg px-4 py-1"
-                >
-                  {passed ? "PASSED" : "FAILED"}
-                </Badge>
-              </div>
-
-              <div className="space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span>Correct Answers</span>
-                  <span className="font-medium text-green-600">{correctCount}</span>
+            <CardContent>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="p-4 bg-muted rounded-lg text-center">
+                  <div className="text-2xl font-bold">{percentage}%</div>
+                  <div className="text-sm text-muted-foreground">Score</div>
                 </div>
-                <div className="flex justify-between text-sm">
-                  <span>Incorrect Answers</span>
-                  <span className="font-medium text-red-600">
-                    {totalQuestions - correctCount}
-                  </span>
+                <div className="p-4 bg-muted rounded-lg text-center">
+                  <div className="text-2xl font-bold">{correctCount}/{totalQuestions}</div>
+                  <div className="text-sm text-muted-foreground">Correct</div>
                 </div>
-                <div className="flex justify-between text-sm">
-                  <span>Total Questions</span>
-                  <span className="font-medium">{totalQuestions}</span>
+                <div className="p-4 bg-muted rounded-lg text-center">
+                  <div className="text-2xl font-bold">{PASS_PERCENTAGE}%</div>
+                  <div className="text-sm text-muted-foreground">Required</div>
                 </div>
-                <div className="flex justify-between text-sm">
-                  <span>Pass Threshold</span>
-                  <span className="font-medium">{PASS_PERCENTAGE}%</span>
+                <div className="p-4 bg-muted rounded-lg text-center">
+                  <div className="text-2xl font-bold">{passed ? "Pass" : "Fail"}</div>
+                  <div className="text-sm text-muted-foreground">Result</div>
                 </div>
-              </div>
-
-              <Progress value={percentage} className="h-3" />
-
-              <div className="space-y-3">
-                <h3 className="font-semibold">Results by Topic</h3>
-                <div className="space-y-2">
-                  {Object.entries(categoryResults).map(([category, result]) => {
-                    const topic = topics.find((t) => t.id === category);
-                    const topicPercentage = Math.round(
-                      (result.correct / result.total) * 100
-                    );
-                    const topicPassed = topicPercentage >= PASS_PERCENTAGE;
-
-                    const TopicIcon = topic?.icon;
-                    return (
-                      <div
-                        key={category}
-                        className="flex items-center justify-between p-3 bg-muted rounded-lg"
-                      >
-                        <div className="flex items-center gap-2">
-                          {TopicIcon && <TopicIcon className="h-4 w-4 text-primary" />}
-                          <span className="text-sm font-medium">
-                            {topic?.name || category}
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-sm">
-                            {result.correct}/{result.total}
-                          </span>
-                          <Badge
-                            variant={topicPassed ? "outline" : "destructive"}
-                            className="text-xs"
-                          >
-                            {topicPercentage}%
-                          </Badge>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-2 pt-4">
-                <Button onClick={handleReturnHome} className="w-full">
-                  Take Another Exam
-                </Button>
-                <Button
-                  variant="outline"
-                  onClick={() => router.push("/practice")}
-                  className="w-full"
-                >
-                  Practice Mode
-                </Button>
               </div>
             </CardContent>
           </Card>
+
+          <Card className="mb-6">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <span>What&apos;s Next</span>
+                <Badge variant="outline">
+                  {passed ? "Well done" : "Keep going"}
+                </Badge>
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                {passed ? (
+                  <>
+                    <li>- Review any topics where you felt unsure</li>
+                    <li>- Take another exam to solidify your knowledge</li>
+                    <li>- Check your progress page for detailed topic breakdown</li>
+                  </>
+                ) : (
+                  <>
+                    <li>- Practice the topics you struggled with</li>
+                    <li>- Review the study materials before retrying</li>
+                    <li>- Check your progress page to identify weak areas</li>
+                  </>
+                )}
+              </ul>
+            </CardContent>
+          </Card>
+
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Button onClick={handleReturnHome} className="flex-1">
+              Take Another Exam
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => router.push("/progress")}
+              className="flex-1"
+            >
+              View Progress
+            </Button>
+          </div>
         </div>
       </div>
     );
