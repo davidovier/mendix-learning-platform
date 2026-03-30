@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { BookOpen, PenLine, Timer, BarChart3, ArrowRight } from "lucide-react";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 // Static page - can be fully cached
 export const revalidate = false;
@@ -63,10 +62,10 @@ export default function HomePage() {
         </div>
       </div>
 
-      <Link href="/study" className={cn(buttonVariants({ size: "lg" }), "gap-2 mt-6 sm:mt-8")}>
+      <Button size="lg" className="gap-2 mt-6 sm:mt-8" render={<Link href="/study" />}>
         Start Learning
         <ArrowRight className="h-4 w-4" />
-      </Link>
+      </Button>
     </div>
   );
 }
