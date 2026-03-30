@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Flame, LogOut, User } from "lucide-react";
+import { Flame, User } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,8 +7,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { getUser, signOut } from "@/lib/supabase/actions";
+import { getUser } from "@/lib/supabase/actions";
 import { getUserStreak } from "@/lib/db/queries";
+import { LogoutButton } from "@/components/auth/logout-button";
 
 export async function UserNav() {
   // Fetch user first (required for auth check)
@@ -51,12 +52,7 @@ export async function UserNav() {
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
-            <form action={async () => { "use server"; await signOut(); }}>
-              <button type="submit" className="flex items-center gap-2 w-full">
-                <LogOut className="h-4 w-4" />
-                Sign out
-              </button>
-            </form>
+            <LogoutButton />
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

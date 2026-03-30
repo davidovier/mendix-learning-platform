@@ -1,6 +1,6 @@
 import { promises as fs } from "fs";
 import path from "path";
-import { MessageResponse } from "@/components/ai-elements/message";
+import { LazyMarkdown } from "@/components/lazy/lazy-markdown";
 
 // Cache this page for 24 hours since cheatsheet content rarely changes
 export const revalidate = 86400;
@@ -30,7 +30,7 @@ export default async function CheatsheetPage() {
         </p>
       </div>
 
-      <MessageResponse>{content}</MessageResponse>
+      <LazyMarkdown>{content}</LazyMarkdown>
     </div>
   );
 }
