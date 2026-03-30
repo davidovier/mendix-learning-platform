@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import { Card, CardContent } from "@/components/ui/card";
 import { Clock, FileQuestion, Target, Shuffle, Navigation } from "lucide-react";
 import { StartExamButton } from "@/components/exam/start-exam-button";
+
+export const metadata: Metadata = {
+  title: "Practice Exam",
+  description:
+    "Take a timed 90-minute practice exam with 50 randomly selected questions. Simulate real Mendix Intermediate Certification exam conditions.",
+};
 
 // Static page - can be fully cached
 export const revalidate = false;

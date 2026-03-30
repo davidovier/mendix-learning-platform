@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import { topics } from "@/lib/content/topics";
 import { TopicCard } from "@/components/study/topic-card";
 import flashcardsData from "@/lib/content/flashcards.json";
+
+export const metadata: Metadata = {
+  title: "Study Mode",
+  description:
+    "Learn Mendix concepts with interactive flashcards. Cover domain models, microflows, security, XPath, integration, and more.",
+};
 
 // Cache this page for 1 hour since topic list rarely changes
 export const revalidate = 3600;

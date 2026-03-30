@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import { topics } from "@/lib/content/topics";
 import questions from "@/lib/content/questions.json";
 import { PracticeClient, type Question, type TopicData } from "./practice-client";
+
+export const metadata: Metadata = {
+  title: "Practice Quiz",
+  description:
+    "Practice with 268+ exam-style questions organized by topic. Get instant feedback and track your progress toward Mendix certification.",
+};
 
 // Cache this page - questions don't change often
 export const revalidate = 3600;

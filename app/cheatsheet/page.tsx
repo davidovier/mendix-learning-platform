@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import { promises as fs } from "fs";
 import path from "path";
 import { LazyMarkdown } from "@/components/lazy/lazy-markdown";
+
+export const metadata: Metadata = {
+  title: "Quick Reference Cheatsheet",
+  description:
+    "Essential Mendix facts and formulas to memorize before your certification exam. Quick reference for XPath, microflows, security rules, and more.",
+};
 
 // Cache this page for 24 hours since cheatsheet content rarely changes
 export const revalidate = 86400;
