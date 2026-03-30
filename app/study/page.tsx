@@ -2,6 +2,9 @@ import { topics } from "@/lib/content/topics";
 import { TopicCard } from "@/components/study/topic-card";
 import flashcardsData from "@/lib/content/flashcards.json";
 
+// Cache this page for 1 hour since topic list rarely changes
+export const revalidate = 3600;
+
 export default function StudyPage() {
   const flashcards = flashcardsData as Record<string, unknown[]>;
 

@@ -1,20 +1,11 @@
-"use client";
-
-import { useRouter } from "next/navigation";
-import { v4 as uuidv4 } from "uuid";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Clock, FileQuestion, Target, ArrowRight, Shuffle, Navigation } from "lucide-react";
+import { Clock, FileQuestion, Target, Shuffle, Navigation } from "lucide-react";
+import { StartExamButton } from "@/components/exam/start-exam-button";
+
+// Static page - can be fully cached
+export const revalidate = false;
 
 export default function ExamStartPage() {
-  const router = useRouter();
-
-  const handleStartExam = () => {
-    const examId = uuidv4();
-    router.push(`/exam/${examId}`);
-  };
-
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-4xl mx-auto">
@@ -71,14 +62,7 @@ export default function ExamStartPage() {
                 </div>
 
                 {/* Start Button */}
-                <Button
-                  size="lg"
-                  onClick={handleStartExam}
-                  className="w-full"
-                >
-                  Start Exam
-                  <ArrowRight className="h-4 w-4 ml-2" />
-                </Button>
+                <StartExamButton />
               </div>
             </CardContent>
           </Card>

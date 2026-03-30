@@ -2,6 +2,9 @@ import { promises as fs } from "fs";
 import path from "path";
 import { MessageResponse } from "@/components/ai-elements/message";
 
+// Cache this page for 24 hours since cheatsheet content rarely changes
+export const revalidate = 86400;
+
 async function getCheatsheetContent() {
   const filePath = path.join(
     process.cwd(),

@@ -11,6 +11,7 @@ import { getUser, signOut } from "@/lib/supabase/actions";
 import { getUserStreak } from "@/lib/db/queries";
 
 export async function UserNav() {
+  // Fetch user first (required for auth check)
   const user = await getUser();
 
   if (!user) {
@@ -24,6 +25,8 @@ export async function UserNav() {
     );
   }
 
+  // Fetch streak data (only after confirming user exists)
+  // This is now the only blocking call after auth
   const streak = await getUserStreak(user.id);
 
   return (

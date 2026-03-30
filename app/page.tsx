@@ -1,9 +1,10 @@
-"use client";
-
 import Link from "next/link";
 import { BookOpen, PenLine, Timer, BarChart3, ArrowRight } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+
+// Static page - can be fully cached
+export const revalidate = false;
 
 const features = [
   {
