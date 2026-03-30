@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { getUser } from "@/lib/supabase/actions";
-import { getUserProgress, getDashboardStats, getRecommendations, getExamHistory } from "@/lib/db/queries";
+import { getUserProgress, getUserStreak, computeDashboardStats, getRecommendations, getExamHistory } from "@/lib/db/queries";
 import { topics } from "@/lib/content/topics";
 import { cn } from "@/lib/utils";
 import { ResetProgressButton } from "@/components/progress/reset-progress-button";
@@ -16,12 +16,15 @@ export default async function ProgressPage() {
     return null; // Middleware should have redirected
   }
 
-  const [progress, stats, examHistory] = await Promise.all([
+  // Fetch all data in parallel - avoiding duplicate getUserProgress call
+  const [progress, streak, examHistory] = await Promise.all([
     getUserProgress(user.id),
-    getDashboardStats(user.id),
+    getUserStreak(user.id),
     getExamHistory(user.id),
   ]);
 
+  // Compute stats from already-fetched data (no extra DB call)
+  const stats = computeDashboardStats(progress, streak);
   const recommendations = getRecommendations(progress);
 
   // Create a map for easy lookup

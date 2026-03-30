@@ -109,12 +109,12 @@ export interface DashboardStats {
   totalStudyDays: number;
 }
 
-export async function getDashboardStats(userId: string): Promise<DashboardStats> {
-  const [progress, streak] = await Promise.all([
-    getUserProgress(userId),
-    getUserStreak(userId),
-  ]);
-
+// Compute dashboard stats from progress and streak data
+// If progress/streak are already fetched, pass them to avoid duplicate queries
+export function computeDashboardStats(
+  progress: Progress[],
+  streak: Streak | null
+): DashboardStats {
   const totalQuestions = progress.reduce((sum, p) => sum + p.completed_questions, 0);
   const correctAnswers = progress.reduce((sum, p) => sum + p.correct_answers, 0);
   const accuracy = totalQuestions > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 0;
@@ -127,4 +127,14 @@ export async function getDashboardStats(userId: string): Promise<DashboardStats>
     longestStreak: streak?.longest_streak || 0,
     totalStudyDays: streak?.total_study_days || 0,
   };
+}
+
+// Convenience function that fetches data if not provided
+export async function getDashboardStats(userId: string): Promise<DashboardStats> {
+  const [progress, streak] = await Promise.all([
+    getUserProgress(userId),
+    getUserStreak(userId),
+  ]);
+
+  return computeDashboardStats(progress, streak);
 }

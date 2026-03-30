@@ -22,65 +22,36 @@ export async function trackAttempt(data: TrackAttemptData) {
 
   const supabase = await createClient();
 
-  // 1. Insert question attempt
-  const { error: attemptError } = await supabase.from("question_attempts").insert({
-    user_id: user.id,
-    question_id: data.question_id,
-    topic_id: data.topic_id,
-    is_correct: data.is_correct,
-    time_spent_seconds: data.time_spent_seconds,
-  });
+  // Phase 2 optimization: Run independent queries in parallel
+  // 1. Insert attempt, 2. Get existing progress, 3. Get streak - all can run in parallel
+  const [attemptResult, progressResult, streak] = await Promise.all([
+    supabase.from("question_attempts").insert({
+      user_id: user.id,
+      question_id: data.question_id,
+      topic_id: data.topic_id,
+      is_correct: data.is_correct,
+      time_spent_seconds: data.time_spent_seconds,
+    }),
+    supabase
+      .from("progress")
+      .select("*")
+      .eq("user_id", user.id)
+      .eq("topic_id", data.topic_id)
+      .single(),
+    getUserStreak(user.id),
+  ]);
 
-  if (attemptError) {
-    console.error("Error tracking attempt:", attemptError);
+  if (attemptResult.error) {
+    console.error("Error tracking attempt:", attemptResult.error);
     return { error: "Failed to track attempt" };
   }
 
-  // 2. Update or create progress record
-  const { data: existingProgress } = await supabase
-    .from("progress")
-    .select("*")
-    .eq("user_id", user.id)
-    .eq("topic_id", data.topic_id)
-    .single();
-
+  const existingProgress = progressResult.data;
   const newCompleted = (existingProgress?.completed_questions || 0) + 1;
   const newCorrect = (existingProgress?.correct_answers || 0) + (data.is_correct ? 1 : 0);
   const newMastery = Math.round((newCorrect / newCompleted) * 100);
 
-  // Bug fix #16: Check for errors on progress updates
-  if (existingProgress) {
-    const { error: updateError } = await supabase
-      .from("progress")
-      .update({
-        completed_questions: newCompleted,
-        correct_answers: newCorrect,
-        mastery_level: newMastery,
-        last_studied_at: new Date().toISOString(),
-      })
-      .eq("id", existingProgress.id);
-
-    if (updateError) {
-      console.error("Error updating progress:", updateError);
-    }
-  } else {
-    const { error: insertError } = await supabase.from("progress").insert({
-      user_id: user.id,
-      topic_id: data.topic_id,
-      topic_name: data.topic_name,
-      completed_questions: 1,
-      correct_answers: data.is_correct ? 1 : 0,
-      mastery_level: data.is_correct ? 100 : 0,
-      last_studied_at: new Date().toISOString(),
-    });
-
-    if (insertError) {
-      console.error("Error inserting progress:", insertError);
-    }
-  }
-
-  // 3. Update streak using client's local date
-  const streak = await getUserStreak(user.id);
+  // Calculate streak update (pure function, no DB call)
   const streakUpdate = calculateStreakUpdate(
     streak?.current_streak || 0,
     streak?.longest_streak || 0,
@@ -90,29 +61,77 @@ export async function trackAttempt(data: TrackAttemptData) {
     data.localDate
   );
 
+  // Run progress and streak updates in parallel
+  const updatePromises: Promise<void>[] = [];
+
+  // Progress update
+  if (existingProgress) {
+    updatePromises.push(
+      (async () => {
+        const { error } = await supabase
+          .from("progress")
+          .update({
+            completed_questions: newCompleted,
+            correct_answers: newCorrect,
+            mastery_level: newMastery,
+            last_studied_at: new Date().toISOString(),
+          })
+          .eq("id", existingProgress.id);
+        if (error) console.error("Error updating progress:", error);
+      })()
+    );
+  } else {
+    updatePromises.push(
+      (async () => {
+        const { error } = await supabase.from("progress").insert({
+          user_id: user.id,
+          topic_id: data.topic_id,
+          topic_name: data.topic_name,
+          completed_questions: 1,
+          correct_answers: data.is_correct ? 1 : 0,
+          mastery_level: data.is_correct ? 100 : 0,
+          last_studied_at: new Date().toISOString(),
+        });
+        if (error) console.error("Error inserting progress:", error);
+      })()
+    );
+  }
+
+  // Streak update
   if (streakUpdate.changed) {
     if (streak) {
-      await supabase
-        .from("streaks")
-        .update({
-          current_streak: streakUpdate.current_streak,
-          longest_streak: streakUpdate.longest_streak,
-          last_activity_date: streakUpdate.last_activity_date,
-          streak_start_date: streakUpdate.streak_start_date,
-          total_study_days: streakUpdate.total_study_days,
-        })
-        .eq("id", streak.id);
+      updatePromises.push(
+        (async () => {
+          await supabase
+            .from("streaks")
+            .update({
+              current_streak: streakUpdate.current_streak,
+              longest_streak: streakUpdate.longest_streak,
+              last_activity_date: streakUpdate.last_activity_date,
+              streak_start_date: streakUpdate.streak_start_date,
+              total_study_days: streakUpdate.total_study_days,
+            })
+            .eq("id", streak.id);
+        })()
+      );
     } else {
-      await supabase.from("streaks").insert({
-        user_id: user.id,
-        current_streak: streakUpdate.current_streak,
-        longest_streak: streakUpdate.longest_streak,
-        last_activity_date: streakUpdate.last_activity_date,
-        streak_start_date: streakUpdate.streak_start_date,
-        total_study_days: streakUpdate.total_study_days,
-      });
+      updatePromises.push(
+        (async () => {
+          await supabase.from("streaks").insert({
+            user_id: user.id,
+            current_streak: streakUpdate.current_streak,
+            longest_streak: streakUpdate.longest_streak,
+            last_activity_date: streakUpdate.last_activity_date,
+            streak_start_date: streakUpdate.streak_start_date,
+            total_study_days: streakUpdate.total_study_days,
+          });
+        })()
+      );
     }
   }
+
+  // Wait for all updates to complete
+  await Promise.all(updatePromises);
 
   return { success: true, mastery: newMastery };
 }

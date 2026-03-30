@@ -1,7 +1,14 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { GraduationCap } from "lucide-react";
 import { Nav } from "./nav";
 import { UserNav } from "./user-nav";
+import { Skeleton } from "@/components/ui/skeleton";
+
+// Lightweight fallback while UserNav loads
+function UserNavSkeleton() {
+  return <Skeleton className="h-8 w-20 rounded-lg" />;
+}
 
 export function Header() {
   return (
@@ -13,7 +20,10 @@ export function Header() {
         </Link>
         <div className="flex items-center gap-3 sm:gap-4">
           <Nav />
-          <UserNav />
+          {/* Suspense prevents UserNav from blocking page render */}
+          <Suspense fallback={<UserNavSkeleton />}>
+            <UserNav />
+          </Suspense>
         </div>
       </div>
     </header>
