@@ -1,7 +1,23 @@
 "use client";
 
 import { useState, useMemo, useRef } from "react";
-import { BookOpen } from "lucide-react";
+import {
+  BookOpen,
+  Database,
+  Workflow,
+  Smartphone,
+  Package,
+  Shield,
+  Layout,
+  Search,
+  Link,
+  Code,
+  Zap,
+  List,
+  Clock,
+  Users,
+  type LucideIcon,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -18,16 +34,33 @@ export interface Question {
   correctIndex: number;
 }
 
-export interface Topic {
+// Serializable topic data (no icon functions)
+export interface TopicData {
   id: string;
   name: string;
   description: string;
-  icon: React.ComponentType<{ className?: string }>;
 }
+
+// Icon mapping - client-side only
+const topicIcons: Record<string, LucideIcon> = {
+  "domain-model": Database,
+  "microflows": Workflow,
+  "nanoflows": Smartphone,
+  "modules": Package,
+  "security": Shield,
+  "pages": Layout,
+  "xpath": Search,
+  "integration": Link,
+  "java": Code,
+  "events": Zap,
+  "enumerations": List,
+  "scheduled-events": Clock,
+  "agile": Users,
+};
 
 interface PracticeClientProps {
   questions: Question[];
-  topics: Topic[];
+  topics: TopicData[];
   questionCountByTopic: Record<string, number>;
   totalQuestionCount: number;
 }
@@ -180,7 +213,7 @@ export function PracticeClient({
 
             {/* Individual Topic Cards */}
             {availableTopics.map((topic) => {
-              const Icon = topic.icon;
+              const Icon = topicIcons[topic.id] || BookOpen;
               const questionCount = questionCountByTopic[topic.id] || 0;
 
               return (
