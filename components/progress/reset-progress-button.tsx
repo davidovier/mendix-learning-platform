@@ -35,12 +35,14 @@ export function ResetProgressButton() {
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
-      <AlertDialogTrigger asChild>
-        <Button variant="outline" size="sm" className="text-muted-foreground">
-          <RotateCcw className="h-4 w-4 mr-2" />
-          Reset Progress
-        </Button>
-      </AlertDialogTrigger>
+      <AlertDialogTrigger
+        render={
+          <Button variant="outline" size="sm" className="text-muted-foreground">
+            <RotateCcw className="h-4 w-4 mr-2" />
+            Reset Progress
+          </Button>
+        }
+      />
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Reset all progress?</AlertDialogTitle>
