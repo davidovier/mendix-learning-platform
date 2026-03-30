@@ -48,8 +48,9 @@ export async function trackAttempt(data: TrackAttemptData) {
   const newCorrect = (existingProgress?.correct_answers || 0) + (data.is_correct ? 1 : 0);
   const newMastery = Math.round((newCorrect / newCompleted) * 100);
 
+  // Bug fix #16: Check for errors on progress updates
   if (existingProgress) {
-    await supabase
+    const { error: updateError } = await supabase
       .from("progress")
       .update({
         completed_questions: newCompleted,
@@ -58,8 +59,12 @@ export async function trackAttempt(data: TrackAttemptData) {
         last_studied_at: new Date().toISOString(),
       })
       .eq("id", existingProgress.id);
+
+    if (updateError) {
+      console.error("Error updating progress:", updateError);
+    }
   } else {
-    await supabase.from("progress").insert({
+    const { error: insertError } = await supabase.from("progress").insert({
       user_id: user.id,
       topic_id: data.topic_id,
       topic_name: data.topic_name,
@@ -68,6 +73,10 @@ export async function trackAttempt(data: TrackAttemptData) {
       mastery_level: data.is_correct ? 100 : 0,
       last_studied_at: new Date().toISOString(),
     });
+
+    if (insertError) {
+      console.error("Error inserting progress:", insertError);
+    }
   }
 
   // 3. Update streak using client's local date

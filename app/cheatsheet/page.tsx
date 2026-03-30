@@ -1,4 +1,4 @@
-import fs from "fs";
+import { promises as fs } from "fs";
 import path from "path";
 import { MessageResponse } from "@/components/ai-elements/message";
 
@@ -11,7 +11,8 @@ async function getCheatsheetContent() {
     "cheatsheet.md"
   );
 
-  return fs.readFileSync(filePath, "utf-8");
+  // Bug fix #17: Use async file reading to avoid blocking the event loop
+  return fs.readFile(filePath, "utf-8");
 }
 
 export default async function CheatsheetPage() {

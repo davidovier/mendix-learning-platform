@@ -11,7 +11,8 @@ interface AnswerOptionProps {
   onClick: () => void;
 }
 
-const letters = ["A", "B", "C", "D"];
+// Bug fix #18: Support more than 4 answer options
+const letters = ["A", "B", "C", "D", "E", "F", "G", "H"];
 
 export function AnswerOption({
   index,

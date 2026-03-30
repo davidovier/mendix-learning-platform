@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 import { BookOpen, ArrowLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -27,13 +27,23 @@ export default function PracticePage() {
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [answeredQuestions, setAnsweredQuestions] = useState(0);
 
+  // Bug fix #2: Store shuffled questions in a ref to persist across re-renders
+  const shuffledAllQuestionsRef = useRef<Question[] | null>(null);
+
   // Filter questions based on selected topic
   const filteredQuestions = useMemo(() => {
     if (selectedTopic === "all") {
-      // Shuffle and take 20 questions for "All Topics"
-      return [...(questions as Question[])]
-        .sort(() => Math.random() - 0.5)
-        .slice(0, 20);
+      // Only shuffle once when "all" is first selected
+      if (!shuffledAllQuestionsRef.current) {
+        const shuffled = [...(questions as Question[])];
+        // Fisher-Yates shuffle
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        shuffledAllQuestionsRef.current = shuffled.slice(0, 20);
+      }
+      return shuffledAllQuestionsRef.current;
     }
     return (questions as Question[]).filter(
       (q) => q.category === selectedTopic
@@ -68,11 +78,15 @@ export default function PracticePage() {
       : selectedTopic;
     const topic = topics.find((t) => t.id === topicId);
 
-    if (topic) {
+    // Bug fix #7: Track attempt even if topic not found, use category as fallback name
+    const topicName = topic?.name ?? topicId ?? "Unknown";
+    const finalTopicId = topicId ?? currentQuestion.category;
+
+    if (finalTopicId) {
       await trackAttempt({
         question_id: questionId,
-        topic_id: topicId!,
-        topic_name: topic.name,
+        topic_id: finalTopicId,
+        topic_name: topicName,
         is_correct: correct,
         localDate: getLocalDate(),
       });
@@ -93,12 +107,16 @@ export default function PracticePage() {
     setCurrentQuestionIndex(0);
     setCorrectAnswers(0);
     setAnsweredQuestions(0);
+    // Clear shuffled questions so a new shuffle happens next time
+    shuffledAllQuestionsRef.current = null;
   };
 
   const handleRetry = () => {
     setCurrentQuestionIndex(0);
     setCorrectAnswers(0);
     setAnsweredQuestions(0);
+    // Clear shuffled questions to get a new random set on retry
+    shuffledAllQuestionsRef.current = null;
     setView("quiz");
   };
 

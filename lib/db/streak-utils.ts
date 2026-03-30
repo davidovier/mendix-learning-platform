@@ -34,7 +34,8 @@ export function calculateStreakUpdate(
   const today = new Date(todayStr + "T12:00:00"); // Noon to avoid timezone edge cases
 
   if (lastActivityDate) {
-    const lastDate = new Date(lastActivityDate);
+    // Bug fix #6: Normalize lastActivityDate to noon to match today's normalization
+    const lastDate = new Date(lastActivityDate + "T12:00:00");
 
     // Already active today
     if (isSameDay(lastDate, today)) {

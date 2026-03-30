@@ -17,18 +17,21 @@ export function ExamTimer({ totalSeconds, onTimeUp }: ExamTimerProps) {
     onTimeUpRef.current = onTimeUp;
   }, [onTimeUp]);
 
+  // Bug fix #5: Remove secondsLeft from deps to avoid creating new interval every second
   useEffect(() => {
-    if (secondsLeft <= 0) {
-      onTimeUpRef.current();
-      return;
-    }
-
     const timer = setInterval(() => {
-      setSecondsLeft((prev) => prev - 1);
+      setSecondsLeft((prev) => {
+        if (prev <= 1) {
+          // Schedule callback after state update to avoid calling during render
+          setTimeout(() => onTimeUpRef.current(), 0);
+          return 0;
+        }
+        return prev - 1;
+      });
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [secondsLeft]);
+  }, []); // Empty deps - interval runs for component lifetime
 
   const minutes = Math.floor(secondsLeft / 60);
   const seconds = secondsLeft % 60;

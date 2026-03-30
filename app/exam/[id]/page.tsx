@@ -35,18 +35,34 @@ export default function ExamPage() {
   const [sessionId, setSessionId] = useState<string | null>(null);
   const startTimeRef = useRef<number>(Date.now());
 
-  // Shuffle and select 50 random questions
-  const examQuestions = useMemo(() => {
-    return [...(questions as Question[])]
-      .sort(() => Math.random() - 0.5)
-      .slice(0, EXAM_QUESTIONS);
-  }, []);
+  // Bug fix #1: Use useState with lazy initializer to shuffle only once on mount
+  // This prevents re-shuffling on re-renders or strict mode double-mount
+  const [examQuestions] = useState<Question[]>(() => {
+    // Seeded shuffle using Fisher-Yates with a fixed seed per session
+    const seed = Date.now();
+    const shuffled = [...(questions as Question[])];
+    let currentIndex = shuffled.length;
+    let seededRandom = seed;
 
-  // Create exam session on mount
+    while (currentIndex !== 0) {
+      // Simple seeded random (mulberry32-like)
+      seededRandom = (seededRandom * 1664525 + 1013904223) % 4294967296;
+      const randomIndex = Math.floor((seededRandom / 4294967296) * currentIndex);
+      currentIndex--;
+      [shuffled[currentIndex], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[currentIndex]];
+    }
+
+    return shuffled.slice(0, EXAM_QUESTIONS);
+  });
+
+  // Bug fix #12: Create exam session on mount with error handling
   useEffect(() => {
     async function initSession() {
       const result = await createExamSession("simulation");
-      if (result.sessionId) {
+      if (result.error) {
+        console.error("Failed to create exam session:", result.error);
+        // Session creation failed but exam can still proceed locally
+      } else if (result.sessionId) {
         setSessionId(result.sessionId);
       }
     }

@@ -30,7 +30,8 @@ export default function TopicStudyPage({ params }: PageProps) {
   const cards = allFlashcards[topicId] ?? [];
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [masteredCount, setMasteredCount] = useState(0);
+  // Bug fix #9: Track which cards have been mastered to prevent double-counting
+  const [masteredCards, setMasteredCards] = useState<Set<number>>(new Set());
 
   if (!topic || cards.length === 0) {
     return (
@@ -47,10 +48,12 @@ export default function TopicStudyPage({ params }: PageProps) {
   }
 
   const currentCard = cards[currentIndex];
+  const masteredCount = masteredCards.size;
   const progress = (masteredCount / cards.length) * 100;
 
   const handleGotIt = () => {
-    setMasteredCount((prev) => prev + 1);
+    // Bug fix #9: Only count each card once as mastered
+    setMasteredCards((prev) => new Set(prev).add(currentIndex));
     if (currentIndex < cards.length - 1) {
       setCurrentIndex((prev) => prev + 1);
     }
@@ -62,7 +65,8 @@ export default function TopicStudyPage({ params }: PageProps) {
     }
   };
 
-  const isComplete = currentIndex === cards.length - 1 && masteredCount === cards.length;
+  // Bug fix #8: Check if all cards are mastered, not if we're on the last card
+  const isComplete = masteredCount === cards.length;
 
   const Icon = topic.icon;
 
