@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Flame, User } from "lucide-react";
+import { Flame, User, Sparkles, CreditCard, Settings } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,8 +7,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Badge } from "@/components/ui/badge";
 import { getUser } from "@/lib/supabase/actions";
 import { getUserStreak } from "@/lib/db/queries";
+import { isProUser } from "@/lib/stripe/subscription";
 import { LogoutButton } from "@/components/auth/logout-button";
 
 export async function UserNav() {
@@ -26,12 +28,21 @@ export async function UserNav() {
     );
   }
 
-  // Fetch streak data (only after confirming user exists)
-  // This is now the only blocking call after auth
-  const streak = await getUserStreak(user.id);
+  // Fetch streak and subscription data in parallel
+  const [streak, isPro] = await Promise.all([
+    getUserStreak(user.id),
+    isProUser(user.id),
+  ]);
 
   return (
     <div className="flex items-center gap-3">
+      {isPro && (
+        <Badge variant="secondary" className="gap-1 hidden sm:flex">
+          <Sparkles className="h-3 w-3" />
+          Pro
+        </Badge>
+      )}
+
       {streak && streak.current_streak > 0 && (
         <div className="flex items-center gap-1 text-sm text-muted-foreground">
           <Flame className="h-4 w-4 text-orange-500" />
@@ -50,6 +61,20 @@ export async function UserNav() {
           <DropdownMenuItem>
             <Link href="/progress" className="w-full">My Progress</Link>
           </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link href="/account" className="w-full flex items-center gap-2">
+              <Settings className="h-4 w-4" />
+              Account
+            </Link>
+          </DropdownMenuItem>
+          {!isPro && (
+            <DropdownMenuItem>
+              <Link href="/pricing" className="w-full flex items-center gap-2 text-primary">
+                <CreditCard className="h-4 w-4" />
+                Upgrade to Pro
+              </Link>
+            </DropdownMenuItem>
+          )}
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             <LogoutButton />
