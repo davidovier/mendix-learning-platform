@@ -1,18 +1,11 @@
 "use client";
 
+import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { User, Sparkles, Settings } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { LogoutButton } from "@/components/auth/logout-button";
+import { User, Sparkles, Settings, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { signOut } from "@/lib/supabase/actions";
 
 interface UserNavClientProps {
   user: { email: string } | null;
@@ -21,6 +14,19 @@ interface UserNavClientProps {
 
 export function UserNavClient({ user, isPro }: UserNavClientProps) {
   const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   if (!user) {
     return (
@@ -35,9 +41,16 @@ export function UserNavClient({ user, isPro }: UserNavClientProps) {
 
   const initials = user.email ? user.email.substring(0, 2).toUpperCase() : "U";
 
+  const handleSignOut = async () => {
+    await signOut();
+    router.refresh();
+    setIsOpen(false);
+  };
+
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger
+    <div className="relative" ref={dropdownRef}>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
         className={cn(
           "relative flex items-center justify-center w-9 h-9 rounded-full text-sm font-bold transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
           isPro
@@ -51,13 +64,13 @@ export function UserNavClient({ user, isPro }: UserNavClientProps) {
             <Sparkles className="w-2 h-2 text-primary" />
           </div>
         )}
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56">
-        <DropdownMenuLabel className="font-normal">
-          <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none truncate">
-              {user.email}
-            </p>
+      </button>
+
+      {isOpen && (
+        <div className="absolute right-0 mt-2 w-56 rounded-lg border border-border bg-popover p-1 shadow-lg z-50">
+          {/* Header */}
+          <div className="px-2 py-1.5 border-b border-border mb-1">
+            <p className="text-sm font-medium truncate">{user.email}</p>
             {isPro ? (
               <p className="text-xs text-primary flex items-center gap-1">
                 <Sparkles className="h-3 w-3" />
@@ -67,33 +80,55 @@ export function UserNavClient({ user, isPro }: UserNavClientProps) {
               <p className="text-xs text-muted-foreground">Free plan</p>
             )}
           </div>
-        </DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => router.push("/progress")}>
-          <User className="h-4 w-4 mr-2" />
-          My Progress
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => router.push("/account")}>
-          <Settings className="h-4 w-4 mr-2" />
-          Account
-        </DropdownMenuItem>
-        {!isPro && (
-          <>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem
-              onClick={() => router.push("/pricing")}
-              className="text-primary"
-            >
-              <Sparkles className="h-4 w-4 mr-2" />
-              Upgrade to Pro
-            </DropdownMenuItem>
-          </>
-        )}
-        <DropdownMenuSeparator />
-        <DropdownMenuItem className="p-0">
-          <LogoutButton />
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+
+          {/* Menu Items */}
+          <button
+            onClick={() => {
+              router.push("/progress");
+              setIsOpen(false);
+            }}
+            className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-sm hover:bg-muted transition-colors"
+          >
+            <User className="h-4 w-4" />
+            My Progress
+          </button>
+          <button
+            onClick={() => {
+              router.push("/account");
+              setIsOpen(false);
+            }}
+            className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-sm hover:bg-muted transition-colors"
+          >
+            <Settings className="h-4 w-4" />
+            Account
+          </button>
+
+          {!isPro && (
+            <>
+              <div className="my-1 h-px bg-border" />
+              <button
+                onClick={() => {
+                  router.push("/pricing");
+                  setIsOpen(false);
+                }}
+                className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-sm text-primary hover:bg-muted transition-colors"
+              >
+                <Sparkles className="h-4 w-4" />
+                Upgrade to Pro
+              </button>
+            </>
+          )}
+
+          <div className="my-1 h-px bg-border" />
+          <button
+            onClick={handleSignOut}
+            className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-sm text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+          >
+            <LogOut className="h-4 w-4" />
+            Sign out
+          </button>
+        </div>
+      )}
+    </div>
   );
 }
