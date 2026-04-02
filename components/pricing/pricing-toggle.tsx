@@ -2,10 +2,9 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Check, Sparkles } from "lucide-react";
+import { Check, Sparkles, Infinity } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
 
 const plans = {
   free: {
@@ -20,18 +19,9 @@ const plans = {
     ],
   },
   pro: {
-    name: "Pro",
-    description: "Everything you need to pass",
-    monthly: {
-      price: 14.99,
-      interval: "month",
-    },
-    annual: {
-      price: 49.99,
-      monthlyEquivalent: 4.17,
-      interval: "year",
-      savings: "Save 72%",
-    },
+    name: "Pro Lifetime",
+    description: "Everything you need to pass - forever",
+    price: 49.99,
     features: [
       "Unlimited practice questions",
       "Unlimited exam simulations",
@@ -39,13 +29,13 @@ const plans = {
       "All flashcard topics",
       "Complete cheatsheet access",
       "AI Study Tutor",
+      "Lifetime access - one-time payment",
     ],
   },
 };
 
 export function PricingToggle() {
   const router = useRouter();
-  const [isAnnual, setIsAnnual] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleCheckout = async () => {
@@ -54,7 +44,6 @@ export function PricingToggle() {
       const response = await fetch("/api/stripe/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ interval: isAnnual ? "annual" : "monthly" }),
       });
 
       const data = await response.json();
@@ -80,45 +69,6 @@ export function PricingToggle() {
 
   return (
     <div>
-      {/* Billing Toggle */}
-      <div className="flex items-center justify-center gap-4 mb-8">
-        <span
-          className={cn(
-            "text-sm font-medium",
-            !isAnnual ? "text-foreground" : "text-muted-foreground"
-          )}
-        >
-          Monthly
-        </span>
-        <button
-          onClick={() => setIsAnnual(!isAnnual)}
-          className={cn(
-            "relative inline-flex h-6 w-11 items-center rounded-full transition-colors",
-            isAnnual ? "bg-primary" : "bg-muted"
-          )}
-        >
-          <span
-            className={cn(
-              "inline-block h-4 w-4 transform rounded-full bg-white transition-transform",
-              isAnnual ? "translate-x-6" : "translate-x-1"
-            )}
-          />
-        </button>
-        <span
-          className={cn(
-            "text-sm font-medium",
-            isAnnual ? "text-foreground" : "text-muted-foreground"
-          )}
-        >
-          Annual
-        </span>
-        {isAnnual && (
-          <Badge variant="secondary" className="text-xs">
-            Save 72%
-          </Badge>
-        )}
-      </div>
-
       {/* Plan Cards */}
       <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
         {/* Free Plan */}
@@ -144,12 +94,12 @@ export function PricingToggle() {
           </ul>
         </div>
 
-        {/* Pro Plan */}
+        {/* Pro Lifetime Plan */}
         <div className="border-2 border-primary rounded-xl p-6 bg-card relative">
           <div className="absolute -top-3 left-1/2 -translate-x-1/2">
             <Badge className="gap-1">
               <Sparkles className="h-3 w-3" />
-              Recommended
+              Best Value
             </Badge>
           </div>
           <h3 className="text-lg font-semibold">{plans.pro.name}</h3>
@@ -157,31 +107,19 @@ export function PricingToggle() {
             {plans.pro.description}
           </p>
           <div className="mt-4">
-            {isAnnual ? (
-              <>
-                <span className="text-3xl font-bold">
-                  €{plans.pro.annual.monthlyEquivalent.toFixed(2)}
-                </span>
-                <span className="text-muted-foreground">/month</span>
-                <div className="text-xs text-muted-foreground mt-1">
-                  €{plans.pro.annual.price.toFixed(2)} billed annually
-                </div>
-              </>
-            ) : (
-              <>
-                <span className="text-3xl font-bold">
-                  €{plans.pro.monthly.price.toFixed(2)}
-                </span>
-                <span className="text-muted-foreground">/month</span>
-              </>
-            )}
+            <span className="text-3xl font-bold">€{plans.pro.price.toFixed(2)}</span>
+            <span className="text-muted-foreground ml-1">one-time</span>
+            <div className="flex items-center gap-1 text-xs text-emerald-600 dark:text-emerald-400 mt-1">
+              <Infinity className="h-3 w-3" />
+              <span>Pay once, access forever</span>
+            </div>
           </div>
           <Button
             className="w-full mt-6"
             onClick={handleCheckout}
             disabled={isLoading}
           >
-            {isLoading ? "Loading..." : "Upgrade to Pro"}
+            {isLoading ? "Loading..." : "Get Lifetime Access"}
           </Button>
           <ul className="mt-6 space-y-3">
             {plans.pro.features.map((feature) => (

@@ -21,9 +21,22 @@ export async function isProUser(userId: string): Promise<boolean> {
   const subscription = await getSubscription(userId);
   if (!subscription) return false;
 
+  // Lifetime access: status is active and current_period_end is null
+  // Regular subscription: status is active/trialing with valid period
   return (
     subscription.status === "active" ||
     subscription.status === "trialing"
+  );
+}
+
+export async function hasLifetimeAccess(userId: string): Promise<boolean> {
+  const subscription = await getSubscription(userId);
+  if (!subscription) return false;
+
+  return (
+    subscription.status === "active" &&
+    subscription.current_period_end === null &&
+    subscription.price_id === "lifetime"
   );
 }
 

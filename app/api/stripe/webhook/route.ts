@@ -6,13 +6,10 @@ import { createClient } from "@/lib/supabase/server";
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
 
-async function updateSubscription(
-  subscription: Stripe.Subscription,
-  customerId: string
-) {
+async function grantLifetimeAccess(customerId: string, paymentId: string) {
   const supabase = await createClient();
 
-  // Get user_id from customer metadata or existing record
+  // Find the user by stripe_customer_id
   const { data: existing } = await supabase
     .from("subscriptions")
     .select("user_id")
@@ -24,44 +21,21 @@ async function updateSubscription(
     return;
   }
 
-  // In newer Stripe API versions, period dates are on subscription items
-  const firstItem = subscription.items.data[0];
-  const periodStart = firstItem?.current_period_start;
-  const periodEnd = firstItem?.current_period_end;
-
+  // Grant lifetime access
   await supabase
     .from("subscriptions")
     .update({
-      stripe_subscription_id: subscription.id,
-      status: subscription.status,
-      price_id: firstItem?.price.id || null,
-      current_period_start: periodStart
-        ? new Date(periodStart * 1000).toISOString()
-        : null,
-      current_period_end: periodEnd
-        ? new Date(periodEnd * 1000).toISOString()
-        : null,
-      cancel_at_period_end: subscription.cancel_at_period_end,
-      updated_at: new Date().toISOString(),
-    })
-    .eq("stripe_customer_id", customerId);
-}
-
-async function handleSubscriptionDeleted(customerId: string) {
-  const supabase = await createClient();
-
-  await supabase
-    .from("subscriptions")
-    .update({
-      stripe_subscription_id: null,
-      status: "canceled",
-      price_id: null,
-      current_period_start: null,
-      current_period_end: null,
+      status: "active",
+      stripe_subscription_id: paymentId, // Store payment ID for reference
+      price_id: "lifetime",
+      current_period_start: new Date().toISOString(),
+      current_period_end: null, // Null = lifetime access
       cancel_at_period_end: false,
       updated_at: new Date().toISOString(),
     })
     .eq("stripe_customer_id", customerId);
+
+  console.log("Granted lifetime access to customer:", customerId);
 }
 
 export async function POST(request: NextRequest) {
@@ -92,58 +66,26 @@ export async function POST(request: NextRequest) {
     switch (event.type) {
       case "checkout.session.completed": {
         const session = event.data.object as Stripe.Checkout.Session;
-        if (session.subscription && session.customer) {
-          const subscription = await stripe.subscriptions.retrieve(
-            session.subscription as string
-          );
-          await updateSubscription(subscription, session.customer as string);
+
+        // Handle one-time payment
+        if (session.mode === "payment" && session.payment_status === "paid") {
+          const customerId = session.customer as string;
+          const paymentIntentId = session.payment_intent as string;
+          await grantLifetimeAccess(customerId, paymentIntentId);
         }
         break;
       }
 
-      case "customer.subscription.created":
-      case "customer.subscription.updated": {
-        const subscription = event.data.object as Stripe.Subscription;
-        await updateSubscription(subscription, subscription.customer as string);
+      case "payment_intent.succeeded": {
+        const paymentIntent = event.data.object as Stripe.PaymentIntent;
+        console.log("Payment succeeded:", paymentIntent.id);
+        // Lifetime access is granted via checkout.session.completed
         break;
       }
 
-      case "customer.subscription.deleted": {
-        const subscription = event.data.object as Stripe.Subscription;
-        await handleSubscriptionDeleted(subscription.customer as string);
-        break;
-      }
-
-      case "invoice.payment_succeeded": {
-        const invoice = event.data.object as Stripe.Invoice;
-        // In newer API, subscription is under parent.subscription_details
-        const subDetails = invoice.parent?.subscription_details;
-        const subscriptionId = typeof subDetails?.subscription === "string"
-          ? subDetails.subscription
-          : subDetails?.subscription?.id;
-        const customerId = typeof invoice.customer === "string"
-          ? invoice.customer
-          : invoice.customer?.id;
-
-        if (subscriptionId && customerId) {
-          const subscription = await stripe.subscriptions.retrieve(subscriptionId);
-          await updateSubscription(subscription, customerId);
-        }
-        break;
-      }
-
-      case "invoice.payment_failed": {
-        const invoice = event.data.object as Stripe.Invoice;
-        const customerId = typeof invoice.customer === "string"
-          ? invoice.customer
-          : invoice.customer?.id;
-        console.warn(
-          "Payment failed for customer:",
-          customerId,
-          "Invoice:",
-          invoice.id
-        );
-        // Stripe automatically handles retries and updates subscription status
+      case "payment_intent.payment_failed": {
+        const paymentIntent = event.data.object as Stripe.PaymentIntent;
+        console.warn("Payment failed:", paymentIntent.id);
         break;
       }
 

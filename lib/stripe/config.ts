@@ -28,27 +28,20 @@ export const stripe = {
 export const PLANS = {
   pro: {
     name: "Pro",
-    description: "Full access to all features",
+    description: "Full access to all features - forever",
     features: [
       "Unlimited practice questions",
       "Unlimited exam simulations",
       "Full progress analytics",
       "Complete cheatsheet access",
       "All study flashcards",
+      "AI-powered explanations",
+      "Lifetime access - one-time payment",
     ],
-    prices: {
-      monthly: {
-        amount: 1499, // €14.99 in cents
-        currency: "eur",
-        interval: "month" as const,
-        priceId: process.env.STRIPE_PRICE_MONTHLY!,
-      },
-      annual: {
-        amount: 4999, // €49.99 in cents
-        currency: "eur",
-        interval: "year" as const,
-        priceId: process.env.STRIPE_PRICE_ANNUAL!,
-      },
+    price: {
+      amount: 4999, // €49.99 in cents
+      currency: "eur",
+      priceId: process.env.STRIPE_PRICE_LIFETIME!,
     },
   },
 } as const;
