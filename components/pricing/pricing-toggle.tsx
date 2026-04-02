@@ -27,10 +27,10 @@ const plans = {
       interval: "month",
     },
     annual: {
-      price: 152.9,
-      monthlyEquivalent: 12.74,
+      price: 49.99,
+      monthlyEquivalent: 4.17,
       interval: "year",
-      savings: "Save 15%",
+      savings: "Save 72%",
     },
     features: [
       "Unlimited practice questions",
@@ -114,7 +114,7 @@ export function PricingToggle() {
         </span>
         {isAnnual && (
           <Badge variant="secondary" className="text-xs">
-            Save 15%
+            Save 72%
           </Badge>
         )}
       </div>

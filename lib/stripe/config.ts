@@ -44,7 +44,7 @@ export const PLANS = {
         priceId: process.env.STRIPE_PRICE_MONTHLY!,
       },
       annual: {
-        amount: 15290, // €152.90 in cents (15% off)
+        amount: 4999, // €49.99 in cents
         currency: "eur",
         interval: "year" as const,
         priceId: process.env.STRIPE_PRICE_ANNUAL!,
