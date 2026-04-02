@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Card, CardContent } from "@/components/ui/card";
 import { Clock, FileQuestion, Target, Shuffle, Navigation } from "lucide-react";
 import { StartExamButton } from "@/components/exam/start-exam-button";
+import { getUsageStatus } from "@/lib/stripe/usage-actions";
+import { UpgradePrompt, UsageLimitBanner } from "@/components/upgrade-prompt";
 
 export const metadata: Metadata = {
   title: "Practice Exam",
@@ -9,13 +11,46 @@ export const metadata: Metadata = {
     "Take a timed 90-minute practice exam with 50 randomly selected questions. Simulate real Mendix Intermediate Certification exam conditions.",
 };
 
-// Static page - can be fully cached
-export const revalidate = false;
+// Dynamic page - needs to check user-specific usage limits
+export const dynamic = "force-dynamic";
 
-export default function ExamStartPage() {
+export default async function ExamStartPage() {
+  const usageStatus = await getUsageStatus();
+  const canTakeExam = usageStatus?.exams.allowed ?? true;
+  const examsRemaining = usageStatus?.exams.remaining ?? Infinity;
+  const examsLimit = usageStatus?.exams.limit ?? 1;
+  const isPro = usageStatus?.isPro ?? false;
+
+  // Show upgrade prompt if weekly limit reached
+  if (!canTakeExam && !isPro) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <div className="max-w-md mx-auto">
+          <UpgradePrompt
+            title="Weekly Exam Limit Reached"
+            description="Free accounts can take 1 exam simulation per week. Upgrade to Pro for unlimited exam practice."
+            feature="exam simulations"
+          />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-4xl mx-auto">
+        {/* Usage limit banner for free users */}
+        {usageStatus && !isPro && (
+          <div className="mb-6 max-w-xl mx-auto">
+            <UsageLimitBanner
+              remaining={examsRemaining}
+              limit={examsLimit}
+              unit="exam"
+              period="this week"
+            />
+          </div>
+        )}
+
         {/* Page Header */}
         <div className="text-center mb-10 sm:mb-12">
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3 sm:mb-4">

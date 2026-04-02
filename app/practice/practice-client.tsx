@@ -23,6 +23,8 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { QuestionCard } from "@/components/practice/question-card";
 import { trackAttempt } from "@/lib/db/actions";
+import { checkAndIncrementQuestionUsage, type UsageStatus } from "@/lib/stripe/usage-actions";
+import { UpgradePrompt, UsageLimitBanner } from "@/components/upgrade-prompt";
 
 type ViewState = "select" | "quiz" | "results";
 
@@ -63,6 +65,7 @@ interface PracticeClientProps {
   topics: TopicData[];
   questionCountByTopic: Record<string, number>;
   totalQuestionCount: number;
+  initialUsageStatus: UsageStatus | null;
 }
 
 export function PracticeClient({
@@ -70,12 +73,15 @@ export function PracticeClient({
   topics,
   questionCountByTopic,
   totalQuestionCount,
+  initialUsageStatus,
 }: PracticeClientProps) {
   const [view, setView] = useState<ViewState>("select");
   const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [answeredQuestions, setAnsweredQuestions] = useState(0);
+  const [usageStatus, setUsageStatus] = useState<UsageStatus | null>(initialUsageStatus);
+  const [limitReached, setLimitReached] = useState(false);
 
   // Store shuffled questions in a ref to persist across re-renders
   const shuffledAllQuestionsRef = useRef<Question[] | null>(null);
@@ -115,6 +121,24 @@ export function PracticeClient({
   };
 
   const handleAnswer = async (correct: boolean, questionId: string) => {
+    // Check and increment usage (only for non-Pro users)
+    if (usageStatus && !usageStatus.isPro) {
+      const result = await checkAndIncrementQuestionUsage();
+      if (!result.allowed) {
+        setLimitReached(true);
+        return;
+      }
+      // Update local usage status
+      setUsageStatus((prev) =>
+        prev
+          ? {
+              ...prev,
+              questions: result,
+            }
+          : null
+      );
+    }
+
     if (correct) {
       setCorrectAnswers((prev) => prev + 1);
     }
@@ -179,6 +203,25 @@ export function PracticeClient({
   const availableTopics = topics.filter((t) => questionCountByTopic[t.id] > 0);
 
   if (view === "select") {
+    // Check if user has reached their daily limit
+    const questionsRemaining = usageStatus?.questions.remaining ?? Infinity;
+    const questionsLimit = usageStatus?.questions.limit ?? 10;
+    const canPractice = questionsRemaining > 0 || usageStatus?.isPro;
+
+    if (!canPractice) {
+      return (
+        <div className="container mx-auto px-4 py-8">
+          <div className="max-w-md mx-auto">
+            <UpgradePrompt
+              title="Daily Limit Reached"
+              description="You've used all 10 practice questions for today. Upgrade to Pro for unlimited practice."
+              feature="practice questions"
+            />
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
@@ -190,6 +233,18 @@ export function PracticeClient({
               Select a topic to practice or test your knowledge across all topics
             </p>
           </div>
+
+          {/* Usage limit banner for free users */}
+          {usageStatus && !usageStatus.isPro && (
+            <div className="mb-6">
+              <UsageLimitBanner
+                remaining={questionsRemaining}
+                limit={questionsLimit}
+                unit="questions"
+                period="today"
+              />
+            </div>
+          )}
 
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {/* All Topics Card */}
@@ -244,6 +299,26 @@ export function PracticeClient({
   }
 
   if (view === "quiz" && currentQuestion) {
+    // Show upgrade prompt if limit reached mid-quiz
+    if (limitReached) {
+      return (
+        <div className="container mx-auto px-4 py-8">
+          <div className="max-w-md mx-auto">
+            <UpgradePrompt
+              title="Daily Limit Reached"
+              description={`You've answered ${answeredQuestions} questions today. Upgrade to Pro to continue practicing without limits.`}
+              feature="practice questions"
+            />
+            <div className="mt-6 text-center">
+              <Button variant="outline" onClick={handleRestart}>
+                Back to Topics
+              </Button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
     const progressPercentage =
       ((currentQuestionIndex + 1) / filteredQuestions.length) * 100;
 

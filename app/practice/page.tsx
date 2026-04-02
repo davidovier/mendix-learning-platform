@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { topics } from "@/lib/content/topics";
 import questions from "@/lib/content/questions.json";
 import { PracticeClient, type Question, type TopicData } from "./practice-client";
+import { getUsageStatus } from "@/lib/stripe/usage-actions";
 
 export const metadata: Metadata = {
   title: "Practice Quiz",
@@ -9,10 +10,10 @@ export const metadata: Metadata = {
     "Practice with 268+ exam-style questions organized by topic. Get instant feedback and track your progress toward Mendix certification.",
 };
 
-// Cache this page - questions don't change often
-export const revalidate = 3600;
+// Dynamic page - needs to check user-specific usage limits
+export const dynamic = "force-dynamic";
 
-export default function PracticePage() {
+export default async function PracticePage() {
   // Server-side: compute counts and prepare data
   const typedQuestions = questions as Question[];
 
@@ -29,12 +30,16 @@ export default function PracticePage() {
     description,
   }));
 
+  // Get user's usage status (null if not logged in)
+  const usageStatus = await getUsageStatus();
+
   return (
     <PracticeClient
       questions={typedQuestions}
       topics={topicData}
       questionCountByTopic={questionCountByTopic}
       totalQuestionCount={typedQuestions.length}
+      initialUsageStatus={usageStatus}
     />
   );
 }
