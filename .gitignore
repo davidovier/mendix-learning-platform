@@ -42,3 +42,4 @@ next-env.d.ts
 
 # Note: content/*.json are committed for deployment
 # They are generated from documentation by running: npm run process-content
+.env*.local

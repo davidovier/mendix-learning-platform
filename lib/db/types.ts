@@ -38,18 +38,6 @@ export interface ExamSession {
   created_at: string;
 }
 
-export interface Streak {
-  id: string;
-  user_id: string;
-  current_streak: number;
-  longest_streak: number;
-  last_activity_date: string | null;
-  streak_start_date: string | null;
-  total_study_days: number;
-  created_at: string;
-  updated_at: string;
-}
-
 export interface TopicStats {
   topic_id: string;
   topic_name: string;

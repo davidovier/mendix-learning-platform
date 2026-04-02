@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { Flame, Target, TrendingUp, Calendar, Lightbulb } from "lucide-react";
+import { Target, TrendingUp, Lightbulb } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { getUser } from "@/lib/supabase/actions";
-import { getUserProgress, getUserStreak, computeDashboardStats, getRecommendations, getExamHistory } from "@/lib/db/queries";
+import { getUserProgress, computeDashboardStats, getRecommendations, getExamHistory } from "@/lib/db/queries";
 import { topics } from "@/lib/content/topics";
 import { cn } from "@/lib/utils";
 import { ResetProgressButton } from "@/components/progress/reset-progress-button";
@@ -16,15 +16,12 @@ export default async function ProgressPage() {
     return null; // Middleware should have redirected
   }
 
-  // Fetch all data in parallel - avoiding duplicate getUserProgress call
-  const [progress, streak, examHistory] = await Promise.all([
+  const [progress, examHistory] = await Promise.all([
     getUserProgress(user.id),
-    getUserStreak(user.id),
     getExamHistory(user.id),
   ]);
 
-  // Compute stats from already-fetched data (no extra DB call)
-  const stats = computeDashboardStats(progress, streak);
+  const stats = computeDashboardStats(progress);
   const recommendations = getRecommendations(progress);
 
   // Create a map for easy lookup
@@ -44,7 +41,7 @@ export default async function ProgressPage() {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground">
@@ -66,30 +63,6 @@ export default async function ProgressPage() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{stats.accuracy}%</div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">
-                Current Streak
-              </CardTitle>
-              <Flame className="h-4 w-4 text-orange-500" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{stats.currentStreak} days</div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">
-                Study Days
-              </CardTitle>
-              <Calendar className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{stats.totalStudyDays}</div>
             </CardContent>
           </Card>
         </div>

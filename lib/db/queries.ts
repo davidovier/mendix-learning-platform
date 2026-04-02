@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { topics } from "@/lib/content/topics";
-import type { Progress, Streak, ExamSession, TopicStats, Recommendations } from "./types";
+import type { Progress, ExamSession, TopicStats, Recommendations } from "./types";
 
 export async function getUserProgress(userId: string): Promise<Progress[]> {
   const supabase = await createClient();
@@ -16,25 +16,6 @@ export async function getUserProgress(userId: string): Promise<Progress[]> {
   }
 
   return data || [];
-}
-
-export async function getUserStreak(userId: string): Promise<Streak | null> {
-  const supabase = await createClient();
-
-  const { data, error } = await supabase
-    .from("streaks")
-    .select("*")
-    .eq("user_id", userId)
-    .single();
-
-  if (error) {
-    if (error.code !== "PGRST116") {
-      console.error("Error fetching streak:", error);
-    }
-    return null;
-  }
-
-  return data;
 }
 
 export async function getExamHistory(userId: string): Promise<ExamSession[]> {
@@ -104,17 +85,9 @@ export interface DashboardStats {
   totalQuestions: number;
   correctAnswers: number;
   accuracy: number;
-  currentStreak: number;
-  longestStreak: number;
-  totalStudyDays: number;
 }
 
-// Compute dashboard stats from progress and streak data
-// If progress/streak are already fetched, pass them to avoid duplicate queries
-export function computeDashboardStats(
-  progress: Progress[],
-  streak: Streak | null
-): DashboardStats {
+export function computeDashboardStats(progress: Progress[]): DashboardStats {
   const totalQuestions = progress.reduce((sum, p) => sum + p.completed_questions, 0);
   const correctAnswers = progress.reduce((sum, p) => sum + p.correct_answers, 0);
   const accuracy = totalQuestions > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 0;
@@ -123,18 +96,10 @@ export function computeDashboardStats(
     totalQuestions,
     correctAnswers,
     accuracy,
-    currentStreak: streak?.current_streak || 0,
-    longestStreak: streak?.longest_streak || 0,
-    totalStudyDays: streak?.total_study_days || 0,
   };
 }
 
-// Convenience function that fetches data if not provided
 export async function getDashboardStats(userId: string): Promise<DashboardStats> {
-  const [progress, streak] = await Promise.all([
-    getUserProgress(userId),
-    getUserStreak(userId),
-  ]);
-
-  return computeDashboardStats(progress, streak);
+  const progress = await getUserProgress(userId);
+  return computeDashboardStats(progress);
 }

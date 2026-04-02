@@ -2,8 +2,6 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { getUser } from "@/lib/supabase/actions";
-import { calculateStreakUpdate } from "./streak-utils";
-import { getUserStreak } from "./queries";
 
 interface TrackAttemptData {
   question_id: string;
@@ -11,7 +9,6 @@ interface TrackAttemptData {
   topic_name: string;
   is_correct: boolean;
   time_spent_seconds?: number;
-  localDate?: string; // YYYY-MM-DD format from client's local timezone
 }
 
 export async function trackAttempt(data: TrackAttemptData) {
@@ -22,9 +19,7 @@ export async function trackAttempt(data: TrackAttemptData) {
 
   const supabase = await createClient();
 
-  // Phase 2 optimization: Run independent queries in parallel
-  // 1. Insert attempt, 2. Get existing progress, 3. Get streak - all can run in parallel
-  const [attemptResult, progressResult, streak] = await Promise.all([
+  const [attemptResult, progressResult] = await Promise.all([
     supabase.from("question_attempts").insert({
       user_id: user.id,
       question_id: data.question_id,
@@ -38,7 +33,6 @@ export async function trackAttempt(data: TrackAttemptData) {
       .eq("user_id", user.id)
       .eq("topic_id", data.topic_id)
       .single(),
-    getUserStreak(user.id),
   ]);
 
   if (attemptResult.error) {
@@ -51,87 +45,29 @@ export async function trackAttempt(data: TrackAttemptData) {
   const newCorrect = (existingProgress?.correct_answers || 0) + (data.is_correct ? 1 : 0);
   const newMastery = Math.round((newCorrect / newCompleted) * 100);
 
-  // Calculate streak update (pure function, no DB call)
-  const streakUpdate = calculateStreakUpdate(
-    streak?.current_streak || 0,
-    streak?.longest_streak || 0,
-    streak?.last_activity_date || null,
-    streak?.streak_start_date || null,
-    streak?.total_study_days || 0,
-    data.localDate
-  );
-
-  // Run progress and streak updates in parallel
-  const updatePromises: Promise<void>[] = [];
-
-  // Progress update
   if (existingProgress) {
-    updatePromises.push(
-      (async () => {
-        const { error } = await supabase
-          .from("progress")
-          .update({
-            completed_questions: newCompleted,
-            correct_answers: newCorrect,
-            mastery_level: newMastery,
-            last_studied_at: new Date().toISOString(),
-          })
-          .eq("id", existingProgress.id);
-        if (error) console.error("Error updating progress:", error);
-      })()
-    );
+    const { error } = await supabase
+      .from("progress")
+      .update({
+        completed_questions: newCompleted,
+        correct_answers: newCorrect,
+        mastery_level: newMastery,
+        last_studied_at: new Date().toISOString(),
+      })
+      .eq("id", existingProgress.id);
+    if (error) console.error("Error updating progress:", error);
   } else {
-    updatePromises.push(
-      (async () => {
-        const { error } = await supabase.from("progress").insert({
-          user_id: user.id,
-          topic_id: data.topic_id,
-          topic_name: data.topic_name,
-          completed_questions: 1,
-          correct_answers: data.is_correct ? 1 : 0,
-          mastery_level: data.is_correct ? 100 : 0,
-          last_studied_at: new Date().toISOString(),
-        });
-        if (error) console.error("Error inserting progress:", error);
-      })()
-    );
+    const { error } = await supabase.from("progress").insert({
+      user_id: user.id,
+      topic_id: data.topic_id,
+      topic_name: data.topic_name,
+      completed_questions: 1,
+      correct_answers: data.is_correct ? 1 : 0,
+      mastery_level: data.is_correct ? 100 : 0,
+      last_studied_at: new Date().toISOString(),
+    });
+    if (error) console.error("Error inserting progress:", error);
   }
-
-  // Streak update
-  if (streakUpdate.changed) {
-    if (streak) {
-      updatePromises.push(
-        (async () => {
-          await supabase
-            .from("streaks")
-            .update({
-              current_streak: streakUpdate.current_streak,
-              longest_streak: streakUpdate.longest_streak,
-              last_activity_date: streakUpdate.last_activity_date,
-              streak_start_date: streakUpdate.streak_start_date,
-              total_study_days: streakUpdate.total_study_days,
-            })
-            .eq("id", streak.id);
-        })()
-      );
-    } else {
-      updatePromises.push(
-        (async () => {
-          await supabase.from("streaks").insert({
-            user_id: user.id,
-            current_streak: streakUpdate.current_streak,
-            longest_streak: streakUpdate.longest_streak,
-            last_activity_date: streakUpdate.last_activity_date,
-            streak_start_date: streakUpdate.streak_start_date,
-            total_study_days: streakUpdate.total_study_days,
-          });
-        })()
-      );
-    }
-  }
-
-  // Wait for all updates to complete
-  await Promise.all(updatePromises);
 
   return { success: true, mastery: newMastery };
 }
@@ -171,7 +107,6 @@ interface CompleteExamData {
   totalQuestions: number;
   answers: Record<string, boolean>;
   timeSpentSeconds: number;
-  localDate?: string; // YYYY-MM-DD format from client's local timezone
 }
 
 export async function completeExamSession(data: CompleteExamData) {
@@ -201,41 +136,6 @@ export async function completeExamSession(data: CompleteExamData) {
     return { error: "Failed to save exam results" };
   }
 
-  // Update streak using client's local date (exam counts as study activity)
-  const streak = await getUserStreak(user.id);
-  const streakUpdate = calculateStreakUpdate(
-    streak?.current_streak || 0,
-    streak?.longest_streak || 0,
-    streak?.last_activity_date || null,
-    streak?.streak_start_date || null,
-    streak?.total_study_days || 0,
-    data.localDate
-  );
-
-  if (streakUpdate.changed) {
-    if (streak) {
-      await supabase
-        .from("streaks")
-        .update({
-          current_streak: streakUpdate.current_streak,
-          longest_streak: streakUpdate.longest_streak,
-          last_activity_date: streakUpdate.last_activity_date,
-          streak_start_date: streakUpdate.streak_start_date,
-          total_study_days: streakUpdate.total_study_days,
-        })
-        .eq("id", streak.id);
-    } else {
-      await supabase.from("streaks").insert({
-        user_id: user.id,
-        current_streak: streakUpdate.current_streak,
-        longest_streak: streakUpdate.longest_streak,
-        last_activity_date: streakUpdate.last_activity_date,
-        streak_start_date: streakUpdate.streak_start_date,
-        total_study_days: streakUpdate.total_study_days,
-      });
-    }
-  }
-
   return { success: true, passed };
 }
 
@@ -247,15 +147,13 @@ export async function resetProgress() {
 
   const supabase = await createClient();
 
-  // Delete all user data in parallel
-  const [progressResult, attemptsResult, streaksResult, examsResult] = await Promise.all([
+  const [progressResult, attemptsResult, examsResult] = await Promise.all([
     supabase.from("progress").delete().eq("user_id", user.id),
     supabase.from("question_attempts").delete().eq("user_id", user.id),
-    supabase.from("streaks").delete().eq("user_id", user.id),
     supabase.from("exam_sessions").delete().eq("user_id", user.id),
   ]);
 
-  const errors = [progressResult.error, attemptsResult.error, streaksResult.error, examsResult.error].filter(Boolean);
+  const errors = [progressResult.error, attemptsResult.error, examsResult.error].filter(Boolean);
 
   if (errors.length > 0) {
     console.error("Errors resetting progress:", errors);

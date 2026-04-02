@@ -48,7 +48,7 @@ export function ResetProgressButton() {
           <AlertDialogTitle>Reset all progress?</AlertDialogTitle>
           <AlertDialogDescription>
             This will permanently delete all your progress data, including question history,
-            topic mastery, streaks, and exam results. This action cannot be undone.
+            topic mastery, and exam results. This action cannot be undone.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

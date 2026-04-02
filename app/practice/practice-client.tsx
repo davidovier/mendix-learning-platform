@@ -114,12 +114,6 @@ export function PracticeClient({
     setView("quiz");
   };
 
-  // Get local date in YYYY-MM-DD format
-  const getLocalDate = () => {
-    const now = new Date();
-    return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
-  };
-
   const handleAnswer = async (correct: boolean, questionId: string) => {
     // Check and increment usage (only for non-Pro users)
     if (usageStatus && !usageStatus.isPro) {
@@ -160,7 +154,6 @@ export function PracticeClient({
         topic_id: finalTopicId,
         topic_name: topicName,
         is_correct: correct,
-        localDate: getLocalDate(),
       });
     }
   };
