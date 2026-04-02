@@ -38,14 +38,14 @@ export function UserNavClient({ user, isPro }: UserNavClientProps) {
         className={cn(
           "relative flex items-center justify-center w-9 h-9 rounded-full text-sm font-bold transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
           isPro
-            ? "bg-gradient-to-br from-amber-400 via-amber-500 to-orange-500 text-white shadow-lg shadow-amber-500/25"
+            ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
             : "bg-primary/10 text-primary hover:bg-primary/20"
         )}
       >
         <span>{initials}</span>
         {isPro && (
-          <div className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 bg-background rounded-full flex items-center justify-center shadow-sm">
-            <Crown className="w-2.5 h-2.5 text-amber-500" />
+          <div className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 bg-background rounded-full flex items-center justify-center shadow-sm border border-border">
+            <Sparkles className="w-2 h-2 text-primary" />
           </div>
         )}
       </DropdownMenuTrigger>
@@ -56,7 +56,7 @@ export function UserNavClient({ user, isPro }: UserNavClientProps) {
               {user.email}
             </p>
             {isPro ? (
-              <p className="text-xs text-amber-600 dark:text-amber-400 flex items-center gap-1">
+              <p className="text-xs text-primary flex items-center gap-1">
                 <Sparkles className="h-3 w-3" />
                 Pro Lifetime
               </p>
@@ -66,36 +66,30 @@ export function UserNavClient({ user, isPro }: UserNavClientProps) {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem
-          render={
-            <Link href="/progress" className="flex items-center gap-2">
-              <User className="h-4 w-4" />
-              My Progress
-            </Link>
-          }
-        />
-        <DropdownMenuItem
-          render={
-            <Link href="/account" className="flex items-center gap-2">
-              <Settings className="h-4 w-4" />
-              Account
-            </Link>
-          }
-        />
+        <DropdownMenuItem>
+          <Link href="/progress" className="flex items-center gap-2 w-full">
+            <User className="h-4 w-4" />
+            My Progress
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <Link href="/account" className="flex items-center gap-2 w-full">
+            <Settings className="h-4 w-4" />
+            Account
+          </Link>
+        </DropdownMenuItem>
         {!isPro && (
           <>
             <DropdownMenuSeparator />
-            <DropdownMenuItem
-              render={
-                <Link
-                  href="/pricing"
-                  className="flex items-center gap-2 text-amber-600 dark:text-amber-400"
-                >
-                  <Sparkles className="h-4 w-4" />
-                  Upgrade to Pro
-                </Link>
-              }
-            />
+            <DropdownMenuItem>
+              <Link
+                href="/pricing"
+                className="flex items-center gap-2 w-full text-primary"
+              >
+                <Sparkles className="h-4 w-4" />
+                Upgrade to Pro
+              </Link>
+            </DropdownMenuItem>
           </>
         )}
         <DropdownMenuSeparator />
