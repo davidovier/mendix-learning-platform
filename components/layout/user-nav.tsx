@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { User, Sparkles, CreditCard, Settings, LogOut, Crown } from "lucide-react";
+import { User, Sparkles, Settings, LogOut, Crown } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -35,7 +35,7 @@ export async function UserNav() {
       <DropdownMenuTrigger className="focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-full">
         <div
           className={cn(
-            "relative flex items-center justify-center w-9 h-9 rounded-full text-sm font-semibold transition-all",
+            "relative flex items-center justify-center w-9 h-9 rounded-full text-sm font-semibold transition-all cursor-pointer",
             isPro
               ? "bg-gradient-to-br from-amber-400 via-amber-500 to-orange-500 text-white shadow-lg shadow-amber-500/25"
               : "bg-muted text-muted-foreground hover:bg-muted/80"
@@ -66,34 +66,40 @@ export async function UserNav() {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <Link href="/progress" className="w-full flex items-center gap-2">
-            <User className="h-4 w-4" />
-            My Progress
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Link href="/account" className="w-full flex items-center gap-2">
-            <Settings className="h-4 w-4" />
-            Account
-          </Link>
-        </DropdownMenuItem>
+        <DropdownMenuItem
+          render={
+            <Link href="/progress" className="flex items-center gap-2">
+              <User className="h-4 w-4" />
+              My Progress
+            </Link>
+          }
+        />
+        <DropdownMenuItem
+          render={
+            <Link href="/account" className="flex items-center gap-2">
+              <Settings className="h-4 w-4" />
+              Account
+            </Link>
+          }
+        />
         {!isPro && (
           <>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Link
-                href="/pricing"
-                className="w-full flex items-center gap-2 text-amber-600 dark:text-amber-400"
-              >
-                <Sparkles className="h-4 w-4" />
-                Upgrade to Pro
-              </Link>
-            </DropdownMenuItem>
+            <DropdownMenuItem
+              render={
+                <Link
+                  href="/pricing"
+                  className="flex items-center gap-2 text-amber-600 dark:text-amber-400"
+                >
+                  <Sparkles className="h-4 w-4" />
+                  Upgrade to Pro
+                </Link>
+              }
+            />
           </>
         )}
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="text-muted-foreground">
+        <DropdownMenuItem className="p-0">
           <LogoutButton />
         </DropdownMenuItem>
       </DropdownMenuContent>
