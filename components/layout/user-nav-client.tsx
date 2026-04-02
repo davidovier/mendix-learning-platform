@@ -1,7 +1,8 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { User, Sparkles, Settings, Crown } from "lucide-react";
+import { User, Sparkles, Settings } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,6 +20,8 @@ interface UserNavClientProps {
 }
 
 export function UserNavClient({ user, isPro }: UserNavClientProps) {
+  const router = useRouter();
+
   if (!user) {
     return (
       <Link
@@ -66,29 +69,23 @@ export function UserNavClient({ user, isPro }: UserNavClientProps) {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <Link href="/progress" className="flex items-center gap-2 w-full">
-            <User className="h-4 w-4" />
-            My Progress
-          </Link>
+        <DropdownMenuItem onClick={() => router.push("/progress")}>
+          <User className="h-4 w-4 mr-2" />
+          My Progress
         </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Link href="/account" className="flex items-center gap-2 w-full">
-            <Settings className="h-4 w-4" />
-            Account
-          </Link>
+        <DropdownMenuItem onClick={() => router.push("/account")}>
+          <Settings className="h-4 w-4 mr-2" />
+          Account
         </DropdownMenuItem>
         {!isPro && (
           <>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Link
-                href="/pricing"
-                className="flex items-center gap-2 w-full text-primary"
-              >
-                <Sparkles className="h-4 w-4" />
-                Upgrade to Pro
-              </Link>
+            <DropdownMenuItem
+              onClick={() => router.push("/pricing")}
+              className="text-primary"
+            >
+              <Sparkles className="h-4 w-4 mr-2" />
+              Upgrade to Pro
             </DropdownMenuItem>
           </>
         )}
