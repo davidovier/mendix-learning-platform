@@ -1,60 +1,38 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Infinity } from "lucide-react";
 
 interface SubscriptionActionsProps {
   hasSubscription: boolean;
   isActive: boolean;
+  isLifetime: boolean;
 }
 
 export function SubscriptionActions({
   hasSubscription,
   isActive,
+  isLifetime,
 }: SubscriptionActionsProps) {
-  const [isLoading, setIsLoading] = useState(false);
-
-  const openPortal = async () => {
-    setIsLoading(true);
-    try {
-      const response = await fetch("/api/stripe/portal", {
-        method: "POST",
-      });
-
-      const data = await response.json();
-
-      if (data.error) {
-        throw new Error(data.error);
-      }
-
-      if (data.url) {
-        window.location.href = data.url;
-      }
-    } catch (error) {
-      console.error("Portal error:", error);
-      alert("Failed to open billing portal. Please try again.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  // Lifetime users don't need to manage anything - one-time payment, forever access
+  if (isActive && isLifetime) {
+    return (
+      <div className="flex items-center gap-2 text-sm text-emerald-600 dark:text-emerald-400">
+        <Infinity className="h-4 w-4" />
+        <span>Lifetime access - no billing to manage</span>
+      </div>
+    );
+  }
 
   if (isActive) {
-    return (
-      <Button variant="outline" onClick={openPortal} disabled={isLoading}>
-        {isLoading ? "Loading..." : "Manage Subscription"}
-      </Button>
-    );
+    // This would be for recurring subscriptions (not currently used)
+    return null;
   }
 
   if (hasSubscription) {
     return (
-      <div className="flex gap-3">
-        <Button render={<Link href="/pricing" />}>Upgrade to Pro</Button>
-        <Button variant="outline" onClick={openPortal} disabled={isLoading}>
-          {isLoading ? "Loading..." : "Billing History"}
-        </Button>
-      </div>
+      <Button render={<Link href="/pricing" />}>Upgrade to Pro</Button>
     );
   }
 

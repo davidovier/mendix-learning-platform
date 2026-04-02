@@ -23,6 +23,7 @@ export default async function AccountPage() {
 
   const subscription = await getSubscription(user.id);
   const isActive = subscription?.status === "active";
+  const isLifetime = isActive && subscription?.price_id === "lifetime";
   const periodEnd = subscription?.current_period_end
     ? new Date(subscription.current_period_end)
     : null;
@@ -66,17 +67,19 @@ export default async function AccountPage() {
             <div className="flex items-center justify-between">
               <CardTitle className="text-lg">Subscription</CardTitle>
               <Badge variant={isActive ? "default" : "secondary"}>
-                {isActive ? "Pro" : "Free"}
+                {isLifetime ? "Pro Lifetime" : isActive ? "Pro" : "Free"}
               </Badge>
             </div>
             <CardDescription>
-              {isActive
-                ? "You have full access to all features"
-                : "Upgrade to Pro for unlimited access"}
+              {isLifetime
+                ? "You have lifetime access to all features"
+                : isActive
+                  ? "You have full access to all features"
+                  : "Upgrade to Pro for unlimited access"}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            {isActive && periodEnd && (
+            {isActive && !isLifetime && periodEnd && (
               <div>
                 <div className="text-sm text-muted-foreground">
                   {subscription?.cancel_at_period_end
@@ -101,6 +104,7 @@ export default async function AccountPage() {
             <SubscriptionActions
               hasSubscription={!!subscription?.stripe_customer_id}
               isActive={isActive}
+              isLifetime={isLifetime}
             />
           </CardContent>
         </Card>
