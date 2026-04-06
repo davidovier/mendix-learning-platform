@@ -4,6 +4,9 @@ import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { GoogleAnalytics } from "@next/third-parties/google";
+import { AnalyticsProvider } from "@/components/providers/analytics-provider";
+import { Suspense } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -73,8 +76,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    // Add these when you have them
-    // google: "your-google-verification-code",
+    google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION,
   },
 };
 
@@ -91,9 +93,16 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col bg-background font-sans antialiased">
         <TooltipProvider>
           <Header />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1">
+            <Suspense fallback={null}>
+              <AnalyticsProvider>{children}</AnalyticsProvider>
+            </Suspense>
+          </main>
           <Footer />
         </TooltipProvider>
+        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+        )}
       </body>
     </html>
   );
