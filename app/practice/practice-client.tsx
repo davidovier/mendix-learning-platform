@@ -34,6 +34,7 @@ export interface Question {
   question: string;
   options: string[];
   correctIndex: number;
+  explanation?: string;
 }
 
 // Serializable topic data (no icon functions)
