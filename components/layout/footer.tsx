@@ -32,6 +32,9 @@ export async function Footer() {
                 <Link href="/cheatsheet" className="text-muted-foreground hover:text-foreground transition-colors">
                   Cheatsheet
                 </Link>
+                <Link href="/pricing" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Pricing
+                </Link>
               </>
             ) : (
               <>
