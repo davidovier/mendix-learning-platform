@@ -1,0 +1,131 @@
+---
+title: "Understanding Mendix Security: Access Rules Explained"
+description: "Master Mendix security concepts including access rules, module roles, entity security, and XPath constraints for the certification exam."
+date: "2026-04-07"
+category: "Concept Guide"
+topics: ["security"]
+---
+
+Security is one of the most heavily tested topics on the Mendix Intermediate exam. This guide explains how Mendix security works from the ground up.
+
+## Security Model Overview
+
+Mendix security operates on multiple levels:
+
+1. **Project Security** - Overall security settings
+2. **Module Security** - Access rules per module
+3. **Entity Security** - Who can access what data
+4. **Page Security** - Who can view which pages
+5. **Microflow Security** - Who can execute which logic
+
+## Security Levels
+
+Mendix has two security levels:
+
+**Prototype/Demo Mode:**
+- Used during development
+- All access allowed by default
+- Easy to test functionality
+- Never use in production!
+
+**Production Mode:**
+- Used for live applications
+- All access denied by default
+- Must explicitly grant permissions
+- Required for deployment
+
+## Module Roles vs User Roles
+
+This distinction trips up many candidates:
+
+**Module Roles:**
+- Defined within a module
+- Determine access to module content
+- Examples: "OrderManager," "OrderViewer"
+
+**User Roles:**
+- Defined at project level
+- Assigned to actual users
+- Combine multiple module roles
+- Examples: "Administrator," "SalesRep"
+
+A user role like "SalesRep" might include:
+- "OrderManager" from the Sales module
+- "CustomerViewer" from the CRM module
+- "ReportViewer" from the Reporting module
+
+## Access Rules
+
+Access rules determine what users can do with entities:
+
+**Rule Components:**
+- **Module Role** - Which role this rule applies to
+- **Access Rights** - Create, Read, Write, Delete
+- **XPath Constraint** - Limit which objects are accessible
+- **Member Access** - Which attributes/associations are accessible
+
+**Example:**
+A "SalesRep" module role might have this access to Orders:
+- Create: Yes
+- Read: Yes (with XPath: `[SalesRep = '[%CurrentUser%]']`)
+- Write: Yes (only their own orders)
+- Delete: No
+
+## XPath Constraints in Security
+
+XPath constraints limit which objects a user can access:
+
+```
+[Owner = '[%CurrentUser%]']           // Only own records
+[Department = '[%CurrentUser%]/Department]  // Same department
+[Status != 'Confidential']            // Not confidential
+```
+
+**Important:** XPath constraints apply to ALL access - retrieve, change, delete.
+
+## Entity Access Summary
+
+| Access Type | Description |
+|-------------|-------------|
+| Create | Can create new objects |
+| Read | Can retrieve/view objects |
+| Write | Can modify existing objects |
+| Delete | Can delete objects |
+
+Each can be:
+- **None** - No access
+- **Yes** - Full access (for this role)
+- **XPath** - Conditional access based on constraint
+
+## Page and Microflow Security
+
+**Pages:**
+- Linked to module roles
+- If no role has access, page is hidden in navigation
+- Users without access see "Access Denied"
+
+**Microflows:**
+- Also linked to module roles
+- Can be set to "Allowed" or specific roles
+- Buttons calling restricted microflows are hidden
+
+## Common Exam Questions
+
+1. *"What happens when a user tries to access data outside their XPath constraint?"*
+   - The data is simply not returned - no error shown
+
+2. *"In Production mode, what is the default access?"*
+   - All access denied - must be explicitly granted
+
+3. *"Can XPath constraints reference the current user?"*
+   - Yes, using `[%CurrentUser%]` token
+
+## Security Best Practices
+
+1. **Start with Production mode** - Even in development
+2. **Least privilege principle** - Only grant necessary access
+3. **Test all roles** - Use demo users for each role
+4. **Document your rules** - Complex security needs documentation
+5. **Review regularly** - Security requirements change
+
+Solidify your understanding with our [security practice questions](/study/security).

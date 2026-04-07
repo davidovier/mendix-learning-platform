@@ -1,0 +1,83 @@
+---
+title: "Microflows vs Nanoflows: Complete Comparison"
+description: "Understand the key differences between Mendix microflows and nanoflows, when to use each, and common mistakes to avoid."
+date: "2026-04-07"
+category: "Concept Guide"
+topics: ["microflows", "nanoflows"]
+---
+
+One of the most common questions on the Mendix Intermediate exam involves understanding when to use microflows versus nanoflows. This guide breaks down everything you need to know.
+
+## What Are Microflows?
+
+Microflows are **server-side** logic flows in Mendix. They execute on the Mendix Runtime server and are used for:
+
+- Database operations (create, retrieve, update, delete)
+- Complex business logic
+- Integration with external systems
+- Operations requiring access to the full database
+
+**Key characteristics:**
+- Run on the server
+- Can access all data in the database
+- Require a network round-trip
+- Cannot run offline
+
+## What Are Nanoflows?
+
+Nanoflows are **client-side** logic flows that execute directly in the user's browser or on their mobile device. They're used for:
+
+- Quick user interface updates
+- Offline functionality
+- Simple calculations
+- Client-side validation
+
+**Key characteristics:**
+- Run in the browser/device
+- Only access data already loaded on the client
+- No network round-trip needed
+- Essential for offline-first applications
+
+## Key Differences
+
+| Aspect | Microflow | Nanoflow |
+|--------|-----------|----------|
+| **Execution** | Server-side | Client-side |
+| **Speed** | Slower (network trip) | Faster (local) |
+| **Offline** | Not available | Available |
+| **Data Access** | Full database | Client-loaded only |
+| **Use Case** | Complex logic, DB ops | UI updates, offline |
+
+## When to Use Each
+
+**Use Microflows when:**
+- Retrieving data from the database
+- Performing commits to the database
+- Calling web services or REST APIs
+- Executing complex business rules
+- Operations that need transaction support
+
+**Use Nanoflows when:**
+- Showing/hiding UI elements
+- Simple calculations on existing objects
+- Client-side validation before submit
+- Building offline-capable apps
+- Performance is critical for user experience
+
+## Common Exam Mistakes
+
+1. **Thinking nanoflows can retrieve from the database** - They can only work with objects already on the client
+
+2. **Using microflows for simple UI logic** - This causes unnecessary server round-trips
+
+3. **Forgetting offline implications** - If your app needs offline support, plan for nanoflows early
+
+4. **Not understanding the performance trade-off** - Microflows are more powerful but slower
+
+## Practice Question Example
+
+*"A user needs to validate that an email field is properly formatted before submitting a form. Which should you use?"*
+
+**Answer:** Nanoflow - This is client-side validation that doesn't require database access.
+
+Ready to test your knowledge? Try our [microflow practice questions](/study/microflows).

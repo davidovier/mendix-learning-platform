@@ -1,0 +1,78 @@
+---
+title: "10 Common Mistakes on the Mendix Intermediate Exam"
+description: "Avoid these frequent pitfalls that trip up Mendix certification candidates. Learn what mistakes to watch for and how to avoid them."
+date: "2026-04-07"
+category: "Exam Tips"
+topics: ["general"]
+---
+
+After analyzing hundreds of practice exam attempts, we've identified the most common mistakes that trip up Mendix Intermediate certification candidates. Avoid these pitfalls to boost your score.
+
+## 1. Confusing Microflows and Nanoflows
+
+**The Mistake:** Selecting microflow when nanoflow is correct (or vice versa).
+
+**How to Avoid:** Remember the key rule - microflows run on the server and can access the database. Nanoflows run on the client and only work with data already loaded.
+
+## 2. Forgetting Association Ownership
+
+**The Mistake:** Not understanding which entity owns an association and how this affects delete behavior.
+
+**How to Avoid:** The entity with the association property is the "owner." When the owner is deleted, the association reference is automatically cleaned up.
+
+## 3. Misunderstanding Access Rules
+
+**The Mistake:** Thinking access rules apply to all users, or confusing module roles with user roles.
+
+**How to Avoid:** Access rules are defined per module role. A user's access is determined by which module roles their user role includes.
+
+## 4. XPath Syntax Errors
+
+**The Mistake:** Forgetting module prefixes, using wrong quotes, or incorrect operator syntax.
+
+**How to Avoid:** Always use the format `//Module.Entity[constraint]`. Strings need single quotes. Practice writing XPath expressions regularly.
+
+## 5. Ignoring Error Handling
+
+**The Mistake:** Not considering what happens when a microflow encounters an error.
+
+**How to Avoid:** Understand error handling activities (Error Event, Continue, Rollback). Know when transactions are rolled back.
+
+## 6. Security Level Confusion
+
+**The Mistake:** Not knowing the difference between Prototype/Demo and Production security levels.
+
+**How to Avoid:** Prototype/Demo mode allows all access by default. Production mode denies everything not explicitly allowed.
+
+## 7. Misreading Questions
+
+**The Mistake:** Missing keywords like "BEST," "FIRST," "NOT," or "EXCEPT."
+
+**How to Avoid:** Read each question twice. Circle or note keywords. "Which is NOT true" means 3 answers ARE true.
+
+## 8. Overthinking Simple Questions
+
+**The Mistake:** Looking for tricks in straightforward questions.
+
+**How to Avoid:** Sometimes the obvious answer is correct. If a question seems simple, it probably is.
+
+## 9. Poor Time Management
+
+**The Mistake:** Spending too long on difficult questions and running out of time.
+
+**How to Avoid:** Set a pace of ~1.5 minutes per question. Flag hard questions and return to them. Never leave questions blank.
+
+## 10. Not Reviewing Flagged Questions
+
+**The Mistake:** Running out of time without reviewing uncertain answers.
+
+**How to Avoid:** Aim to finish with 10-15 minutes left. Your second look often catches mistakes.
+
+## Bonus Tips
+
+- **Read all options** before selecting - the "best" answer might be option D
+- **Eliminate obviously wrong answers** first
+- **Trust your preparation** - you've studied, so trust your knowledge
+- **Stay calm** - anxiety causes careless mistakes
+
+Ready to avoid these mistakes in practice? Take our [practice exam](/exam) to test yourself under real conditions.

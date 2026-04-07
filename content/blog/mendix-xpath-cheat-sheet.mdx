@@ -1,0 +1,114 @@
+---
+title: "Mendix XPath Cheat Sheet with Examples"
+description: "Quick reference guide for Mendix XPath syntax, common functions, tokens, and practical examples for the certification exam."
+date: "2026-04-07"
+category: "Concept Guide"
+topics: ["xpath"]
+---
+
+XPath is essential for retrieving and filtering data in Mendix. This cheat sheet covers the most important syntax and functions you'll need for the certification exam.
+
+## Basic Syntax
+
+XPath expressions in Mendix follow this pattern:
+
+```
+//Module.Entity[constraint]
+```
+
+**Examples:**
+```
+//Sales.Order[Status = 'Completed']
+//HR.Employee[Age > 30]
+//CRM.Customer[contains(Email, '@company.com')]
+```
+
+## Comparison Operators
+
+| Operator | Description | Example |
+|----------|-------------|---------|
+| `=` | Equal | `[Status = 'Active']` |
+| `!=` | Not equal | `[Status != 'Deleted']` |
+| `>` | Greater than | `[Amount > 1000]` |
+| `<` | Less than | `[Age < 18]` |
+| `>=` | Greater or equal | `[Rating >= 4]` |
+| `<=` | Less or equal | `[Stock <= 10]` |
+
+## Logical Operators
+
+Combine multiple conditions:
+
+```
+//Sales.Order[Status = 'Pending' and Amount > 500]
+//HR.Employee[Department = 'IT' or Department = 'HR']
+//CRM.Customer[not(IsActive)]
+```
+
+## Common Functions
+
+**String functions:**
+```
+contains(Name, 'John')      // Name contains 'John'
+starts-with(Code, 'PRD')    // Code starts with 'PRD'
+string-length(Name) > 10    // Name longer than 10 chars
+```
+
+**Null checks:**
+```
+[Email != empty]            // Email is not empty
+[Manager = empty]           // Manager is empty/null
+```
+
+## Tokens (Current User/Time)
+
+Mendix provides special tokens:
+
+| Token | Description |
+|-------|-------------|
+| `[%CurrentUser%]` | The logged-in user |
+| `[%CurrentDateTime%]` | Current date and time |
+| `[%CurrentObject%]` | Current context object |
+| `[%BeginOfCurrentDay%]` | Start of today |
+| `[%EndOfCurrentDay%]` | End of today |
+
+**Examples:**
+```
+//Task.Task[AssignedTo = '[%CurrentUser%]']
+//Sales.Order[OrderDate > '[%BeginOfCurrentDay%]']
+```
+
+## Association Traversal
+
+Navigate associations using `/`:
+
+```
+//Sales.OrderLine[Sales.OrderLine_Order/Sales.Order/Status = 'Shipped']
+//HR.Employee[HR.Employee_Department/HR.Department/Name = 'Engineering']
+```
+
+## Exam Tips
+
+1. **Remember the double slash** - XPath always starts with `//`
+2. **Module prefix required** - Always include `Module.Entity`
+3. **Quotes for strings** - String values need single quotes
+4. **Case sensitivity** - XPath is case-sensitive
+5. **Token syntax** - Tokens use `[% %]` brackets
+
+## Practice Examples
+
+Try writing XPath for these scenarios:
+
+1. All active customers from the USA
+2. Orders placed today worth over $100
+3. Employees whose manager is the current user
+4. Products with names containing "Pro"
+
+**Answers:**
+```
+//CRM.Customer[IsActive = true and Country = 'USA']
+//Sales.Order[OrderDate > '[%BeginOfCurrentDay%]' and Total > 100]
+//HR.Employee[HR.Employee_Manager = '[%CurrentUser%]']
+//Inventory.Product[contains(Name, 'Pro')]
+```
+
+Practice more with our [XPath study materials](/study/xpath).
