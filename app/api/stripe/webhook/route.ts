@@ -6,6 +6,55 @@ import { createClient } from "@/lib/supabase/server";
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
 
+// GA4 Measurement Protocol for server-side tracking
+async function trackPurchaseServerSide(
+  transactionId: string,
+  value: number,
+  currency: string,
+  metadata: Record<string, string>
+) {
+  const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+  const apiSecret = process.env.GA_MEASUREMENT_PROTOCOL_SECRET;
+
+  if (!measurementId || !apiSecret) {
+    console.log("GA4 Measurement Protocol not configured, skipping server-side tracking");
+    return;
+  }
+
+  const payload = {
+    client_id: metadata.userId || "server",
+    events: [
+      {
+        name: "purchase",
+        params: {
+          transaction_id: transactionId,
+          value,
+          currency,
+          ...(metadata.utm_source && { campaign_source: metadata.utm_source }),
+          ...(metadata.utm_medium && { campaign_medium: metadata.utm_medium }),
+          ...(metadata.utm_campaign && { campaign_name: metadata.utm_campaign }),
+        },
+      },
+    ],
+  };
+
+  try {
+    const response = await fetch(
+      `https://www.google-analytics.com/mp/collect?measurement_id=${measurementId}&api_secret=${apiSecret}`,
+      {
+        method: "POST",
+        body: JSON.stringify(payload),
+      }
+    );
+
+    if (!response.ok) {
+      console.error("GA4 Measurement Protocol error:", response.status);
+    }
+  } catch (error) {
+    console.error("Failed to send GA4 server-side event:", error);
+  }
+}
+
 async function grantLifetimeAccess(customerId: string, paymentId: string) {
   const supabase = await createClient();
 
@@ -72,6 +121,16 @@ export async function POST(request: NextRequest) {
           const customerId = session.customer as string;
           const paymentIntentId = session.payment_intent as string;
           await grantLifetimeAccess(customerId, paymentIntentId);
+
+          // Track purchase server-side for attribution
+          const metadata = (session.metadata || {}) as Record<string, string>;
+          const amountTotal = session.amount_total || 0;
+          await trackPurchaseServerSide(
+            paymentIntentId,
+            amountTotal / 100,
+            session.currency?.toUpperCase() || "EUR",
+            metadata
+          );
         }
         break;
       }
