@@ -1,12 +1,36 @@
 import type { Metadata } from "next";
 import { Check, X } from "lucide-react";
 import { PricingToggle } from "@/components/pricing/pricing-toggle";
+import { JsonLd, faqSchema } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
-  title: "Pricing",
+  title: "Pricing - Mendix Prep Premium",
   description:
-    "Choose the plan that fits your Mendix certification preparation needs. Free tier available, Pro unlocks unlimited access.",
+    "Unlock all practice questions and exam simulations. One-time purchase for lifetime access to Mendix Intermediate Certification prep.",
+  keywords: [
+    "mendix prep pricing",
+    "mendix certification cost",
+    "mendix study premium",
+  ],
 };
+
+const pricingFAQs = [
+  {
+    question: "Can I cancel anytime?",
+    answer:
+      "Yes, you can cancel your subscription at any time. You'll continue to have Pro access until the end of your billing period.",
+  },
+  {
+    question: "What payment methods do you accept?",
+    answer:
+      "We accept all major credit cards, iDEAL, and Bancontact through our secure payment provider Stripe.",
+  },
+  {
+    question: "Is the free tier really free?",
+    answer:
+      "Yes! The free tier includes 10 practice questions per day and 1 exam simulation per week. No credit card required.",
+  },
+];
 
 const features = [
   { name: "Practice questions", free: "10/day", pro: "Unlimited" },
@@ -20,6 +44,7 @@ const features = [
 export default function PricingPage() {
   return (
     <div className="container mx-auto px-4 py-12">
+      <JsonLd data={faqSchema(pricingFAQs)} />
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-3xl font-bold tracking-tight mb-4">
