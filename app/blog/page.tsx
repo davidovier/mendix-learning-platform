@@ -26,7 +26,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
     posts = posts.filter((post) => post.category === params.category);
   }
   if (params.topic) {
-    posts = posts.filter((post) => post.topics.includes(params.topic));
+    posts = posts.filter((post) => post.topics.includes(params.topic!));
   }
 
   const activeCategory = params.category || null;
