@@ -5,9 +5,15 @@ import { PracticeClient, type Question, type TopicData } from "./practice-client
 import { getUsageStatus } from "@/lib/stripe/usage-actions";
 
 export const metadata: Metadata = {
-  title: "Practice Quiz",
+  title: "Practice Quiz - 268 Mendix Exam Questions",
   description:
-    "Practice with 268+ exam-style questions organized by topic. Get instant feedback and track your progress toward Mendix certification.",
+    "Test your knowledge with 268 real exam-style questions. Free practice for Mendix Intermediate certification with instant feedback and progress tracking.",
+  keywords: [
+    "mendix practice test",
+    "mendix quiz",
+    "mendix exam questions",
+    "mendix certification practice",
+  ],
 };
 
 // Dynamic page - needs to check user-specific usage limits
