@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
+import createMDX from "@next/mdx";
 
-// Bug fix #15: Removed ignoreBuildErrors to catch type errors during build
-const nextConfig: NextConfig = {};
+const nextConfig: NextConfig = {
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
+};
 
-export default nextConfig;
+const withMDX = createMDX({});
+
+export default withMDX(nextConfig);
