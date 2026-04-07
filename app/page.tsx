@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { BookOpen, PenLine, Timer, BarChart3, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { JsonLd, webApplicationSchema } from "@/lib/structured-data";
 
 // Static page - can be fully cached
 export const revalidate = false;
@@ -35,6 +36,7 @@ const features = [
 export default function HomePage() {
   return (
     <div className="container mx-auto flex flex-col items-center px-4 pt-16 sm:pt-20 md:pt-24 pb-12 sm:pb-16">
+      <JsonLd data={webApplicationSchema()} />
       <div className="text-center mb-8 sm:mb-10 md:mb-12">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground">
           Mendix Intermediate Certification
