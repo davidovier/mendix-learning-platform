@@ -62,6 +62,32 @@ export function faqSchema(items: FAQItem[]) {
   };
 }
 
+export function articleSchema(post: {
+  title: string;
+  description: string;
+  date: string;
+  url: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    url: post.url,
+    author: {
+      "@type": "Organization",
+      name: "Mendix Prep",
+      url: SITE_URL,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Mendix Prep",
+      url: SITE_URL,
+    },
+  };
+}
+
 export function JsonLd({ data }: { data: object }) {
   return (
     <script
