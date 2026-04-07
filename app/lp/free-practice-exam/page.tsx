@@ -65,8 +65,8 @@ export default function FreePracticeExamLandingPage() {
             268 exam-style questions to help you pass the Mendix Intermediate
             Developer Certification
           </p>
-          <Button size="lg" className="text-lg px-8 py-6" asChild>
-            <Link href="/signup">Start Practicing - It&apos;s Free</Link>
+          <Button size="lg" className="text-lg px-8 py-6" render={<Link href="/signup" />}>
+            Start Practicing - It&apos;s Free
           </Button>
           <p className="text-sm text-muted-foreground mt-4">
             No credit card required
@@ -141,8 +141,8 @@ export default function FreePracticeExamLandingPage() {
           <p className="text-muted-foreground mb-6">
             Join developers who use Mendix Prep to ace their exams
           </p>
-          <Button size="lg" asChild>
-            <Link href="/signup">Start Free Practice</Link>
+          <Button size="lg" render={<Link href="/signup" />}>
+            Start Free Practice
           </Button>
         </div>
       </section>
