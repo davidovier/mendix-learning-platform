@@ -6,9 +6,15 @@ import { getUsageStatus } from "@/lib/stripe/usage-actions";
 import { UpgradePrompt, UsageLimitBanner } from "@/components/upgrade-prompt";
 
 export const metadata: Metadata = {
-  title: "Practice Exam",
+  title: "Mock Exam - Timed Mendix Certification Simulation",
   description:
-    "Take a timed 90-minute practice exam with 50 randomly selected questions. Simulate real Mendix Intermediate Certification exam conditions.",
+    "Simulate the real exam with timed 50-question tests. Track your readiness for Mendix Intermediate certification under realistic conditions.",
+  keywords: [
+    "mendix mock exam",
+    "mendix exam simulator",
+    "mendix certification test",
+    "mendix timed exam",
+  ],
 };
 
 // Dynamic page - needs to check user-specific usage limits
