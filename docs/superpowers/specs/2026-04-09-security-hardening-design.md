@@ -31,9 +31,12 @@ If `audit fix` doesn't resolve all issues, use package overrides in `package.jso
 
 ### 1.2 Security Headers
 
-Add to `next.config.ts`:
+Update `next.config.ts` to add headers configuration:
 
 ```typescript
+import type { NextConfig } from "next";
+import createMDX from "@next/mdx";
+
 const securityHeaders = [
   {
     key: 'Content-Security-Policy',
@@ -54,6 +57,22 @@ const securityHeaders = [
   { key: 'Strict-Transport-Security', value: 'max-age=31536000; includeSubDomains' },
   { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
 ];
+```
+
+const nextConfig: NextConfig = {
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: securityHeaders,
+      },
+    ];
+  },
+};
+
+const withMDX = createMDX({});
+export default withMDX(nextConfig);
 ```
 
 **Rationale:**
@@ -93,6 +112,21 @@ CREATE TABLE rate_limits (
 
 CREATE INDEX idx_rate_limits_cleanup ON rate_limits(window_start);
 
+-- Enable RLS - users can only access their own rate limit records
+ALTER TABLE rate_limits ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Users can read own rate limits"
+  ON rate_limits FOR SELECT
+  USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can insert own rate limits"
+  ON rate_limits FOR INSERT
+  WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "Users can update own rate limits"
+  ON rate_limits FOR UPDATE
+  USING (auth.uid() = user_id);
+
 -- Cleanup function for old records (run via pg_cron or manual maintenance)
 -- Not required for MVP - table will stay small with per-minute windows
 -- Consider adding pg_cron job if table grows: SELECT cron.schedule('0 * * * *', 'SELECT cleanup_old_rate_limits()');
@@ -118,15 +152,14 @@ import { createClient } from "@/lib/supabase/server";
 import { isProUser } from "@/lib/stripe/subscription";
 
 interface RateLimitConfig {
-  endpoint: string;
   freeLimit: number;
   proLimit: number;
-  windowMinutes: number;
 }
 
+// All rate limits use 1-minute sliding windows (defined in SQL function)
 const RATE_LIMITS: Record<string, RateLimitConfig> = {
-  "/api/chat": { endpoint: "/api/chat", freeLimit: 10, proLimit: 30, windowMinutes: 1 },
-  "/api/explain": { endpoint: "/api/explain", freeLimit: 15, proLimit: 50, windowMinutes: 1 },
+  "/api/chat": { freeLimit: 10, proLimit: 30 },
+  "/api/explain": { freeLimit: 15, proLimit: 50 },
 };
 
 export interface RateLimitResult {
@@ -229,7 +262,7 @@ export async function POST(req: Request) {
 
 ### 3.2 Password Policy
 
-#### Update: `lib/security/password-validator.ts`
+#### Create: `lib/security/password-validator.ts`
 
 ```typescript
 export interface PasswordValidation {
@@ -255,10 +288,30 @@ export function validatePassword(password: string): PasswordValidation {
 
 - Change `minLength={6}` to `minLength={8}`
 - Update help text to "Minimum 8 characters"
+- Import and use `validatePassword()` for client-side validation before submit
 
-#### Update: Supabase Auth Settings
+#### Update: `lib/supabase/actions.ts`
 
-Configure minimum password length to 8 in Supabase Dashboard > Authentication > Policies.
+Add server-side validation to both `signUpWithEmail` and `updatePassword`:
+
+```typescript
+import { validatePassword } from "@/lib/security/password-validator";
+
+// In signUpWithEmail and updatePassword functions:
+const validation = validatePassword(password);
+if (!validation.valid) {
+  return { error: validation.errors[0] };
+}
+```
+
+#### Manual Step: Supabase Auth Settings
+
+Configure minimum password length to 8 in Supabase Dashboard:
+1. Go to Authentication > Policies
+2. Set minimum password length to 8
+3. Save changes
+
+This provides defense-in-depth: client validation (UX), server validation (security), and Supabase validation (last resort).
 
 ## Implementation Order
 
@@ -267,9 +320,12 @@ Configure minimum password length to 8 in Supabase Dashboard > Authentication > 
 | 1 | Run `npm audit fix` | Low | None |
 | 2 | Add security headers to `next.config.ts` | Low | None |
 | 3 | Add `/account` to proxy.ts protected routes | Low | None |
-| 4 | Update password policy (form + Supabase) | Low | None |
-| 5 | Create rate_limits table migration | Medium | None |
-| 6 | Create increment_rate_limit RPC function | Medium | Step 5 |
+| 4a | Create `lib/security/password-validator.ts` | Low | None |
+| 4b | Update signup-form.tsx (minLength + validator) | Low | Step 4a |
+| 4c | Update actions.ts (signUpWithEmail + updatePassword) | Low | Step 4a |
+| 4d | **Manual:** Update Supabase Dashboard password policy | Low | None |
+| 5 | Create rate_limits table + RLS policies (Supabase migration) | Medium | None |
+| 6 | Create increment_rate_limit RPC function (Supabase migration) | Medium | Step 5 |
 | 7 | Create `lib/security/rate-limiter.ts` | Medium | Step 6 |
 | 8 | Integrate rate limiter in `/api/chat` | Medium | Step 7 |
 | 9 | Integrate rate limiter in `/api/explain` | Medium | Step 7 |
@@ -285,7 +341,8 @@ Configure minimum password length to 8 in Supabase Dashboard > Authentication > 
 
 ### Application Layer
 - **Rate limiting:** Script 15+ rapid requests to `/api/chat`, verify 429 after limit
-- **Password:** Attempt signup with 7-char password, verify rejection
+- **Password (signup):** Attempt signup with 7-char password, verify rejection
+- **Password (reset):** Attempt password reset with 7-char password, verify rejection
 
 ## Rollback Plan
 
