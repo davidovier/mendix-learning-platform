@@ -5,16 +5,27 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { signUpWithEmail } from "@/lib/supabase/actions";
+import { validatePassword } from "@/lib/security/password-validator";
 
 export function SignupForm() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [passwordError, setPasswordError] = useState<string | null>(null);
 
   async function handleSubmit(formData: FormData) {
     setLoading(true);
     setError(null);
     setSuccess(null);
+
+    const password = formData.get("password") as string;
+    const validation = validatePassword(password);
+    if (!validation.valid) {
+      setPasswordError(validation.errors[0]);
+      setLoading(false);
+      return;
+    }
+    setPasswordError(null);
 
     const result = await signUpWithEmail(formData);
 
@@ -58,11 +69,14 @@ export function SignupForm() {
           id="password"
           name="password"
           type="password"
-          minLength={6}
+          minLength={8}
           required
         />
+        {passwordError && (
+          <p className="text-xs text-rose-600">{passwordError}</p>
+        )}
         <p className="text-xs text-muted-foreground">
-          Minimum 6 characters
+          Minimum 8 characters
         </p>
       </div>
 
