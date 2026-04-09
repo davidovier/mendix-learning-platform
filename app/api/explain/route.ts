@@ -1,5 +1,6 @@
 import { generateText } from "ai";
 import { getUser } from "@/lib/supabase/actions";
+import { checkRateLimit } from "@/lib/security/rate-limiter";
 
 export const maxDuration = 30;
 
@@ -39,6 +40,23 @@ export async function POST(req: Request) {
       status: 401,
       headers: { "Content-Type": "application/json" },
     });
+  }
+
+  // Rate limiting
+  const rateLimit = await checkRateLimit(user.id, "/api/explain");
+  if (!rateLimit.allowed) {
+    return new Response(
+      JSON.stringify({ error: "Too many requests", retryAfter: rateLimit.retryAfter }),
+      {
+        status: 429,
+        headers: {
+          "Content-Type": "application/json",
+          "Retry-After": String(rateLimit.retryAfter),
+          "X-RateLimit-Limit": String(rateLimit.limit),
+          "X-RateLimit-Remaining": "0",
+        },
+      }
+    );
   }
 
   let body: ExplainRequest;
