@@ -6,12 +6,13 @@ const securityHeaders = [
     key: "Content-Security-Policy",
     value: [
       "default-src 'self'",
-      "script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com",
+      // Next.js requires 'unsafe-inline' for hydration scripts; nonce-based CSP needs custom server setup
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://vercel.live",
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob: https:",
-      "font-src 'self'",
-      "connect-src 'self' https://*.supabase.co https://api.stripe.com https://www.google-analytics.com",
-      "frame-src https://js.stripe.com https://hooks.stripe.com",
+      "font-src 'self' data: https://fonts.gstatic.com",
+      "connect-src 'self' https://*.supabase.co https://api.stripe.com https://www.google-analytics.com https://vercel.live wss://ws-us3.pusher.com",
+      "frame-src https://js.stripe.com https://hooks.stripe.com https://vercel.live",
       "worker-src 'self' blob:",
     ].join("; "),
   },
