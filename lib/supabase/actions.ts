@@ -2,6 +2,7 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
+import { validatePassword } from "@/lib/security/password-validator";
 
 export async function signInWithEmail(formData: FormData) {
   const email = formData.get("email");
@@ -43,6 +44,11 @@ export async function signUpWithEmail(formData: FormData) {
   }
   if (typeof password !== "string" || !password) {
     return { error: "Password is required" };
+  }
+
+  const validation = validatePassword(password);
+  if (!validation.valid) {
+    return { error: validation.errors[0] };
   }
 
   const supabase = await createClient();
@@ -125,6 +131,11 @@ export async function updatePassword(formData: FormData) {
 
   if (typeof password !== "string" || !password) {
     return { error: "Password is required" };
+  }
+
+  const validation = validatePassword(password);
+  if (!validation.valid) {
+    return { error: validation.errors[0] };
   }
 
   const supabase = await createClient();
