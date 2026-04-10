@@ -242,6 +242,296 @@
       "tags": [
         "domain-model"
       ]
+    },
+    {
+      "id": "domain-model-exam-0",
+      "topicId": "domain-model",
+      "front": "What happens on commit of a non-persistable entity?",
+      "back": "Current attribute values and association values are stored in memory (NOT database).",
+      "tags": [
+        "domain-model",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "domain-model-exam-1",
+      "topicId": "domain-model",
+      "front": "For which entity type does Mendix create a database table?",
+      "back": "For persistable entities only.",
+      "tags": [
+        "domain-model",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "domain-model-exam-2",
+      "topicId": "domain-model",
+      "front": "Name 2 limitations of non-persistable entities",
+      "back": "No indexes and not possible to use validation in the domain model.",
+      "tags": [
+        "domain-model",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "domain-model-exam-3",
+      "topicId": "domain-model",
+      "front": "Who is the owner of an association between non-persistable entity and persistable entity?",
+      "back": "Non-persistable entity (NPE must always be the owner).",
+      "tags": [
+        "domain-model",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "domain-model-exam-4",
+      "topicId": "domain-model",
+      "front": "What is another way of calling an association?",
+      "back": "Reference",
+      "tags": [
+        "domain-model",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "domain-model-exam-5",
+      "topicId": "domain-model",
+      "front": "How many associations can you add between two entities?",
+      "back": "Many associations of various multiplicity.",
+      "tags": [
+        "domain-model",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "domain-model-exam-6",
+      "topicId": "domain-model",
+      "front": "When should you use multiple associations between 2 entities?",
+      "back": "When there are different relationships between two entities.",
+      "tags": [
+        "domain-model",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "domain-model-exam-7",
+      "topicId": "domain-model",
+      "front": "How will the association appearance change after you configure cascade delete?",
+      "back": "The border around the association name will become **RED**.",
+      "tags": [
+        "domain-model",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "domain-model-exam-8",
+      "topicId": "domain-model",
+      "front": "How will the association appearance change after you configure conditional delete?",
+      "back": "The border around the association name will become **BLUE**.",
+      "tags": [
+        "domain-model",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "domain-model-exam-9",
+      "topicId": "domain-model",
+      "front": "For which delete operation can you set error message for user?",
+      "back": "Conditional delete (not cascade).",
+      "tags": [
+        "domain-model",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "domain-model-exam-10",
+      "topicId": "domain-model",
+      "front": "What would be a good situation to use a calculated attribute?",
+      "back": "When a value is **viewed more often than it changes**.",
+      "tags": [
+        "domain-model",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "domain-model-exam-11",
+      "topicId": "domain-model",
+      "front": "If you were building an app with stock prices, would you make the stock value a calculated or stored attribute?",
+      "back": "Calculated attribute (changes frequently, viewed less often than it changes).",
+      "tags": [
+        "domain-model",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "domain-model-exam-12",
+      "topicId": "domain-model",
+      "front": "Can we use space in enum name?",
+      "back": "No.",
+      "tags": [
+        "domain-model",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "domain-model-exam-13",
+      "topicId": "domain-model",
+      "front": "Can you change name or caption of enum value after creation?",
+      "back": "Caption can be modified, name **cannot** be modified.",
+      "tags": [
+        "domain-model",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "domain-model-exam-14",
+      "topicId": "domain-model",
+      "front": "Which event handler always needs to return a boolean return value?",
+      "back": "The **before commit** (and all \"before\" handlers).",
+      "tags": [
+        "domain-model",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "domain-model-exam-15",
+      "topicId": "domain-model",
+      "front": "What is the best alternative to process something immediately after an object is committed?",
+      "back": "Event Handler (specifically, After Commit).",
+      "tags": [
+        "domain-model",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "domain-model-exam-16",
+      "topicId": "domain-model",
+      "front": "What would you do if you want to call a microflow on completion of commit operation of an entity?",
+      "back": "Use Event Handlers.",
+      "tags": [
+        "domain-model",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "domain-model-exam-17",
+      "topicId": "domain-model",
+      "front": "Which options list system members that can be stored as indicated in entity properties?",
+      "back": "Created Date, Changed Date, Owner, ChangedBy",
+      "tags": [
+        "domain-model",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "domain-model-exam-18",
+      "topicId": "domain-model",
+      "front": "Which term indicates a user that created the object?",
+      "back": "Owner",
+      "tags": [
+        "domain-model",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "domain-model-exam-19",
+      "topicId": "domain-model",
+      "front": "Name a reason why you would use a generalization of the Account entity instead of using the Account entity itself (in System module)",
+      "back": "Because you cannot change access rights in the System module.",
+      "tags": [
+        "domain-model",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "domain-model-exam-20",
+      "topicId": "domain-model",
+      "front": "How can you connect a profile picture to the account of a team member?",
+      "back": "Create a ProfilePicture entity and configure Image entity in the System module as its generalization.",
+      "tags": [
+        "domain-model",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "domain-model-exam-21",
+      "topicId": "domain-model",
+      "front": "Is it possible to limit an entity to only one object?",
+      "back": "Yes, through a Microflow.",
+      "tags": [
+        "domain-model",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "domain-model-exam-22",
+      "topicId": "domain-model",
+      "front": "Can you add an error message in the domain model?",
+      "back": "Yes (for validation rules).",
+      "tags": [
+        "domain-model",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "domain-model-exam-23",
+      "topicId": "domain-model",
+      "front": "Validation types available in domain model",
+      "back": "Maximum length, Unique, Required, Range, Equals, RegEx",
+      "tags": [
+        "domain-model",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "domain-model-exam-24",
+      "topicId": "domain-model",
+      "front": "When connecting 2 entities of 2 different modules, what do we call that association?",
+      "back": "Cross-module association.",
+      "tags": [
+        "domain-model",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "domain-model-exam-25",
+      "topicId": "domain-model",
+      "front": "How do you navigate to the associated entity in another module?",
+      "back": "Right-click the association and select \"Go to the other side\".",
+      "tags": [
+        "domain-model",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "domain-model-exam-26",
+      "topicId": "domain-model",
+      "front": "What alternative to drawing an association can you use to connect two entities in separate domain models?",
+      "back": "Right-click in an entity and select Add > Association.",
+      "tags": [
+        "domain-model",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "domain-model-exam-27",
+      "topicId": "domain-model",
+      "front": "What is a good reason to use an Information Entity instead of multiple associations?",
+      "back": "You want to display additional information about an association.",
+      "tags": [
+        "domain-model",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "domain-model-exam-28",
+      "topicId": "domain-model",
+      "front": "Can you connect annotation to entity in domain model?",
+      "back": "No (unlike microflows where you can).",
+      "tags": [
+        "domain-model",
+        "exam-pattern"
+      ]
     }
   ],
   "microflows": [
@@ -550,6 +840,326 @@
       "tags": [
         "microflows"
       ]
+    },
+    {
+      "id": "microflows-exam-0",
+      "topicId": "microflows",
+      "front": "What is the prefix for datasource Microflows?",
+      "back": "DS_",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "microflows-exam-1",
+      "topicId": "microflows",
+      "front": "What are the 2 prefixes for microflows called within a microflow?",
+      "back": "SUB and VAL",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "microflows-exam-2",
+      "topicId": "microflows",
+      "front": "With what sign is a variable indicated in a microflow?",
+      "back": "Dollar sign ($)",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "microflows-exam-3",
+      "topicId": "microflows",
+      "front": "In a microflow, what would be an example of a variable?",
+      "back": "$Customer",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "microflows-exam-4",
+      "topicId": "microflows",
+      "front": "In a microflow, what is a token?",
+      "back": "A system-generated value (like [%CurrentDateTime%], [%CurrentUser%])",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "microflows-exam-5",
+      "topicId": "microflows",
+      "front": "Which of these system variables does NOT exist?",
+      "back": "[%currentPage%] (does not exist)",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "microflows-exam-6",
+      "topicId": "microflows",
+      "front": "Name 3 list operations",
+      "back": "Equals, Sort, Filter",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "microflows-exam-7",
+      "topicId": "microflows",
+      "front": "Which operations can be performed on a list?",
+      "back": "Union, Intersect, Subtract",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "microflows-exam-8",
+      "topicId": "microflows",
+      "front": "What is a limitation of a sub-microflow compared to a regular microflow?",
+      "back": "None. Sub-microflows are equally capable.",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "microflows-exam-9",
+      "topicId": "microflows",
+      "front": "What main benefit do sub-microflows offer?",
+      "back": "Better maintainability (also: readability and reusability)",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "microflows-exam-10",
+      "topicId": "microflows",
+      "front": "What are 3 advantages of sub-microflows?",
+      "back": "Improves readability, maintainability, and reusability",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "microflows-exam-11",
+      "topicId": "microflows",
+      "front": "Max how many levels should you go with sub-microflows?",
+      "back": "2 to 3 levels max is best practice",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "microflows-exam-12",
+      "topicId": "microflows",
+      "front": "Which 3 items can't you select when extracting a Sub Microflow?",
+      "back": "Start event, end event, parameter",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "microflows-exam-13",
+      "topicId": "microflows",
+      "front": "It is not possible to change primitive input parameters (Boolean, Integer, DateTime) in a sub-microflow. True or False?",
+      "back": "True",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "microflows-exam-14",
+      "topicId": "microflows",
+      "front": "What is a limitation of a rule compared to a microflow?",
+      "back": "A rule may only return a Boolean (or enumeration).",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "microflows-exam-15",
+      "topicId": "microflows",
+      "front": "What is the outcome of a Rule?",
+      "back": "Boolean or enumeration",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "microflows-exam-16",
+      "topicId": "microflows",
+      "front": "What is the list object in a loop called?",
+      "back": "An iterator",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "microflows-exam-17",
+      "topicId": "microflows",
+      "front": "What can you use to exit a loop early?",
+      "back": "A break event",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "microflows-exam-18",
+      "topicId": "microflows",
+      "front": "When do you use Loop activity in your microflow?",
+      "back": "When we want to allow certain activities to be executed repeatedly",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "microflows-exam-19",
+      "topicId": "microflows",
+      "front": "Which all three elements can be used inside a loop?",
+      "back": "Retrieve object, list operation, change variable",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "microflows-exam-20",
+      "topicId": "microflows",
+      "front": "You want to find the total number of objects in a list. What can you use?",
+      "back": "Use an aggregate list function",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "microflows-exam-21",
+      "topicId": "microflows",
+      "front": "According to best practices, what will be executed as optimized retrieve?",
+      "back": "Retrieve by association, then count list operation",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "microflows-exam-22",
+      "topicId": "microflows",
+      "front": "In a microflow expression, 'toUpperCase' is an example of what?",
+      "back": "A function",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "microflows-exam-23",
+      "topicId": "microflows",
+      "front": "Which function can you use to display DateTime 05/05/2025 as 'Mon, 5 May of 2025'?",
+      "back": "formatDateTime",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "microflows-exam-24",
+      "topicId": "microflows",
+      "front": "Which function can you use to parse String 05.05.2025 to DateTime?",
+      "back": "parseDateTime",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "microflows-exam-25",
+      "topicId": "microflows",
+      "front": "Which function can you use to parse integer into string?",
+      "back": "toString()",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "microflows-exam-26",
+      "topicId": "microflows",
+      "front": "Which function can you use to get first letter of a String?",
+      "back": "(Trick question - there's no direct function. Use substring.)",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "microflows-exam-27",
+      "topicId": "microflows",
+      "front": "If you want to leave notes for future developers in a microflow, what can you use?",
+      "back": "Annotations",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "microflows-exam-28",
+      "topicId": "microflows",
+      "front": "Can you connect annotation to element in microflow?",
+      "back": "Yes, to multiple ones",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "microflows-exam-29",
+      "topicId": "microflows",
+      "front": "You need to debug a microflow in production but don't want to impact users. How can you trigger debugging only when you personally run it?",
+      "back": "Set a breakpoint condition (e.g., $currentUser/name = 'YourUserName')",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "microflows-exam-30",
+      "topicId": "microflows",
+      "front": "What are batches used for?",
+      "back": "Processing large amounts of data",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "microflows-exam-31",
+      "topicId": "microflows",
+      "front": "In an ACT nanoflow that sorts a list, can I add a rollback activity?",
+      "back": "False (Rollback not available in nanoflows as it's a server action)",
+      "tags": [
+        "microflows",
+        "exam-pattern"
+      ]
     }
   ],
   "nanoflows": [
@@ -769,6 +1379,516 @@
       "back": "- [Modules](https://docs.mendix.com/refguide/modules/)",
       "tags": [
         "modules"
+      ]
+    },
+    {
+      "id": "modules-exam-0",
+      "topicId": "modules",
+      "front": "How many modules does an app have when you build it?",
+      "back": "3: Administration (accounts), System (what makes app run: users, files, sessions), and MyFirstModule",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-1",
+      "topicId": "modules",
+      "front": "Why does Mendix use modules?",
+      "back": "To be able to reuse them in other projects",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-2",
+      "topicId": "modules",
+      "front": "When do you create a new module?",
+      "back": "It is up to you to choose logical modules for your application",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-3",
+      "topicId": "modules",
+      "front": "What is the recommended naming convention for Modules in Mendix?",
+      "back": "UpperCamelCase",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-4",
+      "topicId": "modules",
+      "front": "What is the correct way of structuring resources within the App Explorer?",
+      "back": "Manually",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-5",
+      "topicId": "modules",
+      "front": "When structuring the App Explorer, which subfolder would be best to store Enumerations and Regular Expressions?",
+      "back": "Resources",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-6",
+      "topicId": "modules",
+      "front": "Which principle needs to be utilized to reduce duplication of already created elements?",
+      "back": "DRY (Don't Repeat Yourself)",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-7",
+      "topicId": "modules",
+      "front": "Why shouldn't you make changes to Marketplace modules?",
+      "back": "Updating to a new version of the module erases your changes",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-8",
+      "topicId": "modules",
+      "front": "What is best practice if you want to customize a page from a downloaded Marketplace module?",
+      "back": "Copy the contents to another module in your app and use that module instead",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-9",
+      "topicId": "modules",
+      "front": "Where can you download File Dropper widget for your app?",
+      "back": "Marketplace",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-10",
+      "topicId": "modules",
+      "front": "When can you add version numbers to your module?",
+      "back": "After enabling an add-on module, in the module settings",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-11",
+      "topicId": "modules",
+      "front": "You've replaced a microflow with newer functionality and want to test it without deleting the old one. How?",
+      "back": "Exclude it from the project",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-12",
+      "topicId": "modules",
+      "front": "What are constants?",
+      "back": "Constants are used to define configuration values that can differ per environment, allowing you to change service location without redeploying",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-13",
+      "topicId": "modules",
+      "front": "What is the difference between .mpk and .mxmodule export formats?",
+      "back": ".mpk contains full source code (editable), .mxmodule is protected/compiled (read-only)",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-14",
+      "topicId": "modules",
+      "front": "Which export format should you use for Marketplace distribution?",
+      "back": ".mxmodule (Add-on module)",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-15",
+      "topicId": "modules",
+      "front": "What are the export protection levels for add-on modules?",
+      "back": "Hidden (not visible to consumers) and Usable (can use but not view/modify)",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-16",
+      "topicId": "modules",
+      "front": "What is the default export level for documents in add-on modules?",
+      "back": "Hidden",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-17",
+      "topicId": "modules",
+      "front": "Where are custom Java action implementations stored?",
+      "back": "javasource/[modulename]/actions/",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-18",
+      "topicId": "modules",
+      "front": "Which folder should you NEVER manually edit?",
+      "back": "javasource/[modulename]/proxies/ (auto-generated)",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-19",
+      "topicId": "modules",
+      "front": "Where do external JAR libraries go?",
+      "back": "userlib folder",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-20",
+      "topicId": "modules",
+      "front": "What does your app need to import Excel data into a Mendix app?",
+      "back": "The Excel Importer module from the Marketplace",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-21",
+      "topicId": "modules",
+      "front": "What are the 2 ways to export data with Excel?",
+      "back": "Use the excel button in a data grid OR use the Excel Exporter module",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-22",
+      "topicId": "modules",
+      "front": "What are the limitations of the export to excel button in a data grid?",
+      "back": "Only possible to export data accessible to the data grid, can't manipulate data, only works on XPath data source data grid",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-23",
+      "topicId": "modules",
+      "front": "You want to manipulate your data as you import it. What method would be best?",
+      "back": "Excel Importer module",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-24",
+      "topicId": "modules",
+      "front": "When transforming, why should you import large datasets into a flat structure first?",
+      "back": "To not overrun available memory",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-25",
+      "topicId": "modules",
+      "front": "What does the Mx Model Reflection module do?",
+      "back": "It shows the configuration of your domain model in the client",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-26",
+      "topicId": "modules",
+      "front": "What is JSON and what does it stand for?",
+      "back": "JavaScript Object Notation, a lightweight format for storing and transporting data",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-27",
+      "topicId": "modules",
+      "front": "What does a JSON structure document do?",
+      "back": "It stores a JSON snippet and converts it into a schema structure that can be used in Import/Export mappings to convert JSON into Mendix objects",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-28",
+      "topicId": "modules",
+      "front": "What are JSON structures converted to in Mendix?",
+      "back": "Objects",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-29",
+      "topicId": "modules",
+      "front": "How do you add downloaded JSON structure to your app?",
+      "back": "Right-click on folder or module, add other, and select JSON structure",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-30",
+      "topicId": "modules",
+      "front": "How do you get REST data using a microflow?",
+      "back": "Use a Call REST Service action",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-31",
+      "topicId": "modules",
+      "front": "What are HTTP headers?",
+      "back": "HTTP headers are used to pass meta-data in REST calls",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-32",
+      "topicId": "modules",
+      "front": "What do you use to interpret XML or JSON into Mendix objects?",
+      "back": "Import mappings (Import/Export data)",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-33",
+      "topicId": "modules",
+      "front": "What are export mappings used to accomplish?",
+      "back": "Converting Mendix objects to XML or JSON",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-34",
+      "topicId": "modules",
+      "front": "What are import mappings?",
+      "back": "Import mappings define how incoming XML or JSON is converted into Mendix objects according to a specific XML schema or JSON structure",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-35",
+      "topicId": "modules",
+      "front": "What is the most appropriate prefix for Import Mapping name?",
+      "back": "ImM_",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-36",
+      "topicId": "modules",
+      "front": "What is a piece of data from Data Hub called?",
+      "back": "External Entity",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-37",
+      "topicId": "modules",
+      "front": "What is an external entity?",
+      "back": "An entity that is connected to a dataset in Data Hub",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-38",
+      "topicId": "modules",
+      "front": "Where can published data be found?",
+      "back": "Data Hub Catalog",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-39",
+      "topicId": "modules",
+      "front": "Where can you edit the properties of an External Entity?",
+      "back": "In the domain model of the app where the External Entity is defined",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-40",
+      "topicId": "modules",
+      "front": "What would you use to save changes to an external entity?",
+      "back": "A Send external object activity",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-41",
+      "topicId": "modules",
+      "front": "Can you modify data in an External Entity?",
+      "back": "Yes, if the Updateable(write) property of its public resource settings is checked",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-42",
+      "topicId": "modules",
+      "front": "Why is the version number assigned to OData service important?",
+      "back": "There can be multiple versions of a service and users can connect to a specific one using it",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-43",
+      "topicId": "modules",
+      "front": "What source type is used within Microsoft Excel to connect to a dataset in Data Hub?",
+      "back": "OData Feed",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-44",
+      "topicId": "modules",
+      "front": "How do you get the Data Hub Landscape?",
+      "back": "Clicking the Landscape tab",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-45",
+      "topicId": "modules",
+      "front": "An app connected by a grey dotted line to your service in the Data Hub Landscape means what?",
+      "back": "The app is consuming data from your service",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-46",
+      "topicId": "modules",
+      "front": "An app connected by a grey solid line to your service in the Data Hub Landscape means what?",
+      "back": "The app is providing data to your service",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-47",
+      "topicId": "modules",
+      "front": "If you need to import data regularly, what is the best way to do so?",
+      "back": "Services such as SOAP, REST, and OData",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-48",
+      "topicId": "modules",
+      "front": "What are some alternative methods for importing files into a Mendix app?",
+      "back": "Flat files, CSV, Excel",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-49",
+      "topicId": "modules",
+      "front": "How can you export columns in a data grid without showing them to the user?",
+      "back": "By setting the class on the column to display: none",
+      "tags": [
+        "modules",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "modules-exam-50",
+      "topicId": "modules",
+      "front": "What does the D in CRUD stand for?",
+      "back": "Delete",
+      "tags": [
+        "modules",
+        "exam-pattern"
       ]
     }
   ],
@@ -1015,6 +2135,256 @@
       "tags": [
         "security"
       ]
+    },
+    {
+      "id": "security-exam-0",
+      "topicId": "security",
+      "front": "Where do you connect User roles to Module roles?",
+      "back": "App security",
+      "tags": [
+        "security",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "security-exam-1",
+      "topicId": "security",
+      "front": "How many user roles can a user have in a Mendix application?",
+      "back": "Unlimited",
+      "tags": [
+        "security",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "security-exam-2",
+      "topicId": "security",
+      "front": "Module Roles can be used to grant access on:",
+      "back": "Pages, Microflows, Entities defined in the module",
+      "tags": [
+        "security",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "security-exam-3",
+      "topicId": "security",
+      "front": "Where in Studio Pro can you assign access to pages?",
+      "back": "Module security",
+      "tags": [
+        "security",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "security-exam-4",
+      "topicId": "security",
+      "front": "Where can you configure page access?",
+      "back": "In page properties AND module security",
+      "tags": [
+        "security",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "security-exam-5",
+      "topicId": "security",
+      "front": "How are unused pages displayed in the page access tab?",
+      "back": "They are displayed only if they are set to be visible for some role (otherwise not shown).",
+      "tags": [
+        "security",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "security-exam-6",
+      "topicId": "security",
+      "front": "How are unused microflows displayed in the microflow access tab?",
+      "back": "Orange, but only if they are set to be visible for some role.",
+      "tags": [
+        "security",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "security-exam-7",
+      "topicId": "security",
+      "front": "How can you allow users to access parts of an app without needing to log in?",
+      "back": "Set up anonymous users",
+      "tags": [
+        "security",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "security-exam-8",
+      "topicId": "security",
+      "front": "After selecting 'allow anonymous user', do we require to set username and password?",
+      "back": "No",
+      "tags": [
+        "security",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "security-exam-9",
+      "topicId": "security",
+      "front": "Do you need to configure entity access rules for anonymous users?",
+      "back": "Yes",
+      "tags": [
+        "security",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "security-exam-10",
+      "topicId": "security",
+      "front": "How many user roles can anonymous user have?",
+      "back": "One",
+      "tags": [
+        "security",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "security-exam-11",
+      "topicId": "security",
+      "front": "What pages need to be changed after allowing anonymous users?",
+      "back": "None (they work with the anonymous user role you configure)",
+      "tags": [
+        "security",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "security-exam-12",
+      "topicId": "security",
+      "front": "How can you configure different home pages for different users?",
+      "back": "You can configure Role-based home pages",
+      "tags": [
+        "security",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "security-exam-13",
+      "topicId": "security",
+      "front": "The default home page does not need to have a module role set. True or false?",
+      "back": "True",
+      "tags": [
+        "security",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "security-exam-14",
+      "topicId": "security",
+      "front": "Where should you configure that only selected roles are allowed to see a container on a page?",
+      "back": "In the Conditional visibility property of the container",
+      "tags": [
+        "security",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "security-exam-15",
+      "topicId": "security",
+      "front": "Which option provides an easy way to limit access rights for a given role to a specific functionality within an app?",
+      "back": "By adding a separate module",
+      "tags": [
+        "security",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "security-exam-16",
+      "topicId": "security",
+      "front": "Is it possible to run a Mendix app locally when App security level is NOT set to production?",
+      "back": "Yes",
+      "tags": [
+        "security",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "security-exam-17",
+      "topicId": "security",
+      "front": "What may cause the error 'Creating Object of type MyModule.Entity failed for Security Reasons'?",
+      "back": "Access rules for Entity not configured properly",
+      "tags": [
+        "security",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "security-exam-18",
+      "topicId": "security",
+      "front": "What is best practice for securely creating a user account?",
+      "back": "Keep the option 'Default rights for new members' set to 'None'",
+      "tags": [
+        "security",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "security-exam-19",
+      "topicId": "security",
+      "front": "As Users by default can have multiple UserRoles, which option ensures a user gets restricted to only one user role?",
+      "back": "Adding microflow logic (validation)",
+      "tags": [
+        "security",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "security-exam-20",
+      "topicId": "security",
+      "front": "When one user role is allowed, what is best practice when creating a new team member?",
+      "back": "A before commit event handler to check whether one user role is selected. If not, it stops the commit and gives validation feedback message.",
+      "tags": [
+        "security",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "security-exam-21",
+      "topicId": "security",
+      "front": "Which statements are true?\n> A. To open a page with microflow, user has to be given access to this page in security tab\n> B. To open sub-microflow within a microflow, user has to be given access to that sub-microflow",
+      "back": "None of them",
+      "tags": [
+        "security",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "security-exam-22",
+      "topicId": "security",
+      "front": "To make entire notifications functionality unavailable to a user role, what is best practice?",
+      "back": "Build it in a separate module",
+      "tags": [
+        "security",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "security-exam-23",
+      "topicId": "security",
+      "front": "Do XPath constraints in access rules apply to CREATE operations?",
+      "back": "No. XPath constraints only apply to Read, Write, and Delete operations.",
+      "tags": [
+        "security",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "security-exam-24",
+      "topicId": "security",
+      "front": "Which operations do XPath access rule constraints apply to?",
+      "back": "Read, Write, Delete (NOT Create)",
+      "tags": [
+        "security",
+        "exam-pattern"
+      ]
     }
   ],
   "pages": [
@@ -1214,6 +2584,296 @@
       "back": "- [Pages](https://docs.mendix.com/refguide/pages/)\n- [Data View](https://docs.mendix.com/refguide/data-view/)\n- [Data Grid](https://docs.mendix.com/refguide/data-grid/)\n- [Snippet](https://docs.mendix.com/refguide/snippet/)",
       "tags": [
         "pages"
+      ]
+    },
+    {
+      "id": "pages-exam-0",
+      "topicId": "pages",
+      "front": "What is the fastest way to create overview pages for all entities in your domain model?",
+      "back": "Right-click an Entity and select \"Generate overview pages...\" for all entities",
+      "tags": [
+        "pages",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "pages-exam-1",
+      "topicId": "pages",
+      "front": "Which term refers to the empty areas that form the canvas for any pages that make use of the layout?",
+      "back": "Placeholders",
+      "tags": [
+        "pages",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "pages-exam-2",
+      "topicId": "pages",
+      "front": "When a layout is based on another layout, what refers to the parent layout?",
+      "back": "Master layout",
+      "tags": [
+        "pages",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "pages-exam-3",
+      "topicId": "pages",
+      "front": "How many 'Main' placeholders can be put into a layout?",
+      "back": "1",
+      "tags": [
+        "pages",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "pages-exam-4",
+      "topicId": "pages",
+      "front": "Which option is used for featuring the navigation menu in a sidebar?",
+      "back": "Atlas Sidebar",
+      "tags": [
+        "pages",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "pages-exam-5",
+      "topicId": "pages",
+      "front": "If I want to expand the Atlas UI layout to add a navigation element, what should I do?",
+      "back": "Create a new layout and set the Atlas UI layout as the master layout",
+      "tags": [
+        "pages",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "pages-exam-6",
+      "topicId": "pages",
+      "front": "You want to re-use a header on multiple pages, which option ensures the content automatically changes after you modify it?",
+      "back": "Snippet",
+      "tags": [
+        "pages",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "pages-exam-7",
+      "topicId": "pages",
+      "front": "Is it possible to add dynamic data directly to the navigation layout?",
+      "back": "No, only via a snippet it is possible",
+      "tags": [
+        "pages",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "pages-exam-8",
+      "topicId": "pages",
+      "front": "How can you show data from multiple entities in the same data grid?",
+      "back": "Add columns which use associations",
+      "tags": [
+        "pages",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "pages-exam-9",
+      "topicId": "pages",
+      "front": "From the buttons on a Data Grid that work with single select mode, which ones need to be configured for multi-select mode?",
+      "back": "Edit, Delete",
+      "tags": [
+        "pages",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "pages-exam-10",
+      "topicId": "pages",
+      "front": "You want to allow end-users to delete some extracted result. How can you achieve this?",
+      "back": "Create a microflow which will delete selected rows and configure a delete button to call this microflow",
+      "tags": [
+        "pages",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "pages-exam-11",
+      "topicId": "pages",
+      "front": "Which widget can be used to select associated objects when multiple select is possible?",
+      "back": "Reference set selector",
+      "tags": [
+        "pages",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "pages-exam-12",
+      "topicId": "pages",
+      "front": "What two options do you have of showing objects in a reference set selector?",
+      "back": "Select page and Dropdown",
+      "tags": [
+        "pages",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "pages-exam-13",
+      "topicId": "pages",
+      "front": "What association do you need between two entities to use the reference set selector?",
+      "back": "Many to many",
+      "tags": [
+        "pages",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "pages-exam-14",
+      "topicId": "pages",
+      "front": "Which widget needs to be used inside of a List View for visualizing a dynamic image?",
+      "back": "Dynamic Image",
+      "tags": [
+        "pages",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "pages-exam-15",
+      "topicId": "pages",
+      "front": "How is the size of popup windows set to fixed?",
+      "back": "By setting the resizable property of the page to No",
+      "tags": [
+        "pages",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "pages-exam-16",
+      "topicId": "pages",
+      "front": "What are the default Mendix options for popups?",
+      "back": "Resizable with size determined automatically, with layout grid as the most outer layer of the page",
+      "tags": [
+        "pages",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "pages-exam-17",
+      "topicId": "pages",
+      "front": "How can you ensure that buttons in the footer of a scrollable popup are always visible?",
+      "back": "By removing the outer layout grid (or fixing scroll container)",
+      "tags": [
+        "pages",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "pages-exam-18",
+      "topicId": "pages",
+      "front": "What constraint can you use to show the most recently created items at the top?",
+      "back": "createdDate (descending)",
+      "tags": [
+        "pages",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "pages-exam-19",
+      "topicId": "pages",
+      "front": "What can you use whenever you wish to display a navigation menu, but not the main navigation tree?",
+      "back": "Menu",
+      "tags": [
+        "pages",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "pages-exam-20",
+      "topicId": "pages",
+      "front": "Where on the page can the Menu document be displayed?",
+      "back": "Anywhere",
+      "tags": [
+        "pages",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "pages-exam-21",
+      "topicId": "pages",
+      "front": "Which widget can use menu document?",
+      "back": "Navigation tree (also: Menu bar, Simple menu bar)",
+      "tags": [
+        "pages",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "pages-exam-22",
+      "topicId": "pages",
+      "front": "What CSS technology is a layout grid based on?",
+      "back": "Bootstrap Framework",
+      "tags": [
+        "pages",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "pages-exam-23",
+      "topicId": "pages",
+      "front": "What is the correct naming convention for pages?",
+      "back": "Entity_PageType_User-Role (e.g., Order_Overview_Admin)",
+      "tags": [
+        "pages",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "pages-exam-24",
+      "topicId": "pages",
+      "front": "Which option indicates a default configuration of a page created using Wizard Progress page template with 4 steps?",
+      "back": "Step 2 is active, Step 1 is visited",
+      "tags": [
+        "pages",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "pages-exam-25",
+      "topicId": "pages",
+      "front": "Can you add a validation rule in a page?",
+      "back": "Yes, to input widgets",
+      "tags": [
+        "pages",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "pages-exam-26",
+      "topicId": "pages",
+      "front": "Validation types available in input widgets",
+      "back": "Required, Custom",
+      "tags": [
+        "pages",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "pages-exam-27",
+      "topicId": "pages",
+      "front": "A page is taking forever to load. Whose responsibility is it to solve this?",
+      "back": "The Frontend developer",
+      "tags": [
+        "pages",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "pages-exam-28",
+      "topicId": "pages",
+      "front": "What is the easiest way to collect feedback from users from within your app?",
+      "back": "Use the Feedback widget",
+      "tags": [
+        "pages",
+        "exam-pattern"
       ]
     }
   ],
@@ -1463,6 +3123,156 @@
       "tags": [
         "xpath"
       ]
+    },
+    {
+      "id": "xpath-exam-0",
+      "topicId": "xpath",
+      "front": "How do you begin typing an XPath?",
+      "back": "`[` (opening square bracket)",
+      "tags": [
+        "xpath",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "xpath-exam-1",
+      "topicId": "xpath",
+      "front": "If you want to open the XPath auto-complete menu, you need to press:",
+      "back": "Ctrl + Space",
+      "tags": [
+        "xpath",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "xpath-exam-2",
+      "topicId": "xpath",
+      "front": "What is this called: [year-from-dateTime(StartDate)=2020]?",
+      "back": "An XPath constraint",
+      "tags": [
+        "xpath",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "xpath-exam-3",
+      "topicId": "xpath",
+      "front": "This is a written syntax that specifies relationships between data properties",
+      "back": "XPath",
+      "tags": [
+        "xpath",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "xpath-exam-4",
+      "topicId": "xpath",
+      "front": "Where in Mendix Studio Pro can you configure XPaths?",
+      "back": "List Views (also: Data Grids, Retrieve actions, Access rules)",
+      "tags": [
+        "xpath",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "xpath-exam-5",
+      "topicId": "xpath",
+      "front": "Which Widget feature utilizes XPaths?",
+      "back": "Selectable data constraints on Reference Selectors",
+      "tags": [
+        "xpath",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "xpath-exam-6",
+      "topicId": "xpath",
+      "front": "Where can you utilize XPaths in microflows?",
+      "back": "In the 'Retrieve' action",
+      "tags": [
+        "xpath",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "xpath-exam-7",
+      "topicId": "xpath",
+      "front": "Can you use XPath in Access rules?",
+      "back": "Yes, but it won't apply to create action",
+      "tags": [
+        "xpath",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "xpath-exam-8",
+      "topicId": "xpath",
+      "front": "What is an XPath operator?",
+      "back": "`<, >, =, !=, and, or`",
+      "tags": [
+        "xpath",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "xpath-exam-9",
+      "topicId": "xpath",
+      "front": "If you write [Status = 'Cancelled'], what will be returned?",
+      "back": "A list of all requests with the status set to 'Cancelled'",
+      "tags": [
+        "xpath",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "xpath-exam-10",
+      "topicId": "xpath",
+      "front": "If you write [VacationRequest.VacationRequest_Submitter='[%CurrentUser%]'], what will be returned?",
+      "back": "A list of all vacation requests submitted by the current user",
+      "tags": [
+        "xpath",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "xpath-exam-11",
+      "topicId": "xpath",
+      "front": "What XPath constraint should be used to allow users to only see their own notifications?",
+      "back": "`[Notifications.Notification_Account='[%CurrentUser%]']`",
+      "tags": [
+        "xpath",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "xpath-exam-12",
+      "topicId": "xpath",
+      "front": "Which XPath is correct?",
+      "back": "`[Event_Customer/Customer[Name = \"James\"][Name=\"Thomas\"]]`",
+      "tags": [
+        "xpath",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "xpath-exam-13",
+      "topicId": "xpath",
+      "front": "If you write [StartDate = empty], what will happen?",
+      "back": "The grid will show all VacationRequests where the StartDate is not populated",
+      "tags": [
+        "xpath",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "xpath-exam-14",
+      "topicId": "xpath",
+      "front": "What will this return: [DaysUsed < 4.5 and not(VacationManagement.VacationRequest_Submitter/Administration.Account)]",
+      "back": "A list of all VacationRequests that are shorter than 4.5 days and do not have a Submitter assigned",
+      "tags": [
+        "xpath",
+        "exam-pattern"
+      ]
     }
   ],
   "integration": [
@@ -1599,6 +3409,516 @@
       "back": "- [Integration](https://docs.mendix.com/refguide/integration/)\n- [Consumed REST Services](https://docs.mendix.com/refguide/consumed-rest-services/)\n- [Published REST Services](https://docs.mendix.com/refguide/published-rest-services/)",
       "tags": [
         "integration"
+      ]
+    },
+    {
+      "id": "integration-exam-0",
+      "topicId": "integration",
+      "front": "How many modules does an app have when you build it?",
+      "back": "3: Administration (accounts), System (what makes app run: users, files, sessions), and MyFirstModule",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-1",
+      "topicId": "integration",
+      "front": "Why does Mendix use modules?",
+      "back": "To be able to reuse them in other projects",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-2",
+      "topicId": "integration",
+      "front": "When do you create a new module?",
+      "back": "It is up to you to choose logical modules for your application",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-3",
+      "topicId": "integration",
+      "front": "What is the recommended naming convention for Modules in Mendix?",
+      "back": "UpperCamelCase",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-4",
+      "topicId": "integration",
+      "front": "What is the correct way of structuring resources within the App Explorer?",
+      "back": "Manually",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-5",
+      "topicId": "integration",
+      "front": "When structuring the App Explorer, which subfolder would be best to store Enumerations and Regular Expressions?",
+      "back": "Resources",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-6",
+      "topicId": "integration",
+      "front": "Which principle needs to be utilized to reduce duplication of already created elements?",
+      "back": "DRY (Don't Repeat Yourself)",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-7",
+      "topicId": "integration",
+      "front": "Why shouldn't you make changes to Marketplace modules?",
+      "back": "Updating to a new version of the module erases your changes",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-8",
+      "topicId": "integration",
+      "front": "What is best practice if you want to customize a page from a downloaded Marketplace module?",
+      "back": "Copy the contents to another module in your app and use that module instead",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-9",
+      "topicId": "integration",
+      "front": "Where can you download File Dropper widget for your app?",
+      "back": "Marketplace",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-10",
+      "topicId": "integration",
+      "front": "When can you add version numbers to your module?",
+      "back": "After enabling an add-on module, in the module settings",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-11",
+      "topicId": "integration",
+      "front": "You've replaced a microflow with newer functionality and want to test it without deleting the old one. How?",
+      "back": "Exclude it from the project",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-12",
+      "topicId": "integration",
+      "front": "What are constants?",
+      "back": "Constants are used to define configuration values that can differ per environment, allowing you to change service location without redeploying",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-13",
+      "topicId": "integration",
+      "front": "What is the difference between .mpk and .mxmodule export formats?",
+      "back": ".mpk contains full source code (editable), .mxmodule is protected/compiled (read-only)",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-14",
+      "topicId": "integration",
+      "front": "Which export format should you use for Marketplace distribution?",
+      "back": ".mxmodule (Add-on module)",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-15",
+      "topicId": "integration",
+      "front": "What are the export protection levels for add-on modules?",
+      "back": "Hidden (not visible to consumers) and Usable (can use but not view/modify)",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-16",
+      "topicId": "integration",
+      "front": "What is the default export level for documents in add-on modules?",
+      "back": "Hidden",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-17",
+      "topicId": "integration",
+      "front": "Where are custom Java action implementations stored?",
+      "back": "javasource/[modulename]/actions/",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-18",
+      "topicId": "integration",
+      "front": "Which folder should you NEVER manually edit?",
+      "back": "javasource/[modulename]/proxies/ (auto-generated)",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-19",
+      "topicId": "integration",
+      "front": "Where do external JAR libraries go?",
+      "back": "userlib folder",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-20",
+      "topicId": "integration",
+      "front": "What does your app need to import Excel data into a Mendix app?",
+      "back": "The Excel Importer module from the Marketplace",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-21",
+      "topicId": "integration",
+      "front": "What are the 2 ways to export data with Excel?",
+      "back": "Use the excel button in a data grid OR use the Excel Exporter module",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-22",
+      "topicId": "integration",
+      "front": "What are the limitations of the export to excel button in a data grid?",
+      "back": "Only possible to export data accessible to the data grid, can't manipulate data, only works on XPath data source data grid",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-23",
+      "topicId": "integration",
+      "front": "You want to manipulate your data as you import it. What method would be best?",
+      "back": "Excel Importer module",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-24",
+      "topicId": "integration",
+      "front": "When transforming, why should you import large datasets into a flat structure first?",
+      "back": "To not overrun available memory",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-25",
+      "topicId": "integration",
+      "front": "What does the Mx Model Reflection module do?",
+      "back": "It shows the configuration of your domain model in the client",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-26",
+      "topicId": "integration",
+      "front": "What is JSON and what does it stand for?",
+      "back": "JavaScript Object Notation, a lightweight format for storing and transporting data",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-27",
+      "topicId": "integration",
+      "front": "What does a JSON structure document do?",
+      "back": "It stores a JSON snippet and converts it into a schema structure that can be used in Import/Export mappings to convert JSON into Mendix objects",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-28",
+      "topicId": "integration",
+      "front": "What are JSON structures converted to in Mendix?",
+      "back": "Objects",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-29",
+      "topicId": "integration",
+      "front": "How do you add downloaded JSON structure to your app?",
+      "back": "Right-click on folder or module, add other, and select JSON structure",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-30",
+      "topicId": "integration",
+      "front": "How do you get REST data using a microflow?",
+      "back": "Use a Call REST Service action",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-31",
+      "topicId": "integration",
+      "front": "What are HTTP headers?",
+      "back": "HTTP headers are used to pass meta-data in REST calls",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-32",
+      "topicId": "integration",
+      "front": "What do you use to interpret XML or JSON into Mendix objects?",
+      "back": "Import mappings (Import/Export data)",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-33",
+      "topicId": "integration",
+      "front": "What are export mappings used to accomplish?",
+      "back": "Converting Mendix objects to XML or JSON",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-34",
+      "topicId": "integration",
+      "front": "What are import mappings?",
+      "back": "Import mappings define how incoming XML or JSON is converted into Mendix objects according to a specific XML schema or JSON structure",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-35",
+      "topicId": "integration",
+      "front": "What is the most appropriate prefix for Import Mapping name?",
+      "back": "ImM_",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-36",
+      "topicId": "integration",
+      "front": "What is a piece of data from Data Hub called?",
+      "back": "External Entity",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-37",
+      "topicId": "integration",
+      "front": "What is an external entity?",
+      "back": "An entity that is connected to a dataset in Data Hub",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-38",
+      "topicId": "integration",
+      "front": "Where can published data be found?",
+      "back": "Data Hub Catalog",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-39",
+      "topicId": "integration",
+      "front": "Where can you edit the properties of an External Entity?",
+      "back": "In the domain model of the app where the External Entity is defined",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-40",
+      "topicId": "integration",
+      "front": "What would you use to save changes to an external entity?",
+      "back": "A Send external object activity",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-41",
+      "topicId": "integration",
+      "front": "Can you modify data in an External Entity?",
+      "back": "Yes, if the Updateable(write) property of its public resource settings is checked",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-42",
+      "topicId": "integration",
+      "front": "Why is the version number assigned to OData service important?",
+      "back": "There can be multiple versions of a service and users can connect to a specific one using it",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-43",
+      "topicId": "integration",
+      "front": "What source type is used within Microsoft Excel to connect to a dataset in Data Hub?",
+      "back": "OData Feed",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-44",
+      "topicId": "integration",
+      "front": "How do you get the Data Hub Landscape?",
+      "back": "Clicking the Landscape tab",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-45",
+      "topicId": "integration",
+      "front": "An app connected by a grey dotted line to your service in the Data Hub Landscape means what?",
+      "back": "The app is consuming data from your service",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-46",
+      "topicId": "integration",
+      "front": "An app connected by a grey solid line to your service in the Data Hub Landscape means what?",
+      "back": "The app is providing data to your service",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-47",
+      "topicId": "integration",
+      "front": "If you need to import data regularly, what is the best way to do so?",
+      "back": "Services such as SOAP, REST, and OData",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-48",
+      "topicId": "integration",
+      "front": "What are some alternative methods for importing files into a Mendix app?",
+      "back": "Flat files, CSV, Excel",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-49",
+      "topicId": "integration",
+      "front": "How can you export columns in a data grid without showing them to the user?",
+      "back": "By setting the class on the column to display: none",
+      "tags": [
+        "integration",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "integration-exam-50",
+      "topicId": "integration",
+      "front": "What does the D in CRUD stand for?",
+      "back": "Delete",
+      "tags": [
+        "integration",
+        "exam-pattern"
       ]
     }
   ],
@@ -2058,6 +4378,578 @@
       "back": "- [Scheduled Events](https://docs.mendix.com/refguide/scheduled-events/)",
       "tags": [
         "scheduled-events"
+      ]
+    }
+  ],
+  "agile": [
+    {
+      "id": "agile-exam-0",
+      "topicId": "agile",
+      "front": "What are the five values of Scrum?",
+      "back": "Focus, Courage, Openness, Commitment & Respect",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-1",
+      "topicId": "agile",
+      "front": "Which of the following is one of the Scrum values?",
+      "back": "Openness",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-2",
+      "topicId": "agile",
+      "front": "Scrum Team consists of:",
+      "back": "Scrum Master, Product Owner & Dev Team",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-3",
+      "topicId": "agile",
+      "front": "Name 4 Scrum events",
+      "back": "Planning, Retrospective, Review, and Daily Scrum/Daily Standup",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-4",
+      "topicId": "agile",
+      "front": "Which event is performed at the beginning of the sprint?",
+      "back": "Sprint planning",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-5",
+      "topicId": "agile",
+      "front": "During which Sprint Event does the team determine user stories for the sprint?",
+      "back": "Sprint Planning",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-6",
+      "topicId": "agile",
+      "front": "What happens in the daily scrum?",
+      "back": "Team members share their progress, plans, and issues",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-7",
+      "topicId": "agile",
+      "front": "How long does the daily scrum meeting usually take?",
+      "back": "15 minutes",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-8",
+      "topicId": "agile",
+      "front": "Who is responsible for the daily stand-up?",
+      "back": "Scrum Master",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-9",
+      "topicId": "agile",
+      "front": "Who should be participating in the review meeting?",
+      "back": "PO, Scrum Master, Developers & Management",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-10",
+      "topicId": "agile",
+      "front": "What is the purpose of a product backlog meeting?",
+      "back": "Adding detail, estimation and structure to the Product Backlog",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-11",
+      "topicId": "agile",
+      "front": "Which approach needs to be used to sort items in the product backlog?",
+      "back": "Based on the descending priority (highest priority at top)",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-12",
+      "topicId": "agile",
+      "front": "What do Story Points associated with a user story indicate?",
+      "back": "The difficulty of the user story",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-13",
+      "topicId": "agile",
+      "front": "What is a burndown chart?",
+      "back": "A list of items planned versus items done",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-14",
+      "topicId": "agile",
+      "front": "What does SME mean?",
+      "back": "Subject Matter Expert",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-15",
+      "topicId": "agile",
+      "front": "What is an offshore model?",
+      "back": "A model based on collaboration between multiple time zones",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-16",
+      "topicId": "agile",
+      "front": "Why do we use branches?",
+      "back": "This allows you to continue development of functionality without affecting the running app",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-17",
+      "topicId": "agile",
+      "front": "Why do you separate hot fixes from the development of new functionality?",
+      "back": "Because you don't want to push hotfixes together with features that haven't been completed yet",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-18",
+      "topicId": "agile",
+      "front": "What is a tagged version?",
+      "back": "A revision that has been used to build a Mx deployment package",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-19",
+      "topicId": "agile",
+      "front": "Which function is used to merge a complete branch into the mainline and is only available on the main line?",
+      "back": "Merge feature branch",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-20",
+      "topicId": "agile",
+      "front": "Which option can be used to merge revisions into and from all lines (main line or branch line)?",
+      "back": "Advanced merge",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-21",
+      "topicId": "agile",
+      "front": "What type of conflict occurs when you and your colleague both modified the microflow implementing delete behavior?",
+      "back": "Modify-Modify",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-22",
+      "topicId": "agile",
+      "front": "When working with version control, which concept would you use to share your database with your team?",
+      "back": "By creating a data snapshot and adding it to the deployment directory of your app",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-23",
+      "topicId": "agile",
+      "front": "Which languages are supported in Mendix Applications?",
+      "back": "Languages from ISO 639",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-24",
+      "topicId": "agile",
+      "front": "Which one is the correct language format for American English?",
+      "back": "en-US",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-25",
+      "topicId": "agile",
+      "front": "What does default project language define?",
+      "back": "The language which users will see when using your app",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-26",
+      "topicId": "agile",
+      "front": "When and how does a default language need to be selected?",
+      "back": "Manually at the moment of app creation",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-27",
+      "topicId": "agile",
+      "front": "Where can you choose the development language?",
+      "back": "In the toolbar of Studio Pro",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-28",
+      "topicId": "agile",
+      "front": "Which functionality do you use to show a complete list of all translatable texts of source and destination language?",
+      "back": "Batch translation",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-29",
+      "topicId": "agile",
+      "front": "How many source and destination languages can you specify?",
+      "back": "One source, many destinations",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-30",
+      "topicId": "agile",
+      "front": "You have 2 languages (English default and Russian). You create a text field without Russian translation. What happens?",
+      "back": "Text field displays the text in English (falls back to default)",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-31",
+      "topicId": "agile",
+      "front": "Your app has 2 languages and some French translation is incorrect. What should you do?",
+      "back": "All of the above (Use batch translate, Export/Import Excel, Use batch replace)",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-32",
+      "topicId": "agile",
+      "front": "What is the most suitable technique if you want an overview of what a user feels and experiences?",
+      "back": "Empathy Map",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-33",
+      "topicId": "agile",
+      "front": "What is the main aim of using Customer Value Curve?",
+      "back": "To find out what shortcomings there are in the general market that you can improve on",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-34",
+      "topicId": "agile",
+      "front": "What qualitative technique focuses on how users group different items?",
+      "back": "Card Sorting",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-35",
+      "topicId": "agile",
+      "front": "Which are considered qualitative research methods?",
+      "back": "Competitor Analysis, Card Sorting, Expert Review",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-36",
+      "topicId": "agile",
+      "front": "What should you always do in your wireframe?",
+      "back": "Add annotations",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-37",
+      "topicId": "agile",
+      "front": "What is the purpose of a prototype? It should be a representation of...",
+      "back": "Your application to test with",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-38",
+      "topicId": "agile",
+      "front": "What type of prototype can you do on paper?",
+      "back": "Low fidelity",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-39",
+      "topicId": "agile",
+      "front": "A client wants their application to have a very specific color scheme. Who's work is most likely affected?",
+      "back": "The UX/UIer",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-40",
+      "topicId": "agile",
+      "front": "You want to use different styling for different parts of the app. What is the best setting?",
+      "back": "Show styling for: App and all modules",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-41",
+      "topicId": "agile",
+      "front": "What is the Styling Editor used for?",
+      "back": "Styling and JavaScript actions",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-42",
+      "topicId": "agile",
+      "front": "What part of CSS syntax references the object that is to be styled?",
+      "back": "Selector",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-43",
+      "topicId": "agile",
+      "front": "What is the correct naming convention for Sass partials?",
+      "back": "_partial-name.scss",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-44",
+      "topicId": "agile",
+      "front": "In the Atlas framework, under which folder should you add partials?",
+      "back": "Web",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-45",
+      "topicId": "agile",
+      "front": "Where should $variables be kept according to best practices?",
+      "back": "In any partial with the name variable",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-46",
+      "topicId": "agile",
+      "front": "How should you change the font size of H1 headers?",
+      "back": "By changing the variable in custom-variable.scss",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-47",
+      "topicId": "agile",
+      "front": "You notice a property in the inspector has been crossed through. What does this mean?",
+      "back": "The property has been overwritten",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-48",
+      "topicId": "agile",
+      "front": "Which folders contain source information tied to a specific module?",
+      "back": "Javascriptsource and Javasource folders",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-49",
+      "topicId": "agile",
+      "front": "The VerifyPassword.java file in the System module is stored in which JavaSource sub-folder?",
+      "back": "Actions",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-50",
+      "topicId": "agile",
+      "front": "The Microflows.java file is stored in which sub-folder of JavaSource directory?",
+      "back": "Proxies",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-51",
+      "topicId": "agile",
+      "front": "Which sources are typically stored in the Resources folder?",
+      "back": "Configuration files, HTML and Java files",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-52",
+      "topicId": "agile",
+      "front": "Files and folders that form the styling of your application are typically stored in which folder?",
+      "back": "Theme",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-53",
+      "topicId": "agile",
+      "front": "Where does Mendix store your Java libraries?",
+      "back": "userlib",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-54",
+      "topicId": "agile",
+      "front": "What is in the deployment folder?",
+      "back": "Deployment files needed to run locally",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-55",
+      "topicId": "agile",
+      "front": "Where are enumerations located in the app directory?",
+      "back": "Proxies",
+      "tags": [
+        "agile",
+        "exam-pattern"
+      ]
+    },
+    {
+      "id": "agile-exam-56",
+      "topicId": "agile",
+      "front": "What is a best practice for your userlib?",
+      "back": "Clean up manually after deleting a module",
+      "tags": [
+        "agile",
+        "exam-pattern"
       ]
     }
   ]
