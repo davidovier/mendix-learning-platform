@@ -25,10 +25,6 @@ import { Flashcard } from "@/components/study/flashcard";
 import { FlashcardControls } from "@/components/study/flashcard-controls";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import {
-  StudyGuideAccordion,
-  type StudySection,
-} from "@/components/study/study-guide-accordion";
 
 // Icon mapping - client-side only (icons are not serializable from server)
 const topicIcons: Record<string, LucideIcon> = {
@@ -58,14 +54,12 @@ interface TopicStudyClientProps {
   topicId: string;
   topicName: string;
   cards: FlashcardData[];
-  studySections: StudySection[];
 }
 
 export function TopicStudyClient({
   topicId,
   topicName,
   cards,
-  studySections,
 }: TopicStudyClientProps) {
   const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -117,9 +111,6 @@ export function TopicStudyClient({
           <h1 className="text-xl font-semibold">{topicName}</h1>
         </div>
       </div>
-
-      {/* Study Guide Accordion */}
-      <StudyGuideAccordion sections={studySections} />
 
       {/* Progress */}
       <div className="space-y-2">
