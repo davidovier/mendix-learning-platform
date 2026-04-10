@@ -2,7 +2,25 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, Trophy } from "lucide-react";
+import {
+  ArrowLeft,
+  Trophy,
+  Database,
+  Workflow,
+  Smartphone,
+  Package,
+  Shield,
+  Layout,
+  Search,
+  Link,
+  Code,
+  Zap,
+  List,
+  Clock,
+  Users,
+  BookOpen,
+  type LucideIcon,
+} from "lucide-react";
 import { Flashcard } from "@/components/study/flashcard";
 import { FlashcardControls } from "@/components/study/flashcard-controls";
 import { Button } from "@/components/ui/button";
@@ -11,7 +29,23 @@ import {
   StudyGuideAccordion,
   type StudySection,
 } from "@/components/study/study-guide-accordion";
-import type { Topic } from "@/lib/content/topics";
+
+// Icon mapping - client-side only (icons are not serializable from server)
+const topicIcons: Record<string, LucideIcon> = {
+  "domain-model": Database,
+  "microflows": Workflow,
+  "nanoflows": Smartphone,
+  "modules": Package,
+  "security": Shield,
+  "pages": Layout,
+  "xpath": Search,
+  "integration": Link,
+  "java": Code,
+  "events": Zap,
+  "enumerations": List,
+  "scheduled-events": Clock,
+  "agile": Users,
+};
 
 interface FlashcardData {
   id: string;
@@ -21,13 +55,15 @@ interface FlashcardData {
 }
 
 interface TopicStudyClientProps {
-  topic: Topic;
+  topicId: string;
+  topicName: string;
   cards: FlashcardData[];
   studySections: StudySection[];
 }
 
 export function TopicStudyClient({
-  topic,
+  topicId,
+  topicName,
   cards,
   studySections,
 }: TopicStudyClientProps) {
@@ -67,7 +103,7 @@ export function TopicStudyClient({
   };
 
   const isComplete = masteredCount === cards.length;
-  const Icon = topic.icon;
+  const Icon = topicIcons[topicId] || BookOpen;
 
   return (
     <div className="container mx-auto max-w-2xl px-4 py-8 space-y-6">
@@ -78,7 +114,7 @@ export function TopicStudyClient({
         </Button>
         <div className="flex items-center gap-2">
           <Icon className="h-5 w-5 text-primary" />
-          <h1 className="text-xl font-semibold">{topic.name}</h1>
+          <h1 className="text-xl font-semibold">{topicName}</h1>
         </div>
       </div>
 
@@ -99,7 +135,7 @@ export function TopicStudyClient({
           <Trophy className="h-16 w-16 text-primary mx-auto" />
           <h2 className="text-2xl font-semibold">Topic Complete</h2>
           <p className="text-muted-foreground">
-            You&apos;ve mastered all {cards.length} cards in {topic.name}
+            You&apos;ve mastered all {cards.length} cards in {topicName}
           </p>
           <Button onClick={() => router.push("/study")}>
             Study Another Topic

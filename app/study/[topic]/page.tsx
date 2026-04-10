@@ -36,7 +36,8 @@ export default async function TopicStudyPage({ params }: PageProps) {
 
   return (
     <TopicStudyClient
-      topic={topic}
+      topicId={topic.id}
+      topicName={topic.name}
       cards={cards}
       studySections={studySections}
     />
