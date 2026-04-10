@@ -1,18 +1,8 @@
-"use client";
-
-import { useState, use } from "react";
-import { useRouter } from "next/navigation";
-import { ArrowLeft, Trophy } from "lucide-react";
+import { notFound } from "next/navigation";
 import { getTopicById } from "@/lib/content/topics";
-import { Flashcard } from "@/components/study/flashcard";
-import { FlashcardControls } from "@/components/study/flashcard-controls";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
+import { parseStudySections } from "@/lib/content/parse-study-sections";
+import { TopicStudyClient } from "./topic-study-client";
 import flashcardsData from "@/lib/content/flashcards.json";
-
-interface PageProps {
-  params: Promise<{ topic: string }>;
-}
 
 interface FlashcardData {
   id: string;
@@ -21,103 +11,29 @@ interface FlashcardData {
   codeExample?: string;
 }
 
-export default function TopicStudyPage({ params }: PageProps) {
-  const { topic: topicId } = use(params);
-  const router = useRouter();
+interface PageProps {
+  params: Promise<{ topic: string }>;
+}
+
+export default async function TopicStudyPage({ params }: PageProps) {
+  const { topic: topicId } = await params;
   const topic = getTopicById(topicId);
+
+  if (!topic) {
+    notFound();
+  }
 
   const allFlashcards = flashcardsData as Record<string, FlashcardData[]>;
   const cards = allFlashcards[topicId] ?? [];
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-  // Bug fix #9: Track which cards have been mastered to prevent double-counting
-  const [masteredCards, setMasteredCards] = useState<Set<number>>(new Set());
-
-  if (!topic || cards.length === 0) {
-    return (
-      <div className="text-center py-12">
-        <h1 className="text-2xl font-bold">No flashcards available</h1>
-        <p className="text-muted-foreground mt-2">
-          This topic doesn&apos;t have any flashcards yet.
-        </p>
-        <Button className="mt-4" onClick={() => router.push("/study")}>
-          Back to Topics
-        </Button>
-      </div>
-    );
-  }
-
-  const currentCard = cards[currentIndex];
-  const masteredCount = masteredCards.size;
-  const progress = (masteredCount / cards.length) * 100;
-
-  const handleGotIt = () => {
-    // Bug fix #9: Only count each card once as mastered
-    setMasteredCards((prev) => new Set(prev).add(currentIndex));
-    if (currentIndex < cards.length - 1) {
-      setCurrentIndex((prev) => prev + 1);
-    }
-  };
-
-  const handleReviewAgain = () => {
-    if (currentIndex < cards.length - 1) {
-      setCurrentIndex((prev) => prev + 1);
-    }
-  };
-
-  // Bug fix #8: Check if all cards are mastered, not if we're on the last card
-  const isComplete = masteredCount === cards.length;
-
-  const Icon = topic.icon;
+  // Parse study guide sections from documentation
+  const studySections = await parseStudySections(topic.sourceFile);
 
   return (
-    <div className="container mx-auto max-w-2xl px-4 py-8 space-y-6">
-      <div className="flex items-center justify-between">
-        <Button variant="ghost" onClick={() => router.push("/study")}>
-          <ArrowLeft className="h-4 w-4 mr-1" />
-          Back
-        </Button>
-        <div className="flex items-center gap-2">
-          <Icon className="h-5 w-5 text-primary" />
-          <h1 className="text-xl font-semibold">{topic.name}</h1>
-        </div>
-      </div>
-
-      <div className="space-y-2">
-        <div className="flex justify-between text-sm">
-          <span>Progress</span>
-          <span>{Math.round(progress)}% mastered</span>
-        </div>
-        <Progress value={progress} />
-      </div>
-
-      {isComplete ? (
-        <div className="text-center py-12 space-y-4">
-          <Trophy className="h-16 w-16 text-primary mx-auto" />
-          <h2 className="text-2xl font-semibold">Topic Complete</h2>
-          <p className="text-muted-foreground">
-            You&apos;ve mastered all {cards.length} cards in {topic.name}
-          </p>
-          <Button onClick={() => router.push("/study")}>
-            Study Another Topic
-          </Button>
-        </div>
-      ) : (
-        <>
-          <Flashcard
-            key={currentIndex}
-            front={currentCard.front}
-            back={currentCard.back}
-            codeExample={currentCard.codeExample}
-          />
-          <FlashcardControls
-            onGotIt={handleGotIt}
-            onReviewAgain={handleReviewAgain}
-            currentIndex={currentIndex}
-            totalCards={cards.length}
-          />
-        </>
-      )}
-    </div>
+    <TopicStudyClient
+      topic={topic}
+      cards={cards}
+      studySections={studySections}
+    />
   );
 }
