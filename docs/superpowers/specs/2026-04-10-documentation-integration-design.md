@@ -115,8 +115,20 @@ function parseMarkdownSections(markdown: string): StudySection[] {
 
 | File | Change |
 |------|--------|
-| `components/study/study-guide-accordion.tsx` | New component |
-| `app/study/[topic]/page.tsx` | Add study guide section, convert to server component |
+| `components/study/study-guide-accordion.tsx` | New component (client, uses shadcn Accordion) |
+| `app/study/[topic]/page.tsx` | Split into server wrapper + client component |
+
+### Architecture Note
+
+Current `page.tsx` is `"use client"` for flashcard state. New structure:
+
+```
+app/study/[topic]/
+├── page.tsx           # Server component - reads markdown, passes to client
+└── topic-study-client.tsx  # Client component - flashcards + accordion state
+```
+
+Server reads markdown at request time (cached by Next.js), passes parsed sections as props.
 
 ## Feature 3: Enhanced Flashcards
 
@@ -210,9 +222,11 @@ Enrich `questions.json` with detailed explanations from exam Q&A files.
 
 1. Parse "Key Facts to Memorize" tables and detailed explanations from exam Q&A files
 2. For each existing question in `questions.json`:
-   - Fuzzy match question text against exam Q&A content
-   - If match found with confidence > 80%, merge explanation
-3. Manual review of unmatched questions
+   - Normalize question text (lowercase, remove punctuation)
+   - Check if exam Q&A contains the same or very similar question
+   - Match criteria: question text overlap > 80% of words match
+   - If match found, merge the detailed explanation
+3. Output unmatched questions to console for manual review
 
 ### UI Change
 
