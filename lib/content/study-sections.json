@@ -1,0 +1,539 @@
+{
+  "domain-model": [
+    {
+      "title": "Overview",
+      "content": "A domain model consists of entities and associations that define an application's data layer. Mendix automatically manages the underlying database, eliminating manual table creation and query writing.\n\n---"
+    },
+    {
+      "title": "Entities",
+      "content": "An entity represents a class of real-world objects (customers, invoices, etc.). Instances of entities are called objects. Entities are defined by their properties, described using **attributes**, which store small pieces of information like names or dates.\n\n### Entity Types\n\nMendix supports four entity types:\n\n| Type | Description | Color |\n|------|-------------|-------|\n| **Persistable Entity** | Creates a database table | Blue |\n| **Non-Persistable Entity** | Stored in runtime memory only, never committed to database | Orange |\n| **External Entity** | Links to datasets from shared data sources in Mendix Catalog | Purple |\n| **View Entity** | Read-only result sets from OQL queries | Green |\n\n### Entity Properties\n\n#### General Section\n\n- **Name**: Unique within a module's domain model; used in forms, microflows, queries, and constraints\n- **Export Level**: Controls access for add-on/solution modules (Hidden or Usable)\n- **Generalization**: Enables inheritance - specialized entity inherits attributes, associations, events, and properties from its generalized entity\n- **Image**: Associates a visual representation displayed in domain model\n- **Persistable**: Defines whether instances can be stored in the database\n\n#### System Members\n\nEntities can optionally store automatic system information:\n\n- **createdDate**: Records when objects were created\n- **changedDate**: Records when objects were last committed\n- **owner**: Association to the User entity that created the object\n- **changedBy**: Association to the User entity that last modified the object\n\n### Entity Dialog Tabs\n\n- Attributes\n- Associations\n- Validation Rules\n- Event Handlers\n- Indexes\n- Access Rules\n- Documentation\n\n---"
+    },
+    {
+      "title": "Attributes",
+      "content": "Attributes are characteristics that describe and identify entities in Mendix.\n\n### Attribute Types\n\n| Type | Description | Notes |\n|------|-------------|-------|\n| **AutoNumber** | Automatically generated numbers | Default value determines first number |\n| **Binary** | File or raw data storage | Only for persistable entities |\n| **Boolean** | True or false values | |\n| **Date and time** | Point in time accurate to milliseconds | |\n| **Decimal** | High-precision calculations | Use for money amounts |\n| **Enumeration** | List of predefined attributes | |\n| **Hashed string** | Hashed using app settings algorithm | |\n| **Integer** | Whole numbers | Max 2^31-1, Min -2^31 |\n| **Long** | Whole numbers | Max 2^63-1, Min -2^63 |\n| **String** | Text containing letters, spaces, numbers | |\n\n### Attribute Properties\n\n- **Name**: Identifies the attribute throughout the application\n- **Export Level**: Hidden (default) or Usable\n- **Localization** (Date and time): Converts to UTC before sending to server\n- **String Length**: Limited (default 200) or Unlimited\n\n### Stored vs Calculated Attributes\n\n**Stored**: Value persists in the database with configurable default value\n\n**Calculated**: Calculated via microflow each time object is retrieved\n- Not stored in database\n- Cannot be sorted on\n- Uncommitted associated objects cannot be retrieved\n\n### Attribute Limitations\n\n- **Non-sortable**: Cannot be used in sort bars\n- **Non-filterable**: Cannot be used in XPath constraints\n- Hashed string: non-filterable\n- Binary: non-sortable and non-filterable\n- Calculated: non-sortable and non-filterable\n\n---"
+    },
+    {
+      "title": "Associations",
+      "content": "An association describes a relationship between entities in the domain model, represented by a line or arrow between two entities.\n\n### Types of Associations\n\n#### One-to-Many\n\"One customer is associated with many orders\" - the owner (Order) stores the association reference. Created by default when drawing associations.\n\n#### Many-to-Many with Default Ownership\nCreated by setting type property to `Reference set` with owner as `Default`. Association stored only in owning entity.\n\n#### One-to-One\nCreated by setting owner property to `Both`. Both entities refer to each other.\n\n#### Many-to-Many with Dual Ownership\nBoth entities are owners. Association stored in both entities, enabling bidirectional navigation.\n\n### Multiplicity\n\nIndicated by `1` or `*` at either side:\n- `1` - One object\n- `*` - Many objects\n\n### Ownership\n\n- **Single ownership**: Arrow points from owner to non-owner\n- **Dual ownership**: No arrow (both entities own)\n- Ownership allows dynamic relationship changes without rebuilding databases\n\n### Key Constraints\n\n- Associations between persistable and non-persistable entities must start from non-persistable entity\n- External entities cannot own associations with local entities\n- Reversing association direction results in data loss\n\n---"
+    },
+    {
+      "title": "Creating Entities and Attributes",
+      "content": "### Basic Process\n1. Open your domain model\n2. Drag an **Entity** from the Toolbox into the model\n3. Name the entity (e.g., \"Customer\")\n4. Double-click to add attributes\n5. Specify attribute name and data type\n\n### Adding Enumerations\n\n1. Right-click module and select \"Add other\" > \"Enumeration\"\n2. Name the enumeration (e.g., \"OrderStatus\")\n3. Click \"New\" to add values (Open, Processing, Complete)\n4. In entity, add enumeration attribute and select type\n5. Set default value if needed\n\n### Creating Associations\n\n**Key Principle**: \"Always start with the entity that can have more instances in the system\"\n\nDraw a line from one entity's border to another's to establish the relationship.\n\n### Multiplicity Configuration\n\n- **One-to-Many [1 - *]**: Default setting\n- **One-to-One [1 - 1]**: Single instances connect\n- **Many-to-Many [* - *]**: Multiple instances on both sides\n\n---"
+    },
+    {
+      "title": "Delete Behavior Configuration",
+      "content": "Control what happens when associated objects are deleted:\n\n- **Cascading Delete**: \"Delete 'Order' object(s) as well\" - removes related objects automatically\n- **Prevention of Delete**: \"Delete 'Customer' object only if not associated with 'Order' object(s)\" - prevents deletion and displays error\n\n**Important**: Delete behavior applies to objects in memory, even before committed to database.\n\n---"
+    },
+    {
+      "title": "Practical Example: Online Shopping Application",
+      "content": "### Data Structure\n- **Customer**: Name, address, email, date of birth\n- **Product**: Name, description, price, vendor, availability\n- **Order**: Status, order number, customer details\n- **Order_Line**: Quantity and price per item\n- **Order_Confirmation**: Confirmation details and purchase date\n\n### Association Map\n- Product_Image <-> Product: One-to-One\n- Order <-> Customer: One-to-Many\n- Product <-> Order_Line: One-to-Many\n- Order <-> Order_Line: One-to-Many\n- Order <-> Order_Confirmation: One-to-One\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [Configuring a Domain Model](https://docs.mendix.com/refguide/configuring-a-domain-model/)\n- [Entities](https://docs.mendix.com/refguide/entities/)\n- [Attributes](https://docs.mendix.com/refguide/attributes/)\n- [Associations](https://docs.mendix.com/refguide/associations/)"
+    }
+  ],
+  "microflows": [
+    {
+      "title": "Overview",
+      "content": "Microflows enable developers to express application logic visually rather than through traditional code. They allow you to perform actions like creating/updating objects, displaying pages, and making conditional choices.\n\n**Key Constraint**: Microflows execute on the runtime server and cannot function in offline applications. For offline logic, use Nanoflows instead.\n\n---"
+    },
+    {
+      "title": "Microflow Notation",
+      "content": "Microflows use Business Process Model and Notation (BPMN), a standardized graphical format.\n\n### Events\n\n| Event | Description |\n|-------|-------------|\n| **Start Event** | Single entry point for every microflow |\n| **End Event** | Defines where microflows terminate; may require return values |\n| **Error Event** | Stops execution and throws accumulated errors |\n| **Continue Event** | Skips current loop iteration (loop-only) |\n| **Break Event** | Exits loops entirely (loop-only) |\n\n### Flows & Connections\n\n- **Sequence Flow**: Arrows connecting elements, defining execution order\n- **Annotation Flow**: Dashed lines linking comments to elements\n\n### Decisions\n\n| Decision Type | Description |\n|---------------|-------------|\n| **Decision** | Branches based on conditions; follows one path only |\n| **Object Type Decision** | Branches by object specialization |\n| **Merge** | Combines multiple paths into one |\n\n### Core Components\n\n- **Activities**: Executable actions within microflows\n- **Loop**: Iterates over object lists\n- **Parameter**: Input data for microflows\n- **Annotation**: Comments within microflows\n\n---"
+    },
+    {
+      "title": "Activities (Executable Actions)",
+      "content": "### Object Activities\n\n| Activity | Description |\n|----------|-------------|\n| **Create Object** | Creates a new entity instance |\n| **Change Object** | Changes the members of an object |\n| **Commit Object(s)** | Stores objects persistently in database |\n| **Delete Object(s)** | Removes objects permanently |\n| **Retrieve Object(s)** | Gets objects from database |\n| **Rollback Object** | Undoes uncommitted changes |\n| **Cast Object** | Changes object type from generalized to specialized |\n\n### List Activities\n\n| Activity | Description |\n|----------|-------------|\n| **Aggregate List** | Calculates aggregated values over a list |\n| **Change List** | Adds/removes objects from a list |\n| **Create List** | Creates an empty list |\n| **List Operation** | Performs actions on a list |\n\n### Variable Activities\n\n| Activity | Description |\n|----------|-------------|\n| **Create Variable** | Initialize new variable with initial value |\n| **Change Variable** | Modify existing variable's value |\n\n### Call Activities\n\n- Call Java Action\n- Call JavaScript Action\n- Call Microflow\n\n### Client Activities\n\n- Call Nanoflow\n- Show Message\n- Close Page\n- Download File\n- Show Page\n- Synchronization operations\n- Validation Feedback\n\n### Integration Activities\n\n- REST/Web Service calls\n- External database queries\n- File imports/exports\n- Document generation\n\n### Specialized Activities\n\n- Log Message\n- Metrics operations\n- ML Model calls\n- Workflow activities\n\n---"
+    },
+    {
+      "title": "Loops",
+      "content": "Loops execute repeated actions and iterate either over a list or based on a Boolean condition.\n\n### Loop Variable\n\nWithin loops, `$currentIndex` contains the current iteration number, starting at zero.\n\n### Loop Types\n\n#### For Each (Item in the List)\nIterates over list objects. Configure:\n- **Iterate over**: Specifies the list\n- **Loop object name**: Renames the iterator\n\n**Example**: Set purchase date for every OrderLine object.\n\n#### While (Condition Is True)\nRepeats until condition evaluates to `false`, evaluated before each iteration.\n\n**Example**: Log numbers between 1 and 5.\n\n### Loop Constraints\n\n- Loops cannot contain start or end events\n- Only loops can contain break and continue events\n- Condition expressions must return Boolean values\n\n---"
+    },
+    {
+      "title": "Decisions",
+      "content": "Decisions are elements that split or merge sequence flows based on conditions. They have a diamond shape.\n\n### Decision Types\n\n1. **Decision**: Makes a choice based on a condition and follows one path only\n2. **Object Type Decision**: Makes a choice based on the type of an object\n3. **Merge**: Merges incoming flows into single path\n\n---"
+    },
+    {
+      "title": "Parameters & Return Values",
+      "content": "**Parameters**: Data that serves as input for a microflow. Populated when microflows are triggered from other locations.\n\n**Return Values**: Depend on microflow configuration. End events may require specified return values based on the microflow's return type.\n\n---"
+    },
+    {
+      "title": "Error Handling",
+      "content": "### Error Handling Options\n\n#### 1. Rollback (Default)\nAll changes revert to savepoint created at microflow start, flow aborts, system error message displays.\n\n#### 2. Custom with Rollback\nCreate error handling flows that execute when failures occur. Everything rolls back to savepoint.\n\n#### 3. Custom without Rollback\nPreserves data changes made before the failure point.\n\n#### 4. Continue\nAvailable only for Call Microflow activities and loops. Execution proceeds as if no error occurred.\n\n**Warning**: \"You should be very careful with using the Continue option since it can make it very difficult to understand when something goes wrong.\"\n\n### Error Inspection Variables\n\n| Variable | Description |\n|----------|-------------|\n| `$latestError` | Contains ErrorType, Message, and Stacktrace |\n| `$latestSoapFault` | Specific to SOAP faults with Code, Reason, Node, Role, Detail |\n| `$latestHttpResponse` | Available for REST errors |\n\n### Best Practices\n\n1. **Always log errors**: Use a log activity to print error message and stack trace\n2. **Target third-party integrations**: Add custom handling to external system activities\n3. **Prefer Custom without Rollback**: Where feasible, instead of Continue\n4. **Avoid complexity**: Excessive error handling makes behavior harder to predict\n\n---"
+    },
+    {
+      "title": "Debugging Microflows",
+      "content": "### Three Main Debugging Panes\n\n1. **Breakpoints Pane**: Displays all microflows containing breakpoints\n2. **Debugger Pane**: Walks through microflow step by step during execution\n3. **Variables Pane**: Shows all variables, objects, and lists involved\n\n### Using Breakpoints\n\n1. Run your application locally\n2. Open target microflow in Studio Pro\n3. Right-click any activity and select \"Add breakpoint\" (red dot)\n\n**Limitation**: \"Debugging with breakpoints is not supported for microflows executed during application startup.\"\n\n### Debugger Controls\n\n| Control | Action |\n|---------|--------|\n| **Step Into** | Enter sub-microflows or loops |\n| **Step Over** | Move to next step without entering sub-flows |\n| **Step Out** | Exit current sub-flow or loop |\n| **Continue** | Resume until next breakpoint |\n| **Continue All** | Resume all paused flows |\n\n### Breakpoint Conditions\n\nConfigure conditions using expressions to break only when specific criteria are met.\n\n**Example**: `$currentUser/name = 'YourUserName'`\n\n---"
+    },
+    {
+      "title": "Naming Convention Prefixes",
+      "content": "Mendix recommends standardized prefixes for microflows to indicate their purpose:\n\n| Prefix | Purpose | Example |\n|--------|---------|---------|\n| **DS_** | Data source microflow | DS_GetActiveOrders |\n| **ACT_** | Page action (button click) | ACT_SubmitOrder |\n| **SUB_** | Sub-microflow (called by others) | SUB_CalculateTotal |\n| **VAL_** | Validation microflow | VAL_CheckOrderValid |\n| **BCO_** | Before Commit event handler | BCO_Order |\n| **ACO_** | After Commit event handler | ACO_Order |\n| **BCR_** | Before Create event handler | BCR_Order |\n| **ACR_** | After Create event handler | ACR_Order |\n| **BDE_** | Before Delete event handler | BDE_Order |\n| **ADE_** | After Delete event handler | ADE_Order |\n| **CAL_** | Calculated attribute microflow | CAL_TotalPrice |\n| **OCH_** | On Change event handler | OCH_CustomerChanged |\n\n---"
+    },
+    {
+      "title": "List Operations",
+      "content": "List operations perform actions on lists and return specific result types:\n\n| Operation | Returns | Description |\n|-----------|---------|-------------|\n| **Head** | Single object | First item in the list |\n| **Tail** | List | All items except the first |\n| **Find** | Single object | First item matching expression |\n| **Filter** | List | All items matching expression |\n| **Contains** | Boolean | True if object exists in list |\n| **Equals** | Boolean | True if lists have same objects |\n| **Union** | List | Combined lists (no duplicates) |\n| **Intersect** | List | Objects present in both lists |\n| **Subtract** | List | First list minus second list |\n| **Sort** | List | Sorted by specified attribute |\n\n**Exam Tip**: Know what each operation returns (single object vs. list vs. boolean).\n\n---"
+    },
+    {
+      "title": "Best Practices",
+      "content": "- Follow standardized naming conventions (see prefixes above)\n- Create maintainable, efficient logic\n- Optimize microflow design for performance\n- Leverage proven community patterns\n\n---"
+    },
+    {
+      "title": "Additional Features",
+      "content": "**Format Conversion**: Microflows can be converted to Nanoflows through \"Duplicate as nanoflow\" or \"Convert to nanoflow\" options.\n\n**Export**: Microflows can be exported as PNG images via File > Export as image.\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [Microflows](https://docs.mendix.com/refguide/microflows/)\n- [Debugging Microflows and Nanoflows](https://docs.mendix.com/refguide/debug-microflows-and-nanoflows/)\n- [Error Handling in Microflows](https://docs.mendix.com/refguide/error-handling-in-microflows/)\n- [Decisions](https://docs.mendix.com/refguide/decisions/)\n- [Loop](https://docs.mendix.com/refguide/loop/)"
+    }
+  ],
+  "nanoflows": [
+    {
+      "title": "Overview",
+      "content": "Nanoflows are application logic flows similar to microflows that execute directly in the browser or device rather than on a server. This fundamental difference enables them to function in offline environments and provides performance benefits for logic that doesn't require server access.\n\n---"
+    },
+    {
+      "title": "Key Differences from Microflows",
+      "content": "| Aspect | Microflows | Nanoflows |\n|--------|------------|-----------|\n| **Execution Location** | Server-side | Client-side (browser/device) |\n| **Offline Capability** | No | Yes |\n| **Performance** | Requires server round-trip | Faster for non-server logic |\n| **Database Operations** | Direct database access | Each activity creates network request |\n\n---"
+    },
+    {
+      "title": "When to Use Nanoflows",
+      "content": "### Optimal Use Cases\n\n#### 1. Offline Mobile Applications\nDesigned specifically for offline-first apps where database operations execute against local offline databases, delivering fast performance.\n\n#### 2. Online Applications Without Database Operations\nWork well for:\n- UI logic\n- Validations\n- Calculations\n- Navigation\n\nWhen they contain no database-related activities.\n\n### Database Activities That Create Network Requests\n\nThese activities trigger network calls in online apps:\n- Create object\n- Commit object(s)\n- Retrieve object(s)\n- Rollback object\n\n### Best Practice Exception\n\nYou can use Create object activity with non-persistable entities (NPEs) if they lack:\n- Event handlers\n- Calculated attributes\n- Read-only attributes\n\nThese create client-side objects without network requests.\n\n---"
+    },
+    {
+      "title": "Nanoflow Elements and Structure",
+      "content": "Nanoflows use BPMN (Business Process Model and Notation) graphical notation.\n\n### Components\n\n| Component | Description |\n|-----------|-------------|\n| **Events** | Start/end points and loop operations |\n| **Flows** | Connections defining execution order |\n| **Decisions** | Conditional branching and path merging |\n| **Activities** | Actions executed within the flow |\n| **Loops** | Iteration over object lists |\n| **Parameters** | Input data for the nanoflow |\n| **Annotations** | Comments within the flow |\n\n---"
+    },
+    {
+      "title": "Activities Available",
+      "content": "Nanoflows support various activity categories:\n\n- **Object operations**: create, retrieve, commit, rollback\n- **List operations**: aggregate, change, create list\n- **Variable management**: create variable, change variable\n- **Client-specific actions**: showing messages, showing pages\n\n---"
+    },
+    {
+      "title": "JavaScript Actions (Exam Critical)",
+      "content": "Nanoflows can call **JavaScript actions** - custom client-side code that extends nanoflow capabilities.\n\n### Key Points\n\n| Aspect | Description |\n|--------|-------------|\n| **Purpose** | Execute custom JavaScript in the browser/device |\n| **Location** | Created in module's resources |\n| **Parameters** | Can accept and return Mendix objects |\n| **Use cases** | Device features, browser APIs, third-party libraries |\n\n### Common Use Cases\n\n- Access device camera or GPS\n- Interact with browser localStorage\n- Call external JavaScript libraries\n- Perform complex client-side calculations\n\n**Note**: JavaScript actions only work in nanoflows, not microflows.\n\n---"
+    },
+    {
+      "title": "Nanoflow-Only Activities (Exam Critical)",
+      "content": "Some activities are **exclusive to nanoflows**:\n\n| Activity | Description |\n|----------|-------------|\n| **Call JavaScript action** | Execute custom JavaScript code |\n| **Log message (client)** | Log to browser console |\n| **Synchronize** | Sync offline data with server |\n| **Synchronize to device** | Download data to offline database |\n| **Show progress bar** | Display progress to user |\n| **Hide progress bar** | Remove progress indicator |\n\n### Activities NOT Available in Nanoflows\n\n| Activity | Reason |\n|----------|--------|\n| **Call web service** | Requires server-side execution |\n| **Call REST service** | Requires server-side execution |\n| **Import/Export mappings** | Server-side operations |\n| **Generate document** | Requires server processing |\n| **Java action** | Server-side only |\n\n---"
+    },
+    {
+      "title": "Security",
+      "content": "**Important**: \"Nanoflows are executed in the context of the current user. Any operation for which the user is unauthorized will fail.\"\n\n---"
+    },
+    {
+      "title": "Converting Nanoflows",
+      "content": "You can convert nanoflows to microflows through right-click context menu options:\n- \"Duplicate as microflow\"\n- \"Convert to microflow\"\n\nWarnings will appear about non-replaceable usages.\n\n---"
+    },
+    {
+      "title": "Best Practices",
+      "content": "1. **Use for offline apps**: Primary purpose is offline-first applications\n2. **Avoid database operations in online apps**: Each creates a network request\n3. **Use for UI logic**: Validations, calculations, navigation\n4. **Consider NPEs**: Non-persistable entities without handlers don't create network calls\n\n---"
+    },
+    {
+      "title": "When to Choose Microflows vs Nanoflows",
+      "content": "| Scenario | Use |\n|----------|-----|\n| Server-side business logic | Microflow |\n| Database-heavy operations | Microflow |\n| Offline application logic | Nanoflow |\n| Quick UI validations | Nanoflow |\n| Client-side calculations | Nanoflow |\n| Integration with external services | Microflow |\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [Nanoflows](https://docs.mendix.com/refguide/nanoflows/)\n- [Microflows and Nanoflows](https://docs.mendix.com/refguide/microflows-and-nanoflows/)"
+    }
+  ],
+  "modules": [
+    {
+      "title": "Overview",
+      "content": "Modules are fundamental organizational units in Mendix applications. A Mendix app consists of modules: a **System** module, a UI resources package, one or more user-defined **app modules**, Marketplace modules, add-on modules, and solution modules.\n\n**Key Concept**: Modules enable developers to partition application functionality into separate, manageable components.\n\n**Example**: \"A web shop can put order management in a different module than customer and product management.\"\n\n---"
+    },
+    {
+      "title": "Module Types (Exam Critical)",
+      "content": "When creating a module, developers can choose from three distinct types:\n\n| Type | Description | Use Case |\n|------|-------------|----------|\n| **App modules** | Standard modules for primary application development | Regular app development |\n| **Add-on modules** | Designed for publishing reusable functionality | Marketplace distribution |\n| **Solution modules** | Specialized modules for packaged solutions | ISV solutions |\n\n**Critical Warning**: Converting between module types can cause **data loss**. When you change a module type, certain module-specific settings may be reset or removed. Always backup before converting.\n\n---"
+    },
+    {
+      "title": "Module Settings",
+      "content": "Access module settings by right-clicking the module in the App Explorer and selecting **Settings**.\n\n### General Tab\n\n| Property | Description |\n|----------|-------------|\n| **Name** | Module identifier (used in code and expressions) |\n| **Documentation** | Description for developers |\n| **Module Type** | App module, Add-on module, or Solution module |\n\n### Version Tab (Exam Important)\n\n| Property | Description |\n|----------|-------------|\n| **Module Version** | Semantic versioning (e.g., 1.0.0) |\n| **Minimum Supported Mendix Version** | Minimum Studio Pro version required |\n\n**Note**: Versioning is required for publishing modules to the Marketplace.\n\n### Dependencies Tab\n\nLists other modules this module depends on for functionality.\n\n### Java Dependencies Tab (Exam Critical)\n\n| Property | Description |\n|----------|-------------|\n| **JAR Files** | External Java libraries required by the module |\n| **Location** | Libraries stored in `userlib` folder |\n\n---"
+    },
+    {
+      "title": "Export Protection Levels (Exam Critical)",
+      "content": "When creating add-on or solution modules, you can set export levels for documents:\n\n| Level | Description |\n|-------|-------------|\n| **Hidden** | Document is not visible or accessible to consumers |\n| **Usable** | Document can be used but not viewed or modified |\n\n**Export levels apply to**:\n- Entities and attributes\n- Microflows\n- Constants\n- Enumerations\n- Pages (for solution modules)\n\n**Default**: Most documents are **Hidden** by default in add-on modules.\n\n---"
+    },
+    {
+      "title": "Module Export Formats (Exam Critical)",
+      "content": "| Format | Extension | Description |\n|--------|-----------|-------------|\n| **Module Package** | `.mpk` | Complete module export including all documents |\n| **Add-on Module** | `.mxmodule` | Protected module for distribution (compiled) |\n\n### Key Differences\n\n| Aspect | .mpk | .mxmodule |\n|--------|------|-----------|\n| **Source visibility** | Full source access | Protected/compiled |\n| **Editable** | Yes | No (read-only) |\n| **Use case** | Team sharing, backup | Marketplace distribution |\n\n---"
+    },
+    {
+      "title": "Module Contents",
+      "content": "Modules can contain various document types organized into categories:\n\n### Common Documents\n- **Pages**: User interfaces with widgets\n- **Microflows**: Server-side application logic\n- **Nanoflows**: Client-side application logic\n- **Enumerations**: Predefined value sets\n\n### Domain Model\n- **Entities**: Data structures\n- **Associations**: Relationships between entities\n- **Annotations**: Documentation within domain model\n\n### Page Resources\n- Layouts\n- Menus\n- Snippets\n- Images\n- Building Blocks\n\n### Resources\n- Constants\n- Datasets\n- Java actions\n- Rules\n- Scheduled events\n- Document templates\n\n### Services\n- Consumed and published REST services\n- OData services\n- Web services\n- GraphQL services\n\n---"
+    },
+    {
+      "title": "Java Folder Structure (Exam Critical)",
+      "content": "When a module contains Java actions, Studio Pro creates a specific folder structure:\n\n```\nproject/\n├── javasource/\n│   └── modulename/\n│       ├── actions/          # Custom Java action implementations\n│       │   └── MyAction.java\n│       └── proxies/          # Auto-generated entity proxies\n│           └── MyEntity.java\n└── userlib/                  # External JAR dependencies\n    └── library.jar\n```\n\n### Folder Purposes\n\n| Folder | Purpose | Editable? |\n|--------|---------|-----------|\n| **javasource/[module]/actions/** | Custom Java action code | Yes |\n| **javasource/[module]/proxies/** | Generated entity proxy classes | **No** (auto-generated) |\n| **userlib/** | External JAR libraries | Yes |\n\n**Warning**: Never manually edit files in the `proxies` folder - they are regenerated automatically.\n\n---"
+    },
+    {
+      "title": "Module Security",
+      "content": "Modules feature a dedicated security model. Developers can \"define module security via module roles and specify the security settings of those module roles for pages, microflows, entities, and datasets.\"\n\n### Module Roles\n\n- Created within each module\n- Linked to user roles at the app level\n- Define access to module documents\n\n### Security Settings Per Module Role\n\n| Document Type | Configurable Access |\n|---------------|---------------------|\n| **Pages** | Visible or not |\n| **Microflows** | Executable or not |\n| **Entities** | Create, Read, Write, Delete |\n| **Datasets** | Full, Limited, or No access |\n\nThis portable security model enables secure component reuse across applications.\n\n---"
+    },
+    {
+      "title": "Importing and Exporting Modules",
+      "content": "### Export Module\n\n1. Right-click module in App Explorer\n2. Select **Export module package...**\n3. Choose export location\n4. Select `.mpk` or `.mxmodule` format\n\n### Import Module\n\n1. Right-click app in App Explorer\n2. Select **Import module package...**\n3. Browse to `.mpk` or `.mxmodule` file\n4. Resolve any conflicts\n\n### Conflict Resolution\n\nWhen importing, you may encounter:\n- **Name conflicts**: Rename imported module\n- **Dependency issues**: Install required dependencies first\n- **Version conflicts**: Update to compatible versions\n\n---"
+    },
+    {
+      "title": "Best Practices",
+      "content": "1. **Modular Design**: Separate concerns into different modules\n2. **Clear Naming**: Use descriptive module names\n3. **Version Control**: Maintain proper versioning for shared modules\n4. **Documentation**: Document module purpose and dependencies\n5. **Security**: Configure module roles before deployment\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [Modules](https://docs.mendix.com/refguide/modules/)\n- [Module Settings](https://docs.mendix.com/refguide/module-settings/)\n- [Export Levels](https://docs.mendix.com/refguide/export-levels/)"
+    }
+  ],
+  "security": [
+    {
+      "title": "Overview",
+      "content": "App Security in Mendix allows you to toggle security on or off and configure authentication settings. Access it via **App Explorer > App > Security**.\n\n---"
+    },
+    {
+      "title": "Security Levels",
+      "content": "Three security levels define how comprehensively security is applied:\n\n| Level | Description | Usage |\n|-------|-------------|-------|\n| **Off** | No security applied. Users don't sign in and can access everything | Local testing and Free Apps only |\n| **Prototype/Demo** | Security applies to authentication, forms, and microflows. Users can access all data | Development/testing |\n| **Production** | Full security across all areas | Required for licensed Mendix Cloud |\n\n---"
+    },
+    {
+      "title": "Core Security Components",
+      "content": "### User Roles\n\nUser roles aggregate access rights across data, forms, and microflows. Administrators assign roles to end-users.\n\n**User Roles vs Module Roles**: Each user role contains one or more module roles, enabling modules to remain self-contained and reusable.\n\n#### Role Properties\n\n- **Name**: Displayed to administrators\n- **Documentation**: Additional descriptive information\n- **Module Roles**: List of module roles with accumulated access rights\n- **Check Security**: Whether security consistency is verified\n\n#### User Management Properties\n\n- **All**: End-users can manage all users and assign any role\n- **Selected**: End-users manage only users with specified roles\n\n**Important**: \"The effects of changes to user roles are not immediate.\"\n\n### Administrator\n\nConfigure default credentials and assign a user role specifically for the administrator account.\n\n### Demo Users\n\n\"Demo users are a demonstration of each user role existing in your app.\" Enable testing how the application appears for different roles.\n\n### Anonymous Users\n\nAllow unauthenticated access while restricting data through assigned user roles. Users bypass sign-in but operate within role-based constraints.\n\n**Critical**: Anonymous users can only have **ONE** user role assigned (not multiple).\n\n### Password Policy\n\nDefine password requirements including:\n- Minimum length\n- Required character types (digits, uppercase)\n\n---"
+    },
+    {
+      "title": "Security Access Locations (Exam Critical)",
+      "content": "| Configure | Location |\n|-----------|----------|\n| User roles | **App Security** |\n| Connect user roles to module roles | **App Security** |\n| Anonymous users | **App Security** |\n| Administrator account | **App Security** |\n| Page access | **Module Security** |\n| Microflow access | **Module Security** |\n| Entity access | **Module Security** |\n| OData/REST access | **Module Security** |\n\n**Exam Tip**: Know where each security setting is configured!\n\n---"
+    },
+    {
+      "title": "Module Security",
+      "content": "### Module Roles\n\nModule roles are custom roles created within a module to define access permissions.\n\nProperties:\n- **Name**: Identifies the module role\n- **Documentation**: For Studio Pro users only\n\n\"You can assign multiple module roles to a user role under **App Security** > **User roles** tab.\"\n\n### Page Access\n\nDefines visibility of pages to different roles through a matrix display.\n\n\"A page that is not visible for a specific role will not show up in navigation structures.\"\n\n**Important**: Page access settings don't prevent access through deeplinks or forced-visible buttons. Use entity and microflow access for data restriction.\n\n### Microflow Access\n\nControls which microflows users with specific roles can execute.\n\n\"A microflow is always allowed to call another microflow and these roles are not checked then.\" Role checking only applies to client-side execution.\n\n### Nanoflow Access\n\nSimilar to microflows, defines execution permissions based on user roles.\n\n### Entity Access\n\n\"**Entity Access** defines for each module role whether users are authorized to **Create**, **Read**, **Write** and/or **Delete** objects of the entity.\"\n\nXPath constraints can restrict access to specific object sets.\n\n### OData/GraphQL & REST Access\n\nControls service access per role.\n\nREST access is only visible when authentication is required.\n\n### Data Set Access\n\nThree access levels:\n- **Full access**: No constraints apply\n- **Limited access**: At least one constraint applies\n- **No access**: Users cannot access the dataset\n\n---"
+    },
+    {
+      "title": "Access Rules",
+      "content": "Access rules define what end-users can do with entity objects:\n- Creating objects\n- Deleting objects\n- Viewing member values\n- Editing member values\n\n### Key Principles\n\n**Additive Rules**: \"If multiple access rules apply to the same module role, all access rights of those rules are combined.\"\n\n**No Inheritance**: Access rules are not inherited from parent entities. Security must be explicitly specified for each entity.\n\n**Production Mode Required**: Access rules editor only appears when App Security is set to Production mode.\n\n### XPath Constraints\n\nLimit which objects users can access:\n\n**Owner Constraint**: `[System.owner='[%CurrentUser%]']`\n\n**Path to User**: Access based on associated User objects\n\n**Important**: XPath constraints only apply to persistable entities and are database-enforced.\n\n**Critical Exam Note**: XPath constraints in access rules do **NOT** apply to CREATE operations - only to Read, Write, and Delete.\n\n### Member Rights Configuration\n\n| Level | Description |\n|-------|-------------|\n| None | No access |\n| Read | Read-only access |\n| Read and Write | Full access |\n\n**Note**: \"You cannot set Write access to attributes which are calculated.\"\n\n---"
+    },
+    {
+      "title": "Security Best Practices",
+      "content": "### Entity Access Rules\n\n- **System-determined attributes** (like order status) should never be writable\n- Anonymous users should be constrained to objects they own\n- Avoid default read-write access; explicitly configure each attribute\n- Use entity-level constraints rather than page-level widget restrictions\n\n### Injection Prevention\n\n#### HTML/JavaScript Content\nSanitize user input using XSSSanitize action from Community Commons.\n\n#### Database Queries\nUse prepared statements or validate input against strict patterns.\n\n### API Security Configuration\n\nFor REST/OData endpoints:\n1. **Username/Password Authentication**: Basic auth validated against System.User\n2. **Active Session**: CSRF tokens via `mx.session.getConfig(\"csrftoken\")`\n3. **Custom Authentication**: Microflow validates headers (JWT, API keys)\n\n### Production Hardening\n\n- Rename default MxAdmin administrator account\n- Disable unused endpoints (ws-doc, rest-doc)\n- Apply IP restrictions and certificates to sensitive endpoints\n- Use SSL for all consumed web services\n- Configure HTTP headers to prevent clickjacking\n- Enforce strong password policies\n- Use third-party identity providers (SAML)\n\n### Additional Protections\n\n- Encrypt sensitive data at rest using Encryption module\n- Maintain high app hygiene by removing unused modules\n- Scan uploaded files for malware\n- Configure user roles restrictively\n- Disable anonymous access when unused\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [App Security](https://docs.mendix.com/refguide/app-security/)\n- [Module Security](https://docs.mendix.com/refguide/module-security/)\n- [Access Rules](https://docs.mendix.com/refguide/access-rules/)\n- [User Roles](https://docs.mendix.com/refguide/user-roles/)\n- [Best Practices Security](https://docs.mendix.com/howto9/security/best-practices-security/)"
+    }
+  ],
+  "pages": [
+    {
+      "title": "Overview",
+      "content": "In Mendix, \"A page is the basic end-user interface of a Mendix application. It is used to display information to the end-user, allow end-users to create and edit information, and enable end-users to trigger additional automated processing.\"\n\nThe platform functions as a Single Page Application (SPA), meaning all interactions occur within a single browser tab or window.\n\n---"
+    },
+    {
+      "title": "Page Structure",
+      "content": "Every page requires two foundational components:\n\n1. **Layout**: \"A frame you put your page in\" - provides consistent structure across pages\n2. **Page Template**: A basis with predefined elements that simplifies initial page creation\n\n---"
+    },
+    {
+      "title": "Page Resources",
+      "content": "| Resource | Purpose |\n|----------|---------|\n| **Layout** | Frame providing unified look and feel across platforms |\n| **Page Template** | Predefined structure simplifying common design patterns |\n| **Snippet** | Reusable interface parts used on pages and layouts |\n| **Building Block** | Pre-styled widget sets appearing in editor toolbox |\n| **Menu** | Defines menu structures for navigation widgets |\n| **Image Collection** | Stores custom images for application use |\n\n---"
+    },
+    {
+      "title": "Widget Categories",
+      "content": "Pages are constructed using widgets organized into:\n\n| Category | Description |\n|----------|-------------|\n| **Data Containers** | Central to forms; enable viewing and editing data |\n| **Text Widgets** | Display textual information |\n| **Structure Widgets** | Contain other widgets |\n| **Input Elements** | Show and edit attribute values |\n| **Images, Videos, Files** | Handle multimedia and file management |\n| **Buttons** | Trigger actions |\n| **Menus and Navigation** | Enable application navigation |\n| **Authentication** | Implement user verification |\n| **Charts** | Graphically represent data (add-on widgets) |\n\n---"
+    },
+    {
+      "title": "Data View",
+      "content": "A data view is a container widget designed to display the contents of exactly one object.\n\n### Data Source Options\n\n| Source | Description |\n|--------|-------------|\n| **Context** | Uses already-available objects from page parameters |\n| **Microflow** | Executes microflow and displays return value |\n| **Nanoflow** | Runs nanoflow client-side and displays results |\n| **Listen to Widget** | Displays details from selected objects in list widgets |\n\n### Key Properties\n\n#### General Section\n- **Form Orientation**: Controls label positioning (horizontal/vertical)\n- **Label Width**: Bootstrap grid column weight (default: 3)\n- **Show Footer**: Toggle footer visibility\n- **Empty Entity Message**: Message when no source data available\n\n#### Editability Section\n- **Default**: Inherits from containing data container\n- **Inherited from snippet call**: Matches parent snippet\n- **Never**: Permanently read-only\n- **Conditionally**: Based on attribute values or expressions\n\n### Nested Data Views\n\nData views can contain complex structures including tab containers with nested data grids.\n\n**Note**: \"The footer of nested data views is always invisible.\"\n\n---"
+    },
+    {
+      "title": "Data Grid",
+      "content": "The data grid displays data in table format.\n\n**Note**: Not supported on native mobile pages or React client. Use Gallery or List View for mobile, Data Grid 2 for React.\n\n### Components\n\n1. **Search Bar**: Enables users to search for objects\n2. **Control Bar**: Provides buttons to control displayed objects\n3. **Grid Columns**: Allows column property configuration\n\n### Data Source Types\n\n| Type | Description |\n|------|-------------|\n| **Database source** | Retrieves objects directly; supports searching and sorting |\n| **Microflow source** | Executes microflow to calculate object list |\n| **Association source** | Follows associations to retrieve objects |\n\n### Key Properties\n\n| Property | Description | Default |\n|----------|-------------|---------|\n| Show Control Bar Buttons | Controls visibility | True |\n| Show Paging Bar | Yes (with/without count) or No | Yes (with count) |\n| Number of Rows | Rows per page | 20 |\n| Show Empty Rows | Displays empty rows for consistent height | False |\n| Selection Mode | Single, multi, or no selection | Single |\n| Default Button Trigger | Single or double-click | Double click |\n| Refresh Time | Auto-refresh interval (seconds) | 0 |\n\n### Selection Modes\n\n- No selection\n- Single selection (default)\n- Single selection with mandatory selection\n- Multi-selection (Ctrl+click)\n- Simple multi-selection (click to toggle)\n\n---"
+    },
+    {
+      "title": "Reference Selector Widgets (Exam Critical)",
+      "content": "These widgets are used to select associated objects:\n\n| Widget | Association Type | Use Case |\n|--------|------------------|----------|\n| **Reference Selector** | Many-to-One | Select ONE associated object (dropdown) |\n| **Reference Set Selector** | Many-to-Many | Select MULTIPLE associated objects |\n\n### Reference Selector\n- Used for selecting a single associated object\n- Displays as dropdown or radio buttons\n- Works with `Reference` (many-to-one) associations\n- Example: Select one Customer for an Order\n\n### Reference Set Selector\n- Used for selecting multiple associated objects\n- Displays as a list with checkboxes or multi-select\n- Works with `Reference set` (many-to-many) associations\n- Example: Select multiple Tags for a Product\n\n**Exam Tip**: Know which widget to use for each association multiplicity!\n\n---"
+    },
+    {
+      "title": "Snippets",
+      "content": "Snippets are reusable interface components that can be incorporated into pages, layouts, and other snippets.\n\n### Creating Snippets\n\n1. **Add new empty snippet** via Page Resources section\n2. **Extract from existing content** by right-clicking widget and selecting \"Extract snippet\"\n\n### Snippet Parameters\n\n- Work similarly to page parameters with restrictions\n- \"Snippet parameters do not support primitive types and cannot be made optional\"\n- Configure through **Parameters** button in top bar\n\n### Designer Properties\n\n- **Canvas Width**: Default 800 pixels (editing only)\n- **Canvas Height**: Default 600 pixels (editing only)\n\n### Benefits\n\n\"By centralizing interface logic in snippets, developers can make changes in fewer places when modifying the interface.\"\n\n---"
+    },
+    {
+      "title": "Navigation and Interaction",
+      "content": "Pages can be linked to pass data between them. When a second page contains a data widget with a page parameter data source, objects can be passed from current to new page.\n\nPages open either in current browser pane or popup windows, depending on layout type.\n\n---"
+    },
+    {
+      "title": "Design Principles",
+      "content": "- Layouts support structure-defining widgets but exclude data display widgets\n- Snippets can be placed in layouts as indirect method for including additional widget types\n- The platform optimizes navigation by refreshing only page data when layouts match\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [Pages](https://docs.mendix.com/refguide/pages/)\n- [Data View](https://docs.mendix.com/refguide/data-view/)\n- [Data Grid](https://docs.mendix.com/refguide/data-grid/)\n- [Snippet](https://docs.mendix.com/refguide/snippet/)"
+    }
+  ],
+  "xpath": [
+    {
+      "title": "Expressions Overview",
+      "content": "Expressions in Mendix modify values using functions or combinations of functions. They enable dynamic calculations and conditional logic throughout your application.\n\n---"
+    },
+    {
+      "title": "Basic Syntax",
+      "content": "### Named Items and Variables\n\n- Objects, lists, and variables: `$customer`\n- Attributes and associations: `$customer/Name`\n- Nested access: `$customer/CRM.Customer_Order/CRM.Order/Number`\n\n### Example Calculation\n\n```\n$CurrentPrice/Price - (($CurrentPrice/Price div 100) * $OrderLine/Discount)\n```\n\n---"
+    },
+    {
+      "title": "System Items",
+      "content": "Mendix provides built-in session variables:\n\n| Variable | Description |\n|----------|-------------|\n| `$currentUser` | System.User object with current user attributes |\n| `$currentSession` | System.Session object with session information |\n\n**Note**: Both are cached for performance; refresh from database if values change during sessions.\n\n---"
+    },
+    {
+      "title": "Expression Categories",
+      "content": "### Unary Expressions\n- Unary minus (`-`)\n\n### Arithmetic Operators\n\n| Operator | Description |\n|----------|-------------|\n| `*` | Multiplication |\n| `div` or `:` | Division |\n| `mod` | Modulo |\n| `+` | Addition |\n| `-` | Subtraction |\n\n### Relational Operators\n\n| Operator | Description |\n|----------|-------------|\n| `<` | Less than |\n| `>` | Greater than |\n| `<=` | Less than or equal |\n| `>=` | Greater than or equal |\n| `=` | Equal |\n| `!=` | Not equal |\n\n### Boolean Logic\n\n| Operator | Description |\n|----------|-------------|\n| `and` | Logical conjunction |\n| `or` | Logical disjunction |\n| `not` | Logical negation |\n\n### Special Checks\n\n- Empty object detection\n- Empty object member checking\n- `isNew` - Identifies newly created objects\n- `isSynced` - Confirms object synchronization status\n- `isSyncing` - Detects active synchronization\n\n### Conditional Execution\n\n**If Expressions**: \"Performs a conditional action\" enabling branches based on evaluation results.\n\n---"
+    },
+    {
+      "title": "Mathematical Functions",
+      "content": "| Function | Purpose |\n|----------|---------|\n| `max`, `min` | Extrema from number lists |\n| `round` | Floating-point rounding with optional precision |\n| `floor`, `ceil` | Directional rounding |\n| `random` | Random number generation |\n| `pow` | Exponentiation |\n| `abs` | Absolute value |\n| `sqrt` | Square root |\n\n---"
+    },
+    {
+      "title": "String Functions",
+      "content": "| Function | Purpose |\n|----------|---------|\n| `toLowerCase`, `toUpperCase` | Case conversion |\n| `substring` | Extract string portions |\n| `find`, `findLast` | Locate substrings |\n| `contains`, `startsWith`, `endsWith` | String matching |\n| `trim` | Remove whitespace |\n| `replaceAll`, `replaceFirst` | Text substitution |\n| `isMatch` | Regular expression matching |\n| `urlEncode`, `urlDecode` | URL encoding/decoding |\n| `+` | String concatenation |\n\n---"
+    },
+    {
+      "title": "Date/Time Functions",
+      "content": "### Creation\n- `dateTime` (server calendar)\n- `dateTimeUTC` (UTC calendar)\n\n### Beginning/End Calculations\nFunctions like `beginOfDay`, `endOfMonth` establish temporal boundaries.\n\n### Interval Calculations\n- `daysBetween`\n- `hoursBetween`\n- `weeksBetween`\n\n### Adjustments\n- `addDays`, `addMonths`, `addYears`\n- Corresponding `subtract` variants\n\n### Formatting\n- `parseDateTime`\n- `formatDateTime`\n- `formatDate`\n- `formatTime`\n\n### Epoch Conversion\n- `dateTimeToEpoch`\n- `epochToDateTime`\n\n---"
+    },
+    {
+      "title": "Data Type Functions",
+      "content": "| Function | Purpose |\n|----------|---------|\n| `toString` | Convert values to text |\n| `length` | String/list size |\n| `parseInteger` | Text to integer conversion |\n| `parseDecimal`, `formatDecimal` | Decimal formatting |\n| `getCaption`, `getKey` | Enumeration operations |\n\n---"
+    },
+    {
+      "title": "Error Handling in Expressions",
+      "content": "When objects are empty, accessing their attributes creates an exception, returning `false`.\n\n**Problematic**:\n```\n$emptyObject/attribute != $validObject/attribute or $emptyObject = empty\n```\n(Second statement never evaluates)\n\n**Better**:\n```\n$emptyObject = empty or $emptyObject/attribute != $validObject/attribute\n```\n(Ensures first check occurs)\n\n---"
+    },
+    {
+      "title": "Common Use Cases",
+      "content": "- **Conditional pricing**: \"If weight < 1kg then 0.00 else 5.00\"\n- **Date calculations**: Finding dates between intervals\n- **String manipulation**: Extracting, formatting, or validating text\n- **Business logic**: Multi-condition branching with boolean operators\n\n---\n\n# XPath"
+    },
+    {
+      "title": "What is XPath?",
+      "content": "Mendix XPath is a query language designed to retrieve data from Mendix objects and their attributes or associations.\n\n**Keyboard Shortcut**: Press **Ctrl + Space** to open XPath autocomplete in Studio Pro.\n\n**Syntax Note**: XPath constraints always start with `[` bracket.\n\n---"
+    },
+    {
+      "title": "Basic Syntax",
+      "content": "XPath queries consist of up to four elements:\n\n1. **Aggregate Function (Optional)**: `avg`, `count`, `max`, `min`, `sum` (Java only)\n2. **Entity to Retrieve (Required)**: Starts with `//` followed by module and entity name\n3. **Constraint (Optional)**: Restrictions in brackets to filter results\n4. **Attribute to Retrieve (Optional)**: Specific attribute from retrieved entities\n\n### Example Structure\n\n```\navg(//Sales.Order[IsPaid = true()]/TotalPrice)\n```\n\n---"
+    },
+    {
+      "title": "Key Differences: Studio Pro vs Java",
+      "content": "| Context | Approach |\n|---------|----------|\n| **Studio Pro** | Write only constraints; entity path determined by context |\n| **Java** | Complete queries including `//` and entity names |\n\n### Examples\n\n**Studio Pro**: `[Name='Jansen']`\n\n**Java**: `//Sales.Customer[Name='Jansen']`\n\n---"
+    },
+    {
+      "title": "Common Examples",
+      "content": "| Purpose | XPath |\n|---------|-------|\n| Retrieve all customers | `//Sales.Customer` |\n| Customers named 'Jansen' | `//Sales.Customer[Name='Jansen']` |\n| Calculate averages | `avg(//Sales.Order/TotalPrice)` |\n\n---"
+    },
+    {
+      "title": "XPath Tokens (Exam Critical)",
+      "content": "Tokens are system-provided values for use in XPath constraints:\n\n| Token | Returns | Usage |\n|-------|---------|-------|\n| `[%CurrentUser%]` | Logged-in System.User object | Filter by current user |\n| `[%CurrentDateTime%]` | Current date and time | Date comparisons |\n| `[%CurrentObject%]` | Context object | Self-reference in constraints |\n| `$VariableName` | Variable value | Reference microflow variables |\n\n---"
+    },
+    {
+      "title": "Common XPath Patterns (Exam Critical)",
+      "content": "```xpath\n[Attribute = 'value']                    // Equals string\n[Attribute != 'value']                   // Not equals\n[Attribute = empty]                      // Is null/empty\n[Attribute = true()]                     // Boolean true\n[Attribute = false()]                    // Boolean false\n[Attr1 = 'x' and Attr2 > 100]           // Multiple conditions\n[Attr1 = 'x' or Attr2 = 'y']            // Either condition\n[not(Association/Entity)]                // No associated object\n[Association = '[%CurrentUser%]']        // Current user association\n[CreatedDate > '[%CurrentDateTime%]']    // Date comparison\n```\n\n---"
+    },
+    {
+      "title": "XPath Components",
+      "content": "### Operators\nLogical and comparison operations for building complex queries.\n\n### Functions\n\n| Type | Availability |\n|------|--------------|\n| Aggregate functions | Java only |\n| Constraint functions | Both Java and Studio Pro |\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [Expressions](https://docs.mendix.com/refguide/expressions/)\n- [XPath](https://docs.mendix.com/refguide/xpath/)"
+    }
+  ],
+  "integration": [
+    {
+      "title": "Overview",
+      "content": "Mendix supports multiple integration approaches for connecting applications and sharing data.\n\n\"Integration with other applications can be done using REST, OData, GraphQL, SOAP/Web Services, or Business Events.\"\n\n---"
+    },
+    {
+      "title": "Key Integration Methods",
+      "content": "### REST Services\n\nREST services enable API-based communication between applications.\n\n#### Consumed REST Services\n\nCall external REST APIs from your Mendix application.\n\n**Key Features**:\n- Import OpenAPI/Swagger contracts to auto-generate service definitions\n- Use \"Call REST Service\" action in microflows\n- HttpRequest and HttpResponse System Entities handle communication\n\n#### Published REST Services\n\nExpose your application's functionality as REST endpoints.\n\n**Creating REST Resources**:\n- Right-click entity in domain model: \"Expose as REST resource\"\n- Right-click in editor: \"Publish as REST service operation\"\n\n**Authentication Methods**:\n\n| Method | Description |\n|--------|-------------|\n| Basic & Active Session | Default when security is Prototype/demo or Production |\n| No Authentication | For specific services |\n| Anonymous User | When enabled app-wide |\n| Custom Microflow | JWT, API keys, etc. |\n\n**Note**: \"Web service users cannot access REST services.\"\n\n**Auto-Generated Documentation**:\n- Accessible at `http://yourapp.com/rest-doc/`\n- Features interactive Swagger UI\n- Available in OpenAPI 3.0 and 2.0 formats\n\n**Monitoring**:\nSet log level of REST Publish log node to Trace for detailed logging.\n\n---\n\n### OData Services\n\nOData provides a standardized protocol for data access and manipulation.\n\n#### Consumed OData Services\nIntegrate data from external OData providers.\n\n#### Published OData/GraphQL Services\nShare your data through OData or GraphQL (experimental).\n\nOData services are viewable and manageable through Mendix Connect Catalog.\n\n---\n\n### Web Services (SOAP)\n\nTraditional SOAP-based web services for legacy system integration.\n\n- Consume and publish web services\n- Comprehensive XML schema handling\n\n---\n\n### Additional Capabilities\n\n- **Business Event Services**: Event-driven architecture\n- **Data Import/Export**: XML and JSON\n- **Machine Learning Model Integration**: ML model calls\n- **External Database Connectivity**: Downloadable connectors\n\n---"
+    },
+    {
+      "title": "Mendix Connect Integration",
+      "content": "Data integration features are part of \"Mendix Connect, a collection of functionalities that allows people in your organization to discover, understand, connect, and govern data securely.\"\n\nThe Catalog component enables registration, management, and governance of data assets.\n\n---"
+    },
+    {
+      "title": "Call REST Service Activity",
+      "content": "The primary microflow action for REST integration.\n\n### Configuration\n\n1. Open microflow where you need REST call\n2. Add \"Call REST Service\" activity\n3. Configure:\n   - URL/endpoint\n   - HTTP method\n   - Headers\n   - Request body\n   - Response handling\n\n### Request/Response Handling\n\n- Use HttpRequest system entity for outgoing requests\n- Use HttpResponse system entity for incoming responses\n- Parse JSON/XML responses into domain model objects\n\n---"
+    },
+    {
+      "title": "Import and Export Mappings (Exam Critical)",
+      "content": "Mappings transform data between external formats (JSON/XML) and Mendix domain model objects.\n\n### Import Mappings\n\nConvert incoming JSON/XML data into Mendix objects.\n\n| Property | Description |\n|----------|-------------|\n| **Source** | JSON structure, XML schema, or message definition |\n| **Entity** | Target Mendix entity to create/update |\n| **Attribute mapping** | How source fields map to entity attributes |\n| **Object handling** | Create new, Find by key, or Custom microflow |\n\n**Object Handling Options**:\n\n| Option | Description |\n|--------|-------------|\n| **Create object** | Always create new objects |\n| **Find by key** | Find existing object or create new |\n| **Call a microflow** | Custom logic for object handling |\n\n### Export Mappings\n\nConvert Mendix objects into JSON/XML for external systems.\n\n| Property | Description |\n|----------|-------------|\n| **Source entity** | Mendix entity to export |\n| **Target format** | JSON or XML schema |\n| **Attribute mapping** | Which attributes to include |\n| **Association handling** | How to export related objects |\n\n### Using Mappings in Microflows\n\n| Activity | Mapping Type | Purpose |\n|----------|--------------|---------|\n| **Import with mapping** | Import mapping | JSON/XML → Mendix objects |\n| **Export with mapping** | Export mapping | Mendix objects → JSON/XML |\n| **Call REST service** | Both | Automatic request/response mapping |\n\n### Key Points for Exam\n\n1. Import mappings are used to **consume** external data\n2. Export mappings are used to **publish** data to external systems\n3. Mappings can be reused across multiple integration points\n4. **Find by key** prevents duplicate object creation\n\n---"
+    },
+    {
+      "title": "Best Practices",
+      "content": "### Security\n\n1. Use SSL for all consumed web services\n2. Implement proper authentication\n3. Validate input at system boundaries\n4. Apply IP restrictions for sensitive endpoints\n\n### Error Handling\n\n1. Handle HTTP error codes appropriately\n2. Log integration failures\n3. Implement retry logic for transient failures\n4. Use timeouts to prevent hanging connections\n\n### Performance\n\n1. Cache responses when appropriate\n2. Use pagination for large datasets\n3. Minimize number of API calls\n4. Consider asynchronous processing for long-running operations\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [Integration](https://docs.mendix.com/refguide/integration/)\n- [Consumed REST Services](https://docs.mendix.com/refguide/consumed-rest-services/)\n- [Published REST Services](https://docs.mendix.com/refguide/published-rest-services/)"
+    }
+  ],
+  "java": [
+    {
+      "title": "Overview",
+      "content": "Mendix allows developers to extend microflow functionality with custom Java code through Java actions.\n\n\"Most application logic can be developed using microflows and nanoflows. If there is a feature missing you can extend Mendix microflows with the use of Java actions.\"\n\n---"
+    },
+    {
+      "title": "Creating Java Actions",
+      "content": "### Basic Setup\n\n1. Right-click the module and select **Add other** > **Java action**\n2. Enter a name for the action\n3. Configure parameters and return types through properties pane\n4. Save and deploy for Eclipse to generate the Java class\n\n### Parameters and Return Types\n\nJava actions support:\n- **Object parameters**: Accepts specific entity types from domain model\n- **String/primitive parameters**: Basic data types\n- **Return types**: Strings, objects, lists, or other data types\n\n### Code Generation\n\nStudio Pro generates Java code with designated areas for custom code:\n- Between `//BEGIN USER CODE` and `//END USER CODE` comments\n- Implementation goes in the `executeAction()` method\n\n---"
+    },
+    {
+      "title": "Implementation in Eclipse",
+      "content": "After deploying for Eclipse, developers edit the generated Java class.\n\n### Example: String Manipulation\n\n```java\nString productName = this.productParameter.getName(this.getContext());\nreturn new StringBuilder(productName).reverse().toString();\n```\n\n---"
+    },
+    {
+      "title": "Calling Java Actions from Microflows",
+      "content": "### Integration Steps\n\n1. Open the microflow where you need the Java action\n2. Drag the Java action from **App Explorer** into the microflow\n3. Configure input parameters by selecting appropriate variables\n4. Use the output variable in subsequent activities\n\n---"
+    },
+    {
+      "title": "Data Retrieval with XPath",
+      "content": "Java actions can retrieve database objects using the Mendix Runtime API.\n\n**Recommendation**: Use \"proxy classes generated by Mendix Studio Pro\" to avoid raw string XPath queries, ensuring type safety when domain models change.\n\n---"
+    },
+    {
+      "title": "Best Practices",
+      "content": "### Input Validation\n\n\"This simplified approach should be made more robust in a real app by checking and sanitizing the inputs to prevent exceptions or attempts at hacking.\"\n\n### Using Community Commons\n\nFor complex XPath operations, consider the Community Commons module which \"provides a powerful way of working with XPaths and performs checks automatically.\"\n\n### Deployment Workflow\n\nAlways use **Deploy for Eclipse** to ensure generated code stays synchronized with action configurations.\n\n---"
+    },
+    {
+      "title": "Java Folder Structure (Exam Critical)",
+      "content": "When a module contains Java actions, Studio Pro creates a specific folder structure:\n\n```\nproject/\n├── javasource/\n│   └── modulename/\n│       ├── actions/          # Custom Java action implementations\n│       │   └── MyAction.java\n│       └── proxies/          # Auto-generated entity proxies\n│           └── MyEntity.java\n└── userlib/                  # External JAR dependencies\n    └── library.jar\n```\n\n### Folder Purposes\n\n| Folder | Purpose | Editable? |\n|--------|---------|-----------|\n| **javasource/[module]/actions/** | Custom Java action code | Yes |\n| **javasource/[module]/proxies/** | Generated entity proxy classes | **No** (auto-generated) |\n| **userlib/** | External JAR libraries | Yes |\n\n**Critical Warning**: Never manually edit files in the `proxies` folder - they are regenerated automatically when you deploy.\n\n### Proxy Classes\n\nProxy classes provide type-safe access to domain model entities in Java:\n- Generated for each entity in the domain model\n- Include getter/setter methods for attributes\n- Automatically updated when domain model changes\n\n---"
+    },
+    {
+      "title": "Troubleshooting",
+      "content": "| Issue | Solution |\n|-------|----------|\n| **UnsupportedClassVersionError** | Clean deployment directory and match JDK versions |\n| **Compile Errors** | Studio Pro identifies syntax errors during deployment |\n| **Runtime Errors** | Check Studio Pro console for stack traces |\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [Extending Your Application with Custom Java](https://docs.mendix.com/refguide/extending-your-application-with-custom-java/)"
+    }
+  ],
+  "events": [
+    {
+      "title": "Event Handlers Overview",
+      "content": "Event handlers define microflows that automatically execute in response to specific entity-related events.\n\n\"Event handlers define microflows that handle certain events related to the entity.\"\n\n---"
+    },
+    {
+      "title": "Event Types",
+      "content": "| Event | Description |\n|-------|-------------|\n| **Create** | Microflow executes when object is created |\n| **Commit** | Microflow executes when object is committed |\n| **Delete** | Microflow executes when object is deleted |\n| **Rollback** | Microflow executes when object is rolled back |\n\n---"
+    },
+    {
+      "title": "Timing: Before and After",
+      "content": "| Timing | Description |\n|--------|-------------|\n| **Before** | Executes prior to event; must return Boolean to permit (true) or prevent (false) |\n| **After** | Executes following event; cannot prevent action |\n\n---"
+    },
+    {
+      "title": "Key Configuration Details",
+      "content": "### Parameter Passing\n- Before Create handlers cannot receive the object as parameter\n- All other event handlers can receive the object\n\n### Return Values\n\"Microflows that are executed _before_ the event should return a Boolean value that specifies whether the event should continue (true) or be cancelled (false).\"\n\n### Error Handling\nBefore event handlers can raise errors when returning false, allowing validation-like behavior.\n\n---"
+    },
+    {
+      "title": "Event Handler Naming Conventions (Exam Critical)",
+      "content": "Mendix recommends standardized prefixes for event handler microflows:\n\n| Prefix | Event Type | Example |\n|--------|------------|---------|\n| **BCR_** | Before Create | BCR_Order |\n| **ACR_** | After Create | ACR_Order |\n| **BCO_** | Before Commit | BCO_Order |\n| **ACO_** | After Commit | ACO_Order |\n| **BDE_** | Before Delete | BDE_Order |\n| **ADE_** | After Delete | ADE_Order |\n| **BRO_** | Before Rollback | BRO_Order |\n| **ARO_** | After Rollback | ARO_Order |\n\n**Exam Tip**: Know which prefix corresponds to which event timing!\n\n---"
+    },
+    {
+      "title": "Usage Recommendations",
+      "content": "\"Event handlers should be used moderately, as they will be triggered every time the corresponding event occurs, so they must be for things you want always to happen.\"\n\n---\n\n# Validation Rules"
+    },
+    {
+      "title": "Overview",
+      "content": "Validation rules enforce data integrity by defining conditions that objects must satisfy before being committed to the database.\n\nWhen violated, they generate error messages for end-users or exceptions in microflows.\n\n---"
+    },
+    {
+      "title": "Creating Validation Rules",
+      "content": "Define validation rules through the entity dialog box in the domain model editor.\n\nEach rule includes:\n- **Attribute**: The field to validate\n- **Error Message**: User-facing text when validation fails\n- **Rule Type**: The condition to enforce\n\n---"
+    },
+    {
+      "title": "Rule Types",
+      "content": "| Rule Type | Description |\n|-----------|-------------|\n| **Required** (default) | Attribute needs a value; cannot be empty |\n| **Unique** | Attribute values must differ across all objects |\n| **Equals** | Compares to fixed value or another attribute |\n| **Range** | Values must fall within specified bounds |\n| **Regular Expression** | Matches against stored regex pattern |\n| **Maximum Length** | Restricts character count |\n\n---"
+    },
+    {
+      "title": "Important Constraints",
+      "content": "### Non-Persistable Entities\nValidation rules are disabled for non-persistable entities since they're designed for database integrity.\n\n### Uniqueness with Generalizations\nYou cannot define unique validation rules on inherited attributes in specialized entities.\n\n### Rule Ordering\nRules execute in defined order, with all violations recorded and displayed together. Uniqueness constraints execute separately after other validations pass.\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [Event Handlers](https://docs.mendix.com/refguide/event-handlers/)\n- [Validation Rules](https://docs.mendix.com/refguide/validation-rules/)"
+    }
+  ],
+  "enumerations": [
+    {
+      "title": "Enumerations Overview",
+      "content": "An enumeration defines \"a list of predefined values\" used for enumeration attribute types.\n\n**Example**: An order status might have values like _Open_, _Closed_, or _In Progress_.\n\n---"
+    },
+    {
+      "title": "Enumeration Properties",
+      "content": "| Property | Description |\n|----------|-------------|\n| **Name** | The enumeration identifier |\n| **Documentation** | Information for developers (not visible to end-users) |\n| **Export level** | For add-on modules (Hidden or Usable) |\n| **Enumeration values** | One or more options representing choices |\n\n---"
+    },
+    {
+      "title": "Enumeration Value Properties",
+      "content": "### Caption\n\"The text the end-user sees for this enumeration value.\"\n- Translatable\n- Can contain any character including spaces\n\n### Name\nThe technical identifier:\n- Must start with a letter\n- Can only contain letters, digits, and underscores\n- Reserved words cannot be used (`abstract`, `boolean`, `class`, `enum`, etc.)\n\n**Critical**: Changing a value's name is prohibited since it would \"invalidate the data in your database.\"\n\n### Name vs Caption (Exam Critical)\n\n| Property | Can contain spaces? | Can be changed after creation? |\n|----------|---------------------|-------------------------------|\n| **Name** | No | **No** |\n| **Caption** | Yes | Yes |\n\n**Exam Tip**: This distinction is frequently tested. Name is technical (no spaces, immutable), Caption is user-facing (any characters, editable).\n\n### Image\nOptional image displayed in data grid columns when enumeration format is set to **Image**.\n\n---"
+    },
+    {
+      "title": "Creating an Enumeration",
+      "content": "1. Right-click in App Explorer and select **Add other** > **Enumeration**\n2. Name the enumeration\n3. Click **New** to add enumeration values with Name, Caption, and optional Image\n4. Save each value and the enumeration\n\n---"
+    },
+    {
+      "title": "Localization",
+      "content": "Captions are translatable text, accessible through the Language Menu for multiple language support.\n\n---\n\n# Constants"
+    },
+    {
+      "title": "Overview",
+      "content": "Constants define configuration values that can vary per environment. They're accessible in expressions, web services, and can be configured differently across deployments.\n\n---"
+    },
+    {
+      "title": "Creating and Configuring Constants",
+      "content": "### Environment-Specific Configuration\n\n| Platform | Method |\n|----------|--------|\n| Licensed Mendix Cloud, SAP BTP, Kubernetes | \"Model Options\" tab in Environment Details |\n| Other Cloud Foundry platforms | Environment variables using `module.constant` format |\n| Local/Free App | Values defined in Studio Pro |\n\n### Local Overrides\nConstants can be overridden in configurations for local testing without modifying defaults.\n\n---"
+    },
+    {
+      "title": "Key Properties",
+      "content": "| Property | Description |\n|----------|-------------|\n| **Name** | Identifier used to reference the constant |\n| **Documentation** | Development purposes only |\n| **Export Level** | Hidden (default) or Usable |\n| **Data Types** | String, Boolean, date/time, decimal, integer/long |\n| **Default Value** | Used when running locally or in Free App |\n| **Exposed to Client** | When \"Yes\", constant is accessible in nanoflows and page expressions |\n\n---"
+    },
+    {
+      "title": "Critical Security Consideration",
+      "content": "**\"When a constant is exposed to the client...you should not use sensitive data or secrets such as passwords.\"**\n\nThis applies to:\n- Web apps\n- Offline-first PWAs\n- Native applications\n\n---"
+    },
+    {
+      "title": "Use Cases",
+      "content": "Constants work in:\n- Expressions (prefixed with `@`)\n- Consumed web services (specifying environment-specific URLs)\n- Configuration values that change between environments\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [Enumerations](https://docs.mendix.com/refguide/enumerations/)\n- [Constants](https://docs.mendix.com/refguide/constants/)"
+    }
+  ],
+  "scheduled-events": [
+    {
+      "title": "Overview",
+      "content": "Scheduled events enable you to run microflows automatically on a regular basis without requiring end-user interaction.\n\nThey're managed through the task queue mechanism and added to modules as documents.\n\n**Note**: \"Scheduled events can be tested locally, but they will not be run if your app is deployed as a Free App.\"\n\n---"
+    },
+    {
+      "title": "Creating Scheduled Events",
+      "content": "Access scheduled events by right-clicking your module and selecting \"Add other.\"\n\n---"
+    },
+    {
+      "title": "Core Configuration Properties",
+      "content": "### Common Properties\n\n| Property | Description |\n|----------|-------------|\n| **Name** | Identifies the scheduled event in `System.ProcessedQueueTask` at runtime |\n| **Documentation** | For model documentation only |\n| **Microflow** | Operation triggered by the event (no parameters, runs with all rights) |\n| **Enabled** | Controls whether microflow executes |\n\n---"
+    },
+    {
+      "title": "Timing Options",
+      "content": "The system supports six interval types:\n\n| Interval | Description |\n|----------|-------------|\n| **Yearly** | Run on specific dates or weekdays (e.g., first Monday in April) |\n| **Monthly** | Execute on particular days or specific weekdays |\n| **Weekly** | Run on selected days (Monday, Wednesday, Friday) |\n| **Daily** | Execute at a specified time |\n| **Hourly** | Run every N hours with optional minute offset |\n| **Minutes** | Execute every N minutes |\n\nEach option allows UTC or server-based time zone specification.\n\n---"
+    },
+    {
+      "title": "Handling Long-Running Events",
+      "content": "When events exceed their interval duration, choose an overlap strategy:\n\n| Strategy | Behavior |\n|----------|----------|\n| **Skip next** (default) | Subsequent events skipped until completion, resuming at next scheduled time |\n| **Delay next** | Next event starts immediately after previous finishes, potentially drifting from schedule |\n\n---"
+    },
+    {
+      "title": "Key Operational Limits",
+      "content": "- Maximum of ten scheduled events can run concurrently per cluster node\n- Hour and minute intervals must be integer divisors of 24 or 60 respectively\n- All Mendix Cloud servers operate on UTC time\n\n---"
+    },
+    {
+      "title": "Database Management",
+      "content": "Each execution creates entries in `System.ProcessedQueueTask`.\n\n**Important**: Implement cleanup procedures to manage table growth over time.\n\n---"
+    },
+    {
+      "title": "Best Practices",
+      "content": "1. **Use meaningful names** for easy identification\n2. **Set appropriate intervals** based on task requirements\n3. **Handle errors gracefully** within the microflow\n4. **Monitor execution** through logs and system entities\n5. **Implement cleanup** for ProcessedQueueTask table\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [Scheduled Events](https://docs.mendix.com/refguide/scheduled-events/)"
+    }
+  ],
+  "agile": []
+}
