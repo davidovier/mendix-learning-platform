@@ -16,6 +16,7 @@ interface Question {
   options: string[];
   correctIndex: number;
   explanation?: string;
+  detailedExplanation?: string;
 }
 
 interface QuestionCardProps {
@@ -111,11 +112,11 @@ export function QuestionCard({
             </div>
 
             {/* Explanation */}
-            {question.explanation && (
+            {(question.detailedExplanation || question.explanation) && (
               <div className="flex gap-2 text-sm">
                 <Info className="h-4 w-4 text-emerald-600 dark:text-emerald-400 mt-0.5 shrink-0" />
-                <p className="text-emerald-800 dark:text-emerald-200">
-                  {question.explanation}
+                <p className="text-emerald-800 dark:text-emerald-200 whitespace-pre-line">
+                  {question.detailedExplanation || question.explanation}
                 </p>
               </div>
             )}
