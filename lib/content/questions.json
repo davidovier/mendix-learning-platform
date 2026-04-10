@@ -11,7 +11,8 @@
       "Feedback functionality is automatically included in all Mendix apps."
     ],
     "correctIndex": 0,
-    "explanation": "The Feedback widget in Mendix provides a built-in, easy way for users to submit feedback directly from your application without custom development."
+    "explanation": "The Feedback widget in Mendix provides a built-in, easy way for users to submit feedback directly from your application without custom development.",
+    "detailedExplanation": "Use the Feedback widget"
   },
   {
     "id": "q-1",
@@ -53,7 +54,8 @@
       "Yes, through the Entity Properties"
     ],
     "correctIndex": 0,
-    "explanation": "In Mendix, you can limit an entity to only one object by implementing validation logic in a microflow that checks for existing objects before creating new ones."
+    "explanation": "In Mendix, you can limit an entity to only one object by implementing validation logic in a microflow that checks for existing objects before creating new ones.",
+    "detailedExplanation": "Yes, through a Microflow."
   },
   {
     "id": "q-4",
@@ -67,7 +69,8 @@
       "You have a smaller selection of activities."
     ],
     "correctIndex": 0,
-    "explanation": "Sub-microflows in Mendix have the same capabilities as regular microflows. They are used to organize logic into reusable components, improving code maintainability without sacrificing functionality."
+    "explanation": "Sub-microflows in Mendix have the same capabilities as regular microflows. They are used to organize logic into reusable components, improving code maintainability without sacrificing functionality.",
+    "detailedExplanation": "None. Sub-microflows are equally capable."
   },
   {
     "id": "q-5",
@@ -81,7 +84,8 @@
       "Increased logical capability"
     ],
     "correctIndex": 0,
-    "explanation": "Sub-microflows in Mendix have the same capabilities as regular microflows. They are used to organize logic into reusable components, improving code maintainability without sacrificing functionality."
+    "explanation": "Sub-microflows in Mendix have the same capabilities as regular microflows. They are used to organize logic into reusable components, improving code maintainability without sacrificing functionality.",
+    "detailedExplanation": "Better maintainability (also: readability and reusability)"
   },
   {
     "id": "q-6",
@@ -95,7 +99,8 @@
       "Sticky notes"
     ],
     "correctIndex": 0,
-    "explanation": "Annotations in Mendix microflows allow developers to add notes and documentation directly in the flow, making it easier for others to understand the logic."
+    "explanation": "Annotations in Mendix microflows allow developers to add notes and documentation directly in the flow, making it easier for others to understand the logic.",
+    "detailedExplanation": "Annotations"
   },
   {
     "id": "q-7",
@@ -109,7 +114,8 @@
       "None. Rules are equally capable."
     ],
     "correctIndex": 0,
-    "explanation": "Rules in Mendix have a smaller selection of activities compared to microflows. They are designed for simple boolean logic and validation purposes."
+    "explanation": "Rules in Mendix have a smaller selection of activities compared to microflows. They are designed for simple boolean logic and validation purposes.",
+    "detailedExplanation": "A rule may only return a Boolean (or enumeration)."
   },
   {
     "id": "q-8",
@@ -151,7 +157,8 @@
       "A placeholder variable defined by the developer."
     ],
     "correctIndex": 0,
-    "explanation": "Tokens in Mendix microflows are system-generated values like [%CurrentDateTime%] or [%CurrentUser%] that provide runtime information."
+    "explanation": "Tokens in Mendix microflows are system-generated values like [%CurrentDateTime%] or [%CurrentUser%] that provide runtime information.",
+    "detailedExplanation": "A system-generated value (like [%CurrentDateTime%], [%CurrentUser%])"
   },
   {
     "id": "q-11",
@@ -165,7 +172,8 @@
       "A cast"
     ],
     "correctIndex": 0,
-    "explanation": "In microflow expressions, functions like toUpperCase() are built-in operations that transform or process values."
+    "explanation": "In microflow expressions, functions like toUpperCase() are built-in operations that transform or process values.",
+    "detailedExplanation": "A function"
   },
   {
     "id": "q-12",
@@ -179,7 +187,8 @@
       "Round"
     ],
     "correctIndex": 0,
-    "explanation": "Variables in microflows are prefixed with $ (e.g., $Customer) and represent objects or values that can be used throughout the flow."
+    "explanation": "Variables in microflows are prefixed with $ (e.g., $Customer) and represent objects or values that can be used throughout the flow.",
+    "detailedExplanation": "$Customer"
   },
   {
     "id": "q-13",
@@ -193,7 +202,8 @@
       "Adjust security accordingly."
     ],
     "correctIndex": 0,
-    "explanation": "Breakpoint conditions in Mendix allow you to debug specific scenarios by specifying when the debugger should pause, without affecting other users."
+    "explanation": "Breakpoint conditions in Mendix allow you to debug specific scenarios by specifying when the debugger should pause, without affecting other users.",
+    "detailedExplanation": "Set a breakpoint condition (e.g., $currentUser/name = 'YourUserName')"
   },
   {
     "id": "q-14",
@@ -235,7 +245,8 @@
       "Create a loop with a counter variable."
     ],
     "correctIndex": 0,
-    "explanation": "In microflow expressions, functions like toUpperCase() are built-in operations that transform or process values."
+    "explanation": "In microflow expressions, functions like toUpperCase() are built-in operations that transform or process values.",
+    "detailedExplanation": "Use an aggregate list function"
   },
   {
     "id": "q-17",
@@ -249,7 +260,8 @@
       "Duplicating datasets."
     ],
     "correctIndex": 0,
-    "explanation": "Batches in Mendix are used for processing large amounts of data efficiently by breaking the work into smaller chunks to manage memory and performance."
+    "explanation": "Batches in Mendix are used for processing large amounts of data efficiently by breaking the work into smaller chunks to manage memory and performance.",
+    "detailedExplanation": "Processing large amounts of data"
   },
   {
     "id": "q-18",
@@ -263,7 +275,8 @@
       "An aggregate list"
     ],
     "correctIndex": 0,
-    "explanation": "The iterator in a Mendix loop represents the current object being processed from the list. It changes with each iteration of the loop."
+    "explanation": "The iterator in a Mendix loop represents the current object being processed from the list. It changes with each iteration of the loop.",
+    "detailedExplanation": "An iterator"
   },
   {
     "id": "q-19",
@@ -277,7 +290,8 @@
       "Sprint review"
     ],
     "correctIndex": 0,
-    "explanation": "Sprint planning is performed at the beginning of each sprint to select and commit to user stories for the iteration."
+    "explanation": "Sprint planning is performed at the beginning of each sprint to select and commit to user stories for the iteration.",
+    "detailedExplanation": "Sprint planning"
   },
   {
     "id": "q-20",
@@ -291,7 +305,8 @@
       "Development progress is presented to the stakeholders."
     ],
     "correctIndex": 0,
-    "explanation": "The daily scrum (standup) is where team members share progress, plans, and blockers to maintain transparency."
+    "explanation": "The daily scrum (standup) is where team members share progress, plans, and blockers to maintain transparency.",
+    "detailedExplanation": "Team members share their progress, plans, and issues"
   },
   {
     "id": "q-21",
@@ -305,7 +320,8 @@
       "The priority of the user story."
     ],
     "correctIndex": 0,
-    "explanation": "Story points indicate the relative difficulty or effort required to complete a user story, not time estimates."
+    "explanation": "Story points indicate the relative difficulty or effort required to complete a user story, not time estimates.",
+    "detailedExplanation": "The difficulty of the user story"
   },
   {
     "id": "q-22",
@@ -347,7 +363,8 @@
       "Proxies"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Actions\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Actions\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Actions"
   },
   {
     "id": "q-25",
@@ -361,7 +378,8 @@
       "Actions"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Proxies\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Proxies\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Proxies"
   },
   {
     "id": "q-26",
@@ -389,7 +407,8 @@
       "Resources"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Theme\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Theme\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Theme"
   },
   {
     "id": "q-28",
@@ -403,7 +422,8 @@
       "By creating a dataset."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"By creating a data snapshot and adding it to the deployment directory of your app.\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"By creating a data snapshot and adding it to the deployment directory of your app.\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "By creating a data snapshot and adding it to the deployment directory of your app"
   },
   {
     "id": "q-29",
@@ -417,7 +437,8 @@
       "Delete-Modify"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Modify-Modify\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Modify-Modify\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Modify-Modify"
   },
   {
     "id": "q-30",
@@ -431,7 +452,8 @@
       "A revision of the main line."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"A revision that has been used to build a Mx deployment package.\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"A revision that has been used to build a Mx deployment package.\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "A revision that has been used to build a Mx deployment package"
   },
   {
     "id": "q-31",
@@ -445,7 +467,8 @@
       "Quick fix"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Merge feature branch\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Merge feature branch\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Merge feature branch"
   },
   {
     "id": "q-32",
@@ -473,7 +496,8 @@
       "Text widgets"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"List Views\" because this aligns with Mendix Xpath best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"List Views\" because this aligns with Mendix Xpath best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "List Views (also: Data Grids, Retrieve actions, Access rules)"
   },
   {
     "id": "q-34",
@@ -487,7 +511,8 @@
       "Dynamic text in Labels"
     ],
     "correctIndex": 0,
-    "explanation": "XPath constraints in Mendix filter data by specifying conditions that objects must meet. They start with [ and contain attribute comparisons."
+    "explanation": "XPath constraints in Mendix filter data by specifying conditions that objects must meet. They start with [ and contain attribute comparisons.",
+    "detailedExplanation": "Selectable data constraints on Reference Selectors"
   },
   {
     "id": "q-35",
@@ -501,7 +526,8 @@
       "In the input parameter"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"In the ‘Retrieve’ action\" because this aligns with Mendix Xpath best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"In the ‘Retrieve’ action\" because this aligns with Mendix Xpath best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "In the 'Retrieve' action"
   },
   {
     "id": "q-36",
@@ -515,7 +541,8 @@
       "("
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"[\" because this aligns with Mendix Xpath best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"[\" because this aligns with Mendix Xpath best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "`[` (opening square bracket)"
   },
   {
     "id": "q-37",
@@ -529,7 +556,8 @@
       "Ctrl + Shift"
     ],
     "correctIndex": 0,
-    "explanation": "Ctrl + Space opens the XPath auto-complete menu in Mendix Studio Pro, helping you write correct path expressions."
+    "explanation": "Ctrl + Space opens the XPath auto-complete menu in Mendix Studio Pro, helping you write correct path expressions.",
+    "detailedExplanation": "Ctrl + Space"
   },
   {
     "id": "q-38",
@@ -599,7 +627,8 @@
       "By downloading App Explorer Structure app"
     ],
     "correctIndex": 0,
-    "explanation": "The Resources folder in Mendix modules is used for storing enumerations, regular expressions, constants, and other reusable configurations."
+    "explanation": "The Resources folder in Mendix modules is used for storing enumerations, regular expressions, constants, and other reusable configurations.",
+    "detailedExplanation": "Manually"
   },
   {
     "id": "q-43",
@@ -640,7 +669,8 @@
       "Image"
     ],
     "correctIndex": 0,
-    "explanation": "Widgets in Mendix are reusable UI components that can be configured and placed on pages to provide specific functionality."
+    "explanation": "Widgets in Mendix are reusable UI components that can be configured and placed on pages to provide specific functionality.",
+    "detailedExplanation": "Dynamic Image"
   },
   {
     "id": "q-46",
@@ -668,7 +698,8 @@
       "Layout grid"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Placeholders\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Placeholders\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Placeholders"
   },
   {
     "id": "q-48",
@@ -696,7 +727,8 @@
       "BUY"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"DRY\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"DRY\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "DRY (Don't Repeat Yourself)"
   },
   {
     "id": "q-50",
@@ -738,7 +770,8 @@
       "New, Edit, Delete"
     ],
     "correctIndex": 0,
-    "explanation": "Widgets in Mendix are reusable UI components that can be configured and placed on pages to provide specific functionality."
+    "explanation": "Widgets in Mendix are reusable UI components that can be configured and placed on pages to provide specific functionality.",
+    "detailedExplanation": "Edit, Delete"
   },
   {
     "id": "q-53",
@@ -752,7 +785,8 @@
       "In the Page Access tab of the Module Security."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"In the Conditional visibility property of the container.\" because this aligns with Mendix Security best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"In the Conditional visibility property of the container.\" because this aligns with Mendix Security best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "In the Conditional visibility property of the container"
   },
   {
     "id": "q-54",
@@ -766,7 +800,8 @@
       "Automatically."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"By setting the resizable property of the page to No.\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"By setting the resizable property of the page to No.\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "By setting the resizable property of the page to No"
   },
   {
     "id": "q-55",
@@ -794,7 +829,8 @@
       "dateCreated (descending)"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"createdDate (descending)\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"createdDate (descending)\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "createdDate (descending)"
   },
   {
     "id": "q-57",
@@ -808,7 +844,8 @@
       "Resizable with size determined automatically, with layout grid as the most inner layer of the page."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Resizable with size determined automatically, with layout grid as the most outer layer of the page.\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Resizable with size determined automatically, with layout grid as the most outer layer of the page.\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Resizable with size determined automatically, with layout grid as the most outer layer of the page"
   },
   {
     "id": "q-58",
@@ -836,7 +873,8 @@
       "By creating a separate domain model."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"By adding a separate module.\" because this aligns with Mendix Security best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"By adding a separate module.\" because this aligns with Mendix Security best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "By adding a separate module"
   },
   {
     "id": "q-60",
@@ -892,7 +930,8 @@
       "Modules from the App Store"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Menu\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Menu\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Menu"
   },
   {
     "id": "q-64",
@@ -906,7 +945,8 @@
       "One source, many destinations"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"One source, one destination\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"One source, one destination\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "One source, many destinations"
   },
   {
     "id": "q-65",
@@ -920,7 +960,8 @@
       "The language which will be selected by the user at the first log-in."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"The language which users will see when using your app.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"The language which users will see when using your app.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "The language which users will see when using your app"
   },
   {
     "id": "q-66",
@@ -948,7 +989,8 @@
       "In the project folder"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"In the toolbar of Studio Pro\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"In the toolbar of Studio Pro\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "In the toolbar of Studio Pro"
   },
   {
     "id": "q-68",
@@ -962,7 +1004,8 @@
       "Export translation"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Batch translation\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Batch translation\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Batch translation"
   },
   {
     "id": "q-69",
@@ -976,7 +1019,8 @@
       "Arrow"
     ],
     "correctIndex": 0,
-    "explanation": "Associations in Mendix define relationships between entities. The owner of an association determines which entity stores the reference."
+    "explanation": "Associations in Mendix define relationships between entities. The owner of an association determines which entity stores the reference.",
+    "detailedExplanation": "Reference"
   },
   {
     "id": "q-70",
@@ -990,7 +1034,8 @@
       "Only one association."
     ],
     "correctIndex": 0,
-    "explanation": "Associations in Mendix define relationships between entities. The owner of an association determines which entity stores the reference."
+    "explanation": "Associations in Mendix define relationships between entities. The owner of an association determines which entity stores the reference.",
+    "detailedExplanation": "Many associations of various multiplicity."
   },
   {
     "id": "q-71",
@@ -1004,7 +1049,8 @@
       "You want clear Entity names"
     ],
     "correctIndex": 0,
-    "explanation": "Associations in Mendix define relationships between entities. The owner of an association determines which entity stores the reference."
+    "explanation": "Associations in Mendix define relationships between entities. The owner of an association determines which entity stores the reference.",
+    "detailedExplanation": "You want to display additional information about an association."
   },
   {
     "id": "q-72",
@@ -1060,7 +1106,8 @@
       "Current attributes and association values are stored in the database."
     ],
     "correctIndex": 0,
-    "explanation": "Associations in Mendix define relationships between entities. The owner of an association determines which entity stores the reference."
+    "explanation": "Associations in Mendix define relationships between entities. The owner of an association determines which entity stores the reference.",
+    "detailedExplanation": "Current attribute values and association values are stored in memory (NOT database).\n\n| Aspect | Persistable | Non-Persistable |\n|--------|-------------|-----------------|\n| Storage | Database table | Runtime memory only |\n| Color | Blue | Orange |\n| Mendix creates DB table? | Yes | No |\n| Indexes possible? | Yes | **No** |\n| Validation in domain model? | Yes | **No** |\n| Survives restart? | Yes | No |"
   },
   {
     "id": "q-76",
@@ -1074,7 +1121,8 @@
       "When a value is viewed more often than it changes"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"When a value changes more often than it is viewed\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"When a value changes more often than it is viewed\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "When a value is **viewed more often than it changes**."
   },
   {
     "id": "q-77",
@@ -1088,7 +1136,8 @@
       "Cross-functional association"
     ],
     "correctIndex": 0,
-    "explanation": "Associations in Mendix define relationships between entities. The owner of an association determines which entity stores the reference."
+    "explanation": "Associations in Mendix define relationships between entities. The owner of an association determines which entity stores the reference.",
+    "detailedExplanation": "Cross-module association."
   },
   {
     "id": "q-78",
@@ -1144,7 +1193,8 @@
       "As long as you need"
     ],
     "correctIndex": 0,
-    "explanation": "The daily scrum (standup) is where team members share progress, plans, and blockers to maintain transparency."
+    "explanation": "The daily scrum (standup) is where team members share progress, plans, and blockers to maintain transparency.",
+    "detailedExplanation": "15 minutes"
   },
   {
     "id": "q-82",
@@ -1158,7 +1208,8 @@
       "PO & Management"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"PO, SCRUM master, Developers & Management\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"PO, SCRUM master, Developers & Management\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "PO, Scrum Master, Developers & Management"
   },
   {
     "id": "q-83",
@@ -1185,7 +1236,8 @@
       "Whenever a module exceeds 35 mbs in size"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"It is up to you to choose logical modules for your application\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"It is up to you to choose logical modules for your application\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "It is up to you to choose logical modules for your application"
   },
   {
     "id": "q-85",
@@ -1199,7 +1251,8 @@
       "Directly in the module’s security settings"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"After enabling an add-on module, in the module settings\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"After enabling an add-on module, in the module settings\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "After enabling an add-on module, in the module settings"
   },
   {
     "id": "q-86",
@@ -1213,7 +1266,8 @@
       "You can only put a ‘Main’ placeholder in the Master Layout"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"1\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"1\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "1"
   },
   {
     "id": "q-87",
@@ -1226,7 +1280,8 @@
       "Copy the layout from the marketplace module and change the copy"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Create a new layout and set the Atlas UI layout as the master layout.\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Create a new layout and set the Atlas UI layout as the master layout.\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Create a new layout and set the Atlas UI layout as the master layout"
   },
   {
     "id": "q-88",
@@ -1240,7 +1295,8 @@
       "[%currentDateTime%]"
     ],
     "correctIndex": 0,
-    "explanation": "Variables in microflows are prefixed with $ (e.g., $Customer) and represent objects or values that can be used throughout the flow."
+    "explanation": "Variables in microflows are prefixed with $ (e.g., $Customer) and represent objects or values that can be used throughout the flow.",
+    "detailedExplanation": "[%currentPage%] (does not exist)"
   },
   {
     "id": "q-89",
@@ -1278,7 +1334,8 @@
       "App>Tools > Properties"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Module security\" because this aligns with Mendix Security best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Module security\" because this aligns with Mendix Security best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Module security"
   },
   {
     "id": "q-92",
@@ -1291,7 +1348,8 @@
       "Only if you have a demo user for the anonymous user"
     ],
     "correctIndex": 0,
-    "explanation": "Anonymous users in Mendix allow access to specific parts of your application without requiring authentication, such as login pages or public content."
+    "explanation": "Anonymous users in Mendix allow access to specific parts of your application without requiring authentication, such as login pages or public content.",
+    "detailedExplanation": "Yes"
   },
   {
     "id": "q-93",
@@ -1333,7 +1391,8 @@
       "Each page must be created manually"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Right click an Entity and select “Generate overview pages...” for all entities.\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Right click an Entity and select “Generate overview pages...” for all entities.\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Right-click an Entity and select \"Generate overview pages...\" for all entities"
   },
   {
     "id": "q-96",
@@ -1347,7 +1406,8 @@
       "Select multiple data sources for the data grid."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Add columns which use associations.\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Add columns which use associations.\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Add columns which use associations"
   },
   {
     "id": "q-97",
@@ -1361,7 +1421,8 @@
       "Production security"
     ],
     "correctIndex": 0,
-    "explanation": "User roles in Mendix define what users can see and do in your application. Each role has specific module roles and access rights."
+    "explanation": "User roles in Mendix define what users can see and do in your application. Each role has specific module roles and access rights.",
+    "detailedExplanation": "App security"
   },
   {
     "id": "q-98",
@@ -1375,7 +1436,8 @@
       "The Excel Importer data grid widget from the Marketplace."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"The Excel Importer module from the Marketplace.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"The Excel Importer module from the Marketplace.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "The Excel Importer module from the Marketplace"
   },
   {
     "id": "q-99",
@@ -1389,7 +1451,8 @@
       "It creates a second domain model for testing."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"It shows the configuration of your domain model in the client.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"It shows the configuration of your domain model in the client.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "It shows the configuration of your domain model in the client"
   },
   {
     "id": "q-100",
@@ -1403,7 +1466,8 @@
       "Your edits will affect the version of the app on the Marketplace for everyone using it."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Updating to a new version of the module erases your changes.\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Updating to a new version of the module erases your changes.\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Updating to a new version of the module erases your changes"
   },
   {
     "id": "q-101",
@@ -1417,7 +1481,8 @@
       "Focus, Courage, Cooperation, Commitment & Communication"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Focus, Courage, Openness, Commitment & Respect\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Focus, Courage, Openness, Commitment & Respect\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Focus, Courage, Openness, Commitment & Respect"
   },
   {
     "id": "q-102",
@@ -1445,7 +1510,8 @@
       "Kick-off, Mid-sprint Check, Bug Fixing, Go-live"
     ],
     "correctIndex": 0,
-    "explanation": "The daily scrum (standup) is where team members share progress, plans, and blockers to maintain transparency."
+    "explanation": "The daily scrum (standup) is where team members share progress, plans, and blockers to maintain transparency.",
+    "detailedExplanation": "Planning, Retrospective, Review, and Daily Scrum/Daily Standup"
   },
   {
     "id": "q-104",
@@ -1457,7 +1523,8 @@
       "yes"
     ],
     "correctIndex": 0,
-    "explanation": "Anonymous users in Mendix allow access to specific parts of your application without requiring authentication, such as login pages or public content."
+    "explanation": "Anonymous users in Mendix allow access to specific parts of your application without requiring authentication, such as login pages or public content.",
+    "detailedExplanation": "No"
   },
   {
     "id": "q-105",
@@ -1471,7 +1538,8 @@
       "Project Security"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Data Hub Catalog\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Data Hub Catalog\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Data Hub Catalog"
   },
   {
     "id": "q-106",
@@ -1485,7 +1553,8 @@
       "Hub Record"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"External Entity\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"External Entity\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "External Entity"
   },
   {
     "id": "q-107",
@@ -1499,7 +1568,8 @@
       "It's used for licensing purposes."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"There can be multiple versions of a service and users can connect to a specific one using it.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"There can be multiple versions of a service and users can connect to a specific one using it.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "There can be multiple versions of a service and users can connect to a specific one using it"
   },
   {
     "id": "q-108",
@@ -1513,7 +1583,8 @@
       "An entity that directly consumes data from an external API."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"An entity that is connected to a dataset in Data Hub.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"An entity that is connected to a dataset in Data Hub.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "An entity that is connected to a dataset in Data Hub"
   },
   {
     "id": "q-109",
@@ -1527,7 +1598,8 @@
       "SQL Query"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"OData Feed\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"OData Feed\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "OData Feed"
   },
   {
     "id": "q-110",
@@ -1555,7 +1627,8 @@
       "An Update entity microflow"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"A Send external object activity\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"A Send external object activity\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "A Send external object activity"
   },
   {
     "id": "q-112",
@@ -1569,7 +1642,8 @@
       "Only via custom Java actions."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Yes, if the Updateable(write) property of its public resource settings is checked.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Yes, if the Updateable(write) property of its public resource settings is checked.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Yes, if the Updateable(write) property of its public resource settings is checked"
   },
   {
     "id": "q-113",
@@ -1583,7 +1657,8 @@
       "Using the 'View Data Hub' option in Studio Pro."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Clicking the Landscape tab.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Clicking the Landscape tab.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Clicking the Landscape tab"
   },
   {
     "id": "q-114",
@@ -1597,7 +1672,8 @@
       "The app is independent of your service."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"The app is consuming data from your service.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"The app is consuming data from your service.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "The app is consuming data from your service"
   },
   {
     "id": "q-115",
@@ -1611,7 +1687,8 @@
       "The app is an administrative tool for your service."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"The app is providing data to your service.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"The app is providing data to your service.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "The app is providing data to your service"
   },
   {
     "id": "q-116",
@@ -1625,7 +1702,8 @@
       "Duplicate"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Delete\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Delete\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Delete"
   },
   {
     "id": "q-117",
@@ -1653,7 +1731,8 @@
       "Only in pages."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Yes\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Yes\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Yes (for validation rules)."
   },
   {
     "id": "q-119",
@@ -1667,7 +1746,8 @@
       "Material Design"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Bootstrap Framework\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Bootstrap Framework\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Bootstrap Framework"
   },
   {
     "id": "q-120",
@@ -1681,7 +1761,8 @@
       "RET"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"DS\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"DS\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "DS_"
   },
   {
     "id": "q-121",
@@ -1695,7 +1776,8 @@
       "To simplify database management."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"To be able to reuse them in other projects\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"To be able to reuse them in other projects\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "To be able to reuse them in other projects"
   },
   {
     "id": "q-122",
@@ -1709,7 +1791,8 @@
       "deployment"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"userlib\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"userlib\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "userlib"
   },
   {
     "id": "q-123",
@@ -1723,7 +1806,8 @@
       "Always avoid modifying Marketplace modules."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Copy the contents of the Marketplace module to another module in your app and use that module instead (remember that your app will no longer reflect updates to the original Marketplace module)\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Copy the contents of the Marketplace module to another module in your app and use that module instead (remember that your app will no longer reflect updates to the original Marketplace module)\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Copy the contents to another module in your app and use that module instead"
   },
   {
     "id": "q-124",
@@ -1737,7 +1821,8 @@
       "To collect feedback from stakeholders."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"adding detail, estimation and structure to the Product Backlog.\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"adding detail, estimation and structure to the Product Backlog.\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Adding detail, estimation and structure to the Product Backlog"
   },
   {
     "id": "q-125",
@@ -1751,7 +1836,8 @@
       "Do not set any default rights for new members."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"The best practice when setting security rules to new entities is to keep the option 'Default rights for new members' set to 'None'.\" because this aligns with Mendix Security best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"The best practice when setting security rules to new entities is to keep the option 'Default rights for new members' set to 'None'.\" because this aligns with Mendix Security best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Keep the option 'Default rights for new members' set to 'None'"
   },
   {
     "id": "q-126",
@@ -1765,7 +1851,8 @@
       "Project Manager"
     ],
     "correctIndex": 0,
-    "explanation": "The daily scrum (standup) is where team members share progress, plans, and blockers to maintain transparency."
+    "explanation": "The daily scrum (standup) is where team members share progress, plans, and blockers to maintain transparency.",
+    "detailedExplanation": "Scrum Master"
   },
   {
     "id": "q-127",
@@ -1793,7 +1880,8 @@
       "The project manager"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"The Frontend developer\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"The Frontend developer\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "The Frontend developer"
   },
   {
     "id": "q-129",
@@ -1821,7 +1909,8 @@
       "To measure customer satisfaction."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"To find out what shortcomings there are in the general market that you can improve on\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"To find out what shortcomings there are in the general market that you can improve on\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "To find out what shortcomings there are in the general market that you can improve on"
   },
   {
     "id": "q-131",
@@ -1835,7 +1924,8 @@
       "Surveys"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Card Sorting\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Card Sorting\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Card Sorting"
   },
   {
     "id": "q-132",
@@ -1863,7 +1953,8 @@
       "The data modeler"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"The UX/UIer\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"The UX/UIer\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "The UX/UIer"
   },
   {
     "id": "q-134",
@@ -1877,7 +1968,8 @@
       "Use a specialized delete widget."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Create a microflow which will delete selected rows and configure a delete button to call this microflow\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Create a microflow which will delete selected rows and configure a delete button to call this microflow\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Create a microflow which will delete selected rows and configure a delete button to call this microflow"
   },
   {
     "id": "q-135",
@@ -1891,7 +1983,8 @@
       "Calling a microflow from the UI element."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Event Handler\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Event Handler\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Event Handler (specifically, After Commit)."
   },
   {
     "id": "q-136",
@@ -1905,7 +1998,8 @@
       "The module is not deployed correctly."
     ],
     "correctIndex": 0,
-    "explanation": "Access rules in Mendix define which attributes and associations a user role can read or write for a specific entity."
+    "explanation": "Access rules in Mendix define which attributes and associations a user role can read or write for a specific entity.",
+    "detailedExplanation": "Access rules for Entity not configured properly"
   },
   {
     "id": "q-137",
@@ -1919,7 +2013,8 @@
       "By using a separate export microflow."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"By setting the class on the column to display: none\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"By setting the class on the column to display: none\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "By setting the class on the column to display: none"
   },
   {
     "id": "q-138",
@@ -1933,7 +2028,8 @@
       "They are used only for error reporting."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"HTTP headers are used to pass meta-data in the REST calls\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"HTTP headers are used to pass meta-data in the REST calls\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "HTTP headers are used to pass meta-data in REST calls"
   },
   {
     "id": "q-139",
@@ -1947,7 +2043,8 @@
       "Javascript Online Navigator, a tool for web browsing."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"JavaScript Object Notation, is a lightweight format for storing and transporting data.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"JavaScript Object Notation, is a lightweight format for storing and transporting data.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "JavaScript Object Notation, a lightweight format for storing and transporting data"
   },
   {
     "id": "q-140",
@@ -1961,7 +2058,8 @@
       "It provides a visual representation of JSON data."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"It stores a JSON snippet and converts it into a schema structure that can be used in Import/Export mappings to convert JSON into Mendix\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"It stores a JSON snippet and converts it into a schema structure that can be used in Import/Export mappings to convert JSON into Mendix\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "It stores a JSON snippet and converts it into a schema structure that can be used in Import/Export mappings to convert JSON into Mendix objects"
   },
   {
     "id": "q-141",
@@ -1975,7 +2073,8 @@
       "Two: System and MyFirstModule."
     ],
     "correctIndex": 0,
-    "explanation": "Mendix provides built-in Account_Overview pages in the Administration module for managing user accounts without custom development."
+    "explanation": "Mendix provides built-in Account_Overview pages in the Administration module for managing user accounts without custom development.",
+    "detailedExplanation": "3: Administration (accounts), System (what makes app run: users, files, sessions), and MyFirstModule"
   },
   {
     "id": "q-142",
@@ -1988,7 +2087,8 @@
       "It depends on the frequency of data updates."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Calculated attritbute;\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Calculated attritbute;\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Calculated attribute (changes frequently, viewed less often than it changes)."
   },
   {
     "id": "q-143",
@@ -2016,7 +2116,8 @@
       "The entity with the many-side multiplicity."
     ],
     "correctIndex": 0,
-    "explanation": "Associations in Mendix define relationships between entities. The owner of an association determines which entity stores the reference."
+    "explanation": "Associations in Mendix define relationships between entities. The owner of an association determines which entity stores the reference.",
+    "detailedExplanation": "Non-persistable entity (NPE must always be the owner)."
   },
   {
     "id": "q-145",
@@ -2030,7 +2131,8 @@
       "Only when working with external entities."
     ],
     "correctIndex": 0,
-    "explanation": "Associations in Mendix define relationships between entities. The owner of an association determines which entity stores the reference."
+    "explanation": "Associations in Mendix define relationships between entities. The owner of an association determines which entity stores the reference.",
+    "detailedExplanation": "When there are different relationships between two entities."
   },
   {
     "id": "q-146",
@@ -2044,7 +2146,8 @@
       "%"
     ],
     "correctIndex": 0,
-    "explanation": "Variables in microflows are prefixed with $ (e.g., $Customer) and represent objects or values that can be used throughout the flow."
+    "explanation": "Variables in microflows are prefixed with $ (e.g., $Customer) and represent objects or values that can be used throughout the flow.",
+    "detailedExplanation": "Dollar sign ($)"
   },
   {
     "id": "q-147",
@@ -2058,7 +2161,8 @@
       "A string or integer."
     ],
     "correctIndex": 0,
-    "explanation": "Rules in Mendix have a smaller selection of activities compared to microflows. They are designed for simple boolean logic and validation purposes."
+    "explanation": "Rules in Mendix have a smaller selection of activities compared to microflows. They are designed for simple boolean logic and validation purposes.",
+    "detailedExplanation": "Boolean or enumeration"
   },
   {
     "id": "q-148",
@@ -2072,7 +2176,8 @@
       "As many as necessary for complex logic."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"2 tot 3 levels max is best practice.\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"2 tot 3 levels max is best practice.\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "2 to 3 levels max is best practice"
   },
   {
     "id": "q-149",
@@ -2084,7 +2189,8 @@
       "False"
     ],
     "correctIndex": 0,
-    "explanation": "Sub-microflows in Mendix have the same capabilities as regular microflows. They are used to organize logic into reusable components, improving code maintainability without sacrificing functionality."
+    "explanation": "Sub-microflows in Mendix have the same capabilities as regular microflows. They are used to organize logic into reusable components, improving code maintainability without sacrificing functionality.",
+    "detailedExplanation": "True"
   },
   {
     "id": "q-150",
@@ -2098,7 +2204,8 @@
       "M_ and MF_"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"SUB and VAL\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"SUB and VAL\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "SUB and VAL"
   },
   {
     "id": "q-151",
@@ -2112,7 +2219,8 @@
       "Easier deployment, less code, native mobile support"
     ],
     "correctIndex": 0,
-    "explanation": "Sub-microflows in Mendix have the same capabilities as regular microflows. They are used to organize logic into reusable components, improving code maintainability without sacrificing functionality."
+    "explanation": "Sub-microflows in Mendix have the same capabilities as regular microflows. They are used to organize logic into reusable components, improving code maintainability without sacrificing functionality.",
+    "detailedExplanation": "Improves readability, maintainability, and reusability"
   },
   {
     "id": "q-152",
@@ -2124,7 +2232,8 @@
       "False"
     ],
     "correctIndex": 0,
-    "explanation": "Module roles provide granular security control within a module, defining access to pages, microflows, and entities."
+    "explanation": "Module roles provide granular security control within a module, defining access to pages, microflows, and entities.",
+    "detailedExplanation": "True"
   },
   {
     "id": "q-153",
@@ -2152,7 +2261,8 @@
       "It depends on the specific license type."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Yes.\" because this aligns with Mendix Security best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Yes.\" because this aligns with Mendix Security best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Yes"
   },
   {
     "id": "q-155",
@@ -2166,7 +2276,8 @@
       "Delete the notification module for that user role."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Build it in a seperate module\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Build it in a seperate module\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Build it in a separate module"
   },
   {
     "id": "q-156",
@@ -2179,7 +2290,8 @@
       "List view and Data grid."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Select page and Dropdown.\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Select page and Dropdown.\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Select page and Dropdown"
   },
   {
     "id": "q-157",
@@ -2207,7 +2319,8 @@
       "Yes, using JavaScript."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"No, only via a snippet it is possible\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"No, only via a snippet it is possible\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "No, only via a snippet it is possible"
   },
   {
     "id": "q-159",
@@ -2220,7 +2333,8 @@
       "Restrict user role selection at the UI level."
     ],
     "correctIndex": 0,
-    "explanation": "User roles in Mendix define what users can see and do in your application. Each role has specific module roles and access rights."
+    "explanation": "User roles in Mendix define what users can see and do in your application. Each role has specific module roles and access rights.",
+    "detailedExplanation": "A before commit event handler to check whether one user role is selected. If not, it stops the commit and gives validation feedback message."
   },
   {
     "id": "q-160",
@@ -2234,7 +2348,8 @@
       "DescriptiveName"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Entity_PageType_User-Role\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Entity_PageType_User-Role\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Entity_PageType_User-Role (e.g., Order_Overview_Admin)"
   },
   {
     "id": "q-161",
@@ -2262,7 +2377,8 @@
       "Through the Mendix UI import function"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Services such as SOAP, REST, and oData\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Services such as SOAP, REST, and oData\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Services such as SOAP, REST, and OData"
   },
   {
     "id": "q-163",
@@ -2276,7 +2392,8 @@
       "Proprietary Mendix file formats"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Flat files, CSV, Excel\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Flat files, CSV, Excel\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Flat files, CSV, Excel"
   },
   {
     "id": "q-164",
@@ -2304,7 +2421,8 @@
       "Direct access to the Excel file system."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"The Excel Importer module from the Marketplace.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"The Excel Importer module from the Marketplace.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "The Excel Importer module from the Marketplace"
   },
   {
     "id": "q-166",
@@ -2318,7 +2436,8 @@
       "Strings"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Objects\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Objects\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Objects"
   },
   {
     "id": "q-167",
@@ -2332,7 +2451,8 @@
       "Data transformations"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Import/Export data\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Import/Export data\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Import mappings (Import/Export data)"
   },
   {
     "id": "q-168",
@@ -2346,7 +2466,8 @@
       "Access it via an external entity."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Use a Call REST Service action.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Use a Call REST Service action.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Use a Call REST Service action"
   },
   {
     "id": "q-169",
@@ -2360,7 +2481,8 @@
       "Transforming data within Mendix."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Converting Mendix objects to XML or JSON\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Converting Mendix objects to XML or JSON\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Converting Mendix objects to XML or JSON"
   },
   {
     "id": "q-170",
@@ -2388,7 +2510,8 @@
       "US-ENG"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"en-US\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"en-US\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "en-US"
   },
   {
     "id": "q-172",
@@ -2402,7 +2525,8 @@
       "Copy the JSON content into a constant."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Right click on folder or module, add other, and select JSON structure\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Right click on folder or module, add other, and select JSON structure\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Right-click on folder or module, add other, and select JSON structure"
   },
   {
     "id": "q-173",
@@ -2416,7 +2540,8 @@
       "To commit changes to an object."
     ],
     "correctIndex": 0,
-    "explanation": "The iterator in a Mendix loop represents the current object being processed from the list. It changes with each iteration of the loop."
+    "explanation": "The iterator in a Mendix loop represents the current object being processed from the list. It changes with each iteration of the loop.",
+    "detailedExplanation": "When we want to allow certain activities to be executed repeatedly"
   },
   {
     "id": "q-174",
@@ -2430,7 +2555,8 @@
       "Configure an After Save microflow."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Use Event Handlers\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Use Event Handlers\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Use Event Handlers."
   },
   {
     "id": "q-175",
@@ -2444,7 +2570,8 @@
       "Mendix Studio Pro built-in tools"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Marketplace\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Marketplace\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Marketplace"
   },
   {
     "id": "q-176",
@@ -2458,7 +2585,8 @@
       "Only entities and their attributes."
     ],
     "correctIndex": 0,
-    "explanation": "Module roles provide granular security control within a module, defining access to pages, microflows, and entities."
+    "explanation": "Module roles provide granular security control within a module, defining access to pages, microflows, and entities.",
+    "detailedExplanation": "Pages, Microflows, Entities defined in the module"
   },
   {
     "id": "q-177",
@@ -2472,7 +2600,8 @@
       "Through microflow logic at login."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"You can configure Role-based home pages\" because this aligns with Mendix Security best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"You can configure Role-based home pages\" because this aligns with Mendix Security best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "You can configure Role-based home pages"
   },
   {
     "id": "q-178",
@@ -2486,7 +2615,8 @@
       "IM_"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"ImM_\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"ImM_\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "ImM_"
   },
   {
     "id": "q-179",
@@ -2500,7 +2630,8 @@
       "Connect to live data."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Add annotations.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Add annotations.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Add annotations"
   },
   {
     "id": "q-180",
@@ -2514,7 +2645,8 @@
       "the deployment pipeline."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"your application to test with.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"your application to test with.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Your application to test with"
   },
   {
     "id": "q-181",
@@ -2528,7 +2660,8 @@
       "Digital."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Low fidelity.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Low fidelity.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Low fidelity"
   },
   {
     "id": "q-182",
@@ -2542,7 +2675,8 @@
       "Modify the global theme settings."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Show styling for...: App and all modules\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Show styling for...: App and all modules\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Show styling for: App and all modules"
   },
   {
     "id": "q-183",
@@ -2556,7 +2690,8 @@
       "Defining domain models."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Styling and JavaScript actions.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Styling and JavaScript actions.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Styling and JavaScript actions"
   },
   {
     "id": "q-184",
@@ -2570,7 +2705,8 @@
       "Declaration"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Selector\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Selector\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Selector"
   },
   {
     "id": "q-185",
@@ -2584,7 +2720,8 @@
       ".partial-name.scss"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"_partial-name.scss\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"_partial-name.scss\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "_partial-name.scss"
   },
   {
     "id": "q-186",
@@ -2612,7 +2749,8 @@
       "As constants in the domain model."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"In any partial with the name variable.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"In any partial with the name variable.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "In any partial with the name variable"
   },
   {
     "id": "q-188",
@@ -2640,7 +2778,8 @@
       "The property is read-only."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"The property has been overwritten.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"The property has been overwritten.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "The property has been overwritten"
   },
   {
     "id": "q-190",
@@ -2654,7 +2793,8 @@
       "A variable declaration"
     ],
     "correctIndex": 0,
-    "explanation": "XPath constraints in Mendix filter data by specifying conditions that objects must meet. They start with [ and contain attribute comparisons."
+    "explanation": "XPath constraints in Mendix filter data by specifying conditions that objects must meet. They start with [ and contain attribute comparisons.",
+    "detailedExplanation": "An XPath constraint"
   },
   {
     "id": "q-191",
@@ -2668,7 +2808,8 @@
       "Object Relational Mapping (ORM)"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Xpath\" because this aligns with Mendix Xpath best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Xpath\" because this aligns with Mendix Xpath best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "XPath"
   },
   {
     "id": "q-192",
@@ -2682,7 +2823,8 @@
       "Regularly back up the entire userlib folder."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Clean up manually after deleting a module\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Clean up manually after deleting a module\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Clean up manually after deleting a module"
   },
   {
     "id": "q-193",
@@ -2696,7 +2838,8 @@
       "System Management Entity"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Subject Matter Expert \" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Subject Matter Expert \" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Subject Matter Expert"
   },
   {
     "id": "q-194",
@@ -2710,7 +2853,8 @@
       "A tool for tracking individual developer progress."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"A list of items planned versus items done.\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"A list of items planned versus items done.\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "A list of items planned versus items done"
   },
   {
     "id": "q-195",
@@ -2724,7 +2868,8 @@
       "A method for deploying applications to cloud environments."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"A model based on collaboration between multi- ple time zones.\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"A model based on collaboration between multi- ple time zones.\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "A model based on collaboration between multiple time zones"
   },
   {
     "id": "q-196",
@@ -2738,7 +2883,8 @@
       "Best Practice"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Proxies\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Proxies\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Proxies"
   },
   {
     "id": "q-197",
@@ -2752,7 +2898,8 @@
       "Project backup files."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Deployment files needed to run locally.\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Deployment files needed to run locally.\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Deployment files needed to run locally"
   },
   {
     "id": "q-198",
@@ -2766,7 +2913,8 @@
       "To manage multiple database connections."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"This will allow you to continue the development of functionality without affecting the running app.\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"This will allow you to continue the development of functionality without affecting the running app.\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "This allows you to continue development of functionality without affecting the running app"
   },
   {
     "id": "q-199",
@@ -2794,7 +2942,8 @@
       "To simplify debugging."
     ],
     "correctIndex": 0,
-    "explanation": "Generalization in Mendix allows entities to inherit attributes and associations from a parent entity, enabling polymorphism and code reuse."
+    "explanation": "Generalization in Mendix allows entities to inherit attributes and associations from a parent entity, enabling polymorphism and code reuse.",
+    "detailedExplanation": "Because you cannot change access rights in the System module."
   },
   {
     "id": "q-201",
@@ -2808,7 +2957,8 @@
       "count, sum, avg"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"<, >, =, !=, and, or\" because this aligns with Mendix Xpath best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"<, >, =, !=, and, or\" because this aligns with Mendix Xpath best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "`<, >, =, !=, and, or`"
   },
   {
     "id": "q-202",
@@ -2822,7 +2972,8 @@
       "Depends on the license."
     ],
     "correctIndex": 0,
-    "explanation": "User roles in Mendix define what users can see and do in your application. Each role has specific module roles and access rights."
+    "explanation": "User roles in Mendix define what users can see and do in your application. Each role has specific module roles and access rights.",
+    "detailedExplanation": "Unlimited"
   },
   {
     "id": "q-203",
@@ -2836,7 +2987,8 @@
       "Using a simple CSV import."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Excel Importer module\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Excel Importer module\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Excel Importer module"
   },
   {
     "id": "q-204",
@@ -2850,7 +3002,8 @@
       "It requires a paid license."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Only possible to export the data that is accesible to the data grid, you cannot manipulate the data to be exported, you can only use it on an Xpath data source data grid.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Only possible to export the data that is accesible to the data grid, you cannot manipulate the data to be exported, you can only use it on an Xpath data source data grid.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Only possible to export data accessible to the data grid, can't manipulate data, only works on XPath data source data grid"
   },
   {
     "id": "q-205",
@@ -2864,7 +3017,8 @@
       "Generate a report and then save it as Excel, or print to PDF and convert."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"You can use the excel button in a data grid or use the excel exporter module.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"You can use the excel button in a data grid or use the excel exporter module.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Use the excel button in a data grid OR use the Excel Exporter module"
   },
   {
     "id": "q-206",
@@ -2878,7 +3032,8 @@
       "Attributes of entities that never change."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Constants are used to define configuration values that can differ per environment, and this will allow you to change the service location without having to deploy the app again\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Constants are used to define configuration values that can differ per environment, and this will allow you to change the service location without having to deploy the app again\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Constants are used to define configuration values that can differ per environment, allowing you to change service location without redeploying"
   },
   {
     "id": "q-207",
@@ -2892,7 +3047,8 @@
       "They define the navigation paths within an application."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Import mappings are used to define how in- coming XML or JSON is converted into Mendix objects according to a specific XML schema or JSON structure.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Import mappings are used to define how in- coming XML or JSON is converted into Mendix objects according to a specific XML schema or JSON structure.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Import mappings define how incoming XML or JSON is converted into Mendix objects according to a specific XML schema or JSON structure"
   },
   {
     "id": "q-208",
@@ -2906,7 +3062,8 @@
       "Retrieve, commit, rollback."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Start event, end event, parameter.\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Start event, end event, parameter.\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Start event, end event, parameter"
   },
   {
     "id": "q-209",
@@ -2918,7 +3075,8 @@
       "yes"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"no.\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"no.\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "No."
   },
   {
     "id": "q-210",
@@ -2932,7 +3090,8 @@
       "kebab-case"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"UpperCamelCase\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"UpperCamelCase\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "UpperCamelCase"
   },
   {
     "id": "q-211",
@@ -2974,7 +3133,8 @@
       "ENTITY_NAME"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"UpperCamelCase\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"UpperCamelCase\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "UpperCamelCase"
   },
   {
     "id": "q-214",
@@ -2988,7 +3148,8 @@
       "MF_{Operation}_{Entity}"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"{PREFIX}_{Entity}_{Operation}\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"{PREFIX}_{Entity}_{Operation}\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "UpperCamelCase"
   },
   {
     "id": "q-215",
@@ -3156,7 +3317,8 @@
       " \"The border around the association name with become yellow\""
     ],
     "correctIndex": 0,
-    "explanation": "Associations in Mendix define relationships between entities. The owner of an association determines which entity stores the reference."
+    "explanation": "Associations in Mendix define relationships between entities. The owner of an association determines which entity stores the reference.",
+    "detailedExplanation": "The border around the association name will become **RED**."
   },
   {
     "id": "q-227",
@@ -3170,7 +3332,8 @@
       " \"The border around the association name with become yellow\""
     ],
     "correctIndex": 0,
-    "explanation": "Associations in Mendix define relationships between entities. The owner of an association determines which entity stores the reference."
+    "explanation": "Associations in Mendix define relationships between entities. The owner of an association determines which entity stores the reference.",
+    "detailedExplanation": "The border around the association name will become **BLUE**."
   },
   {
     "id": "q-228",
@@ -3183,7 +3346,8 @@
       "Yes, it will apply to every possible action"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Yes, but it wont apply to create action\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Yes, but it wont apply to create action\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Yes, but it won't apply to create action"
   },
   {
     "id": "q-229",
@@ -3195,7 +3359,8 @@
       "Yes"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"No\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"No\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "No (unlike microflows where you can)."
   },
   {
     "id": "q-230",
@@ -3208,7 +3373,8 @@
       "No"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Yes, to multiple ones\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Yes, to multiple ones\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Yes, to multiple ones"
   },
   {
     "id": "q-231",
@@ -3221,7 +3387,8 @@
       "No"
     ],
     "correctIndex": 0,
-    "explanation": "Widgets in Mendix are reusable UI components that can be configured and placed on pages to provide specific functionality."
+    "explanation": "Widgets in Mendix are reusable UI components that can be configured and placed on pages to provide specific functionality.",
+    "detailedExplanation": "Yes, to input widgets"
   },
   {
     "id": "q-232",
@@ -3235,7 +3402,8 @@
       "In page properties, module security and app security"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"In page properties and module security\" because this aligns with Mendix Security best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"In page properties and module security\" because this aligns with Mendix Security best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "In page properties AND module security"
   },
   {
     "id": "q-233",
@@ -3248,7 +3416,8 @@
       "Orange, but only if they are set to be visible for some role."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"They are only if they are set to be visible for some role.\" because this aligns with Mendix Security best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"They are only if they are set to be visible for some role.\" because this aligns with Mendix Security best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "They are displayed only if they are set to be visible for some role (otherwise not shown)."
   },
   {
     "id": "q-234",
@@ -3261,7 +3430,8 @@
       "They are only if they are set to be visible for some role."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Orange, but only if they are set to be visible for some role.\" because this aligns with Mendix Security best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Orange, but only if they are set to be visible for some role.\" because this aligns with Mendix Security best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Orange, but only if they are set to be visible for some role."
   },
   {
     "id": "q-235",
@@ -3275,7 +3445,8 @@
       "\" Required, Unique \""
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"\"Maximum length, Unique, Required, Range, Equals, RegEx\"\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"\"Maximum length, Unique, Required, Range, Equals, RegEx\"\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Maximum length, Unique, Required, Range, Equals, RegEx"
   },
   {
     "id": "q-236",
@@ -3289,7 +3460,8 @@
       "\" Required, Unique \""
     ],
     "correctIndex": 0,
-    "explanation": "Widgets in Mendix are reusable UI components that can be configured and placed on pages to provide specific functionality."
+    "explanation": "Widgets in Mendix are reusable UI components that can be configured and placed on pages to provide specific functionality.",
+    "detailedExplanation": "Required, Custom"
   },
   {
     "id": "q-237",
@@ -3303,7 +3475,8 @@
       "Show, Hide, Toggle"
     ],
     "correctIndex": 0,
-    "explanation": "The list equals operation in Mendix returns a Boolean value, indicating whether two lists contain the same objects."
+    "explanation": "The list equals operation in Mendix returns a Boolean value, indicating whether two lists contain the same objects.",
+    "detailedExplanation": "Equals, Sort, Filter"
   },
   {
     "id": "q-238",
@@ -3317,7 +3490,8 @@
       "Find, NotEquals, Sort"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Union, Intersect, Subtract\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Union, Intersect, Subtract\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Union, Intersect, Subtract"
   },
   {
     "id": "q-239",
@@ -3331,7 +3505,8 @@
       "Collaboration"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Openness\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Openness\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Openness"
   },
   {
     "id": "q-240",
@@ -3461,7 +3636,8 @@
       "Languages installed on your computer"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Languages from ISO 639\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Languages from ISO 639\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Languages from ISO 639"
   },
   {
     "id": "q-250",
@@ -3475,7 +3651,8 @@
       "None of them can be modified"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Caption of enum value can be modified and name can't be modified\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Caption of enum value can be modified and name can't be modified\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Caption can be modified, name **cannot** be modified."
   },
   {
     "id": "q-251",
@@ -3489,7 +3666,8 @@
       "parseDateTime"
     ],
     "correctIndex": 0,
-    "explanation": "In microflow expressions, functions like toUpperCase() are built-in operations that transform or process values."
+    "explanation": "In microflow expressions, functions like toUpperCase() are built-in operations that transform or process values.",
+    "detailedExplanation": "formatDateTime"
   },
   {
     "id": "q-252",
@@ -3502,7 +3680,8 @@
       "Retrieve by association, then sum operation"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Retrieve by association, then count list operation\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"Retrieve by association, then count list operation\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "Retrieve by association, then count list operation"
   },
   {
     "id": "q-253",
@@ -3516,7 +3695,8 @@
       "For any delete operation"
     ],
     "correctIndex": 0,
-    "explanation": "Delete behavior in Mendix controls what happens to associated objects when the parent object is deleted, preventing orphaned data."
+    "explanation": "Delete behavior in Mendix controls what happens to associated objects when the parent object is deleted, preventing orphaned data.",
+    "detailedExplanation": "Conditional delete (not cascade)."
   },
   {
     "id": "q-254",
@@ -3530,7 +3710,8 @@
       "parseStringToDateTime"
     ],
     "correctIndex": 0,
-    "explanation": "In microflow expressions, functions like toUpperCase() are built-in operations that transform or process values."
+    "explanation": "In microflow expressions, functions like toUpperCase() are built-in operations that transform or process values.",
+    "detailedExplanation": "parseDateTime"
   },
   {
     "id": "q-255",
@@ -3544,7 +3725,8 @@
       "elementAt"
     ],
     "correctIndex": 0,
-    "explanation": "In microflow expressions, functions like toUpperCase() are built-in operations that transform or process values."
+    "explanation": "In microflow expressions, functions like toUpperCase() are built-in operations that transform or process values.",
+    "detailedExplanation": "(Trick question - there's no direct function. Use substring.)"
   },
   {
     "id": "q-256",
@@ -3557,7 +3739,8 @@
       "Menu list"
     ],
     "correctIndex": 0,
-    "explanation": "Widgets in Mendix are reusable UI components that can be configured and placed on pages to provide specific functionality."
+    "explanation": "Widgets in Mendix are reusable UI components that can be configured and placed on pages to provide specific functionality.",
+    "detailedExplanation": "Navigation tree (also: Menu bar, Simple menu bar)"
   },
   {
     "id": "q-257",
@@ -3571,7 +3754,8 @@
       "A and B"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"None of them\" because this aligns with Mendix Security best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The correct answer is \"None of them\" because this aligns with Mendix Security best practices and documentation. This concept is important for the Intermediate Certification exam.",
+    "detailedExplanation": "None of them"
   },
   {
     "id": "q-258",
@@ -3585,7 +3769,8 @@
       "change variable, merge, error event"
     ],
     "correctIndex": 0,
-    "explanation": "Variables in microflows are prefixed with $ (e.g., $Customer) and represent objects or values that can be used throughout the flow."
+    "explanation": "Variables in microflows are prefixed with $ (e.g., $Customer) and represent objects or values that can be used throughout the flow.",
+    "detailedExplanation": "Retrieve object, list operation, change variable"
   },
   {
     "id": "q-259",
@@ -3599,7 +3784,8 @@
       "All pages"
     ],
     "correctIndex": 0,
-    "explanation": "Anonymous users in Mendix allow access to specific parts of your application without requiring authentication, such as login pages or public content."
+    "explanation": "Anonymous users in Mendix allow access to specific parts of your application without requiring authentication, such as login pages or public content.",
+    "detailedExplanation": "None (they work with the anonymous user role you configure)"
   },
   {
     "id": "q-260",
@@ -3613,7 +3799,8 @@
       "None"
     ],
     "correctIndex": 0,
-    "explanation": "Anonymous users in Mendix allow access to specific parts of your application without requiring authentication, such as login pages or public content."
+    "explanation": "Anonymous users in Mendix allow access to specific parts of your application without requiring authentication, such as login pages or public content.",
+    "detailedExplanation": "One"
   },
   {
     "id": "q-261",
@@ -3627,6 +3814,7 @@
       "parseString"
     ],
     "correctIndex": 0,
-    "explanation": "In microflow expressions, functions like toUpperCase() are built-in operations that transform or process values."
+    "explanation": "In microflow expressions, functions like toUpperCase() are built-in operations that transform or process values.",
+    "detailedExplanation": "toString()"
   }
 ]
