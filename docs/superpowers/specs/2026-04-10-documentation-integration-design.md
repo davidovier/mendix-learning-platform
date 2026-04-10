@@ -47,7 +47,12 @@ The `topics.ts` file already maps topics to documentation files:
 
 ### Implementation
 
-Replace `lib/content/docs/cheatsheet.md` with content from `documentation/20-quick-reference-cheatsheet.md`.
+Copy `documentation/20-quick-reference-cheatsheet.md` to `lib/content/docs/cheatsheet.md`.
+
+No script needed - simple file copy via:
+```bash
+cp documentation/20-quick-reference-cheatsheet.md lib/content/docs/cheatsheet.md
+```
 
 ### Rationale
 
@@ -109,14 +114,20 @@ function parseMarkdownSections(markdown: string): StudySection[] {
 | Component | Purpose |
 |-----------|---------|
 | `components/study/study-guide-accordion.tsx` | Renders sections as shadcn Accordion |
-| `components/study/study-section.tsx` | Renders markdown content within accordion item |
+
+### Edge Case: Topics Without Source File
+
+Some topics (e.g., "agile") have empty `sourceFile`. Handle gracefully:
+- If `topic.sourceFile` is empty, don't render the study guide section
+- Show flashcards only (current behavior)
 
 ### Files Changed
 
 | File | Change |
 |------|--------|
-| `components/study/study-guide-accordion.tsx` | New component (client, uses shadcn Accordion) |
+| `components/study/study-guide-accordion.tsx` | New component (client, uses shadcn Accordion + LazyMarkdown) |
 | `app/study/[topic]/page.tsx` | Split into server wrapper + client component |
+| `app/study/[topic]/topic-study-client.tsx` | New client component (extracted from page.tsx) |
 
 ### Architecture Note
 
@@ -179,10 +190,19 @@ Also:
 
 Build script `scripts/generate-exam-flashcards.ts`:
 
-1. Read all exam Q&A files from `documentation/13-19-*.md`
-2. Parse question/answer pairs using regex
-3. Map to topic ID using filename or content matching
-4. Append to existing `flashcards.json` (preserve existing cards)
+1. Import `topics` from `lib/content/topics.ts` to get file mappings
+2. For each topic with `questionFiles`, read those files from `documentation/`
+3. Parse question/answer pairs using regex (see Parsing Strategy above)
+4. Generate flashcards with topic ID from the mapping
+5. Append to existing `flashcards.json` (preserve existing cards, dedupe by question text)
+
+**Topic to file mapping already exists:**
+```typescript
+// From topics.ts
+{ id: "domain-model", questionFiles: ["13-exam-questions-domain-model.md"] }
+{ id: "microflows", questionFiles: ["14-exam-questions-microflows.md"] }
+// etc.
+```
 
 ### Files Changed
 
@@ -248,19 +268,14 @@ const explanation = question.detailedExplanation || question.explanation;
 
 | Script | Purpose | Run |
 |--------|---------|-----|
-| `scripts/update-cheatsheet.ts` | Copy new cheatsheet | Once |
 | `scripts/generate-exam-flashcards.ts` | Parse exam Q&A → flashcards | Once, re-run if docs change |
 | `scripts/enhance-explanations.ts` | Parse exam Q&A → enrich questions | Once, re-run if docs change |
 
+Note: Cheatsheet update is a simple `cp` command, no script needed.
+
 ## Dependencies
 
-Check if `gray-matter` is needed for frontmatter parsing. If documentation files have frontmatter, add:
-
-```bash
-npm install gray-matter
-```
-
-Otherwise, simple string splitting suffices.
+No new dependencies required. Documentation files have no frontmatter - simple string splitting suffices for markdown parsing.
 
 ## Testing
 
