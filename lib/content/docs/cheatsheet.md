@@ -124,12 +124,28 @@
 ---
 
 ## 13. Key Module Folders
-| Folder | Contains |
-|--------|----------|
-| javasource/Actions | Java actions |
-| javasource/Proxies | Generated classes, enums |
-| userlib | Java libraries |
-| theme | Styling files |
+| Folder | Contains | Editable? |
+|--------|----------|-----------|
+| javasource/Actions | Java actions | Yes |
+| javasource/Proxies | Generated classes, enums | **NO** |
+| userlib | Java libraries | Yes |
+| theme | Styling files | Yes |
+
+---
+
+## 13b. Module Export Formats
+| Format | Extension | Editable? |
+|--------|-----------|-----------|
+| Module Package | `.mpk` | Yes (full source) |
+| Add-on Module | `.mxmodule` | No (protected) |
+
+---
+
+## 13c. Export Protection Levels
+| Level | Description |
+|-------|-------------|
+| **Hidden** | Not visible to consumers |
+| **Usable** | Can use but not view/modify |
 
 ---
 
@@ -182,6 +198,25 @@
 | Export complex | Excel Exporter module |
 | REST to objects | Import mapping |
 | Objects to JSON | Export mapping |
+
+---
+
+## 20b. Import Mapping Object Handling
+| Option | Result |
+|--------|--------|
+| **Create object** | Always creates new |
+| **Find by key** | Find existing or create new |
+| **Call a microflow** | Custom logic |
+
+---
+
+## 20c. Nanoflow-Only Activities
+- Call JavaScript action
+- Synchronize / Synchronize to device
+- Show/Hide progress bar
+- Log message (client-side)
+
+**NOT available in Nanoflows**: Call REST, Call web service, Java actions, Import/Export mappings
 
 ---
 
