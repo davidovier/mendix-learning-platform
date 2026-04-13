@@ -23,7 +23,6 @@ import {
 } from "lucide-react";
 import { Flashcard } from "@/components/study/flashcard";
 import { FlashcardControls } from "@/components/study/flashcard-controls";
-import { ExamMode } from "@/components/study/exam/exam-mode";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 
@@ -65,7 +64,6 @@ export function TopicStudyClient({
   const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [masteredCards, setMasteredCards] = useState<Set<number>>(new Set());
-  const [showExam, setShowExam] = useState(false);
 
   if (cards.length === 0) {
     return (
@@ -123,31 +121,17 @@ export function TopicStudyClient({
         <Progress value={progress} />
       </div>
 
-      {isComplete && !showExam ? (
+      {isComplete ? (
         <div className="text-center py-12 space-y-4">
           <Trophy className="h-16 w-16 text-primary mx-auto" />
-          <h2 className="text-2xl font-semibold">Topic Complete!</h2>
+          <h2 className="text-2xl font-semibold">Topic Complete</h2>
           <p className="text-muted-foreground">
             You&apos;ve mastered all {cards.length} cards in {topicName}
           </p>
-          <div className="flex gap-3 justify-center">
-            <Button variant="outline" onClick={() => router.push("/study")}>
-              Back to Topics
-            </Button>
-            {cards.length >= 2 && (
-              <Button onClick={() => setShowExam(true)}>
-                Take Exam
-              </Button>
-            )}
-          </div>
+          <Button onClick={() => router.push("/study")}>
+            Study Another Topic
+          </Button>
         </div>
-      ) : showExam ? (
-        <ExamMode
-          cards={cards}
-          topicName={topicName}
-          onComplete={() => router.push("/study")}
-          onExit={() => setShowExam(false)}
-        />
       ) : (
         <>
           <Flashcard
