@@ -43,17 +43,11 @@ export function TitleDropZone({
       {placedContent && (
         <p
           className={cn(
-            "mt-2 text-sm",
+            "mt-2 text-sm leading-relaxed",
             isCorrect ? "text-green-700 dark:text-green-400" : "text-muted-foreground"
           )}
         >
           {placedContent.summary}
-        </p>
-      )}
-
-      {!placedContent && !isCorrect && (
-        <p className="text-sm text-muted-foreground/60 mt-2 italic">
-          Drop matching description here
         </p>
       )}
     </div>

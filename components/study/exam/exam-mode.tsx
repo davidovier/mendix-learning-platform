@@ -33,16 +33,24 @@ function shuffleArray<T>(array: T[]): T[] {
 
 // Extract a clean, short summary from flashcard content
 function getCleanSummary(text: string): string {
+  // Remove markdown links [text](url) -> text
+  let clean = text.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");
   // Remove markdown tables
-  let clean = text.replace(/\|[^\n]+\|/g, "");
+  clean = clean.replace(/\|[^\n]+\|/g, "");
   // Remove table separators
   clean = clean.replace(/\|[-:]+\|/g, "");
   // Remove bold markers
   clean = clean.replace(/\*\*([^*]+)\*\*/g, "$1");
   // Remove list markers
   clean = clean.replace(/^[-*]\s+/gm, "");
+  // Remove numbered list markers
+  clean = clean.replace(/^\d+\.\s+/gm, "");
   // Remove horizontal rules
   clean = clean.replace(/^---+$/gm, "");
+  // Remove "Important:" prefix
+  clean = clean.replace(/^Important:\s*/i, "");
+  // Remove standalone URLs
+  clean = clean.replace(/https?:\/\/[^\s]+/g, "");
   // Collapse multiple newlines
   clean = clean.replace(/\n{2,}/g, " ");
   // Collapse multiple spaces
@@ -51,7 +59,7 @@ function getCleanSummary(text: string): string {
   clean = clean.trim();
 
   // Get first 1-2 sentences (up to ~150 chars)
-  const sentences = clean.split(/(?<=[.!?])\s+/);
+  const sentences = clean.split(/(?<=[.!?])\s+/).filter(s => s.length > 10);
   let summary = sentences[0] || clean;
 
   // Add second sentence if first is short
@@ -60,8 +68,8 @@ function getCleanSummary(text: string): string {
   }
 
   // Truncate if still too long
-  if (summary.length > 150) {
-    summary = summary.slice(0, 147) + "...";
+  if (summary.length > 180) {
+    summary = summary.slice(0, 177) + "...";
   }
 
   return summary;
@@ -80,14 +88,26 @@ export function ExamMode({
   onExit,
 }: ExamModeProps) {
   // Select up to 10 random cards and create clean exam cards
+  // Filter out cards with empty or too short summaries
   const examCards = useMemo((): ExamCard[] => {
     const shuffled = shuffleArray(cards);
-    const selected = shuffled.slice(0, Math.min(10, cards.length));
-    return selected.map((card) => ({
-      id: card.id,
-      title: card.front,
-      summary: getCleanSummary(card.back),
-    }));
+    const validCards: ExamCard[] = [];
+
+    for (const card of shuffled) {
+      if (validCards.length >= 10) break;
+
+      const summary = getCleanSummary(card.back);
+      // Only include cards with meaningful summaries (at least 20 chars)
+      if (summary.length >= 20) {
+        validCards.push({
+          id: card.id,
+          title: card.front,
+          summary,
+        });
+      }
+    }
+
+    return validCards;
   }, [cards]);
 
   // Shuffle content order separately
@@ -179,7 +199,7 @@ export function ExamMode({
       <div className="text-center mb-8">
         <h1 className="text-2xl font-bold">{topicName} Exam</h1>
         <p className="text-muted-foreground mt-2">
-          Match each concept with its description
+          Drag descriptions from the right and drop them on matching concepts
         </p>
       </div>
 
