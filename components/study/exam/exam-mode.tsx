@@ -58,18 +58,16 @@ function getCleanSummary(text: string): string {
   // Trim
   clean = clean.trim();
 
-  // Get first 1-2 sentences (up to ~150 chars)
+  // Get first sentence only, max ~100 chars for compact display
   const sentences = clean.split(/(?<=[.!?])\s+/).filter(s => s.length > 10);
   let summary = sentences[0] || clean;
 
-  // Add second sentence if first is short
-  if (summary.length < 80 && sentences[1]) {
-    summary += " " + sentences[1];
-  }
-
-  // Truncate if still too long
-  if (summary.length > 180) {
-    summary = summary.slice(0, 177) + "...";
+  // Truncate to keep cards compact
+  if (summary.length > 100) {
+    // Try to cut at a word boundary
+    const truncated = summary.slice(0, 97);
+    const lastSpace = truncated.lastIndexOf(" ");
+    summary = (lastSpace > 60 ? truncated.slice(0, lastSpace) : truncated) + "...";
   }
 
   return summary;
@@ -204,13 +202,13 @@ export function ExamMode({
       </div>
 
       <DndContext onDragEnd={handleDragEnd}>
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-6">
           {/* Left column: Titles (drop zones) */}
-          <div className="space-y-4">
-            <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+          <div className="space-y-3">
+            <h2 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
               Concepts
             </h2>
-            <div className="space-y-3">
+            <div className="space-y-2">
               {examCards.map((card) => (
                 <TitleDropZone
                   key={card.id}
@@ -228,11 +226,11 @@ export function ExamMode({
           </div>
 
           {/* Right column: Content (draggables) */}
-          <div className="space-y-4">
-            <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+          <div className="space-y-3">
+            <h2 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
               Descriptions
             </h2>
-            <div className="space-y-3">
+            <div className="space-y-2">
               {unplacedContentIds.map((id) => {
                 const card = getCardById(id);
                 if (!card) return null;
