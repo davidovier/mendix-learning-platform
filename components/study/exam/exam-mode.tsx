@@ -31,16 +31,63 @@ function shuffleArray<T>(array: T[]): T[] {
   return shuffled;
 }
 
+// Extract a clean, short summary from flashcard content
+function getCleanSummary(text: string): string {
+  // Remove markdown tables
+  let clean = text.replace(/\|[^\n]+\|/g, "");
+  // Remove table separators
+  clean = clean.replace(/\|[-:]+\|/g, "");
+  // Remove bold markers
+  clean = clean.replace(/\*\*([^*]+)\*\*/g, "$1");
+  // Remove list markers
+  clean = clean.replace(/^[-*]\s+/gm, "");
+  // Remove horizontal rules
+  clean = clean.replace(/^---+$/gm, "");
+  // Collapse multiple newlines
+  clean = clean.replace(/\n{2,}/g, " ");
+  // Collapse multiple spaces
+  clean = clean.replace(/\s{2,}/g, " ");
+  // Trim
+  clean = clean.trim();
+
+  // Get first 1-2 sentences (up to ~150 chars)
+  const sentences = clean.split(/(?<=[.!?])\s+/);
+  let summary = sentences[0] || clean;
+
+  // Add second sentence if first is short
+  if (summary.length < 80 && sentences[1]) {
+    summary += " " + sentences[1];
+  }
+
+  // Truncate if still too long
+  if (summary.length > 150) {
+    summary = summary.slice(0, 147) + "...";
+  }
+
+  return summary;
+}
+
+interface ExamCard {
+  id: string;
+  title: string;
+  summary: string;
+}
+
 export function ExamMode({
   cards,
   topicName,
   onComplete,
   onExit,
 }: ExamModeProps) {
-  // Select up to 10 random cards for the exam
-  const examCards = useMemo(() => {
+  // Select up to 10 random cards and create clean exam cards
+  const examCards = useMemo((): ExamCard[] => {
     const shuffled = shuffleArray(cards);
-    return shuffled.slice(0, Math.min(10, cards.length));
+    const selected = shuffled.slice(0, Math.min(10, cards.length));
+    return selected.map((card) => ({
+      id: card.id,
+      title: card.front,
+      summary: getCleanSummary(card.back),
+    }));
   }, [cards]);
 
   // Shuffle content order separately
@@ -102,7 +149,7 @@ export function ExamMode({
   );
 
   const getCardById = useCallback(
-    (id: string): FlashcardData | null => examCards.find((c) => c.id === id) ?? null,
+    (id: string): ExamCard | null => examCards.find((c) => c.id === id) ?? null,
     [examCards]
   );
 
@@ -129,19 +176,19 @@ export function ExamMode({
         </div>
       </div>
 
-      <div className="text-center mb-6">
-        <h1 className="text-xl font-semibold">{topicName} Exam</h1>
-        <p className="text-sm text-muted-foreground mt-1">
-          Drag each content card to its matching title
+      <div className="text-center mb-8">
+        <h1 className="text-2xl font-bold">{topicName} Exam</h1>
+        <p className="text-muted-foreground mt-2">
+          Match each concept with its description
         </p>
       </div>
 
       <DndContext onDragEnd={handleDragEnd}>
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-8">
           {/* Left column: Titles (drop zones) */}
-          <div className="space-y-3">
-            <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
-              Titles
+          <div className="space-y-4">
+            <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+              Concepts
             </h2>
             <div className="space-y-3">
               {examCards.map((card) => (
@@ -161,9 +208,9 @@ export function ExamMode({
           </div>
 
           {/* Right column: Content (draggables) */}
-          <div className="space-y-3">
-            <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
-              Content
+          <div className="space-y-4">
+            <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+              Descriptions
             </h2>
             <div className="space-y-3">
               {unplacedContentIds.map((id) => {
@@ -179,9 +226,10 @@ export function ExamMode({
                 );
               })}
               {unplacedContentIds.length === 0 && (
-                <p className="text-sm text-muted-foreground text-center py-8">
-                  All content cards have been placed!
-                </p>
+                <div className="text-center py-8 text-muted-foreground">
+                  <p className="text-sm">All descriptions matched!</p>
+                  <p className="text-xs mt-1">Check your answers above</p>
+                </div>
               )}
             </div>
           </div>

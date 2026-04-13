@@ -3,18 +3,17 @@
 import { useDroppable } from "@dnd-kit/core";
 import { cn } from "@/lib/utils";
 
-interface FlashcardData {
+interface ExamCard {
   id: string;
-  front: string;
-  back: string;
-  codeExample?: string;
+  title: string;
+  summary: string;
 }
 
 interface TitleDropZoneProps {
-  card: FlashcardData;
+  card: ExamCard;
   isCorrect: boolean;
   isIncorrectFlash: boolean;
-  placedContent: FlashcardData | null;
+  placedContent: ExamCard | null;
 }
 
 export function TitleDropZone({
@@ -32,30 +31,30 @@ export function TitleDropZone({
     <div
       ref={setNodeRef}
       className={cn(
-        "p-4 rounded-lg border-2 transition-all duration-200 min-h-[80px]",
+        "p-4 rounded-xl border-2 transition-all duration-200",
         isCorrect && "border-green-500 bg-green-500/10",
         isIncorrectFlash && "border-red-500 bg-red-500/10 animate-pulse",
-        !isCorrect && !isIncorrectFlash && "border-border bg-card",
-        isOver && !isCorrect && "border-primary bg-primary/5"
+        !isCorrect && !isIncorrectFlash && "border-border bg-card hover:border-muted-foreground/30",
+        isOver && !isCorrect && "border-primary bg-primary/5 scale-[1.02]"
       )}
     >
-      <h3 className="font-semibold text-foreground">{card.front}</h3>
+      <h3 className="font-semibold text-foreground">{card.title}</h3>
 
       {placedContent && (
-        <div
+        <p
           className={cn(
-            "mt-3 p-3 rounded border text-sm max-h-32 overflow-y-auto",
-            isCorrect
-              ? "border-green-500/50 bg-green-500/5 text-muted-foreground"
-              : "border-muted bg-muted/50 text-muted-foreground"
+            "mt-2 text-sm",
+            isCorrect ? "text-green-700 dark:text-green-400" : "text-muted-foreground"
           )}
         >
-          <p className="whitespace-pre-wrap">{placedContent.back}</p>
-        </div>
+          {placedContent.summary}
+        </p>
       )}
 
       {!placedContent && !isCorrect && (
-        <p className="text-sm text-muted-foreground mt-2">Drop matching content here</p>
+        <p className="text-sm text-muted-foreground/60 mt-2 italic">
+          Drop matching description here
+        </p>
       )}
     </div>
   );

@@ -1,17 +1,17 @@
 "use client";
 
 import { useDraggable } from "@dnd-kit/core";
+import { GripVertical } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-interface FlashcardData {
+interface ExamCard {
   id: string;
-  front: string;
-  back: string;
-  codeExample?: string;
+  title: string;
+  summary: string;
 }
 
 interface DraggableContentProps {
-  card: FlashcardData;
+  card: ExamCard;
   isPlaced: boolean;
   isCorrect: boolean;
 }
@@ -46,18 +46,14 @@ export function DraggableContent({
       {...listeners}
       {...attributes}
       className={cn(
-        "p-4 rounded-lg border bg-card transition-all max-h-48 overflow-y-auto",
-        isDragging && "opacity-50 cursor-grabbing shadow-lg z-50",
-        !isDragging && !isCorrect && "cursor-grab hover:border-primary",
+        "p-4 rounded-xl border-2 bg-card transition-all flex items-start gap-3",
+        isDragging && "opacity-70 cursor-grabbing shadow-xl z-50 rotate-2 scale-105",
+        !isDragging && !isCorrect && "cursor-grab hover:border-primary hover:shadow-md",
         isCorrect && "cursor-default opacity-50"
       )}
     >
-      <p className="text-sm text-muted-foreground whitespace-pre-wrap">{card.back}</p>
-      {card.codeExample && (
-        <pre className="mt-2 text-xs bg-muted p-2 rounded overflow-x-auto">
-          {card.codeExample}
-        </pre>
-      )}
+      <GripVertical className="h-5 w-5 text-muted-foreground/40 flex-shrink-0 mt-0.5" />
+      <p className="text-sm text-foreground leading-relaxed">{card.summary}</p>
     </div>
   );
 }
