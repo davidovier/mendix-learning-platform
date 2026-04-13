@@ -102,7 +102,7 @@ export function ExamMode({
   );
 
   const getCardById = useCallback(
-    (id: string) => examCards.find((c) => c.id === id),
+    (id: string): FlashcardData | null => examCards.find((c) => c.id === id) ?? null,
     [examCards]
   );
 
