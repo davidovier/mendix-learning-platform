@@ -24,6 +24,32 @@ type ExamState = "active" | "results";
 const EXAM_TIME_SECONDS = 90 * 60; // 90 minutes
 const PASS_PERCENTAGE = 70;
 
+// Seeded random for consistent shuffling per question
+function seededRandom(seed: string) {
+  let hash = 0;
+  for (let i = 0; i < seed.length; i++) {
+    const char = seed.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash;
+  }
+  return function() {
+    hash = Math.imul(hash ^ (hash >>> 16), 0x85ebca6b);
+    hash = Math.imul(hash ^ (hash >>> 13), 0xc2b2ae35);
+    hash ^= hash >>> 16;
+    return (hash >>> 0) / 4294967296;
+  };
+}
+
+function shuffleWithSeed<T>(array: T[], seed: string): T[] {
+  const result = [...array];
+  const random = seededRandom(seed);
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+
 interface ExamClientProps {
   // Server pre-shuffles and sends only 50 questions - no need to transfer 100KB+
   examQuestions: Question[];
@@ -36,6 +62,19 @@ export function ExamClient({ examQuestions }: ExamClientProps) {
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [sessionId, setSessionId] = useState<string | null>(null);
   const startTimeRef = useRef<number>(Date.now());
+
+  // Pre-compute shuffled options for all questions (stable across navigation)
+  const shuffledQuestions = useMemo(() => {
+    return examQuestions.map((q) => {
+      const indices = q.options.map((_, i) => i);
+      const shuffledIndices = shuffleWithSeed(indices, q.id);
+      return {
+        ...q,
+        shuffledOptions: shuffledIndices.map((i) => q.options[i]),
+        shuffledCorrectIndex: shuffledIndices.indexOf(q.correctIndex),
+      };
+    });
+  }, [examQuestions]);
 
   // Create exam session on mount with error handling
   useEffect(() => {
@@ -51,7 +90,7 @@ export function ExamClient({ examQuestions }: ExamClientProps) {
     startTimeRef.current = Date.now();
   }, []);
 
-  const currentQuestion = examQuestions[currentQuestionIndex];
+  const currentQuestion = shuffledQuestions[currentQuestionIndex];
 
   const handleSelectAnswer = (optionIndex: number) => {
     setAnswers((prev) => ({
@@ -67,7 +106,7 @@ export function ExamClient({ examQuestions }: ExamClientProps) {
   };
 
   const handleNext = () => {
-    if (currentQuestionIndex < examQuestions.length - 1) {
+    if (currentQuestionIndex < shuffledQuestions.length - 1) {
       setCurrentQuestionIndex((prev) => prev + 1);
     }
   };
@@ -81,9 +120,9 @@ export function ExamClient({ examQuestions }: ExamClientProps) {
     let correctCount = 0;
     const answersRecord: Record<string, boolean> = {};
 
-    examQuestions.forEach((question, index) => {
+    shuffledQuestions.forEach((question, index) => {
       const userAnswer = answers[index];
-      const isCorrect = userAnswer === question.correctIndex;
+      const isCorrect = userAnswer === question.shuffledCorrectIndex;
       answersRecord[question.id] = isCorrect;
       if (isCorrect) correctCount++;
     });
@@ -101,7 +140,7 @@ export function ExamClient({ examQuestions }: ExamClientProps) {
     }
 
     setExamState("results");
-  }, [sessionId, examQuestions, answers]);
+  }, [sessionId, shuffledQuestions, answers]);
 
   const handleTimeUp = useCallback(async () => {
     // Auto-submit when time runs out
@@ -117,9 +156,9 @@ export function ExamClient({ examQuestions }: ExamClientProps) {
     let correctCount = 0;
     const categoryResults: Record<string, { correct: number; total: number }> = {};
 
-    examQuestions.forEach((question, index) => {
+    shuffledQuestions.forEach((question, index) => {
       const userAnswer = answers[index];
-      const isCorrect = userAnswer === question.correctIndex;
+      const isCorrect = userAnswer === question.shuffledCorrectIndex;
 
       if (isCorrect) {
         correctCount++;
@@ -134,17 +173,17 @@ export function ExamClient({ examQuestions }: ExamClientProps) {
       }
     });
 
-    const percentage = Math.round((correctCount / examQuestions.length) * 100);
+    const percentage = Math.round((correctCount / shuffledQuestions.length) * 100);
     const passed = percentage >= PASS_PERCENTAGE;
 
     return {
       correctCount,
-      totalQuestions: examQuestions.length,
+      totalQuestions: shuffledQuestions.length,
       percentage,
       passed,
       categoryResults,
     };
-  }, [examQuestions, answers]);
+  }, [shuffledQuestions, answers]);
 
   const answeredCount = Object.keys(answers).length;
 
@@ -243,7 +282,7 @@ export function ExamClient({ examQuestions }: ExamClientProps) {
           <div className="flex items-center gap-4">
             <h1 className="text-xl font-bold">Exam</h1>
             <Badge variant="outline">
-              {answeredCount}/{examQuestions.length} answered
+              {answeredCount}/{shuffledQuestions.length} answered
             </Badge>
           </div>
           <ExamTimer totalSeconds={EXAM_TIME_SECONDS} onTimeUp={handleTimeUp} />
@@ -255,7 +294,7 @@ export function ExamClient({ examQuestions }: ExamClientProps) {
             <CardHeader className="space-y-4">
               <div className="flex items-center justify-between">
                 <Badge variant="outline">
-                  Question {currentQuestionIndex + 1} of {examQuestions.length}
+                  Question {currentQuestionIndex + 1} of {shuffledQuestions.length}
                 </Badge>
                 <Badge>{currentQuestion.category}</Badge>
               </div>
@@ -265,7 +304,7 @@ export function ExamClient({ examQuestions }: ExamClientProps) {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-3">
-                {currentQuestion.options.map((option, index) => (
+                {currentQuestion.shuffledOptions.map((option, index) => (
                   <AnswerOption
                     key={index}
                     index={index}
@@ -287,7 +326,7 @@ export function ExamClient({ examQuestions }: ExamClientProps) {
                   Previous
                 </Button>
                 <div className="flex gap-2">
-                  {currentQuestionIndex < examQuestions.length - 1 ? (
+                  {currentQuestionIndex < shuffledQuestions.length - 1 ? (
                     <Button onClick={handleNext}>Next</Button>
                   ) : (
                     <Button onClick={handleSubmitExam} variant="default">
@@ -306,7 +345,7 @@ export function ExamClient({ examQuestions }: ExamClientProps) {
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-5 gap-2">
-                {examQuestions.map((_, index) => {
+                {shuffledQuestions.map((_, index) => {
                   const isAnswered = answers[index] !== undefined;
                   const isCurrent = index === currentQuestionIndex;
 

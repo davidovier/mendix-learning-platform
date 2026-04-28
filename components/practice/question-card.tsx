@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -37,11 +37,25 @@ export function QuestionCard({
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [submitted, setSubmitted] = useState(false);
 
+  // Shuffle options once per question to randomize answer order
+  const { shuffledOptions, shuffledCorrectIndex } = useMemo(() => {
+    const indices = question.options.map((_, i) => i);
+    // Fisher-Yates shuffle
+    for (let i = indices.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [indices[i], indices[j]] = [indices[j], indices[i]];
+    }
+    return {
+      shuffledOptions: indices.map((i) => question.options[i]),
+      shuffledCorrectIndex: indices.indexOf(question.correctIndex),
+    };
+  }, [question.id, question.options, question.correctIndex]);
+
   const handleSubmit = () => {
     if (selectedIndex === null) return;
     setSubmitted(true);
 
-    const isCorrect = selectedIndex === question.correctIndex;
+    const isCorrect = selectedIndex === shuffledCorrectIndex;
     onAnswer(isCorrect, question.id);
   };
 
@@ -51,8 +65,7 @@ export function QuestionCard({
     onNext();
   };
 
-  const isCorrect = selectedIndex === question.correctIndex;
-  const correctAnswer = question.options[question.correctIndex];
+  const isCorrect = selectedIndex === shuffledCorrectIndex;
 
   // Format category name for display
   const formatCategory = (cat: string): string => {
@@ -77,13 +90,13 @@ export function QuestionCard({
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="space-y-3">
-          {question.options.map((option, index) => (
+          {shuffledOptions.map((option, index) => (
             <AnswerOption
               key={index}
               index={index}
               text={option}
               selected={selectedIndex === index}
-              correct={index === question.correctIndex}
+              correct={index === shuffledCorrectIndex}
               showResult={submitted}
               onClick={() => !submitted && setSelectedIndex(index)}
             />
