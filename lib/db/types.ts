@@ -86,3 +86,15 @@ export interface UsageTracking {
   created_at: string;
   updated_at: string;
 }
+
+export interface UserProfile {
+  id: string;
+  user_id: string;
+  email: string;
+  is_admin: boolean;
+  capgemini_status: "pending" | "approved" | null;
+  capgemini_requested_at: string | null;
+  capgemini_reviewed_at: string | null;
+  capgemini_reviewed_by: string | null;
+  created_at: string;
+}
