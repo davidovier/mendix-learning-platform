@@ -35,6 +35,7 @@ function PendingRow({ request, onAction }: { request: PendingRequest; onAction: 
 
   const handleApprove = () => {
     startTransition(async () => {
+      setError(null);
       const result = await approveCapgeminiRequest(request.user_id);
       if (result.error) setError(result.error);
       else onAction();
@@ -43,6 +44,7 @@ function PendingRow({ request, onAction }: { request: PendingRequest; onAction: 
 
   const handleDecline = () => {
     startTransition(async () => {
+      setError(null);
       const result = await declineCapgeminiRequest(request.user_id);
       if (result.error) {
         setError(result.error);
@@ -75,7 +77,7 @@ function PendingRow({ request, onAction }: { request: PendingRequest; onAction: 
             className="h-7 gap-1 px-2.5 text-xs"
           >
             <Check className="h-3 w-3" />
-            Approve
+            {isPending ? "Approving..." : "Approve"}
           </Button>
           <AlertDialog open={dialogOpen} onOpenChange={setDialogOpen}>
             <AlertDialogTrigger
@@ -106,7 +108,7 @@ function PendingRow({ request, onAction }: { request: PendingRequest; onAction: 
                   onClick={handleDecline}
                   disabled={isPending}
                 >
-                  Delete account
+                  {isPending ? "Deleting..." : "Delete account"}
                 </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
