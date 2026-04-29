@@ -3,6 +3,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { stripe, FREE_TIER_LIMITS } from "./config";
 import type { Subscription, UsageTracking } from "@/lib/db/types";
+import { getUserProfile } from "@/lib/db/profile";
 
 export async function getSubscription(userId: string): Promise<Subscription | null> {
   const supabase = await createClient();
@@ -27,6 +28,16 @@ export async function isProUser(userId: string): Promise<boolean> {
     subscription.status === "active" ||
     subscription.status === "trialing"
   );
+}
+
+export async function hasFullAccess(userId: string): Promise<boolean> {
+  const [pro, profile] = await Promise.all([
+    isProUser(userId),
+    getUserProfile(userId),
+  ]);
+  if (pro) return true;
+  if (!profile) return false;
+  return profile.is_admin || profile.capgemini_status === "approved";
 }
 
 export async function hasLifetimeAccess(userId: string): Promise<boolean> {
@@ -174,8 +185,8 @@ export async function canAnswerQuestion(userId: string): Promise<{
   remaining: number;
   limit: number;
 }> {
-  // Check if pro user first
-  if (await isProUser(userId)) {
+  // Check if user has full access first
+  if (await hasFullAccess(userId)) {
     return { allowed: true, remaining: Infinity, limit: Infinity };
   }
 
@@ -196,7 +207,7 @@ export async function canTakeExam(userId: string): Promise<{
   remaining: number;
   limit: number;
 }> {
-  if (await isProUser(userId)) {
+  if (await hasFullAccess(userId)) {
     return { allowed: true, remaining: Infinity, limit: Infinity };
   }
 
