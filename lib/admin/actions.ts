@@ -25,6 +25,12 @@ export interface AdminDashboardData {
   totalUsers: number;
 }
 
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+function isValidUuid(id: string): boolean {
+  return UUID_RE.test(id);
+}
+
 function getAdminSupabaseClient() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -64,6 +70,10 @@ export async function getAdminDashboardData(): Promise<AdminDashboardData> {
       .from("user_profiles")
       .select("user_id", { count: "exact", head: true }),
   ]);
+
+  if (pendingResult.error) throw new Error(pendingResult.error.message);
+  if (approvedResult.error) throw new Error(approvedResult.error.message);
+  if (totalResult.error) throw new Error(totalResult.error.message);
 
   // Resolve reviewer emails for approved colleagues
   const approvedRaw = (approvedResult.data ?? []) as {
@@ -105,6 +115,7 @@ export async function getAdminDashboardData(): Promise<AdminDashboardData> {
 }
 
 export async function approveCapgeminiRequest(targetUserId: string): Promise<{ error?: string }> {
+  if (!isValidUuid(targetUserId)) return { error: "Invalid user ID" };
   const adminId = await assertAdmin().catch(() => null);
   if (!adminId) return { error: "Unauthorized" };
 
@@ -126,8 +137,20 @@ export async function approveCapgeminiRequest(targetUserId: string): Promise<{ e
 }
 
 export async function declineCapgeminiRequest(targetUserId: string): Promise<{ error?: string }> {
+  if (!isValidUuid(targetUserId)) return { error: "Invalid user ID" };
   const adminId = await assertAdmin().catch(() => null);
   if (!adminId) return { error: "Unauthorized" };
+
+  const supabase = await createClient();
+  const { data: targetProfile } = await supabase
+    .from("user_profiles")
+    .select("capgemini_status")
+    .eq("user_id", targetUserId)
+    .single();
+
+  if (targetProfile?.capgemini_status !== "pending") {
+    return { error: "User is not in pending status" };
+  }
 
   const adminClient = getAdminSupabaseClient();
   const { error } = await adminClient.auth.admin.deleteUser(targetUserId);
