@@ -84,7 +84,7 @@ export function QuestionCard({
           </Badge>
           <Badge>{formatCategory(question.category)}</Badge>
         </div>
-        <h2 className="text-xl font-medium leading-relaxed">
+        <h2 className="text-xl font-medium leading-relaxed break-words">
           {question.question}
         </h2>
       </CardHeader>

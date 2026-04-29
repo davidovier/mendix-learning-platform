@@ -298,7 +298,7 @@ export function ExamClient({ examQuestions }: ExamClientProps) {
                 </Badge>
                 <Badge>{currentQuestion.category}</Badge>
               </div>
-              <h2 className="text-xl font-medium leading-relaxed">
+              <h2 className="text-xl font-medium leading-relaxed break-words">
                 {currentQuestion.question}
               </h2>
             </CardHeader>
