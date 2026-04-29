@@ -14,8 +14,6 @@ CREATE TABLE IF NOT EXISTS public.user_profiles (
   CONSTRAINT user_profiles_user_id_key UNIQUE (user_id)
 );
 
-CREATE INDEX IF NOT EXISTS idx_user_profiles_user_id
-  ON public.user_profiles(user_id);
 CREATE INDEX IF NOT EXISTS idx_user_profiles_capgemini_status
   ON public.user_profiles(capgemini_status);
 
@@ -45,7 +43,11 @@ CREATE POLICY "Users can view their own profile"
 
 CREATE POLICY "Admins can update any profile"
   ON public.user_profiles FOR UPDATE
-  USING (public.is_admin());
+  USING (public.is_admin())
+  WITH CHECK (public.is_admin());
+
+-- INSERT and DELETE are intentionally not granted — profile rows are created
+-- exclusively by the handle_new_user() trigger. No client path can insert directly.
 
 -- Trigger function — runs as SECURITY DEFINER so it bypasses RLS on INSERT.
 -- Stores email (denormalized) so admin dashboard can read it without
@@ -57,7 +59,7 @@ SECURITY DEFINER
 SET search_path = public
 AS $$
 BEGIN
-  IF NEW.email LIKE '%@capgemini.com' THEN
+  IF NEW.email ~* '^[^@]+@capgemini\.com$' THEN
     INSERT INTO public.user_profiles (user_id, email, capgemini_status, capgemini_requested_at)
     VALUES (NEW.id, NEW.email, 'pending', NOW());
   ELSE
