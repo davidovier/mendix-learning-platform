@@ -65,7 +65,12 @@ export async function signUpWithEmail(formData: FormData) {
     return { error: error.message };
   }
 
-  return { success: "Check your email to confirm your account" };
+  const isCapgemini = email.trim().toLowerCase().endsWith("@capgemini.com");
+  const successMessage = isCapgemini
+    ? "Check your email to confirm your account. We detected your Capgemini email — once confirmed, your request for free colleague access will be reviewed by an admin."
+    : "Check your email to confirm your account";
+
+  return { success: successMessage };
 }
 
 export async function signOut() {
