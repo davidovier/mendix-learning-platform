@@ -6,7 +6,7 @@ import {
   canTakeExam,
   incrementQuestionUsage,
   incrementExamUsage,
-  isProUser,
+  hasFullAccess,
 } from "./subscription";
 
 export interface UsageStatus {
@@ -32,7 +32,7 @@ export async function getUsageStatus(): Promise<UsageStatus | null> {
   if (!user) return null;
 
   const [isPro, questions, exams] = await Promise.all([
-    isProUser(user.id),
+    hasFullAccess(user.id),
     canAnswerQuestion(user.id),
     canTakeExam(user.id),
   ]);

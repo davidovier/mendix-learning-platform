@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import { isProUser } from "@/lib/stripe/subscription";
+import { hasFullAccess } from "@/lib/stripe/subscription";
 
 interface RateLimitConfig {
   freeLimit: number;
@@ -29,8 +29,8 @@ export async function checkRateLimit(
   }
 
   const supabase = await createClient();
-  const isPro = await isProUser(userId);
-  const limit = isPro ? config.proLimit : config.freeLimit;
+  const fullAccess = await hasFullAccess(userId);
+  const limit = fullAccess ? config.proLimit : config.freeLimit;
 
   // Atomic upsert - no race conditions
   const { data, error } = await supabase.rpc("increment_rate_limit", {
