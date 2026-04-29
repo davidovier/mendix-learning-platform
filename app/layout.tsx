@@ -7,6 +7,10 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { AnalyticsProvider } from "@/components/providers/analytics-provider";
 import { Suspense } from "react";
+import { getUser } from "@/lib/supabase/actions";
+import { getUserProfile } from "@/lib/db/profile";
+import { PendingBanner } from "@/components/layout/capgemini-banner";
+import { ApprovalBannerClient } from "@/components/layout/capgemini-approval-banner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -80,11 +84,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const user = await getUser();
+  const profile = user ? await getUserProfile(user.id) : null;
+  const capgeminiStatus = profile?.capgemini_status ?? null;
+
   return (
     <html
       lang="en"
@@ -93,6 +101,8 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col bg-background font-sans antialiased">
         <TooltipProvider>
           <Header />
+          {capgeminiStatus === "pending" && <PendingBanner />}
+          {capgeminiStatus === "approved" && <ApprovalBannerClient />}
           <main className="flex-1">
             <Suspense fallback={null}>
               <AnalyticsProvider>{children}</AnalyticsProvider>
