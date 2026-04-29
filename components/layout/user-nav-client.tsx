@@ -3,21 +3,21 @@
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { User, Sparkles, Settings, LogOut } from "lucide-react";
+import { User, Sparkles, Settings, LogOut, ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { signOut } from "@/lib/supabase/actions";
 
 interface UserNavClientProps {
   user: { email: string } | null;
-  isPro: boolean;
+  isFullAccess: boolean;
+  isAdmin: boolean;
 }
 
-export function UserNavClient({ user, isPro }: UserNavClientProps) {
+export function UserNavClient({ user, isFullAccess, isAdmin }: UserNavClientProps) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -53,13 +53,13 @@ export function UserNavClient({ user, isPro }: UserNavClientProps) {
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
           "relative flex items-center justify-center w-9 h-9 rounded-full text-sm font-bold transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-          isPro
+          isFullAccess
             ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
             : "bg-primary/10 text-primary hover:bg-primary/20"
         )}
       >
         <span>{initials}</span>
-        {isPro && (
+        {isFullAccess && (
           <div className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 bg-background rounded-full flex items-center justify-center shadow-sm border border-border">
             <Sparkles className="w-2 h-2 text-primary" />
           </div>
@@ -68,49 +68,51 @@ export function UserNavClient({ user, isPro }: UserNavClientProps) {
 
       {isOpen && (
         <div className="absolute right-0 mt-2 w-56 rounded-lg border border-border bg-popover p-1 shadow-lg z-50">
-          {/* Header */}
           <div className="px-2 py-1.5 border-b border-border mb-1">
             <p className="text-sm font-medium truncate">{user.email}</p>
-            {isPro ? (
+            {isFullAccess ? (
               <p className="text-xs text-primary flex items-center gap-1">
                 <Sparkles className="h-3 w-3" />
-                Pro Lifetime
+                Pro
               </p>
             ) : (
               <p className="text-xs text-muted-foreground">Free plan</p>
             )}
           </div>
 
-          {/* Menu Items */}
           <button
-            onClick={() => {
-              router.push("/progress");
-              setIsOpen(false);
-            }}
+            onClick={() => { router.push("/progress"); setIsOpen(false); }}
             className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-sm hover:bg-muted transition-colors"
           >
             <User className="h-4 w-4" />
             My Progress
           </button>
           <button
-            onClick={() => {
-              router.push("/account");
-              setIsOpen(false);
-            }}
+            onClick={() => { router.push("/account"); setIsOpen(false); }}
             className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-sm hover:bg-muted transition-colors"
           >
             <Settings className="h-4 w-4" />
             Account
           </button>
 
-          {!isPro && (
+          {isAdmin && (
             <>
               <div className="my-1 h-px bg-border" />
               <button
-                onClick={() => {
-                  router.push("/pricing");
-                  setIsOpen(false);
-                }}
+                onClick={() => { router.push("/admin"); setIsOpen(false); }}
+                className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-sm text-primary hover:bg-muted transition-colors"
+              >
+                <ShieldCheck className="h-4 w-4" />
+                Admin Dashboard
+              </button>
+            </>
+          )}
+
+          {!isFullAccess && (
+            <>
+              <div className="my-1 h-px bg-border" />
+              <button
+                onClick={() => { router.push("/pricing"); setIsOpen(false); }}
                 className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-sm text-primary hover:bg-muted transition-colors"
               >
                 <Sparkles className="h-4 w-4" />
