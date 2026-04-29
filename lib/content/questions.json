@@ -11,8 +11,7 @@
       "Feedback functionality is automatically included in all Mendix apps."
     ],
     "correctIndex": 0,
-    "explanation": "The Feedback widget in Mendix provides a built-in, easy way for users to submit feedback directly from your application without custom development.",
-    "detailedExplanation": "Use the Feedback widget"
+    "explanation": "The Feedback widget is built for in-app feedback collection, so users can report issues or suggestions without leaving the application context. A Contact Us link may work, but it usually loses page-specific context and requires extra user effort. Building a custom feedback page is possible, but in real Mendix projects the widget is faster and more consistent for early user testing."
   },
   {
     "id": "q-1",
@@ -54,8 +53,7 @@
       "Yes, through the Entity Properties"
     ],
     "correctIndex": 0,
-    "explanation": "In Mendix, you can limit an entity to only one object by implementing validation logic in a microflow that checks for existing objects before creating new ones.",
-    "detailedExplanation": "Yes, through a Microflow."
+    "explanation": "A single-object limit is enforced with logic, typically by checking in a microflow whether an object already exists before creating another one. Entity properties and module security control structure and access, not business rules like \"only one settings object may exist.\" This matters for configuration entities, where an app should have one active company profile, settings record, or default workflow."
   },
   {
     "id": "q-4",
@@ -69,8 +67,7 @@
       "You have a smaller selection of activities."
     ],
     "correctIndex": 0,
-    "explanation": "Sub-microflows in Mendix have the same capabilities as regular microflows. They are used to organize logic into reusable components, improving code maintainability without sacrificing functionality.",
-    "detailedExplanation": "None. Sub-microflows are equally capable."
+    "explanation": "A sub-microflow is still a microflow, so it can use the same kinds of activities, decisions, loops, and return values as any other microflow. Options like \"only returns Boolean\" describe rules more than sub-microflows. In real development, sub-microflows are used to split large logic into reusable pieces without losing capability."
   },
   {
     "id": "q-5",
@@ -99,8 +96,7 @@
       "Sticky notes"
     ],
     "correctIndex": 0,
-    "explanation": "Annotations in Mendix microflows allow developers to add notes and documentation directly in the flow, making it easier for others to understand the logic.",
-    "detailedExplanation": "Annotations"
+    "explanation": "Annotations are the Mendix modeling feature used to document why a microflow does something or to leave guidance for future developers. \"Comments\" and \"sticky notes\" are familiar terms from other tools, but they are not the Studio Pro element used in microflows. Good annotations are especially useful when a microflow contains business rules that are not obvious from the activity names."
   },
   {
     "id": "q-7",
@@ -114,8 +110,7 @@
       "None. Rules are equally capable."
     ],
     "correctIndex": 0,
-    "explanation": "Rules in Mendix have a smaller selection of activities compared to microflows. They are designed for simple boolean logic and validation purposes.",
-    "detailedExplanation": "A rule may only return a Boolean (or enumeration)."
+    "explanation": "Rules are more limited than microflows because they are intended for decision logic, not full process logic. They can branch and return values, but they do not offer the same broad set of activities as microflows. In real apps, rules are useful for reusable checks, while microflows handle actions like creating objects, sending emails, or committing data."
   },
   {
     "id": "q-8",
@@ -129,7 +124,7 @@
       "Soft delete to the recycle bin and restore later."
     ],
     "correctIndex": 0,
-    "explanation": "Excluding a document from a Mendix project removes it from deployment without deleting it, allowing you to test changes safely."
+    "explanation": "Excluding the old microflow from the project keeps it available in the model while preventing it from being included in the running app. Renaming it does not stop it from being used if references still exist, and Mendix does not use a \"soft delete recycle bin\" workflow for this. This is useful when replacing behavior during refactoring but keeping a fallback during testing."
   },
   {
     "id": "q-9",
@@ -172,8 +167,7 @@
       "A cast"
     ],
     "correctIndex": 0,
-    "explanation": "In microflow expressions, functions like toUpperCase() are built-in operations that transform or process values.",
-    "detailedExplanation": "A function"
+    "explanation": "`toUpperCase` is a function because it performs a predefined transformation on a value and returns a result. It may feel like a \"string transform,\" but in Mendix expressions it belongs to the function syntax. This matters when writing expressions for validations, decisions, or display formatting."
   },
   {
     "id": "q-12",
@@ -187,8 +181,7 @@
       "Round"
     ],
     "correctIndex": 0,
-    "explanation": "Variables in microflows are prefixed with $ (e.g., $Customer) and represent objects or values that can be used throughout the flow.",
-    "detailedExplanation": "$Customer"
+    "explanation": "`$Customer` is a variable because Mendix uses the dollar sign to reference objects, primitive values, and lists available in the microflow context. `formatDateTime`, `empty`, and `round` are functions or special values, not variable names. Recognizing variables is essential when passing data between microflow activities."
   },
   {
     "id": "q-13",
@@ -202,8 +195,7 @@
       "Adjust security accordingly."
     ],
     "correctIndex": 0,
-    "explanation": "Breakpoint conditions in Mendix allow you to debug specific scenarios by specifying when the debugger should pause, without affecting other users.",
-    "detailedExplanation": "Set a breakpoint condition (e.g., $currentUser/name = 'YourUserName')"
+    "explanation": "A breakpoint condition lets the debugger stop only when a specific expression is true, such as when the current user is your account. Adding a decision changes runtime logic for everyone, and changing security is too broad for debugging. This matters in production troubleshooting because you want observability without interrupting normal users."
   },
   {
     "id": "q-14",
@@ -231,7 +223,7 @@
       "A go-to event"
     ],
     "correctIndex": 0,
-    "explanation": "The iterator in a Mendix loop represents the current object being processed from the list. It changes with each iteration of the loop."
+    "explanation": "A break event exits the current loop immediately, so the microflow continues after the loop instead of processing every remaining item. A continue event skips to the next iteration, which is useful but does not end the loop. This is practical when you only need to find the first matching object in a large list."
   },
   {
     "id": "q-16",
@@ -245,8 +237,7 @@
       "Create a loop with a counter variable."
     ],
     "correctIndex": 0,
-    "explanation": "In microflow expressions, functions like toUpperCase() are built-in operations that transform or process values.",
-    "detailedExplanation": "Use an aggregate list function"
+    "explanation": "An aggregate list function can count the number of objects in a list directly without manually looping through it. A counter loop would work, but it is more verbose and easier to get wrong. In Mendix projects, aggregate functions keep microflows cleaner and improve readability."
   },
   {
     "id": "q-17",
@@ -260,8 +251,7 @@
       "Duplicating datasets."
     ],
     "correctIndex": 0,
-    "explanation": "Batches in Mendix are used for processing large amounts of data efficiently by breaking the work into smaller chunks to manage memory and performance.",
-    "detailedExplanation": "Processing large amounts of data"
+    "explanation": "Batches are used to process large amounts of data in manageable chunks instead of handling everything at once. Nightly cycles may use scheduled events, but batching is about volume and performance, not timing. This matters for imports, migrations, cleanups, and integrations with many records."
   },
   {
     "id": "q-18",
@@ -275,8 +265,7 @@
       "An aggregate list"
     ],
     "correctIndex": 0,
-    "explanation": "The iterator in a Mendix loop represents the current object being processed from the list. It changes with each iteration of the loop.",
-    "detailedExplanation": "An iterator"
+    "explanation": "The object currently being processed inside a loop is called the iterator. Terms like \"looped list\" describe the list itself, not the current object from that list. This is important because actions inside the loop usually work on the iterator variable."
   },
   {
     "id": "q-19",
@@ -290,8 +279,7 @@
       "Sprint review"
     ],
     "correctIndex": 0,
-    "explanation": "Sprint planning is performed at the beginning of each sprint to select and commit to user stories for the iteration.",
-    "detailedExplanation": "Sprint planning"
+    "explanation": "Sprint planning happens at the beginning of a sprint because the team selects and plans the work to be done. The daily scrum happens during the sprint, while the review and retrospective happen near the end. In Mendix projects, sprint planning determines which user stories become actual app changes."
   },
   {
     "id": "q-20",
@@ -305,8 +293,7 @@
       "Development progress is presented to the stakeholders."
     ],
     "correctIndex": 0,
-    "explanation": "The daily scrum (standup) is where team members share progress, plans, and blockers to maintain transparency.",
-    "detailedExplanation": "Team members share their progress, plans, and issues"
+    "explanation": "The daily scrum is a short synchronization where team members share progress, plans, and blockers. It is not mainly for the Scrum Master to give instructions or for stakeholder demos. This helps Mendix teams quickly surface issues like blocked integrations, unclear stories, or environment problems."
   },
   {
     "id": "q-21",
@@ -320,8 +307,7 @@
       "The priority of the user story."
     ],
     "correctIndex": 0,
-    "explanation": "Story points indicate the relative difficulty or effort required to complete a user story, not time estimates.",
-    "detailedExplanation": "The difficulty of the user story"
+    "explanation": "Story points express the relative difficulty or effort of a user story, including complexity and uncertainty. They do not directly represent priority, task count, or team velocity. In Mendix delivery, story points help teams forecast how many app features can fit into a sprint."
   },
   {
     "id": "q-22",
@@ -349,7 +335,7 @@
       "Only Javasource folder"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Javascriptsource and Javasource folders\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "`javasource` and `javascriptsource` contain module-specific source code that can be reused when the module is moved to another app. Other app folders may contain project-wide files that are not tied to a single module. This matters when building reusable Marketplace or add-on modules."
   },
   {
     "id": "q-24",
@@ -363,8 +349,7 @@
       "Proxies"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Actions\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Actions"
+    "explanation": "`VerifyPassword.java` is a Java action, so it belongs in the `Actions` subfolder under `javasource`. The `Proxies` folder is for generated Java proxy classes, not custom action implementations. Knowing this helps when inspecting or troubleshooting custom Java logic in a Mendix module."
   },
   {
     "id": "q-25",
@@ -378,8 +363,7 @@
       "Actions"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Proxies\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Proxies"
+    "explanation": "`Microflows.java` is generated proxy code, so it is stored in the `Proxies` subfolder. The `Actions` folder contains Java action implementations, which is tempting but not where generated microflow proxy classes live. This matters when Java code needs to call Mendix microflows safely."
   },
   {
     "id": "q-26",
@@ -407,8 +391,7 @@
       "Resources"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Theme\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Theme"
+    "explanation": "The `theme` folder contains styling-related files such as Sass, CSS, and theme resources used to shape the app's look and feel. `userlib` is for Java libraries, while `resources` is for module resources, not the main visual theme. This matters when customizing Atlas UI or app branding."
   },
   {
     "id": "q-28",
@@ -422,8 +405,7 @@
       "By creating a dataset."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"By creating a data snapshot and adding it to the deployment directory of your app.\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "By creating a data snapshot and adding it to the deployment directory of your app"
+    "explanation": "A data snapshot captures database content and can be shared through the deployment directory so team members can run the app with the same sample data. Committing to Team Server shares the model, not everyone's local database. This is useful when developers need identical test data for debugging or demos."
   },
   {
     "id": "q-29",
@@ -437,8 +419,7 @@
       "Delete-Modify"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Modify-Modify\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Modify-Modify"
+    "explanation": "A Modify-Modify conflict occurs when two people change the same document, such as the same delete microflow. Modify-Delete would mean one person changed it while another deleted it. This matters when merging team work because Studio Pro must know which version of the microflow logic to keep."
   },
   {
     "id": "q-30",
@@ -452,8 +433,7 @@
       "A revision of the main line."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"A revision that has been used to build a Mx deployment package.\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "A revision that has been used to build a Mx deployment package"
+    "explanation": "A tagged version is a revision that was used to create a Mendix deployment package. It is not simply any mainline or branch revision. In real projects, tags help teams identify exactly which model version was deployed to test, acceptance, or production."
   },
   {
     "id": "q-31",
@@ -467,8 +447,7 @@
       "Quick fix"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Merge feature branch\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Merge feature branch"
+    "explanation": "Merge feature branch is used from the main line to merge an entire branch back into it. Port fix is more commonly used to move selected fixes between lines, not merge a full feature branch. This matters when finishing a feature branch and preparing it for release."
   },
   {
     "id": "q-32",
@@ -482,7 +461,7 @@
       "Quick fix"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Advanced merge\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "Advanced merge can merge revisions into and from different lines, including main lines and branch lines. Merge feature branch is more specific and only applies to a complete branch merge into main. This is useful when a team needs more control over exactly which revisions are moved."
   },
   {
     "id": "q-33",
@@ -496,8 +475,7 @@
       "Text widgets"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"List Views\" because this aligns with Mendix Xpath best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "List Views (also: Data Grids, Retrieve actions, Access rules)"
+    "explanation": "XPath constraints can be configured on list-based data sources such as List Views to limit which objects are shown. Text widgets and page access settings do not use XPath for retrieving displayed data. This matters when filtering lists by status, ownership, or date."
   },
   {
     "id": "q-34",
@@ -511,8 +489,7 @@
       "Dynamic text in Labels"
     ],
     "correctIndex": 0,
-    "explanation": "XPath constraints in Mendix filter data by specifying conditions that objects must meet. They start with [ and contain attribute comparisons.",
-    "detailedExplanation": "Selectable data constraints on Reference Selectors"
+    "explanation": "Reference selectors can use selectable data constraints with XPath to limit which associated objects a user can choose. Styling or tab order properties do not query data. This is important when users should only select valid related records, such as active customers or available products."
   },
   {
     "id": "q-35",
@@ -526,8 +503,7 @@
       "In the input parameter"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"In the ‘Retrieve’ action\" because this aligns with Mendix Xpath best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "In the 'Retrieve' action"
+    "explanation": "In microflows, XPath is used in Retrieve actions when retrieving objects from the database. Open page and Commit actions do not use XPath because they are not database query filters. This matters whenever server-side logic needs to fetch only relevant records."
   },
   {
     "id": "q-36",
@@ -541,8 +517,7 @@
       "("
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"[\" because this aligns with Mendix Xpath best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "`[` (opening square bracket)"
+    "explanation": "An XPath constraint in Mendix begins with `[` because the constraint is written inside square brackets after the entity context. Parentheses and quotes may appear inside expressions, but they do not start the constraint. This is a basic syntax habit used in grids, selectors, and retrieve actions."
   },
   {
     "id": "q-37",
@@ -556,8 +531,7 @@
       "Ctrl + Shift"
     ],
     "correctIndex": 0,
-    "explanation": "Ctrl + Space opens the XPath auto-complete menu in Mendix Studio Pro, helping you write correct path expressions.",
-    "detailedExplanation": "Ctrl + Space"
+    "explanation": "Ctrl + Space opens auto-complete, helping you select attributes, associations, functions, and tokens while writing XPath. Ctrl + O and Shift + Space do not provide the same XPath assistance. In real development, auto-complete reduces syntax mistakes in complex constraints."
   },
   {
     "id": "q-38",
@@ -571,7 +545,7 @@
       "A new object with Status = ‘Cancelled’."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"A list of all requests with the status set to ‘Cancelled’.\" because this aligns with Mendix Xpath best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "`[Status = 'Cancelled']` filters VacationRequest objects to only those whose Status attribute equals Cancelled. It does not create or modify objects; XPath only constrains retrieval. This matters when building overview pages that show specific states such as cancelled, submitted, or approved requests."
   },
   {
     "id": "q-39",
@@ -585,7 +559,7 @@
       "A list of all the vacation requests submitted by the current user that have yet to be approved."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"A list of all vacation requests submitted by the current user.\" because this aligns with Mendix Xpath best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "`[VacationRequest.VacationRequest_Submitter='[%CurrentUser%]']` filters requests by the association to the current user. It does not automatically filter by approval status or return only the earliest request. This is commonly used to make \"My Requests\" pages secure and relevant."
   },
   {
     "id": "q-40",
@@ -599,7 +573,7 @@
       "A list of all VacationRequests that have been approved and are shorter than 4.5 days"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"A list of all VacationRequests that are shorter than 4.5 days and do not have a Submitter assigned\" because this aligns with Mendix Xpath best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The XPath combines two conditions: DaysUsed must be less than 4.5 and the Submitter association must be empty. The `not(.../Administration.Account)` part checks that no submitter account is connected, not that the request is approved. This is useful for finding incomplete or orphaned records during validation or cleanup."
   },
   {
     "id": "q-41",
@@ -613,7 +587,7 @@
       "The grid will show the VacationRequest with the oldest StartDate."
     ],
     "correctIndex": 0,
-    "explanation": "XPath constraints in Mendix filter data by specifying conditions that objects must meet. They start with [ and contain attribute comparisons."
+    "explanation": "`[StartDate = empty]` returns VacationRequest objects where the StartDate attribute has no value. DateTime attributes can be empty unless required by validation or business logic. This matters when showing drafts or incomplete records that still need scheduling information."
   },
   {
     "id": "q-42",
@@ -627,8 +601,7 @@
       "By downloading App Explorer Structure app"
     ],
     "correctIndex": 0,
-    "explanation": "The Resources folder in Mendix modules is used for storing enumerations, regular expressions, constants, and other reusable configurations.",
-    "detailedExplanation": "Manually"
+    "explanation": "App Explorer structure is organized manually by creating folders and moving documents into a meaningful structure. There is no automatic \"structuring mode\" that decides your app architecture for you. In real projects, manual organization keeps modules readable as pages, microflows, and domain objects grow."
   },
   {
     "id": "q-43",
@@ -655,7 +628,7 @@
       "Copy the Image entity from the System module to the Domain Model of your module."
     ],
     "correctIndex": 0,
-    "explanation": "Generalization in Mendix allows entities to inherit attributes and associations from a parent entity, enabling polymorphism and code reuse."
+    "explanation": "A custom ProfilePicture entity that generalizes System.Image lets you use Mendix's file/image behavior while adding your own access rules and associations. Directly using or copying System.Image is tempting, but it limits customization and can create maintenance issues. This matters when user-uploaded images need app-specific security or metadata."
   },
   {
     "id": "q-45",
@@ -669,8 +642,7 @@
       "Image"
     ],
     "correctIndex": 0,
-    "explanation": "Widgets in Mendix are reusable UI components that can be configured and placed on pages to provide specific functionality.",
-    "detailedExplanation": "Dynamic Image"
+    "explanation": "The Dynamic Image widget displays an image based on data from the current object context, such as an associated image in a List View. Image Uploader is for uploading, and the static Image widget is for fixed assets. This matters when showing user avatars, product photos, or document thumbnails from the database."
   },
   {
     "id": "q-46",
@@ -684,7 +656,7 @@
       "Atlas Topbar"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Atlas Default\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "Atlas Default provides the sidebar-style navigation layout in the standard Atlas UI setup. Atlas Topbar is for top navigation, and Popup is not a navigation layout. This matters when choosing a layout that matches the app's navigation pattern."
   },
   {
     "id": "q-47",
@@ -698,8 +670,7 @@
       "Layout grid"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Placeholders\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Placeholders"
+    "explanation": "Placeholders are the empty regions in a layout where page content is inserted. Scroll containers and layout grids control layout behavior, but placeholders define where child page content appears. This matters when creating reusable layouts for many pages."
   },
   {
     "id": "q-48",
@@ -713,7 +684,7 @@
       "Template layout"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Master layout\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The parent layout is called the master layout because the child layout inherits structure from it. \"Template layout\" sounds plausible, but templates are used to create pages, not to describe layout inheritance. This matters when extending Atlas layouts without modifying the original."
   },
   {
     "id": "q-49",
@@ -727,8 +698,7 @@
       "BUY"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"DRY\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "DRY (Don't Repeat Yourself)"
+    "explanation": "DRY means \"Don't Repeat Yourself,\" and it encourages reuse instead of duplicating pages, snippets, microflows, or logic. The other options are not recognized software design principles. In Mendix, DRY often means using snippets, sub-microflows, layouts, and reusable modules."
   },
   {
     "id": "q-50",
@@ -742,7 +712,7 @@
       "Template"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Snippet\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "A snippet is reusable page content, so changing the snippet updates every page where it is used. A building block helps create content quickly, but copied content does not automatically stay synchronized. This is ideal for shared headers, footers, filters, or navigation fragments."
   },
   {
     "id": "q-51",
@@ -756,7 +726,7 @@
       "Check boxes"
     ],
     "correctIndex": 0,
-    "explanation": "Widgets in Mendix are reusable UI components that can be configured and placed on pages to provide specific functionality."
+    "explanation": "A reference set selector is used when selecting multiple associated objects through a many-to-many association. A reference selector handles a single associated object, which makes it tempting but incorrect for multi-select. This matters for assigning multiple tags, roles, categories, or participants."
   },
   {
     "id": "q-52",
@@ -770,8 +740,7 @@
       "New, Edit, Delete"
     ],
     "correctIndex": 0,
-    "explanation": "Widgets in Mendix are reusable UI components that can be configured and placed on pages to provide specific functionality.",
-    "detailedExplanation": "Edit, Delete"
+    "explanation": "Edit and Delete operate on selected existing rows, so they need to respect the grid's selection mode. New does not require selecting existing rows because it creates a new object. This matters when configuring Data Grid behavior so users can safely act on one or more selected records."
   },
   {
     "id": "q-53",
@@ -785,8 +754,7 @@
       "In the Page Access tab of the Module Security."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"In the Conditional visibility property of the container.\" because this aligns with Mendix Security best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "In the Conditional visibility property of the container"
+    "explanation": "Conditional visibility on the container controls whether selected roles can see that specific part of a page. Page access controls the whole page, not one container, and project security maps broader roles. This is useful when a page is shared by roles but some actions or fields should only appear for certain users."
   },
   {
     "id": "q-54",
@@ -800,8 +768,7 @@
       "Automatically."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"By setting the resizable property of the page to No.\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "By setting the resizable property of the page to No"
+    "explanation": "Setting a popup page's resizable property to No makes its size fixed. Layout choice or column width can affect content, but they do not directly control whether the popup can be resized. This matters for modal dialogs where a stable visual size improves usability."
   },
   {
     "id": "q-55",
@@ -815,7 +782,7 @@
       "By fixing the size of the scroll container."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"By removing the outer layout grid.\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "Removing the outer layout grid allows the popup page structure to keep the footer visible while the content area scrolls. Fixing scroll container size or changing floating settings can create brittle layouts. This matters for long edit forms where Save and Cancel buttons should always remain accessible."
   },
   {
     "id": "q-56",
@@ -829,8 +796,7 @@
       "dateCreated (descending)"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"createdDate (descending)\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "createdDate (descending)"
+    "explanation": "Sorting by `createdDate` descending shows the newest created objects first. The other names look similar but are not the standard system member name. This is common for activity feeds, notification lists, and recent records pages."
   },
   {
     "id": "q-57",
@@ -844,8 +810,7 @@
       "Resizable with size determined automatically, with layout grid as the most inner layer of the page."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Resizable with size determined automatically, with layout grid as the most outer layer of the page.\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Resizable with size determined automatically, with layout grid as the most outer layer of the page"
+    "explanation": "Mendix popups are resizable by default, automatically sized, and commonly generated with a layout grid as the outer layer. Fixed-size behavior must be configured separately. Knowing the default helps when adjusting generated popup pages that do not scroll or size the way users expect."
   },
   {
     "id": "q-58",
@@ -859,7 +824,7 @@
       "Change the layer grid."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Remove the outer layer grid.\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "Removing the outer layout grid helps keep the popup content visible rather than constrained by an unnecessary wrapper. Changing popup style alone does not solve layout visibility issues. This matters when generated popup pages have footers or content that disappear behind scrolling areas."
   },
   {
     "id": "q-59",
@@ -873,8 +838,7 @@
       "By creating a separate domain model."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"By adding a separate module.\" because this aligns with Mendix Security best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "By adding a separate module"
+    "explanation": "A separate module lets you assign module roles and remove access to an entire functional area more cleanly. Conditional visibility or page access can hide pieces, but they are harder to maintain across many pages and microflows. This matters for optional features such as notifications, reporting, or administration."
   },
   {
     "id": "q-60",
@@ -888,7 +852,7 @@
       "Only in a navigation layout"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Anywhere\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "A Menu document can be displayed wherever a suitable menu widget or layout area uses it, so it is not limited to the main navigation tree. It is not only for one fixed navigation layout. This matters when creating secondary menus, sidebars, or contextual navigation."
   },
   {
     "id": "q-61",
@@ -916,7 +880,7 @@
       "Notifications.Notification_Account='[%CurrentSession%]']"
     ],
     "correctIndex": 0,
-    "explanation": "XPath constraints in Mendix filter data by specifying conditions that objects must meet. They start with [ and contain attribute comparisons."
+    "explanation": "`[Notifications.Notification_Account='[%CurrentUser%]']` filters notifications to those associated with the logged-in user. `[%CurrentSession%]` is not the user object, and the other options use invalid or incomplete XPath syntax. This matters for privacy because users should not see each other's notifications."
   },
   {
     "id": "q-63",
@@ -930,8 +894,7 @@
       "Modules from the App Store"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Menu\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Menu"
+    "explanation": "A Menu document is used when you want to display a custom navigation menu rather than the main navigation tree. JavaScript or Marketplace modules are unnecessary for this standard Mendix feature. This is useful for secondary navigation inside dashboards or admin sections."
   },
   {
     "id": "q-64",
@@ -945,8 +908,7 @@
       "One source, many destinations"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"One source, one destination\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "One source, many destinations"
+    "explanation": "Mendix translation tooling works with one source language and one destination language at a time. Translating many languages at once may sound efficient, but the tool is designed around a specific language pair. This matters when managing multilingual apps because each translation pass must be targeted."
   },
   {
     "id": "q-65",
@@ -960,8 +922,7 @@
       "The language which will be selected by the user at the first log-in."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"The language which users will see when using your app.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "The language which users will see when using your app"
+    "explanation": "The default project language is the fallback language users see when no other language or translation applies. It is not simply the Studio Pro interface language or a value chosen at first login. This matters because missing translations fall back to the default language."
   },
   {
     "id": "q-66",
@@ -975,7 +936,7 @@
       "Manually at the moment of app creation."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Automatically at the moment of app creation.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The default language is selected automatically when the app is created. It is not something you normally choose manually every time you open the project. This matters because later translation work depends on the original default language baseline."
   },
   {
     "id": "q-67",
@@ -989,8 +950,7 @@
       "In the project folder"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"In the toolbar of Studio Pro\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "In the toolbar of Studio Pro"
+    "explanation": "The development language can be selected in the Studio Pro toolbar, letting developers edit app texts in a chosen language. It is not configured from the project folder or system texts directly. This matters when maintaining labels and messages in multilingual projects."
   },
   {
     "id": "q-68",
@@ -1004,8 +964,7 @@
       "Export translation"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Batch translation\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Batch translation"
+    "explanation": "Batch translation shows translatable texts for a source and destination language, making it easier to review and update many texts. Import and export are useful for moving translations, but batch translation is the in-Studio overview tool. This matters when cleaning up missing or inconsistent UI text."
   },
   {
     "id": "q-69",
@@ -1019,8 +978,7 @@
       "Arrow"
     ],
     "correctIndex": 0,
-    "explanation": "Associations in Mendix define relationships between entities. The owner of an association determines which entity stores the reference.",
-    "detailedExplanation": "Reference"
+    "explanation": "An association is also commonly called a reference because it lets one object point to another object or set of objects. \"Arrow\" describes the visual notation, not the concept itself. This matters when configuring selectors, retrieves by association, and access rules."
   },
   {
     "id": "q-70",
@@ -1034,8 +992,7 @@
       "Only one association."
     ],
     "correctIndex": 0,
-    "explanation": "Associations in Mendix define relationships between entities. The owner of an association determines which entity stores the reference.",
-    "detailedExplanation": "Many associations of various multiplicity."
+    "explanation": "You can create multiple associations between the same two entities, each with its own meaning and multiplicity. Only one association would be too limiting when entities have several relationships, such as Customer as buyer and Customer as approver. This matters when modeling real business relationships accurately."
   },
   {
     "id": "q-71",
@@ -1049,8 +1006,7 @@
       "You want clear Entity names"
     ],
     "correctIndex": 0,
-    "explanation": "Associations in Mendix define relationships between entities. The owner of an association determines which entity stores the reference.",
-    "detailedExplanation": "You want to display additional information about an association."
+    "explanation": "An information entity is useful when the relationship itself needs extra attributes, such as a role, date, quantity, or status. Multiple associations show different relationships, but they do not store details about the relationship. This matters for join-like concepts such as enrollment, membership, or order lines."
   },
   {
     "id": "q-72",
@@ -1064,7 +1020,7 @@
       "Not the before commit and after create."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"The before commit.\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "A before commit event handler must return a Boolean because Mendix uses that result to decide whether the commit may continue. After create handlers do not control whether an already-created object may proceed in the same way. This matters for validations that must block saving invalid data."
   },
   {
     "id": "q-73",
@@ -1078,7 +1034,7 @@
       "In the Microflow"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"In the domain model\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "Persistable is an entity property configured in the domain model. Pages and microflows can use the entity, but they do not define whether it is stored in the database. This matters when deciding whether data should be temporary or permanently saved."
   },
   {
     "id": "q-74",
@@ -1092,7 +1048,7 @@
       "For both persistable and non-persistable entities"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"For persistable entities\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "Mendix creates database tables for persistable entities because their objects must be stored. Non-persistable entities live in memory and are not represented as database tables. This matters for performance, persistence, and whether data remains after a session or transaction."
   },
   {
     "id": "q-75",
@@ -1106,8 +1062,7 @@
       "Current attributes and association values are stored in the database."
     ],
     "correctIndex": 0,
-    "explanation": "Associations in Mendix define relationships between entities. The owner of an association determines which entity stores the reference.",
-    "detailedExplanation": "Current attribute values and association values are stored in memory (NOT database).\n\n| Aspect | Persistable | Non-Persistable |\n|--------|-------------|-----------------|\n| Storage | Database table | Runtime memory only |\n| Color | Blue | Orange |\n| Mendix creates DB table? | Yes | No |\n| Indexes possible? | Yes | **No** |\n| Validation in domain model? | Yes | **No** |\n| Survives restart? | Yes | No |"
+    "explanation": "Committing a non-persistable entity stores its current attribute and association values in memory, not in the database. The commit can still be meaningful during runtime, but it does not persist data across sessions. This matters for wizard objects, temporary forms, and import staging data."
   },
   {
     "id": "q-76",
@@ -1121,8 +1076,7 @@
       "When a value is viewed more often than it changes"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"When a value changes more often than it is viewed\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "When a value is **viewed more often than it changes**."
+    "explanation": "A calculated attribute works well when the value changes often but is viewed less often, because it is computed when needed instead of stored and constantly updated. If a value is viewed frequently and rarely changes, storing it may be more efficient. This matters for performance when calculations involve retrieves or complex logic."
   },
   {
     "id": "q-77",
@@ -1136,8 +1090,7 @@
       "Cross-functional association"
     ],
     "correctIndex": 0,
-    "explanation": "Associations in Mendix define relationships between entities. The owner of an association determines which entity stores the reference.",
-    "detailedExplanation": "Cross-module association."
+    "explanation": "An association between entities in different modules is called a cross-module association. Terms like bi-module or cross-functional are not standard Mendix naming. This matters because cross-module references affect module reuse and dependencies."
   },
   {
     "id": "q-78",
@@ -1165,7 +1118,7 @@
       "Created Date, Altered Date, Initiator, ChangedBy"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Created Date, Changed Date, Owner, ChangedBy\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "Created Date, Changed Date, Owner, and ChangedBy are Mendix system members that can be stored for an entity. Similar words like Creator or Modified Date sound natural but are not the exact Mendix member names. These members matter for auditing, ownership, and filtering records by creator or change history."
   },
   {
     "id": "q-80",
@@ -1179,7 +1132,7 @@
       "Initiator"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Owner\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "Owner is the Mendix system member that identifies the user who created the object. Creator or Originator may sound descriptive, but Owner is the term used in entity properties and access rules. This is important when implementing \"users can only see their own records\" behavior."
   },
   {
     "id": "q-81",
@@ -1193,8 +1146,7 @@
       "As long as you need"
     ],
     "correctIndex": 0,
-    "explanation": "The daily scrum (standup) is where team members share progress, plans, and blockers to maintain transparency.",
-    "detailedExplanation": "15 minutes"
+    "explanation": "A daily scrum is timeboxed to 15 minutes to keep it focused on progress, plans, and blockers. Thirty minutes is usually too long, while five minutes may be too short for a full team. In Mendix teams, this keeps delivery aligned without replacing detailed design discussions."
   },
   {
     "id": "q-82",
@@ -1208,8 +1160,7 @@
       "PO & Management"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"PO, SCRUM master, Developers & Management\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "PO, Scrum Master, Developers & Management"
+    "explanation": "A sprint review includes the Product Owner, Scrum Master, Developers, and stakeholders such as management because it is about inspecting the increment and gathering feedback. Limiting it only to the team would miss stakeholder input. In Mendix projects, this is where working app functionality is demonstrated."
   },
   {
     "id": "q-83",
@@ -1236,8 +1187,7 @@
       "Whenever a module exceeds 35 mbs in size"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"It is up to you to choose logical modules for your application\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "It is up to you to choose logical modules for your application"
+    "explanation": "Modules should be chosen based on logical structure and maintainability, not fixed numbers of entities or file size. Creating a module for every feature may create unnecessary fragmentation. In real apps, modules often represent functional areas like Administration, Orders, Reporting, or Integrations."
   },
   {
     "id": "q-85",
@@ -1251,8 +1201,7 @@
       "Directly in the module’s security settings"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"After enabling an add-on module, in the module settings\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "After enabling an add-on module, in the module settings"
+    "explanation": "Version numbers can be added after enabling a module as an add-on module and then configuring them in module settings. Regular modules do not need versioning in the same way. This matters when packaging reusable modules for other apps or Marketplace-style distribution."
   },
   {
     "id": "q-86",
@@ -1266,8 +1215,7 @@
       "You can only put a ‘Main’ placeholder in the Master Layout"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"1\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "1"
+    "explanation": "A layout can contain only one Main placeholder because it represents the primary page content insertion point. Multiple main placeholders would make it ambiguous where a page's main content should render. This matters when building layout inheritance with master layouts."
   },
   {
     "id": "q-87",
@@ -1280,8 +1228,7 @@
       "Copy the layout from the marketplace module and change the copy"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Create a new layout and set the Atlas UI layout as the master layout.\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Create a new layout and set the Atlas UI layout as the master layout"
+    "explanation": "Creating a new layout and setting the Atlas UI layout as the master layout lets you extend Atlas without modifying Marketplace content directly. Editing the Marketplace layout is tempting but makes updates harder and risks losing changes. This is the safer approach for custom navigation or branding."
   },
   {
     "id": "q-88",
@@ -1295,8 +1242,7 @@
       "[%currentDateTime%]"
     ],
     "correctIndex": 0,
-    "explanation": "Variables in microflows are prefixed with $ (e.g., $Customer) and represent objects or values that can be used throughout the flow.",
-    "detailedExplanation": "[%currentPage%] (does not exist)"
+    "explanation": "`[%currentPage%]` is not a Mendix system variable. Variables like current user, current object in context, and current date/time are commonly available in relevant expressions. This matters because using nonexistent tokens causes expression errors."
   },
   {
     "id": "q-89",
@@ -1308,7 +1254,7 @@
       "[Event_Customer/Customer[if name=\"James\" or name=\"Thomas\" then true else false]]"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"[Event_Customer/Customer[Name = \"James\"][Name=\"Thomas\"]]\" because this aligns with Mendix Xpath best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "`[Event_Customer/Customer[Name = \"James\"][Name=\"Thomas\"]]` is syntactically valid XPath, even though the two name constraints together are very restrictive. The alternative uses an if-then-else expression style that does not belong in XPath constraints. This matters when filtering through associations in data sources or retrieves."
   },
   {
     "id": "q-90",
@@ -1320,7 +1266,7 @@
       "True"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"False\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "Nanoflows run client-side and do not support the same transaction behavior as server-side microflows, so you cannot simply add rollback behavior for a client-side sort. A rollback activity is associated with object state and persistence behavior, not undoing any arbitrary list operation. This matters when deciding whether logic belongs in a nanoflow or microflow."
   },
   {
     "id": "q-91",
@@ -1334,8 +1280,7 @@
       "App>Tools > Properties"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Module security\" because this aligns with Mendix Security best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Module security"
+    "explanation": "Page access is assigned in module security because pages belong to modules and are exposed through module roles. App security maps user roles to module roles, but it does not configure individual page access. This matters when users can log in but still cannot open certain pages."
   },
   {
     "id": "q-92",
@@ -1348,8 +1293,7 @@
       "Only if you have a demo user for the anonymous user"
     ],
     "correctIndex": 0,
-    "explanation": "Anonymous users in Mendix allow access to specific parts of your application without requiring authentication, such as login pages or public content.",
-    "detailedExplanation": "Yes"
+    "explanation": "Anonymous users still interact with entities, so entity access rules must be configured for them. Assuming anonymous access bypasses entity security is unsafe. This matters for public forms, portals, and landing pages where unauthenticated users create or view data."
   },
   {
     "id": "q-93",
@@ -1363,7 +1307,7 @@
       "The app gives an error"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Text field displays the text in English\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "If a Russian translation is missing, Mendix falls back to the default language text, English in this case. It does not show a blank field or throw an error just because one translation is missing. This matters because incomplete translations can still leave visible English text in localized apps."
   },
   {
     "id": "q-94",
@@ -1377,7 +1321,7 @@
       "Use batch replace in French and replace the incorrect text"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"All of the above\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "Incorrect translations can be fixed through batch translation, by exporting and importing translations, or by replacing text in the target language. Each method suits a different scale of change. This matters in real multilingual apps where translation corrections may come from developers, business users, or external translators."
   },
   {
     "id": "q-95",
@@ -1391,8 +1335,7 @@
       "Each page must be created manually"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Right click an Entity and select “Generate overview pages...” for all entities.\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Right-click an Entity and select \"Generate overview pages...\" for all entities"
+    "explanation": "Generating overview pages from entities is the fastest way to create basic CRUD pages across the domain model. Duplicating pages still requires manual rebinding and creates mistakes. This is useful for quickly scaffolding admin pages or prototypes."
   },
   {
     "id": "q-96",
@@ -1406,8 +1349,7 @@
       "Select multiple data sources for the data grid."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Add columns which use associations.\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Add columns which use associations"
+    "explanation": "A data grid can show related data by adding columns that follow associations from the grid entity. Mendix does not join multiple independent data sources just because grids are placed together. This matters when showing order data with customer names, product categories, or related statuses."
   },
   {
     "id": "q-97",
@@ -1421,8 +1363,7 @@
       "Production security"
     ],
     "correctIndex": 0,
-    "explanation": "User roles in Mendix define what users can see and do in your application. Each role has specific module roles and access rights.",
-    "detailedExplanation": "App security"
+    "explanation": "User roles are connected to module roles in app security. Module security defines what module roles may access, but app security decides which user roles receive those module roles. This matters because a user role with no mapped module role will not get the intended permissions."
   },
   {
     "id": "q-98",
@@ -1436,8 +1377,7 @@
       "The Excel Importer data grid widget from the Marketplace."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"The Excel Importer module from the Marketplace.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "The Excel Importer module from the Marketplace"
+    "explanation": "Excel import requires the Excel Importer module from the Marketplace because Mendix does not provide a simple built-in toolbox activity for arbitrary Excel imports. A data grid cannot use `.xls` as a data source. This matters when business users expect spreadsheet-based data loading."
   },
   {
     "id": "q-99",
@@ -1451,8 +1391,7 @@
       "It creates a second domain model for testing."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"It shows the configuration of your domain model in the client.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "It shows the configuration of your domain model in the client"
+    "explanation": "Mx Model Reflection exposes metadata about your domain model and related configuration inside the client so other modules can use it. It does not duplicate entities or import Excel by itself. This is commonly used with modules like Excel Importer that need to know entity and attribute structure."
   },
   {
     "id": "q-100",
@@ -1466,8 +1405,7 @@
       "Your edits will affect the version of the app on the Marketplace for everyone using it."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Updating to a new version of the module erases your changes.\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Updating to a new version of the module erases your changes"
+    "explanation": "Changing Marketplace modules directly is risky because updating the module can overwrite or remove your changes. It does not affect the Marketplace version for everyone else, but it can break your local customization. In real projects, customizations should usually be copied or extended outside the Marketplace module."
   },
   {
     "id": "q-101",
@@ -1481,8 +1419,7 @@
       "Focus, Courage, Cooperation, Commitment & Communication"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Focus, Courage, Openness, Commitment & Respect\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Focus, Courage, Openness, Commitment & Respect"
+    "explanation": "Scrum's five values are Focus, Courage, Openness, Commitment, and Respect. Other options include useful ideas like communication or cooperation, but they are not the formal Scrum values. These values matter in Mendix teams because rapid iteration depends on trust and transparent feedback."
   },
   {
     "id": "q-102",
@@ -1496,7 +1433,7 @@
       "Stakeholders, Users, Sponsors"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Scrum Master, Product Owner & Dev Team\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "A Scrum Team consists of a Scrum Master, Product Owner, and Developers. Roles like project manager or business analyst may exist around the project, but they are not the formal Scrum Team roles. This matters because responsibilities for backlog, delivery, and process should be clear."
   },
   {
     "id": "q-103",
@@ -1510,8 +1447,7 @@
       "Kick-off, Mid-sprint Check, Bug Fixing, Go-live"
     ],
     "correctIndex": 0,
-    "explanation": "The daily scrum (standup) is where team members share progress, plans, and blockers to maintain transparency.",
-    "detailedExplanation": "Planning, Retrospective, Review, and Daily Scrum/Daily Standup"
+    "explanation": "The four common Scrum events are Sprint Planning, Daily Scrum, Sprint Review, and Sprint Retrospective. Coding, testing, and deployment are development activities, not Scrum events. In Mendix projects, these events structure how app increments are planned, built, reviewed, and improved."
   },
   {
     "id": "q-104",
@@ -1523,8 +1459,7 @@
       "yes"
     ],
     "correctIndex": 0,
-    "explanation": "Anonymous users in Mendix allow access to specific parts of your application without requiring authentication, such as login pages or public content.",
-    "detailedExplanation": "No"
+    "explanation": "Anonymous users do not need a username and password because they access the app without logging in. Requiring credentials would defeat the purpose of anonymous access. This matters for public registration pages, surveys, and external request forms."
   },
   {
     "id": "q-105",
@@ -1538,8 +1473,7 @@
       "Project Security"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Data Hub Catalog\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Data Hub Catalog"
+    "explanation": "Published data is discovered in the Data Hub Catalog, where available datasets and services can be found. App Explorer and Domain Model are local modeling areas, not the central discovery catalog. This matters when teams reuse data exposed by other Mendix apps."
   },
   {
     "id": "q-106",
@@ -1553,8 +1487,7 @@
       "Hub Record"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"External Entity\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "External Entity"
+    "explanation": "A piece of data consumed from Data Hub is represented as an External Entity in your app. \"Data Object\" or \"Hub Record\" may sound reasonable, but they are not the Mendix modeling concept. This matters when building apps that use data owned by another service."
   },
   {
     "id": "q-107",
@@ -1568,8 +1501,7 @@
       "It's used for licensing purposes."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"There can be multiple versions of a service and users can connect to a specific one using it.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "There can be multiple versions of a service and users can connect to a specific one using it"
+    "explanation": "The OData service version matters because multiple versions can exist and consumers can connect to the version they depend on. It is not mainly a licensing or stability label. This matters when changing a published API without breaking existing consuming apps."
   },
   {
     "id": "q-108",
@@ -1583,8 +1515,7 @@
       "An entity that directly consumes data from an external API."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"An entity that is connected to a dataset in Data Hub.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "An entity that is connected to a dataset in Data Hub"
+    "explanation": "An external entity is connected to a dataset in Data Hub and represents externally provided data in your domain model. It may feel like \"any entity outside the database,\" but in Mendix the term has a specific Data Hub meaning. This matters when consuming data without copying ownership of that data into your app."
   },
   {
     "id": "q-109",
@@ -1598,8 +1529,7 @@
       "SQL Query"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"OData Feed\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "OData Feed"
+    "explanation": "Microsoft Excel connects to Data Hub datasets through an OData Feed. CSV and SQL are different data access mechanisms and do not represent the published Data Hub service connection. This matters when business users analyze Mendix-published data in Excel."
   },
   {
     "id": "q-110",
@@ -1613,7 +1543,7 @@
       "In the External Entity's properties dialog within Studio Pro."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"In the domain model of the app where the External Entity is defined.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "External entity properties are edited in the domain model where the external entity is defined. The Data Hub Catalog is for discovery and metadata, not direct editing of your app's model. This matters when aligning consumed data with the app's domain model usage."
   },
   {
     "id": "q-111",
@@ -1627,8 +1557,7 @@
       "An Update entity microflow"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"A Send external object activity\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "A Send external object activity"
+    "explanation": "Changes to an external entity are saved using a Send external object activity because the data is owned by the external service. A regular Commit object activity is for local persistable entities. This matters when writing back to another app through Data Hub or OData."
   },
   {
     "id": "q-112",
@@ -1642,8 +1571,7 @@
       "Only via custom Java actions."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Yes, if the Updateable(write) property of its public resource settings is checked.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Yes, if the Updateable(write) property of its public resource settings is checked"
+    "explanation": "External entity data can be modified only when the published resource allows updates through its updateable/write setting. Administrative rights alone do not override a read-only service contract. This matters when designing integrations where some consuming apps may read data but not change it."
   },
   {
     "id": "q-113",
@@ -1657,8 +1585,7 @@
       "Using the 'View Data Hub' option in Studio Pro."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Clicking the Landscape tab.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Clicking the Landscape tab"
+    "explanation": "The Data Hub Landscape is opened from the Landscape tab, which visualizes how apps and services are connected. Project Explorer is for the local app structure, not the cross-app landscape. This matters when analyzing dependencies between services and consuming apps."
   },
   {
     "id": "q-114",
@@ -1672,8 +1599,7 @@
       "The app is independent of your service."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"The app is consuming data from your service.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "The app is consuming data from your service"
+    "explanation": "A grey dotted line from another app to your service means that app is consuming data from your service. A provider relationship is shown differently, so confusing the line type can reverse the dependency. This matters when assessing the impact of changing or retiring a published service."
   },
   {
     "id": "q-115",
@@ -1687,8 +1613,7 @@
       "The app is an administrative tool for your service."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"The app is providing data to your service.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "The app is providing data to your service"
+    "explanation": "A grey solid line means an app is providing data to your service in the Data Hub Landscape. A dotted line indicates consumption, so the line style shows direction and relationship type. This matters when understanding who owns data and who depends on it."
   },
   {
     "id": "q-116",
@@ -1702,8 +1627,7 @@
       "Duplicate"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Delete\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Delete"
+    "explanation": "In CRUD, D stands for Delete. Develop or Deploy are common software terms but not part of this data operation acronym. This matters because CRUD maps directly to common Mendix page and microflow actions: create, read, update, and delete."
   },
   {
     "id": "q-117",
@@ -1717,7 +1641,7 @@
       "Using a marketplace module for user management."
     ],
     "correctIndex": 0,
-    "explanation": "User roles in Mendix define what users can see and do in your application. Each role has specific module roles and access rights."
+    "explanation": "To restrict a user to only one user role, you need microflow logic that validates and enforces that rule. Mendix allows multiple user roles by default, so project settings alone do not impose a single-role limit. This matters in apps where role combinations could accidentally grant too much access."
   },
   {
     "id": "q-118",
@@ -1731,8 +1655,7 @@
       "Only in pages."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Yes\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Yes (for validation rules)."
+    "explanation": "Validation messages can be configured in the domain model through validation rules on attributes. Microflows and pages can also validate, but the domain model supports built-in validation messages close to the data definition. This matters for consistent validation across all pages and flows that save the entity."
   },
   {
     "id": "q-119",
@@ -1746,8 +1669,7 @@
       "Material Design"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Bootstrap Framework\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Bootstrap Framework"
+    "explanation": "Mendix layout grids are based on the Bootstrap framework. CSS Grid and Flexbox are modern CSS layout technologies, but they are not the basis of the Mendix layout grid concept in this context. This matters when customizing responsive page layouts."
   },
   {
     "id": "q-120",
@@ -1761,8 +1683,7 @@
       "RET"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"DS\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "DS_"
+    "explanation": "Datasource microflows use the `DS` prefix to show they provide data to a page or widget. `ACT` is used for action microflows, which makes it a tempting but different convention. Naming prefixes help developers quickly understand how a microflow is intended to be used."
   },
   {
     "id": "q-121",
@@ -1776,8 +1697,7 @@
       "To simplify database management."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"To be able to reuse them in other projects\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "To be able to reuse them in other projects"
+    "explanation": "Mendix uses modules to organize functionality and make it reusable in other projects. Modules may also improve maintainability, but reuse is a central reason for the module concept. This matters when packaging shared features such as notifications, integrations, or administration tools."
   },
   {
     "id": "q-122",
@@ -1791,8 +1711,7 @@
       "deployment"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"userlib\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "userlib"
+    "explanation": "Java libraries are stored in the `userlib` folder. `javasource` contains Java source files, not compiled library dependencies. This matters when adding third-party JAR files required by custom Java actions or Marketplace modules."
   },
   {
     "id": "q-123",
@@ -1806,8 +1725,7 @@
       "Always avoid modifying Marketplace modules."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Copy the contents of the Marketplace module to another module in your app and use that module instead (remember that your app will no longer reflect updates to the original Marketplace module)\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Copy the contents to another module in your app and use that module instead"
+    "explanation": "To customize a Marketplace page safely, copy the relevant content into your own module and use that version, understanding it will no longer automatically reflect updates from the original module. Direct edits can be lost during module updates. This matters when balancing customization with maintainability."
   },
   {
     "id": "q-124",
@@ -1821,8 +1739,7 @@
       "To collect feedback from stakeholders."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"adding detail, estimation and structure to the Product Backlog.\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Adding detail, estimation and structure to the Product Backlog"
+    "explanation": "Product backlog refinement adds detail, estimates, and structure to backlog items so they are ready for future sprint planning. It is not mainly a task assignment or stakeholder review meeting. In Mendix projects, this turns vague feature ideas into buildable user stories."
   },
   {
     "id": "q-125",
@@ -1836,8 +1753,7 @@
       "Do not set any default rights for new members."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"The best practice when setting security rules to new entities is to keep the option 'Default rights for new members' set to 'None'.\" because this aligns with Mendix Security best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Keep the option 'Default rights for new members' set to 'None'"
+    "explanation": "Keeping \"Default rights for new members\" set to None avoids accidentally exposing new attributes or associations when entities change. Granting high or inherited rights by default is convenient but risky. This matters because security should fail closed when the domain model evolves."
   },
   {
     "id": "q-126",
@@ -1851,8 +1767,7 @@
       "Project Manager"
     ],
     "correctIndex": 0,
-    "explanation": "The daily scrum (standup) is where team members share progress, plans, and blockers to maintain transparency.",
-    "detailedExplanation": "Scrum Master"
+    "explanation": "The Scrum Master is responsible for ensuring the daily stand-up happens and stays useful, even though the developers actively participate. The Product Owner may attend, but does not own the event. This matters when keeping Mendix delivery teams aligned without turning the meeting into status reporting."
   },
   {
     "id": "q-127",
@@ -1866,7 +1781,7 @@
       "Randomly to ensure fairness."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Based on the descending priority.\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "Product backlog items are ordered from top to bottom by descending priority or value. Alphabetical order or story point size does not reflect what should be delivered first. This matters because Mendix teams usually build the highest-value app features earliest."
   },
   {
     "id": "q-128",
@@ -1880,8 +1795,7 @@
       "The project manager"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"The Frontend developer\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "The Frontend developer"
+    "explanation": "A slow-loading page is primarily a frontend responsibility because page structure, widgets, data sources, and client rendering often determine load experience. Database or network issues can contribute, but the page developer must investigate how the page retrieves and displays data. This matters when optimizing grids, list views, images, and nested data views."
   },
   {
     "id": "q-129",
@@ -1895,7 +1809,7 @@
       "A/B Testing"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Empathy Map\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "An empathy map captures what a user thinks, feels, says, and does while using or approaching an application. Wireframes and user flows show structure and steps, but not emotional context as directly. This matters in Mendix discovery work before designing screens."
   },
   {
     "id": "q-130",
@@ -1909,8 +1823,7 @@
       "To measure customer satisfaction."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"To find out what shortcomings there are in the general market that you can improve on\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "To find out what shortcomings there are in the general market that you can improve on"
+    "explanation": "A Customer Value Curve helps identify market gaps and areas where your product can improve compared with alternatives. It is not primarily a demographic or satisfaction measurement tool. This matters when deciding which Mendix app features should differentiate the solution."
   },
   {
     "id": "q-131",
@@ -1924,8 +1837,7 @@
       "Surveys"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Card Sorting\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Card Sorting"
+    "explanation": "Card sorting is a qualitative research technique where users group items in ways that make sense to them. Surveys and A/B testing can provide useful data, but they do not focus specifically on grouping and information architecture. This matters when designing menus, categories, and page structures."
   },
   {
     "id": "q-132",
@@ -1939,7 +1851,7 @@
       "Eye Tracking, Clickstream Analysis, Interviews"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Competitor Analysis, Card Sorting, Expert Review\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "Competitor analysis, card sorting, and expert review are qualitative methods because they focus on interpretation, structure, and expert or user judgment. Surveys and analytics are often quantitative because they produce numerical results. This matters when choosing research methods before designing Mendix user experiences."
   },
   {
     "id": "q-133",
@@ -1953,8 +1865,7 @@
       "The data modeler"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"The UX/UIer\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "The UX/UIer"
+    "explanation": "A specific color scheme most directly affects the UX/UI role because it changes visual design, branding, contrast, and component styling. Backend developers and data modelers are less involved unless styling affects generated content or theming logic. This matters when customizing Atlas UI for a client brand."
   },
   {
     "id": "q-134",
@@ -1968,8 +1879,7 @@
       "Use a specialized delete widget."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Create a microflow which will delete selected rows and configure a delete button to call this microflow\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Create a microflow which will delete selected rows and configure a delete button to call this microflow"
+    "explanation": "A microflow attached to a delete button can delete selected rows while applying business rules and security-aware logic. Cascading delete is for related object cleanup, not a user-facing delete action for selected results. This matters when users need controlled deletion from a grid or list."
   },
   {
     "id": "q-135",
@@ -1983,8 +1893,7 @@
       "Calling a microflow from the UI element."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Event Handler\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Event Handler (specifically, After Commit)."
+    "explanation": "An event handler is the right mechanism for running logic immediately after an object is committed. Scheduled events run by time, and UI-triggered microflows only run when a user action calls them. This matters when every save must trigger follow-up logic such as audit creation or status updates."
   },
   {
     "id": "q-136",
@@ -1998,8 +1907,7 @@
       "The module is not deployed correctly."
     ],
     "correctIndex": 0,
-    "explanation": "Access rules in Mendix define which attributes and associations a user role can read or write for a specific entity.",
-    "detailedExplanation": "Access rules for Entity not configured properly"
+    "explanation": "That security error usually means entity access is not configured to allow the current user role to create objects of that entity. Database permissions and deployment state are less likely because Mendix enforces runtime security before the database operation. This matters when adding upload or import entities for end users."
   },
   {
     "id": "q-137",
@@ -2013,8 +1921,7 @@
       "By using a separate export microflow."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"By setting the class on the column to display: none\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "By setting the class on the column to display: none"
+    "explanation": "Setting a column class to `display: none` can hide it visually while still allowing it to be part of export behavior. Removing the attribute or hiding it only through normal page design may also remove it from the export context. This matters when exports need extra technical or reporting columns users should not see on screen."
   },
   {
     "id": "q-138",
@@ -2028,8 +1935,7 @@
       "They are used only for error reporting."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"HTTP headers are used to pass meta-data in the REST calls\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "HTTP headers are used to pass meta-data in REST calls"
+    "explanation": "HTTP headers carry metadata about REST requests and responses, such as content type, authorization, and accepted formats. The body contains the main content, while the URL identifies the resource. This matters when configuring Mendix REST calls that require tokens or JSON content types."
   },
   {
     "id": "q-139",
@@ -2043,8 +1949,7 @@
       "Javascript Online Navigator, a tool for web browsing."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"JavaScript Object Notation, is a lightweight format for storing and transporting data.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "JavaScript Object Notation, a lightweight format for storing and transporting data"
+    "explanation": "JSON stands for JavaScript Object Notation and is a lightweight text format for storing and exchanging structured data. It is not a programming language or browser tool. This matters because Mendix REST integrations often import or export JSON payloads."
   },
   {
     "id": "q-140",
@@ -2058,8 +1963,7 @@
       "It provides a visual representation of JSON data."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"It stores a JSON snippet and converts it into a schema structure that can be used in Import/Export mappings to convert JSON into Mendix\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "It stores a JSON snippet and converts it into a schema structure that can be used in Import/Export mappings to convert JSON into Mendix objects"
+    "explanation": "A JSON structure document stores a sample JSON snippet and turns it into a schema-like structure usable in import and export mappings. It does not automatically create a full domain model. This matters when converting REST payloads into Mendix objects."
   },
   {
     "id": "q-141",
@@ -2073,8 +1977,7 @@
       "Two: System and MyFirstModule."
     ],
     "correctIndex": 0,
-    "explanation": "Mendix provides built-in Account_Overview pages in the Administration module for managing user accounts without custom development.",
-    "detailedExplanation": "3: Administration (accounts), System (what makes app run: users, files, sessions), and MyFirstModule"
+    "explanation": "A newly created Mendix app commonly includes Administration, System, and MyFirstModule. System contains platform-level entities and behavior, while Administration handles accounts and users. This matters because developers should know which modules are safe to modify and which are core platform modules."
   },
   {
     "id": "q-142",
@@ -2087,8 +1990,7 @@
       "It depends on the frequency of data updates."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Calculated attritbute;\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Calculated attribute (changes frequently, viewed less often than it changes)."
+    "explanation": "A stock value is a good candidate for a calculated attribute when it should reflect a current or derived value rather than a manually stored snapshot. A stored attribute may be needed for historical prices, but the practice question targets a value that changes frequently. This matters when choosing between live calculation and persisted history."
   },
   {
     "id": "q-143",
@@ -2131,8 +2033,7 @@
       "Only when working with external entities."
     ],
     "correctIndex": 0,
-    "explanation": "Associations in Mendix define relationships between entities. The owner of an association determines which entity stores the reference.",
-    "detailedExplanation": "When there are different relationships between two entities."
+    "explanation": "Multiple associations are useful when the same two entities have different relationship meanings. For example, an Account could be both requester and approver of a Request through separate associations. This matters because one generic association would make microflows, pages, and XPath constraints unclear."
   },
   {
     "id": "q-146",
@@ -2146,8 +2047,7 @@
       "%"
     ],
     "correctIndex": 0,
-    "explanation": "Variables in microflows are prefixed with $ (e.g., $Customer) and represent objects or values that can be used throughout the flow.",
-    "detailedExplanation": "Dollar sign ($)"
+    "explanation": "Microflow variables are referenced with a dollar sign, such as `$Customer` or `$TotalAmount`. Symbols like `%` are used in tokens such as `[%CurrentUser%]`, not normal variables. This matters when writing expressions in decisions, changes, and validations."
   },
   {
     "id": "q-147",
@@ -2161,8 +2061,7 @@
       "A string or integer."
     ],
     "correctIndex": 0,
-    "explanation": "Rules in Mendix have a smaller selection of activities compared to microflows. They are designed for simple boolean logic and validation purposes.",
-    "detailedExplanation": "Boolean or enumeration"
+    "explanation": "A rule returns a Boolean or enumeration, making it useful for reusable decision logic. It does not return objects, lists, or arbitrary strings like a full microflow can. This matters when centralizing business decisions such as eligibility, status classification, or validation outcomes."
   },
   {
     "id": "q-148",
@@ -2176,8 +2075,7 @@
       "As many as necessary for complex logic."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"2 tot 3 levels max is best practice.\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "2 to 3 levels max is best practice"
+    "explanation": "Keeping sub-microflow nesting around two to three levels preserves readability and makes debugging easier. Unlimited nesting may technically seem possible, but deeply nested logic becomes hard to trace. This matters in larger Mendix apps where maintainability is more important than clever decomposition."
   },
   {
     "id": "q-149",
@@ -2189,8 +2087,7 @@
       "False"
     ],
     "correctIndex": 0,
-    "explanation": "Sub-microflows in Mendix have the same capabilities as regular microflows. They are used to organize logic into reusable components, improving code maintainability without sacrificing functionality.",
-    "detailedExplanation": "True"
+    "explanation": "Primitive input parameters passed to a sub-microflow cannot be changed in a way that updates the original caller's variable. Objects can be changed because their attributes are modified, but primitive values are passed as values. This matters when designing sub-microflows that should return changed numbers, dates, or Booleans explicitly."
   },
   {
     "id": "q-150",
@@ -2204,8 +2101,7 @@
       "M_ and MF_"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"SUB and VAL\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "SUB and VAL"
+    "explanation": "`SUB` and `VAL` are common prefixes for microflows called from other microflows, especially reusable helper logic and validations. `ACT` and `DS` are page-oriented action and datasource prefixes. Good prefixes help developers understand whether a microflow is UI-facing, reusable, or validation-focused."
   },
   {
     "id": "q-151",
@@ -2219,8 +2115,7 @@
       "Easier deployment, less code, native mobile support"
     ],
     "correctIndex": 0,
-    "explanation": "Sub-microflows in Mendix have the same capabilities as regular microflows. They are used to organize logic into reusable components, improving code maintainability without sacrificing functionality.",
-    "detailedExplanation": "Improves readability, maintainability, and reusability"
+    "explanation": "Sub-microflows improve readability, maintainability, and reusability by separating repeated or complex logic into named pieces. They do not automatically make execution faster or security stronger. This matters when large microflows become difficult to understand or duplicate logic appears in several places."
   },
   {
     "id": "q-152",
@@ -2232,8 +2127,7 @@
       "False"
     ],
     "correctIndex": 0,
-    "explanation": "Module roles provide granular security control within a module, defining access to pages, microflows, and entities.",
-    "detailedExplanation": "True"
+    "explanation": "The default home page does not need a module role set because it is resolved as the landing page for the applicable user role setup. Other pages still need appropriate access configuration. This matters when configuring navigation and login behavior without accidentally exposing unrelated pages."
   },
   {
     "id": "q-153",
@@ -2247,7 +2141,7 @@
       "Persistable entities have more attributes."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Non-persistable entities are not stored in the database, persistent ones are.\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "Persistable entities are stored in the database, while non-persistable entities only exist in memory during runtime. Non-persistable entities are not limited to nanoflows and can still have attributes and associations. This matters when choosing between permanent business data and temporary helper objects."
   },
   {
     "id": "q-154",
@@ -2261,8 +2155,7 @@
       "It depends on the specific license type."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Yes.\" because this aligns with Mendix Security best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Yes"
+    "explanation": "A Mendix app can run locally even when app security is not set to production. Production security is required for realistic deployed access control, but local development can use other security levels. This matters when testing quickly during development versus validating final security behavior."
   },
   {
     "id": "q-155",
@@ -2276,8 +2169,7 @@
       "Delete the notification module for that user role."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Build it in a seperate module\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Build it in a separate module"
+    "explanation": "Building notifications in a separate module makes it easy to remove the whole functionality from a user role through module roles. Hiding pages or widgets one by one is more error-prone and may still leave microflows or entities accessible. This matters for optional app features with distinct permissions."
   },
   {
     "id": "q-156",
@@ -2290,8 +2182,7 @@
       "List view and Data grid."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Select page and Dropdown.\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Select page and Dropdown"
+    "explanation": "A reference set selector can display selectable objects through a select page or a dropdown. Radio buttons and checkboxes sound like selection controls, but they are not the configured display options in this context. This matters when designing many-to-many selection experiences."
   },
   {
     "id": "q-157",
@@ -2305,7 +2196,7 @@
       "Zero to many"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Many to many\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "A reference set selector requires a many-to-many association because it manages a set of related objects. A one-to-one or many-to-one association is handled by a reference selector instead. This matters when modeling relationships such as users assigned to multiple groups."
   },
   {
     "id": "q-158",
@@ -2319,8 +2210,7 @@
       "Yes, using JavaScript."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"No, only via a snippet it is possible\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "No, only via a snippet it is possible"
+    "explanation": "Dynamic data cannot be added directly to a navigation layout; it needs to be included through a snippet with the right data context. Directly binding layout navigation to attributes is not how Mendix navigation layouts work. This matters when showing dynamic counters, user info, or contextual menus in shared layouts."
   },
   {
     "id": "q-159",
@@ -2333,8 +2223,7 @@
       "Restrict user role selection at the UI level."
     ],
     "correctIndex": 0,
-    "explanation": "User roles in Mendix define what users can see and do in your application. Each role has specific module roles and access rights.",
-    "detailedExplanation": "A before commit event handler to check whether one user role is selected. If not, it stops the commit and gives validation feedback message."
+    "explanation": "A before commit event handler can validate that exactly one user role is selected and block saving with validation feedback if not. UI-only restrictions are helpful but can be bypassed by other flows or future pages. This matters when enforcing security-related business rules consistently."
   },
   {
     "id": "q-160",
@@ -2348,8 +2237,7 @@
       "DescriptiveName"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Entity_PageType_User-Role\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Entity_PageType_User-Role (e.g., Order_Overview_Admin)"
+    "explanation": "`Entity_PageType_UserRole` communicates what data the page shows, what kind of page it is, and who it is for. A purely descriptive name may be readable at first but becomes inconsistent in larger projects. This matters when many generated and custom pages exist in the same module."
   },
   {
     "id": "q-161",
@@ -2363,7 +2251,7 @@
       "No steps are active by default."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Step 2 is active, Step 1 is visited\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "In the Wizard Progress template with four steps, Step 2 is active and Step 1 is visited by default. This demonstrates the visual state of a multi-step process rather than making every step active. This matters when building onboarding, application, or checkout-style flows."
   },
   {
     "id": "q-162",
@@ -2377,8 +2265,7 @@
       "Through the Mendix UI import function"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Services such as SOAP, REST, and oData\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Services such as SOAP, REST, and OData"
+    "explanation": "For regular imports, services such as SOAP, REST, and OData are better because they can be automated and integrated reliably. Manual Excel import is useful for occasional loading but not repeated operational integration. This matters when apps need scheduled or system-to-system data exchange."
   },
   {
     "id": "q-163",
@@ -2392,8 +2279,7 @@
       "Proprietary Mendix file formats"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Flat files, CSV, Excel\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Flat files, CSV, Excel"
+    "explanation": "Flat files, CSV, and Excel are common file-based import formats for Mendix apps. PDFs and images can be uploaded, but they are not structured data import formats in the same sense. This matters when designing import functionality for business-maintained datasets."
   },
   {
     "id": "q-164",
@@ -2407,7 +2293,7 @@
       "To simplify error handling."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"To not overrun available memory\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "Large datasets should first be imported into a flat structure to avoid overrunning memory during transformation. Transforming deeply nested or complex data directly can create too many objects in memory at once. This matters for stable bulk imports and migrations."
   },
   {
     "id": "q-165",
@@ -2421,8 +2307,7 @@
       "Direct access to the Excel file system."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"The Excel Importer module from the Marketplace.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "The Excel Importer module from the Marketplace"
+    "explanation": "The Excel Importer module from the Marketplace provides the configurable functionality needed to import Excel data. Mendix does not include a universal built-in Excel import wizard as a standard activity. This matters when business users want spreadsheet-driven setup or migration."
   },
   {
     "id": "q-166",
@@ -2436,8 +2321,7 @@
       "Strings"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Objects\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Objects"
+    "explanation": "JSON structures are converted into Mendix objects through mappings. They are not converted into XML or plain strings unless you explicitly model that transformation. This matters when REST data must become usable domain model data."
   },
   {
     "id": "q-167",
@@ -2451,8 +2335,7 @@
       "Data transformations"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Import/Export data\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Import mappings (Import/Export data)"
+    "explanation": "Import/export data mappings interpret XML or JSON into Mendix objects and convert Mendix objects back out. Export mappings alone only cover outgoing conversion. This matters for integrations where external payloads need to become app data."
   },
   {
     "id": "q-168",
@@ -2466,8 +2349,7 @@
       "Access it via an external entity."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Use a Call REST Service action.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Use a Call REST Service action"
+    "explanation": "A Call REST Service action in a microflow retrieves data from a REST endpoint. Consume Web Service is associated with SOAP-style services, not REST. This matters when integrating Mendix apps with modern APIs."
   },
   {
     "id": "q-169",
@@ -2481,8 +2363,7 @@
       "Transforming data within Mendix."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Converting Mendix objects to XML or JSON\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Converting Mendix objects to XML or JSON"
+    "explanation": "Export mappings convert Mendix objects into XML or JSON for outgoing messages. Import mappings handle incoming data, so confusing them reverses the integration direction. This matters when sending data to external systems through REST or web services."
   },
   {
     "id": "q-170",
@@ -2496,7 +2377,7 @@
       "List View Page"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Wizard Form\" because this aligns with Mendix Pages best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "Wizard Form is the page template used for question-and-answer flows and confirmation-style multi-step pages. Data grid or list view templates focus on object lists, not guided step-by-step entry. This matters when creating forms that lead users through a process."
   },
   {
     "id": "q-171",
@@ -2510,8 +2391,7 @@
       "US-ENG"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"en-US\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "en-US"
+    "explanation": "`en-US` is the correct language-culture format for American English. Reversed formats like `us-EN` do not follow the standard language tag pattern. This matters for localization, formatting, and translation configuration."
   },
   {
     "id": "q-172",
@@ -2525,8 +2405,7 @@
       "Copy the JSON content into a constant."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Right click on folder or module, add other, and select JSON structure\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Right-click on folder or module, add other, and select JSON structure"
+    "explanation": "A JSON structure is added by right-clicking a folder or module, choosing Add other, and selecting JSON structure. Dragging a JSON file into the project tree may seem natural but is not the modeled Mendix approach. This matters when preparing import mappings from sample REST payloads."
   },
   {
     "id": "q-173",
@@ -2540,8 +2419,7 @@
       "To commit changes to an object."
     ],
     "correctIndex": 0,
-    "explanation": "The iterator in a Mendix loop represents the current object being processed from the list. It changes with each iteration of the loop.",
-    "detailedExplanation": "When we want to allow certain activities to be executed repeatedly"
+    "explanation": "A loop activity is used when activities need to run repeatedly for each object in a list. Conditional logic is handled by decisions, and retrieving data is handled by retrieve actions. This matters when processing selected records, imported rows, or related objects."
   },
   {
     "id": "q-174",
@@ -2555,8 +2433,7 @@
       "Configure an After Save microflow."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Use Event Handlers\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Use Event Handlers."
+    "explanation": "Event handlers are used to call logic when an entity is committed, created, deleted, or rolled back. Calling a microflow from a save button only covers that specific UI path, not every commit. This matters when the rule must apply consistently from pages, imports, and integrations."
   },
   {
     "id": "q-175",
@@ -2570,8 +2447,7 @@
       "Mendix Studio Pro built-in tools"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Marketplace\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Marketplace"
+    "explanation": "The File Dropper widget is downloaded from the Marketplace. GitHub might host code for some components, but Mendix widgets are normally added through Marketplace. This matters when extending an app with reusable community or vendor components."
   },
   {
     "id": "q-176",
@@ -2585,8 +2461,7 @@
       "Only entities and their attributes."
     ],
     "correctIndex": 0,
-    "explanation": "Module roles provide granular security control within a module, defining access to pages, microflows, and entities.",
-    "detailedExplanation": "Pages, Microflows, Entities defined in the module"
+    "explanation": "Module roles grant access to pages, microflows, and entities defined in that module. They are not limited to only pages or only project-level settings. This matters because module roles are the bridge between app-level user roles and module-level permissions."
   },
   {
     "id": "q-177",
@@ -2600,8 +2475,7 @@
       "Through microflow logic at login."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"You can configure Role-based home pages\" because this aligns with Mendix Security best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "You can configure Role-based home pages"
+    "explanation": "Role-based home pages let different users land on different pages after login. Conditional visibility on one home page can work visually, but it is not the clean configuration for different starting pages. This matters in apps with separate admin, employee, and customer experiences."
   },
   {
     "id": "q-178",
@@ -2615,8 +2489,7 @@
       "IM_"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"ImM_\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "ImM_"
+    "explanation": "`ImM_` is the recommended prefix for Import Mapping names. Similar prefixes like `Imp_` or `IM_` may be understandable, but they do not match the stated convention. Naming mappings consistently helps developers find integration artifacts quickly."
   },
   {
     "id": "q-179",
@@ -2630,8 +2503,7 @@
       "Connect to live data."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Add annotations.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Add annotations"
+    "explanation": "Wireframes should include annotations to explain behavior, intent, and assumptions that are not obvious from simple boxes and labels. Full styling and live data are unnecessary at the wireframe stage. This matters when sharing early designs with stakeholders and developers."
   },
   {
     "id": "q-180",
@@ -2645,8 +2517,7 @@
       "the deployment pipeline."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"your application to test with.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Your application to test with"
+    "explanation": "A prototype represents your application so it can be tested and validated before full implementation. It is not meant to fully define the database or deployment pipeline. This matters in Mendix because rapid prototypes help confirm user flows before building detailed logic."
   },
   {
     "id": "q-181",
@@ -2660,8 +2531,7 @@
       "Digital."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Low fidelity.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Low fidelity"
+    "explanation": "A paper prototype is low fidelity because it communicates layout and flow without detailed styling or real interaction. High-fidelity and interactive prototypes are usually digital and closer to the final product. This matters when testing ideas cheaply before building pages in Mendix."
   },
   {
     "id": "q-182",
@@ -2675,8 +2545,7 @@
       "Modify the global theme settings."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Show styling for...: App and all modules\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Show styling for: App and all modules"
+    "explanation": "\"Show styling for: App and all modules\" is the best setting when different parts of the app need styling visibility and customization across modules. Inline CSS per widget is harder to maintain and less reusable. This matters when theming larger Mendix apps consistently."
   },
   {
     "id": "q-183",
@@ -2690,8 +2559,7 @@
       "Defining domain models."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Styling and JavaScript actions.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Styling and JavaScript actions"
+    "explanation": "The Styling Editor is used for styling and JavaScript actions, helping developers customize the look and client-side behavior. It is not for creating domain models or security rules. This matters when adjusting Atlas UI styles or adding frontend interactions."
   },
   {
     "id": "q-184",
@@ -2705,8 +2573,7 @@
       "Declaration"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Selector\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Selector"
+    "explanation": "The selector is the part of CSS syntax that identifies which element or class should be styled. Properties and values describe what styling is applied after the selector has matched something. This matters when targeting Mendix widget classes or custom page elements."
   },
   {
     "id": "q-185",
@@ -2720,8 +2587,7 @@
       ".partial-name.scss"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"_partial-name.scss\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "_partial-name.scss"
+    "explanation": "Sass partials are named with a leading underscore, such as `_partial-name.scss`. The underscore tells Sass the file is meant to be imported rather than compiled on its own. This matters when organizing Mendix theme customizations into maintainable files."
   },
   {
     "id": "q-186",
@@ -2735,7 +2601,7 @@
       "Custom"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Web\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "In the Atlas framework, custom partials are added under the Web folder for web styling. Generic folders like Theme or Styles sound plausible but are not the specific Atlas partial location in this context. This matters when customizing app design without fighting the generated theme structure."
   },
   {
     "id": "q-187",
@@ -2749,8 +2615,7 @@
       "As constants in the domain model."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"In any partial with the name variable.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "In any partial with the name variable"
+    "explanation": "Variables should be kept in a partial with \"variable\" in the name so design values are centralized. Scattering variables through unrelated files makes theme maintenance harder. This matters when changing colors, spacing, or typography consistently across a Mendix app."
   },
   {
     "id": "q-188",
@@ -2764,7 +2629,7 @@
       "Through a specific property in the H1 widget."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"By changing the variable in custom-variable.scss.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "Changing the variable in `custom-variable.scss` is the best-practice way to adjust H1 font size globally. Inline styling each header is repetitive and hard to maintain. This matters when applying a consistent design system across many pages."
   },
   {
     "id": "q-189",
@@ -2778,8 +2643,7 @@
       "The property is read-only."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"The property has been overwritten.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "The property has been overwritten"
+    "explanation": "A crossed-through CSS property in the inspector means it has been overridden by another rule with higher priority or later application. It does not necessarily mean the property is invalid or deprecated. This matters when debugging why Mendix styling changes do not appear on screen."
   },
   {
     "id": "q-190",
@@ -2793,8 +2657,7 @@
       "A variable declaration"
     ],
     "correctIndex": 0,
-    "explanation": "XPath constraints in Mendix filter data by specifying conditions that objects must meet. They start with [ and contain attribute comparisons.",
-    "detailedExplanation": "An XPath constraint"
+    "explanation": "`[year-from-dateTime(StartDate)=2020]` is an XPath constraint because it filters objects based on an expression inside square brackets. The function is part of the constraint, but the whole syntax is the constraint. This matters when filtering entities by computed date parts."
   },
   {
     "id": "q-191",
@@ -2808,8 +2671,7 @@
       "Object Relational Mapping (ORM)"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Xpath\" because this aligns with Mendix Xpath best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "XPath"
+    "explanation": "XPath is a written syntax for specifying relationships and constraints between data properties. The domain model defines structure, while XPath queries or filters data based on that structure. This matters in Mendix retrieves, data sources, and access rules."
   },
   {
     "id": "q-192",
@@ -2823,8 +2685,7 @@
       "Regularly back up the entire userlib folder."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Clean up manually after deleting a module\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Clean up manually after deleting a module"
+    "explanation": "After deleting a module, you should manually clean up unused libraries from `userlib`. Mendix may not automatically know which JAR files are still needed by custom code or other modules. This matters because leftover libraries can cause conflicts, larger deployments, or maintenance confusion."
   },
   {
     "id": "q-193",
@@ -2838,8 +2699,7 @@
       "System Management Entity"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Subject Matter Expert \" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Subject Matter Expert"
+    "explanation": "SME means Subject Matter Expert, a person with deep knowledge of the business area being modeled. It does not refer to a Scrum role or technical engineering role. This matters because SMEs help Mendix teams capture correct business rules and terminology."
   },
   {
     "id": "q-194",
@@ -2853,8 +2713,7 @@
       "A tool for tracking individual developer progress."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"A list of items planned versus items done.\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "A list of items planned versus items done"
+    "explanation": "A burndown chart compares planned work with completed work over time. It is not mainly for tracking individual developers or project dependencies. In Mendix sprints, it helps the team see whether they are on track to finish selected stories."
   },
   {
     "id": "q-195",
@@ -2868,8 +2727,7 @@
       "A method for deploying applications to cloud environments."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"A model based on collaboration between multi- ple time zones.\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "A model based on collaboration between multiple time zones"
+    "explanation": "An offshore model involves collaboration across multiple locations and often multiple time zones. It is not the same as a co-located team or a deployment model. This matters when planning handovers, communication, and sprint ceremonies for distributed Mendix teams."
   },
   {
     "id": "q-196",
@@ -2883,8 +2741,7 @@
       "Best Practice"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Proxies\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Proxies"
+    "explanation": "Enumerations are represented in generated Java proxy code, so they are found under Proxies in the app directory structure. Resources and domain models describe other parts of the project, but proxy classes expose model elements to Java. This matters when custom Java actions reference enum values."
   },
   {
     "id": "q-197",
@@ -2898,8 +2755,7 @@
       "Project backup files."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Deployment files needed to run locally.\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Deployment files needed to run locally"
+    "explanation": "The deployment folder contains files needed to run the app locally. It is not the main source code or backup folder. This matters when sharing local runtime artifacts such as data snapshots or inspecting generated deployment output."
   },
   {
     "id": "q-198",
@@ -2913,8 +2769,7 @@
       "To manage multiple database connections."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"This will allow you to continue the development of functionality without affecting the running app.\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "This allows you to continue development of functionality without affecting the running app"
+    "explanation": "Branches let developers continue building functionality without affecting the running or stable app line. They are not primarily for different customers or database connections. This matters when teams work on larger features while production still needs fixes."
   },
   {
     "id": "q-199",
@@ -2928,7 +2783,7 @@
       "New functionality can introduce more bugs to hotfixes."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Because you don't want to push hotfixes together with features that haven't been completed yet.\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "Hotfixes are separated from new development so urgent fixes can be released without unfinished features. New functionality might not be tested or complete, even if it is in progress. This matters when production issues must be solved quickly and safely."
   },
   {
     "id": "q-200",
@@ -2942,8 +2797,7 @@
       "To simplify debugging."
     ],
     "correctIndex": 0,
-    "explanation": "Generalization in Mendix allows entities to inherit attributes and associations from a parent entity, enabling polymorphism and code reuse.",
-    "detailedExplanation": "Because you cannot change access rights in the System module."
+    "explanation": "Generalizing Account lets you extend account data and configure access in your own module, because you cannot freely change access rights inside the System module. Marketplace update risk is a different concern and not the reason for extending System.Account. This matters when adding profile fields, employee data, or app-specific user behavior."
   },
   {
     "id": "q-201",
@@ -2957,8 +2811,7 @@
       "count, sum, avg"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"<, >, =, !=, and, or\" because this aligns with Mendix Xpath best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "`<, >, =, !=, and, or`"
+    "explanation": "XPath operators include comparisons and logical operators such as `<`, `>`, `=`, `!=`, `and`, and `or`. Arithmetic symbols and functions have different roles and are not the core XPath operators listed here. This matters when writing filters that combine multiple conditions."
   },
   {
     "id": "q-202",
@@ -2972,8 +2825,7 @@
       "Depends on the license."
     ],
     "correctIndex": 0,
-    "explanation": "User roles in Mendix define what users can see and do in your application. Each role has specific module roles and access rights.",
-    "detailedExplanation": "Unlimited"
+    "explanation": "A Mendix user can have unlimited user roles by default. Assuming only one role can cause security design mistakes because permissions may combine. This matters when users act in multiple capacities, such as both manager and employee."
   },
   {
     "id": "q-203",
@@ -2987,8 +2839,7 @@
       "Using a simple CSV import."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Excel Importer module\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Excel Importer module"
+    "explanation": "The Excel Importer module is well suited when imported spreadsheet data must be manipulated during import. A simple CSV import or manual entry gives less structured transformation support. This matters when business spreadsheets need mapping, validation, and conversion into domain objects."
   },
   {
     "id": "q-204",
@@ -3002,8 +2853,7 @@
       "It requires a paid license."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Only possible to export the data that is accesible to the data grid, you cannot manipulate the data to be exported, you can only use it on an Xpath data source data grid.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Only possible to export data accessible to the data grid, can't manipulate data, only works on XPath data source data grid"
+    "explanation": "The data grid export button only exports data accessible to that XPath data source grid and does not let you manipulate the export data. It is convenient but limited compared with a dedicated Excel Exporter module. This matters when reports need calculated, reformatted, or cross-entity export logic."
   },
   {
     "id": "q-205",
@@ -3017,8 +2867,7 @@
       "Generate a report and then save it as Excel, or print to PDF and convert."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"You can use the excel button in a data grid or use the excel exporter module.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Use the excel button in a data grid OR use the Excel Exporter module"
+    "explanation": "Excel data can be exported using the built-in export button in a data grid or a dedicated Excel Exporter module. CSV conversion or database export are alternatives outside the standard Mendix Excel approaches described here. This matters when choosing between quick exports and customized reporting."
   },
   {
     "id": "q-206",
@@ -3032,8 +2881,7 @@
       "Attributes of entities that never change."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Constants are used to define configuration values that can differ per environment, and this will allow you to change the service location without having to deploy the app again\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Constants are used to define configuration values that can differ per environment, allowing you to change service location without redeploying"
+    "explanation": "Constants define configuration values that can differ per environment, such as service URLs, feature flags, or credentials references. They are not normal microflow variables because their values are configured outside runtime logic. This matters when moving the same app between development, test, acceptance, and production."
   },
   {
     "id": "q-207",
@@ -3047,8 +2895,7 @@
       "They define the navigation paths within an application."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Import mappings are used to define how in- coming XML or JSON is converted into Mendix objects according to a specific XML schema or JSON structure.\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Import mappings define how incoming XML or JSON is converted into Mendix objects according to a specific XML schema or JSON structure"
+    "explanation": "Import mappings define how incoming XML or JSON is converted into Mendix objects based on a schema or JSON structure. Export mappings do the reverse, so choosing the wrong one flips the integration direction. This matters when receiving REST or SOAP payloads from external systems."
   },
   {
     "id": "q-208",
@@ -3062,8 +2909,7 @@
       "Retrieve, commit, rollback."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Start event, end event, parameter.\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Start event, end event, parameter"
+    "explanation": "When extracting a sub-microflow, the start event, end event, and parameters are not selected because the new sub-microflow gets its own boundaries and interface. Activities like decisions or retrieves can be extracted as part of the reusable logic. This matters when refactoring a large microflow into smaller parts."
   },
   {
     "id": "q-209",
@@ -3075,8 +2921,7 @@
       "yes"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"no.\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "No."
+    "explanation": "Enum names cannot contain spaces because they are technical identifiers used in expressions, code, and model references. Captions can be user-friendly, but names must remain valid identifiers. This matters when enums are used in microflow logic or XPath constraints."
   },
   {
     "id": "q-210",
@@ -3090,8 +2935,7 @@
       "kebab-case"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"UpperCamelCase\" because this aligns with Mendix Modules best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "UpperCamelCase"
+    "explanation": "Module names should use UpperCamelCase, such as `OrderManagement` or `CustomerPortal`. Lowercase or snake_case styles do not match Mendix naming conventions. Consistent module naming improves readability and reuse across projects."
   },
   {
     "id": "q-211",
@@ -3133,8 +2977,7 @@
       "ENTITY_NAME"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"UpperCamelCase\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "UpperCamelCase"
+    "explanation": "Entity names should use UpperCamelCase, such as `CustomerOrder` or `VacationRequest`. Entity names are model identifiers, so casual or all-caps naming becomes hard to read and inconsistent. This matters because entity names appear across pages, microflows, XPath, and generated code."
   },
   {
     "id": "q-214",
@@ -3148,8 +2991,7 @@
       "MF_{Operation}_{Entity}"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"{PREFIX}_{Entity}_{Operation}\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "UpperCamelCase"
+    "explanation": "Microflows generally follow `{PREFIX}_{Entity}_{Operation}` so their purpose and context are visible from the name. Putting the operation or prefix in random positions makes lists of microflows harder to scan. This matters in large modules with many actions, validations, and data sources."
   },
   {
     "id": "q-215",
@@ -3163,7 +3005,7 @@
       "MCF_Commit"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"BCO_/ACO_\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "Before and after commit microflows use `BCO_` and `ACO_` prefixes. Generic commit prefixes like `CMT_` are understandable but do not match the stated Mendix convention. This matters when event handler microflows need to be found quickly."
   },
   {
     "id": "q-216",
@@ -3177,7 +3019,7 @@
       "MCF_Create"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"BCR_/ACR_\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "Before and after create microflows use `BCR_` and `ACR_` prefixes. Prefixes like `CRT_` or `NEW_` do not distinguish before versus after behavior clearly. This matters because create event handlers often initialize or validate objects at different lifecycle moments."
   },
   {
     "id": "q-217",
@@ -3191,7 +3033,7 @@
       "MCF_Delete"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"BDE_/ADE_\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "Before and after delete microflows use `BDE_` and `ADE_` prefixes. Generic delete names do not show whether the logic runs before or after deletion. This matters when delete behavior must validate dependencies or clean up related data."
   },
   {
     "id": "q-218",
@@ -3205,7 +3047,7 @@
       "MCF_Rollback"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"BRO_/ARO_\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "Before and after rollback microflows use `BRO_` and `ARO_` prefixes. `RBK_` may suggest rollback but does not show lifecycle timing as clearly. This matters when rollback behavior needs to reset temporary state or handle cancellation logic."
   },
   {
     "id": "q-219",
@@ -3219,7 +3061,7 @@
       "GET"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"CAL_\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "Calculated attribute microflows use the `CAL_` prefix. `GET` may sound natural because the value is being retrieved, but the prefix should communicate that it backs a calculated attribute. This matters when identifying logic that may run often during page rendering or data access."
   },
   {
     "id": "q-220",
@@ -3233,7 +3075,7 @@
       "PEN_{Purpose}"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"OEN_{Purpose}\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "An on-enter page event microflow uses the `OEN_{Purpose}` prefix. Longer names like `ON_ENTER_` are readable but do not match the compact convention. This matters when page behavior is split between enter, change, and leave events."
   },
   {
     "id": "q-221",
@@ -3247,7 +3089,7 @@
       "PCH_{Purpose}"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"OCH_{Purpose}\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "An on-change page event microflow uses the `OCH_{Purpose}` prefix. `CHG_` may be understandable, but the convention clearly ties it to the page event. This matters when input changes trigger recalculation, validation, or dynamic UI behavior."
   },
   {
     "id": "q-222",
@@ -3261,7 +3103,7 @@
       "PLE_{Purpose}"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"OLE_{Purpose}\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "An on-leave page event microflow uses the `OLE_{Purpose}` prefix. Generic leave prefixes do not align with the page-event naming scheme. This matters when logic must run as the user exits a page or field context."
   },
   {
     "id": "q-223",
@@ -3275,7 +3117,7 @@
       "PDS_{Purpose}"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"DS_{Purpose}\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "Page-based data source microflows use `DS_{Purpose}`. Prefixes like `SRC_` may describe the idea but are not the Mendix convention used in the question. This matters when widgets retrieve data through microflows instead of XPath."
   },
   {
     "id": "q-224",
@@ -3289,7 +3131,7 @@
       "DO_{Purpose}"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"ACT_{Purpose}\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "Page-based action microflows use `ACT_{Purpose}` because they are triggered by user actions such as buttons. `DO_` or `ACTION_` may be understandable but are not the preferred convention. This matters when separating UI actions from subflows and event handlers."
   },
   {
     "id": "q-225",
@@ -3303,7 +3145,7 @@
       "ERR"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"VAL_\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "Validation microflows use the `VAL_` prefix. `CHK_` or `ERR` may suggest checking or errors, but `VAL_` clearly communicates validation intent. This matters when validation logic is reused from pages, entity events, or sub-microflows."
   },
   {
     "id": "q-226",
@@ -3317,8 +3159,7 @@
       " \"The border around the association name with become yellow\""
     ],
     "correctIndex": 0,
-    "explanation": "Associations in Mendix define relationships between entities. The owner of an association determines which entity stores the reference.",
-    "detailedExplanation": "The border around the association name will become **RED**."
+    "explanation": "Cascade delete is shown with a red border around the association name, signaling that deleting one object can automatically delete associated objects. Saying visuals do not change misses an important domain model cue. This matters because cascade delete can remove data unexpectedly if modeled incorrectly."
   },
   {
     "id": "q-227",
@@ -3332,8 +3173,7 @@
       " \"The border around the association name with become yellow\""
     ],
     "correctIndex": 0,
-    "explanation": "Associations in Mendix define relationships between entities. The owner of an association determines which entity stores the reference.",
-    "detailedExplanation": "The border around the association name will become **BLUE**."
+    "explanation": "Conditional delete is shown with a blue border around the association name, indicating delete behavior depends on a condition. Red is associated with cascade delete, so confusing the colors can lead to misunderstanding object lifecycle behavior. This matters when users need a clear error instead of automatic deletion."
   },
   {
     "id": "q-228",
@@ -3346,8 +3186,7 @@
       "Yes, it will apply to every possible action"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Yes, but it wont apply to create action\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Yes, but it won't apply to create action"
+    "explanation": "XPath can be used in access rules, but it does not apply to create because a new object does not yet have stored values to filter in the same way. Assuming it applies to every action can create security gaps. This matters when access depends on ownership, status, or associations."
   },
   {
     "id": "q-229",
@@ -3359,8 +3198,7 @@
       "Yes"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"No\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "No (unlike microflows where you can)."
+    "explanation": "Domain model annotations cannot be connected directly to an entity. They can document the model visually, but not attach to entities the way microflow annotations can connect to elements. This matters when documenting entity design decisions in a readable way."
   },
   {
     "id": "q-230",
@@ -3373,8 +3211,7 @@
       "No"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Yes, to multiple ones\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Yes, to multiple ones"
+    "explanation": "Microflow annotations can be connected to multiple elements, making it clear which activities the note explains. Limiting an annotation to one element would make complex explanations harder. This matters when documenting a group of activities that together implement a business rule."
   },
   {
     "id": "q-231",
@@ -3387,8 +3224,7 @@
       "No"
     ],
     "correctIndex": 0,
-    "explanation": "Widgets in Mendix are reusable UI components that can be configured and placed on pages to provide specific functionality.",
-    "detailedExplanation": "Yes, to input widgets"
+    "explanation": "Validation rules can be added to input widgets on a page, such as required or custom validation. Parameters themselves are not page validation targets. This matters for immediate user feedback before data is submitted or committed."
   },
   {
     "id": "q-232",
@@ -3402,8 +3238,7 @@
       "In page properties, module security and app security"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"In page properties and module security\" because this aligns with Mendix Security best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "In page properties AND module security"
+    "explanation": "Page access can be configured in page properties and module security. App security maps user roles to module roles, but it is not where the page-level setting itself is defined. This matters when a page appears inaccessible even though the user has a general role."
   },
   {
     "id": "q-233",
@@ -3416,8 +3251,7 @@
       "Orange, but only if they are set to be visible for some role."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"They are only if they are set to be visible for some role.\" because this aligns with Mendix Security best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "They are displayed only if they are set to be visible for some role (otherwise not shown)."
+    "explanation": "Unused pages appear in the page access tab only if they are set to be visible for some role. If they are not exposed, they may not show as relevant access items in the same way. This matters when cleaning up pages that should not be reachable."
   },
   {
     "id": "q-234",
@@ -3430,8 +3264,7 @@
       "They are only if they are set to be visible for some role."
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Orange, but only if they are set to be visible for some role.\" because this aligns with Mendix Security best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Orange, but only if they are set to be visible for some role."
+    "explanation": "Unused microflows are shown in orange in the microflow access tab when they are still configured as visible for some role. This warns that access is configured even though the microflow may not be used. This matters when reviewing security and removing outdated exposed logic."
   },
   {
     "id": "q-235",
@@ -3445,8 +3278,7 @@
       "\" Required, Unique \""
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"\"Maximum length, Unique, Required, Range, Equals, RegEx\"\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Maximum length, Unique, Required, Range, Equals, RegEx"
+    "explanation": "Domain model validation types include Maximum length, Unique, Required, Range, Equals, and RegEx. Required and Custom are page input validation types, so they are tempting but incomplete for the domain model. This matters because domain validation applies consistently wherever the entity is saved."
   },
   {
     "id": "q-236",
@@ -3460,8 +3292,7 @@
       "\" Required, Unique \""
     ],
     "correctIndex": 0,
-    "explanation": "Widgets in Mendix are reusable UI components that can be configured and placed on pages to provide specific functionality.",
-    "detailedExplanation": "Required, Custom"
+    "explanation": "Input widgets support Required and Custom validation. Domain model validations like Unique or RegEx are configured on attributes, not directly as input widget validation types in this context. This matters when deciding whether validation belongs on the page or in the data model."
   },
   {
     "id": "q-237",
@@ -3475,8 +3306,7 @@
       "Show, Hide, Toggle"
     ],
     "correctIndex": 0,
-    "explanation": "The list equals operation in Mendix returns a Boolean value, indicating whether two lists contain the same objects.",
-    "detailedExplanation": "Equals, Sort, Filter"
+    "explanation": "Equals, Sort, and Filter are list operations used to compare or manipulate lists in microflows. Create, Update, and Delete are object/database actions, not list operations. This matters when processing selected records or derived lists without extra database retrieves."
   },
   {
     "id": "q-238",
@@ -3490,8 +3320,7 @@
       "Find, NotEquals, Sort"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Union, Intersect, Subtract\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Union, Intersect, Subtract"
+    "explanation": "Union, Intersect, and Subtract are list operations for combining or comparing two lists. Find and Filter are also list-related, but the listed correct set focuses on set-style operations. This matters when calculating differences between selected, available, or already-assigned objects."
   },
   {
     "id": "q-239",
@@ -3505,8 +3334,7 @@
       "Collaboration"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Openness\" because this aligns with Mendix Agile best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Openness"
+    "explanation": "Openness is one of the Scrum values. Communication and collaboration are important in Agile work, but they are not one of the five named Scrum values in this list. This matters because Scrum relies on transparent progress, blockers, and feedback."
   },
   {
     "id": "q-240",
@@ -3520,7 +3348,7 @@
       "All elements of a list except last one"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"First object of a list\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The head list operation returns the first object of a list. It does not return the first five objects or a shortened list. This matters when you need a single representative object after sorting or filtering a list."
   },
   {
     "id": "q-241",
@@ -3533,7 +3361,7 @@
       "Returns last five elements of a list"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Returns list that contains all elements of the list except first one\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "The tail list operation returns a list containing all elements except the first one. It does not return the last object only. This matters when processing a list recursively or separating the first item from the remaining items."
   },
   {
     "id": "q-242",
@@ -3546,7 +3374,7 @@
       "Returns list containing combination of two lists with duplicates"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Returns list containing elements that appear in both parameters\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "List intersection returns the elements that appear in both input lists. Union combines lists, while subtract removes elements from one list based on another. This matters when finding shared selections, overlapping permissions, or common related objects."
   },
   {
     "id": "q-243",
@@ -3559,7 +3387,7 @@
       "Returns intersection of lists"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Returns first parameter list without elements of second parameter list\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "List subtract returns the first parameter list after removing elements that also appear in the second parameter list. It is not the same as intersection, which keeps shared elements. This matters when finding items not yet assigned, not yet processed, or no longer selected."
   },
   {
     "id": "q-244",
@@ -3572,7 +3400,7 @@
       "Checks if list contains particular object or list"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Checks if list contains all elements from another list\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "List contains checks whether one list contains all elements from another list. Checking for one particular object is a different kind of containment use case and can be confused with object membership. This matters when validating that required selections are included in a user's chosen set."
   },
   {
     "id": "q-245",
@@ -3597,7 +3425,7 @@
       "Yes"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"No\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "You cannot sort a list directly by attributes reached through associations in the list sort operation. This is tempting because data grids often show associated values, but list sorting is more limited. This matters when you may need to retrieve with database sorting, denormalize a value, or use another approach."
   },
   {
     "id": "q-247",
@@ -3610,7 +3438,7 @@
       "List of objects"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"First object that has given value\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "Find returns the first object that matches the given value or condition. It does not return all matching objects; that is what filtering is for. This matters when you expect only one match or only need the first matching record."
   },
   {
     "id": "q-248",
@@ -3623,7 +3451,7 @@
       "There is no difference in the return value"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Find returns object and filter returns list\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam."
+    "explanation": "Find returns a single object, while Filter returns a list of all matching objects. Confusing the two can cause type errors in later microflow activities. This matters when deciding whether the next step should change one object or loop over several."
   },
   {
     "id": "q-249",
@@ -3636,8 +3464,7 @@
       "Languages installed on your computer"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Languages from ISO 639\" because this aligns with Mendix Misc best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Languages from ISO 639"
+    "explanation": "Mendix application languages are based on ISO 639 language definitions. They are not determined by local computer installations or arbitrary settings files. This matters for consistent localization across users and environments."
   },
   {
     "id": "q-250",
@@ -3651,8 +3478,7 @@
       "None of them can be modified"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Caption of enum value can be modified and name can't be modified\" because this aligns with Mendix Domain Model best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Caption can be modified, name **cannot** be modified."
+    "explanation": "An enum value's caption can be modified, but its name cannot be changed after creation. The name is a technical identifier used in logic and stored references, while the caption is what users see. This matters when improving UI text without breaking microflows or XPath expressions."
   },
   {
     "id": "q-251",
@@ -3666,8 +3492,7 @@
       "parseDateTime"
     ],
     "correctIndex": 0,
-    "explanation": "In microflow expressions, functions like toUpperCase() are built-in operations that transform or process values.",
-    "detailedExplanation": "formatDateTime"
+    "explanation": "`formatDateTime` formats a DateTime value into a readable string such as `Mon, 5 May of 2025`. Parse functions go the opposite direction, converting strings into date values. This matters when displaying dates in emails, pages, or generated documents."
   },
   {
     "id": "q-252",
@@ -3680,8 +3505,7 @@
       "Retrieve by association, then sum operation"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"Retrieve by association, then count list operation\" because this aligns with Mendix Microflows best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "Retrieve by association, then count list operation"
+    "explanation": "Retrieving by association and then using a count list operation can be optimized because Mendix can handle the associated data efficiently. Retrieving from the database and then summing is a different use case and may require more data than needed. This matters when counting related objects without unnecessary processing."
   },
   {
     "id": "q-253",
@@ -3695,8 +3519,7 @@
       "For any delete operation"
     ],
     "correctIndex": 0,
-    "explanation": "Delete behavior in Mendix controls what happens to associated objects when the parent object is deleted, preventing orphaned data.",
-    "detailedExplanation": "Conditional delete (not cascade)."
+    "explanation": "Conditional delete can show an error message to the user when deletion is blocked. Cascade delete automatically deletes related data, so it is not the mechanism for user-facing prevention messages. This matters when users should understand why a record cannot be deleted."
   },
   {
     "id": "q-254",
@@ -3710,8 +3533,7 @@
       "parseStringToDateTime"
     ],
     "correctIndex": 0,
-    "explanation": "In microflow expressions, functions like toUpperCase() are built-in operations that transform or process values.",
-    "detailedExplanation": "parseDateTime"
+    "explanation": "`parseDateTime` converts a string such as `05.05.2025` into a DateTime value, assuming the format is handled correctly. `formatDateTime` does the reverse by turning a DateTime into text. This matters when importing dates from files, APIs, or user-entered text."
   },
   {
     "id": "q-255",
@@ -3725,8 +3547,7 @@
       "elementAt"
     ],
     "correctIndex": 0,
-    "explanation": "In microflow expressions, functions like toUpperCase() are built-in operations that transform or process values.",
-    "detailedExplanation": "(Trick question - there's no direct function. Use substring.)"
+    "explanation": "`startsWith` can be used to check whether a string begins with a specific letter or substring. It does not extract the character itself like a `charAt` function would in some programming languages, but in this context it is the available expression function for testing the first letter. This matters when validating prefixes, codes, or names."
   },
   {
     "id": "q-256",
@@ -3754,8 +3575,7 @@
       "A and B"
     ],
     "correctIndex": 0,
-    "explanation": "The correct answer is \"None of them\" because this aligns with Mendix Security best practices and documentation. This concept is important for the Intermediate Certification exam.",
-    "detailedExplanation": "None of them"
+    "explanation": "Neither statement is true because opening a page through a microflow and calling a sub-microflow are governed by the access of the calling flow and runtime context, not separate user access checks in the way described. Page and microflow access matter for directly exposed entry points, but internal calls behave differently. This matters when securing public actions while still allowing reusable internal logic."
   },
   {
     "id": "q-258",
@@ -3769,8 +3589,7 @@
       "change variable, merge, error event"
     ],
     "correctIndex": 0,
-    "explanation": "Variables in microflows are prefixed with $ (e.g., $Customer) and represent objects or values that can be used throughout the flow.",
-    "detailedExplanation": "Retrieve object, list operation, change variable"
+    "explanation": "Inside a loop you can retrieve objects, perform list operations, and change variables. Start and end events define the microflow boundary and cannot be placed inside a loop body. This matters when processing each item in a list while maintaining counters, related data, or accumulated results."
   },
   {
     "id": "q-259",
@@ -3784,8 +3603,7 @@
       "All pages"
     ],
     "correctIndex": 0,
-    "explanation": "Anonymous users in Mendix allow access to specific parts of your application without requiring authentication, such as login pages or public content.",
-    "detailedExplanation": "None (they work with the anonymous user role you configure)"
+    "explanation": "No pages need to be changed automatically after allowing anonymous users. You must configure security and navigation appropriately, but enabling anonymous access itself does not require modifying every page. This matters when exposing only a small public area of an otherwise secured app."
   },
   {
     "id": "q-260",
@@ -3799,8 +3617,7 @@
       "None"
     ],
     "correctIndex": 0,
-    "explanation": "Anonymous users in Mendix allow access to specific parts of your application without requiring authentication, such as login pages or public content.",
-    "detailedExplanation": "One"
+    "explanation": "The anonymous user can have one user role. Unlike authenticated users, anonymous access is represented by a single configured role for unauthenticated sessions. This matters when deciding exactly what public users may see and do."
   },
   {
     "id": "q-261",
@@ -3814,7 +3631,6 @@
       "parseString"
     ],
     "correctIndex": 0,
-    "explanation": "In microflow expressions, functions like toUpperCase() are built-in operations that transform or process values.",
-    "detailedExplanation": "toString()"
+    "explanation": "`toString()` converts an integer into a string in a Mendix expression. Names like `intToString` or `integerToString` sound plausible from other languages but are not the Mendix expression function used here. This matters when combining numbers into messages, labels, or integration payloads."
   }
 ]
