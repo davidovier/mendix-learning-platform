@@ -76,7 +76,7 @@ hasFullAccess(userId) =
 **Call sites to update (replace `isProUser()` with `hasFullAccess()`):**
 1. Inside `canAnswerQuestion()` in `lib/stripe/subscription.ts`
 2. Inside `canTakeExam()` in `lib/stripe/subscription.ts`
-3. `components/layout/user-nav.tsx` — for the Pro badge
+3. `components/layout/user-nav.tsx` — approved Capgemini users and admins show the same existing "Pro" badge, no new badge type needed
 4. `lib/security/rate-limiter.ts` — so approved colleagues/admins get unlimited rate limits
 
 ---
@@ -85,10 +85,10 @@ hasFullAccess(userId) =
 
 ### What users see
 
-1. **Form** — unchanged. No Capgemini-specific UI. Detection is server-side in `signUpWithEmail`.
-2. **Success message** — standard "Check your email" message, with an extra sentence for Capgemini emails: *"We detected your Capgemini email. Once confirmed, your request for free colleague access will be reviewed by an admin."*
-3. **After first login (pending)** — a persistent amber banner in the root layout below the nav: *"⏳ Capgemini access pending — your request is awaiting admin approval. Free tier access applies in the meantime."* Shown on every page render until `capgemini_status` changes.
-4. **After approval (one-time)** — a dismissible green banner: *"🎉 Capgemini access approved! You now have full pro access as a Capgemini colleague."* Dismiss state stored in `localStorage` — no DB column needed.
+1. **Form** — unchanged. No Capgemini-specific UI.
+2. **Success message** — `signUpWithEmail` checks if the submitted email ends in `@capgemini.com` and conditionally appends a sentence: *"We detected your Capgemini email. Once confirmed, your request for free colleague access will be reviewed by an admin."* The Postgres trigger independently creates the `user_profiles` row with `capgemini_status = 'pending'` — these are two separate checks for two separate concerns.
+3. **After first login (pending)** — a server-rendered persistent amber banner in the root layout below the nav: *"⏳ Capgemini access pending — your request is awaiting admin approval. Free tier access applies in the meantime."* The root layout fetches the user's profile row on every render (server component — no client polling). Banner disappears automatically once `capgemini_status` changes to `'approved'`.
+4. **After approval (one-time)** — a dismissible green banner rendered by a `"use client"` component that checks `localStorage` for a `capgemini_approval_dismissed` key. On first render after approval it shows: *"🎉 Capgemini access approved! You now have full pro access as a Capgemini colleague."* Dismissing sets `localStorage.setItem('capgemini_approval_dismissed', 'true')`. No DB column needed.
 
 ### Pending state behaviour
 
