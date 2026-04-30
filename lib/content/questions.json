@@ -959,7 +959,7 @@
     "question": "Which of the following functionalities do you need to use to show a complete list of all translatable texts of a source and destination language?",
     "options": [
       "Batch translation",
-      "Occurance window",
+      "Occurrence window",
       "Import translation",
       "Export translation"
     ],
@@ -1985,7 +1985,7 @@
     "knowledgePath": "Quizlet",
     "question": "If you were building an app with stock prices, would you make the stock value a calculated or a stored attribute?",
     "options": [
-      "Calculated attritbute;",
+      "Calculated attribute;",
       "Stored attribute, because it needs to be persisted in the database.",
       "It depends on the frequency of data updates."
     ],
@@ -2069,7 +2069,7 @@
     "knowledgePath": "Quizlet",
     "question": "Max how many levels should you go with sub microflows?",
     "options": [
-      "2 tot 3 levels max is best practice.",
+      "2 to 3 levels max is best practice.",
       "Unlimited levels, as long as it's logical.",
       "1 level for simplicity.",
       "As many as necessary for complex logic."
@@ -2163,7 +2163,7 @@
     "knowledgePath": "Quizlet",
     "question": "To make entire notifications functionality unavailable to a user role, what is best practice?",
     "options": [
-      "Build it in a seperate module",
+      "Build it in a separate module",
       "Apply page access security to the notification page.",
       "Use conditional visibility on all notification widgets.",
       "Delete the notification module for that user role."
@@ -2621,7 +2621,7 @@
     "id": "q-188",
     "category": "misc",
     "knowledgePath": "Quizlet",
-    "question": "According to best practices, how should you change the font side of H1 headers?",
+    "question": "According to best practices, how should you change the font size of H1 headers?",
     "options": [
       "By changing the variable in custom-variable.scss.",
       "By applying inline styling to each H1 header.",
@@ -2721,7 +2721,7 @@
     "knowledgePath": "Quizlet",
     "question": "What is an offshore model?",
     "options": [
-      "A model based on collaboration between multi- ple time zones.",
+      "A model based on collaboration between multiple time zones.",
       "A development approach where all team members are in the same location.",
       "A model focused on rapid prototyping and deployment.",
       "A method for deploying applications to cloud environments."
@@ -2775,7 +2775,7 @@
     "id": "q-199",
     "category": "agile",
     "knowledgePath": "Quizlet",
-    "question": "Why do you seperate hot fixes from the development of new functional- ity?",
+    "question": "Why do you separate hot fixes from the development of new functionality?",
     "options": [
       "Because you don't want to push hotfixes together with features that haven't been completed yet.",
       "To ensure hotfixes are always developed by a senior team.",
@@ -2792,7 +2792,7 @@
     "question": "Name a reason why you would use a generalization of the account entity instead of using the account entity itself (in system module):",
     "options": [
       "Because you cannot change access rights in the system module.",
-      "Because market place modules can change, and then you loose all your changes.",
+      "Because market place modules can change, and then you lose all your changes.",
       "To improve performance.",
       "To simplify debugging."
     ],
@@ -2847,7 +2847,7 @@
     "knowledgePath": "Quizlet",
     "question": "What are the limitations of the export to excel button in a data grid?",
     "options": [
-      "Only possible to export the data that is accesible to the data grid, you cannot manipulate the data to be exported, you can only use it on an Xpath data source data grid.",
+      "Only possible to export the data that is accessible to the data grid, you cannot manipulate the data to be exported, you can only use it on an Xpath data source data grid.",
       "It can only export a limited number of rows.",
       "It doesn't support complex data types.",
       "It requires a paid license."
@@ -2957,7 +2957,7 @@
     "knowledgePath": "Custom",
     "question": "When there are multiple associations between the same two entities, what naming convention should be used?",
     "options": [
-      "{entity1}_{entity2}_{recongizable purpose}",
+      "{entity1}_{entity2}_{recognizable purpose}",
       "{entity1}_{entity2}_Multi",
       "{entity1}_{entity2}2",
       "Just {entity1}_{entity2}"
@@ -3153,10 +3153,10 @@
     "knowledgePath": "Custom",
     "question": " \"How will the association appearance change after you configure cascade delete?\"",
     "options": [
-      " \"The border around the association name with become red\"",
+      " \"The border around the association name will become red\"",
       " \"Changing delete settings does not change the visuals in domain model\"",
-      " \"The border around the association name with become blue\"",
-      " \"The border around the association name with become yellow\""
+      " \"The border around the association name will become blue\"",
+      " \"The border around the association name will become yellow\""
     ],
     "correctIndex": 0,
     "explanation": "Cascade delete is shown with a red border around the association name, signaling that deleting one object can automatically delete associated objects. Saying visuals do not change misses an important domain model cue. This matters because cascade delete can remove data unexpectedly if modeled incorrectly."
@@ -3167,10 +3167,10 @@
     "knowledgePath": "Custom",
     "question": " \"How will the association appearance change after you configure conditional delete?\"",
     "options": [
-      " \"The border around the association name with become blue\"",
+      " \"The border around the association name will become blue\"",
       " \"Changing delete settings does not change the visuals in domain model\"",
-      " \"The border around the association name with become red\"",
-      " \"The border around the association name with become yellow\""
+      " \"The border around the association name will become red\"",
+      " \"The border around the association name will become yellow\""
     ],
     "correctIndex": 0,
     "explanation": "Conditional delete is shown with a blue border around the association name, indicating delete behavior depends on a condition. Red is associated with cascade delete, so confusing the colors can lead to misunderstanding object lifecycle behavior. This matters when users need a clear error instead of automatic deletion."
@@ -3247,7 +3247,7 @@
     "question": "How are unused paged displayed in the page access tab?",
     "options": [
       "They are only if they are set to be visible for some role.",
-      "They arent.",
+      "They aren't.",
       "Orange, but only if they are set to be visible for some role."
     ],
     "correctIndex": 0,
@@ -3260,7 +3260,7 @@
     "question": "How are unused microflow displayed in the microflow access tab?",
     "options": [
       "Orange, but only if they are set to be visible for some role.",
-      "They arent.",
+      "They aren't.",
       "They are only if they are set to be visible for some role."
     ],
     "correctIndex": 0,

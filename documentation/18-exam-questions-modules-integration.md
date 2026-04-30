@@ -274,7 +274,7 @@
 #### Exam Question:
 > "Can you modify data in an External Entity?"
 
-**Answer**: Yes, if the Updateable(write) property of its public resource settings is checked
+**Answer**: Yes, if the Updatable(write) property of its public resource settings is checked
 
 ---
 
