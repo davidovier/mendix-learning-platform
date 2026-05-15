@@ -67,6 +67,7 @@ interface PracticeClientProps {
   questionCountByTopic: Record<string, number>;
   totalQuestionCount: number;
   initialUsageStatus: UsageStatus | null;
+  initialTopicId?: string | null;
 }
 
 export function PracticeClient({
@@ -75,9 +76,12 @@ export function PracticeClient({
   questionCountByTopic,
   totalQuestionCount,
   initialUsageStatus,
+  initialTopicId,
 }: PracticeClientProps) {
-  const [view, setView] = useState<ViewState>("select");
-  const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
+  const [view, setView] = useState<ViewState>(initialTopicId ? "quiz" : "select");
+  const [selectedTopic, setSelectedTopic] = useState<string | null>(
+    initialTopicId ?? null,
+  );
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [answeredQuestions, setAnsweredQuestions] = useState(0);

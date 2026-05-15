@@ -19,24 +19,31 @@ export const metadata: Metadata = {
 // Dynamic page - needs to check user-specific usage limits
 export const dynamic = "force-dynamic";
 
-export default async function PracticePage() {
-  // Server-side: compute counts and prepare data
+export default async function PracticePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ topic?: string }>;
+}) {
   const typedQuestions = questions as Question[];
 
-  // Compute question counts per topic (done server-side, not bundled to client)
   const questionCountByTopic: Record<string, number> = {};
   for (const q of typedQuestions) {
     questionCountByTopic[q.category] = (questionCountByTopic[q.category] || 0) + 1;
   }
 
-  // Extract only serializable topic data (no icon functions)
   const topicData: TopicData[] = topics.map(({ id, name, description }) => ({
     id,
     name,
     description,
   }));
 
-  // Get user's usage status (null if not logged in)
+  const { topic: requestedTopic } = await searchParams;
+  const initialTopicId =
+    requestedTopic === "all" ||
+    (requestedTopic && (questionCountByTopic[requestedTopic] ?? 0) > 0)
+      ? requestedTopic
+      : null;
+
   const usageStatus = await getUsageStatus();
 
   return (
@@ -46,6 +53,7 @@ export default async function PracticePage() {
       questionCountByTopic={questionCountByTopic}
       totalQuestionCount={typedQuestions.length}
       initialUsageStatus={usageStatus}
+      initialTopicId={initialTopicId}
     />
   );
 }
