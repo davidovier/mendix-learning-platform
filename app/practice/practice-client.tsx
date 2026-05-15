@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useEffect } from "react";
 import {
   BookOpen,
   Database,
@@ -27,6 +27,15 @@ import { checkAndIncrementQuestionUsage, type UsageStatus } from "@/lib/stripe/u
 import { UpgradePrompt, UsageLimitBanner } from "@/components/upgrade-prompt";
 
 type ViewState = "select" | "quiz" | "results";
+
+function shuffle<T>(input: T[]): T[] {
+  const out = [...input];
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [out[i], out[j]] = [out[j], out[i]];
+  }
+  return out;
+}
 
 export interface Question {
   id: string;
@@ -87,31 +96,32 @@ export function PracticeClient({
   const [answeredQuestions, setAnsweredQuestions] = useState(0);
   const [usageStatus, setUsageStatus] = useState<UsageStatus | null>(initialUsageStatus);
   const [limitReached, setLimitReached] = useState(false);
-  // Bumped each time a topic is (re)selected so the question order reshuffles.
-  const [shuffleNonce, setShuffleNonce] = useState(0);
+  // Bumped on every (re)entry into a quiz to force a fresh shuffle.
+  const [sessionNonce, setSessionNonce] = useState(0);
+  const [filteredQuestions, setFilteredQuestions] = useState<Question[]>([]);
 
-  const filteredQuestions = useMemo(() => {
+  // Shuffle on the client only — avoids SSR/hydration determinism issues and
+  // guarantees a new order each time a quiz session starts.
+  useEffect(() => {
+    if (!selectedTopic) {
+      setFilteredQuestions([]);
+      return;
+    }
     const pool =
       selectedTopic === "all"
-        ? [...questions]
+        ? questions
         : questions.filter((q) => q.category === selectedTopic);
-
-    // Fisher-Yates shuffle
-    for (let i = pool.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [pool[i], pool[j]] = [pool[j], pool[i]];
-    }
-
-    return selectedTopic === "all" ? pool.slice(0, 20) : pool;
-    // shuffleNonce intentionally included so a re-selection re-shuffles.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedTopic, questions, shuffleNonce]);
+    const shuffled = shuffle(pool);
+    setFilteredQuestions(
+      selectedTopic === "all" ? shuffled.slice(0, 20) : shuffled,
+    );
+  }, [selectedTopic, questions, sessionNonce]);
 
   const currentQuestion = filteredQuestions[currentQuestionIndex];
 
   const handleTopicSelect = (topicId: string) => {
     setSelectedTopic(topicId);
-    setShuffleNonce((n) => n + 1);
+    setSessionNonce((n) => n + 1);
     setCurrentQuestionIndex(0);
     setCorrectAnswers(0);
     setAnsweredQuestions(0);
@@ -182,7 +192,7 @@ export function PracticeClient({
     setCurrentQuestionIndex(0);
     setCorrectAnswers(0);
     setAnsweredQuestions(0);
-    setShuffleNonce((n) => n + 1);
+    setSessionNonce((n) => n + 1);
     setView("quiz");
   };
 
