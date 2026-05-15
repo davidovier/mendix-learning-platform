@@ -898,7 +898,7 @@
   },
   {
     "id": "q-64",
-    "category": "misc",
+    "category": "pages",
     "knowledgePath": "Create an App with Advanced Page Building",
     "question": "How many source and destination languages can you specify?",
     "options": [
@@ -912,7 +912,7 @@
   },
   {
     "id": "q-65",
-    "category": "misc",
+    "category": "pages",
     "knowledgePath": "Create an App with Advanced Page Building",
     "question": "What does default project language define?",
     "options": [
@@ -926,7 +926,7 @@
   },
   {
     "id": "q-66",
-    "category": "misc",
+    "category": "pages",
     "knowledgePath": "Create an App with Advanced Page Building",
     "question": "When and how a default language of an app needs to be selected?",
     "options": [
@@ -940,7 +940,7 @@
   },
   {
     "id": "q-67",
-    "category": "misc",
+    "category": "pages",
     "knowledgePath": "Create an App with Advanced Page Building",
     "question": "Where can you choose the development language?",
     "options": [
@@ -954,7 +954,7 @@
   },
   {
     "id": "q-68",
-    "category": "misc",
+    "category": "pages",
     "knowledgePath": "Create an App with Advanced Page Building",
     "question": "Which of the following functionalities do you need to use to show a complete list of all translatable texts of a source and destination language?",
     "options": [
@@ -1297,7 +1297,7 @@
   },
   {
     "id": "q-93",
-    "category": "misc",
+    "category": "pages",
     "knowledgePath": "Exam preparation video from 14-01-2025",
     "question": "You have 2 languages set up in your app, English (default) and Russian. You create a text field. What happens if you don’t put a Russian translation in the text field?",
     "options": [
@@ -1311,7 +1311,7 @@
   },
   {
     "id": "q-94",
-    "category": "misc",
+    "category": "pages",
     "knowledgePath": "Exam preparation video from 14-01-2025",
     "question": "Your app has 2 languages, English (default) and French. You notice that some of the French translation is incorrect and you want to fix this. What should you do?",
     "options": [
@@ -1367,7 +1367,7 @@
   },
   {
     "id": "q-98",
-    "category": "misc",
+    "category": "integration",
     "knowledgePath": "Importing and Exporting Your Data",
     "question": "What does your app need in order to import Excel data into a Mendix app?",
     "options": [
@@ -1381,7 +1381,7 @@
   },
   {
     "id": "q-99",
-    "category": "misc",
+    "category": "integration",
     "knowledgePath": "Importing and Exporting Your Data",
     "question": "What does the Mx Model Reflection module do?",
     "options": [
@@ -1463,7 +1463,7 @@
   },
   {
     "id": "q-105",
-    "category": "misc",
+    "category": "integration",
     "knowledgePath": "Quizlet",
     "question": "Where can published data be found?",
     "options": [
@@ -1477,7 +1477,7 @@
   },
   {
     "id": "q-106",
-    "category": "misc",
+    "category": "integration",
     "knowledgePath": "Quizlet",
     "question": "What is a piece of data from the data hub called?",
     "options": [
@@ -1491,7 +1491,7 @@
   },
   {
     "id": "q-107",
-    "category": "misc",
+    "category": "integration",
     "knowledgePath": "Quizlet",
     "question": "Why is the version number assigned to Odata service important?",
     "options": [
@@ -1505,7 +1505,7 @@
   },
   {
     "id": "q-108",
-    "category": "misc",
+    "category": "integration",
     "knowledgePath": "Quizlet",
     "question": "What is an external entity?",
     "options": [
@@ -1519,7 +1519,7 @@
   },
   {
     "id": "q-109",
-    "category": "misc",
+    "category": "integration",
     "knowledgePath": "Quizlet",
     "question": "What source type is used within Microsoft Excel to connect to a dataset in Data Hub?",
     "options": [
@@ -1533,7 +1533,7 @@
   },
   {
     "id": "q-110",
-    "category": "misc",
+    "category": "integration",
     "knowledgePath": "Quizlet",
     "question": "Where can you edit the properties (i.e. attributes, name, etc.) of an External Entity?",
     "options": [
@@ -1547,7 +1547,7 @@
   },
   {
     "id": "q-111",
-    "category": "misc",
+    "category": "integration",
     "knowledgePath": "Quizlet",
     "question": "What would you use to save changes to an external entity?",
     "options": [
@@ -1561,7 +1561,7 @@
   },
   {
     "id": "q-112",
-    "category": "misc",
+    "category": "integration",
     "knowledgePath": "Quizlet",
     "question": "Can you modify data in an External Entity?",
     "options": [
@@ -1575,7 +1575,7 @@
   },
   {
     "id": "q-113",
-    "category": "misc",
+    "category": "integration",
     "knowledgePath": "Quizlet",
     "question": "How do you get the Data Hub Landscape?",
     "options": [
@@ -1589,7 +1589,7 @@
   },
   {
     "id": "q-114",
-    "category": "misc",
+    "category": "integration",
     "knowledgePath": "Quizlet",
     "question": "An app connected by a grey dotted line to your service in the Data Hub Landscape means what?",
     "options": [
@@ -1603,7 +1603,7 @@
   },
   {
     "id": "q-115",
-    "category": "misc",
+    "category": "integration",
     "knowledgePath": "Quizlet",
     "question": "An app connected by a grey solid line to your service in the Data Hub Landscape means what?",
     "options": [
@@ -1617,7 +1617,7 @@
   },
   {
     "id": "q-116",
-    "category": "misc",
+    "category": "integration",
     "knowledgePath": "Quizlet",
     "question": "What does the D in CRUD stand for?",
     "options": [
@@ -1799,7 +1799,7 @@
   },
   {
     "id": "q-129",
-    "category": "misc",
+    "category": "agile",
     "knowledgePath": "Quizlet",
     "question": "What is the most suitable technique if you want to have an overview of what a user feels and experiences while using an application?",
     "options": [
@@ -1813,7 +1813,7 @@
   },
   {
     "id": "q-130",
-    "category": "misc",
+    "category": "agile",
     "knowledgePath": "Quizlet",
     "question": "What is the main aim of using Customer Value Curve?",
     "options": [
@@ -1827,7 +1827,7 @@
   },
   {
     "id": "q-131",
-    "category": "misc",
+    "category": "agile",
     "knowledgePath": "Quizlet",
     "question": "What qualitative technique focuses on how users group different items?",
     "options": [
@@ -1841,7 +1841,7 @@
   },
   {
     "id": "q-132",
-    "category": "misc",
+    "category": "agile",
     "knowledgePath": "Quizlet",
     "question": "Which of the following are considered qualitative research methods?",
     "options": [
@@ -1855,7 +1855,7 @@
   },
   {
     "id": "q-133",
-    "category": "misc",
+    "category": "agile",
     "knowledgePath": "Quizlet",
     "question": "A client wants their application to have a very specific color scheme. Who's work is most likely to be affected?",
     "options": [
@@ -1911,7 +1911,7 @@
   },
   {
     "id": "q-137",
-    "category": "misc",
+    "category": "pages",
     "knowledgePath": "Quizlet",
     "question": "How can you export columns in a data grid without showing them to the user?",
     "options": [
@@ -1925,7 +1925,7 @@
   },
   {
     "id": "q-138",
-    "category": "misc",
+    "category": "integration",
     "knowledgePath": "Quizlet",
     "question": "What are HTTP headers?",
     "options": [
@@ -1939,7 +1939,7 @@
   },
   {
     "id": "q-139",
-    "category": "misc",
+    "category": "integration",
     "knowledgePath": "Quizlet",
     "question": "What is JSON and what does it stand for?",
     "options": [
@@ -1953,7 +1953,7 @@
   },
   {
     "id": "q-140",
-    "category": "misc",
+    "category": "integration",
     "knowledgePath": "Quizlet",
     "question": "What does a JSON structure document do?",
     "options": [
@@ -2255,7 +2255,7 @@
   },
   {
     "id": "q-162",
-    "category": "misc",
+    "category": "integration",
     "knowledgePath": "Quizlet",
     "question": "If you need to import data regularly, what is the best way to do so?",
     "options": [
@@ -2269,7 +2269,7 @@
   },
   {
     "id": "q-163",
-    "category": "misc",
+    "category": "integration",
     "knowledgePath": "Quizlet",
     "question": "What are some alternative methods for importing files into a Mendix app?",
     "options": [
@@ -2283,7 +2283,7 @@
   },
   {
     "id": "q-164",
-    "category": "misc",
+    "category": "integration",
     "knowledgePath": "Quizlet",
     "question": "When transforming, why should you import large datasets into a flat structure before running the transformation?",
     "options": [
@@ -2297,7 +2297,7 @@
   },
   {
     "id": "q-165",
-    "category": "misc",
+    "category": "integration",
     "knowledgePath": "Quizlet",
     "question": "What does your app need in order to import Excel data into a Mendix app?",
     "options": [
@@ -2311,7 +2311,7 @@
   },
   {
     "id": "q-166",
-    "category": "misc",
+    "category": "integration",
     "knowledgePath": "Quizlet",
     "question": "What are JSON structures converted to in Mendix?",
     "options": [
@@ -2325,7 +2325,7 @@
   },
   {
     "id": "q-167",
-    "category": "misc",
+    "category": "integration",
     "knowledgePath": "Quizlet",
     "question": "What do you use to interpret XML or JSON into Mendix objects?",
     "options": [
@@ -2339,7 +2339,7 @@
   },
   {
     "id": "q-168",
-    "category": "misc",
+    "category": "integration",
     "knowledgePath": "Quizlet",
     "question": "How do you get REST data using a microflow?",
     "options": [
@@ -2353,7 +2353,7 @@
   },
   {
     "id": "q-169",
-    "category": "misc",
+    "category": "integration",
     "knowledgePath": "Quizlet",
     "question": "What are export mappings used to accomplish?",
     "options": [
@@ -2381,7 +2381,7 @@
   },
   {
     "id": "q-171",
-    "category": "misc",
+    "category": "pages",
     "knowledgePath": "Quizlet",
     "question": "Which one is the correct language format for American English?",
     "options": [
@@ -2395,7 +2395,7 @@
   },
   {
     "id": "q-172",
-    "category": "misc",
+    "category": "integration",
     "knowledgePath": "Quizlet",
     "question": "How do you add downloaded JSON structure to your app?",
     "options": [
@@ -2479,7 +2479,7 @@
   },
   {
     "id": "q-178",
-    "category": "misc",
+    "category": "integration",
     "knowledgePath": "Quizlet",
     "question": "What is the most appropriate prefix for Import Mapping name?",
     "options": [
@@ -2493,7 +2493,7 @@
   },
   {
     "id": "q-179",
-    "category": "misc",
+    "category": "agile",
     "knowledgePath": "Quizlet",
     "question": "What should you always do in your wireframe?",
     "options": [
@@ -2507,7 +2507,7 @@
   },
   {
     "id": "q-180",
-    "category": "misc",
+    "category": "agile",
     "knowledgePath": "Quizlet",
     "question": "What is the purpose of a prototype? It should be a representation of...",
     "options": [
@@ -2521,7 +2521,7 @@
   },
   {
     "id": "q-181",
-    "category": "misc",
+    "category": "agile",
     "knowledgePath": "Quizlet",
     "question": "What type of prototype can you do on paper?",
     "options": [
@@ -2535,7 +2535,7 @@
   },
   {
     "id": "q-182",
-    "category": "misc",
+    "category": "pages",
     "knowledgePath": "Quizlet",
     "question": "You want to use a different styling for different parts of the app, what is probably the best setting for this?",
     "options": [
@@ -2549,7 +2549,7 @@
   },
   {
     "id": "q-183",
-    "category": "misc",
+    "category": "pages",
     "knowledgePath": "Quizlet",
     "question": "What is the Styling Editor used for?",
     "options": [
@@ -2563,7 +2563,7 @@
   },
   {
     "id": "q-184",
-    "category": "misc",
+    "category": "pages",
     "knowledgePath": "Quizlet",
     "question": "What part of the CSS syntax references the object that is to be styled?",
     "options": [
@@ -2577,7 +2577,7 @@
   },
   {
     "id": "q-185",
-    "category": "misc",
+    "category": "pages",
     "knowledgePath": "Quizlet",
     "question": "What is the correct naming convention for Sass partials?",
     "options": [
@@ -2591,7 +2591,7 @@
   },
   {
     "id": "q-186",
-    "category": "misc",
+    "category": "pages",
     "knowledgePath": "Quizlet",
     "question": "In the Atlas framework, under which folder should you add partials to customize your app's design?",
     "options": [
@@ -2605,7 +2605,7 @@
   },
   {
     "id": "q-187",
-    "category": "misc",
+    "category": "pages",
     "knowledgePath": "Quizlet",
     "question": "Where should $variables be kept according to Mendix best practices?",
     "options": [
@@ -2619,7 +2619,7 @@
   },
   {
     "id": "q-188",
-    "category": "misc",
+    "category": "pages",
     "knowledgePath": "Quizlet",
     "question": "According to best practices, how should you change the font size of H1 headers?",
     "options": [
@@ -2633,7 +2633,7 @@
   },
   {
     "id": "q-189",
-    "category": "misc",
+    "category": "pages",
     "knowledgePath": "Quizlet",
     "question": "You notice that a property in the inspector has been crossed through, what does this mean?",
     "options": [
@@ -2829,7 +2829,7 @@
   },
   {
     "id": "q-203",
-    "category": "misc",
+    "category": "integration",
     "knowledgePath": "Quizlet",
     "question": "You want to manipulate your data as you import it. What method would be best suited to accomplish this?",
     "options": [
@@ -2843,7 +2843,7 @@
   },
   {
     "id": "q-204",
-    "category": "misc",
+    "category": "pages",
     "knowledgePath": "Quizlet",
     "question": "What are the limitations of the export to excel button in a data grid?",
     "options": [
@@ -2857,7 +2857,7 @@
   },
   {
     "id": "q-205",
-    "category": "misc",
+    "category": "integration",
     "knowledgePath": "Quizlet",
     "question": "What are the 2 ways to export data with excel?",
     "options": [
@@ -2885,7 +2885,7 @@
   },
   {
     "id": "q-207",
-    "category": "misc",
+    "category": "integration",
     "knowledgePath": "Quizlet",
     "question": "What are import mappings?",
     "options": [
@@ -3455,7 +3455,7 @@
   },
   {
     "id": "q-249",
-    "category": "misc",
+    "category": "pages",
     "knowledgePath": "Similar to the exam",
     "question": "Which languages are supported in Mendix Applications?",
     "options": [
