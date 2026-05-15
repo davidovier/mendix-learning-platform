@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useRef } from "react";
+import { useState, useMemo } from "react";
 import {
   BookOpen,
   Database,
@@ -87,32 +87,31 @@ export function PracticeClient({
   const [answeredQuestions, setAnsweredQuestions] = useState(0);
   const [usageStatus, setUsageStatus] = useState<UsageStatus | null>(initialUsageStatus);
   const [limitReached, setLimitReached] = useState(false);
+  // Bumped each time a topic is (re)selected so the question order reshuffles.
+  const [shuffleNonce, setShuffleNonce] = useState(0);
 
-  // Store shuffled questions in a ref to persist across re-renders
-  const shuffledAllQuestionsRef = useRef<Question[] | null>(null);
-
-  // Filter questions based on selected topic
   const filteredQuestions = useMemo(() => {
-    if (selectedTopic === "all") {
-      // Only shuffle once when "all" is first selected
-      if (!shuffledAllQuestionsRef.current) {
-        const shuffled = [...questions];
-        // Fisher-Yates shuffle
-        for (let i = shuffled.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-        }
-        shuffledAllQuestionsRef.current = shuffled.slice(0, 20);
-      }
-      return shuffledAllQuestionsRef.current;
+    const pool =
+      selectedTopic === "all"
+        ? [...questions]
+        : questions.filter((q) => q.category === selectedTopic);
+
+    // Fisher-Yates shuffle
+    for (let i = pool.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
     }
-    return questions.filter((q) => q.category === selectedTopic);
-  }, [selectedTopic, questions]);
+
+    return selectedTopic === "all" ? pool.slice(0, 20) : pool;
+    // shuffleNonce intentionally included so a re-selection re-shuffles.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedTopic, questions, shuffleNonce]);
 
   const currentQuestion = filteredQuestions[currentQuestionIndex];
 
   const handleTopicSelect = (topicId: string) => {
     setSelectedTopic(topicId);
+    setShuffleNonce((n) => n + 1);
     setCurrentQuestionIndex(0);
     setCorrectAnswers(0);
     setAnsweredQuestions(0);
@@ -177,16 +176,13 @@ export function PracticeClient({
     setCurrentQuestionIndex(0);
     setCorrectAnswers(0);
     setAnsweredQuestions(0);
-    // Clear shuffled questions so a new shuffle happens next time
-    shuffledAllQuestionsRef.current = null;
   };
 
   const handleRetry = () => {
     setCurrentQuestionIndex(0);
     setCorrectAnswers(0);
     setAnsweredQuestions(0);
-    // Clear shuffled questions to get a new random set on retry
-    shuffledAllQuestionsRef.current = null;
+    setShuffleNonce((n) => n + 1);
     setView("quiz");
   };
 
