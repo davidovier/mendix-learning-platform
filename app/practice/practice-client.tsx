@@ -102,6 +102,13 @@ export function PracticeClient({
 
   // Shuffle on the client only — avoids SSR/hydration determinism issues and
   // guarantees a new order each time a quiz session starts.
+  //
+  // `questions` is intentionally omitted from the dep list: a server action
+  // (trackAttempt, checkAndIncrementQuestionUsage) can refresh the RSC payload
+  // mid-session and hand us a fresh prop reference even though the content is
+  // identical. Reshuffling on that would silently swap the current question
+  // out from under the user. Only an explicit (re)entry into a quiz should
+  // reshuffle, which we drive via `sessionNonce`.
   useEffect(() => {
     if (!selectedTopic) {
       setFilteredQuestions([]);
@@ -122,7 +129,8 @@ export function PracticeClient({
     setFilteredQuestions(
       selectedTopic === "all" ? shuffled.slice(0, 20) : shuffled,
     );
-  }, [selectedTopic, questions, sessionNonce]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedTopic, sessionNonce]);
 
   const currentQuestion = filteredQuestions[currentQuestionIndex];
 
