@@ -2296,20 +2296,6 @@
     "explanation": "Large datasets should first be imported into a flat structure to avoid overrunning memory during transformation. Transforming deeply nested or complex data directly can create too many objects in memory at once. This matters for stable bulk imports and migrations."
   },
   {
-    "id": "q-165",
-    "category": "integration",
-    "knowledgePath": "Quizlet",
-    "question": "What does your app need in order to import Excel data into a Mendix app?",
-    "options": [
-      "The Excel Importer module from the Marketplace.",
-      "A built-in Excel import wizard.",
-      "A custom Java action for parsing Excel files.",
-      "Direct access to the Excel file system."
-    ],
-    "correctIndex": 0,
-    "explanation": "The Excel Importer module from the Marketplace provides the configurable functionality needed to import Excel data. Mendix does not include a universal built-in Excel import wizard as a standard activity. This matters when business users want spreadsheet-driven setup or migration."
-  },
-  {
     "id": "q-166",
     "category": "integration",
     "knowledgePath": "Quizlet",

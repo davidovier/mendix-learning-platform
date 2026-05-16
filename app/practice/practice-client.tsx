@@ -111,7 +111,14 @@ export function PracticeClient({
       selectedTopic === "all"
         ? questions
         : questions.filter((q) => q.category === selectedTopic);
-    const shuffled = shuffle(pool);
+    const seen = new Set<string>();
+    const unique = pool.filter((q) => {
+      const key = q.question.trim().toLowerCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+    const shuffled = shuffle(unique);
     setFilteredQuestions(
       selectedTopic === "all" ? shuffled.slice(0, 20) : shuffled,
     );
