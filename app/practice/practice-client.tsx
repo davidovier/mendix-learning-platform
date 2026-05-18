@@ -25,10 +25,21 @@ import { QuestionCard } from "@/components/practice/question-card";
 import { trackAttempt } from "@/lib/db/actions";
 import { checkAndIncrementQuestionUsage, type UsageStatus } from "@/lib/stripe/usage-actions";
 import { UpgradePrompt, UsageLimitBanner } from "@/components/upgrade-prompt";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
 
-const HARD_ONLY_STORAGE_KEY = "practice:hardOnly";
+const DIFFICULTY_STORAGE_KEY = "practice:difficultyFilter";
+
+type DifficultyFilter = "all" | Difficulty;
+
+const DIFFICULTY_OPTIONS: { value: DifficultyFilter; label: string }[] = [
+  { value: "all", label: "Alle" },
+  { value: "easy", label: "Easy" },
+  { value: "medium", label: "Medium" },
+  { value: "hard", label: "Hard" },
+];
+
+function isDifficultyFilter(value: string | null): value is DifficultyFilter {
+  return value === "all" || value === "easy" || value === "medium" || value === "hard";
+}
 
 type ViewState = "select" | "quiz" | "results";
 
@@ -106,21 +117,26 @@ export function PracticeClient({
   // Bumped on every (re)entry into a quiz to force a fresh shuffle.
   const [sessionNonce, setSessionNonce] = useState(0);
   const [filteredQuestions, setFilteredQuestions] = useState<Question[]>([]);
-  // When true, restrict the pool to difficulty === "hard" (the new trap-style set).
-  const [hardOnly, setHardOnly] = useState(false);
+  // Selected difficulty bucket — "all" shows the whole pool.
+  const [difficultyFilter, setDifficultyFilter] =
+    useState<DifficultyFilter>("all");
 
-  // Restore the toggle from localStorage so the preference survives reloads.
+  // Restore the filter from localStorage so the preference survives reloads.
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (window.localStorage.getItem(HARD_ONLY_STORAGE_KEY) === "1") {
-      setHardOnly(true);
+    const stored = window.localStorage.getItem(DIFFICULTY_STORAGE_KEY);
+    if (isDifficultyFilter(stored)) {
+      setDifficultyFilter(stored);
     }
   }, []);
 
-  // Pool of questions after applying the difficulty toggle but before topic filter.
+  // Pool of questions after applying the difficulty filter but before topic filter.
   const difficultyFilteredQuestions = useMemo(
-    () => (hardOnly ? questions.filter((q) => q.difficulty === "hard") : questions),
-    [questions, hardOnly],
+    () =>
+      difficultyFilter === "all"
+        ? questions
+        : questions.filter((q) => q.difficulty === difficultyFilter),
+    [questions, difficultyFilter],
   );
 
   // Per-topic counts that reflect the current difficulty filter so the cards
@@ -257,13 +273,13 @@ export function PracticeClient({
   // Filter topics that have questions under the current difficulty filter.
   const availableTopics = topics.filter((t) => (visibleCountByTopic[t.id] ?? 0) > 0);
 
-  const handleHardOnlyChange = (next: boolean) => {
-    setHardOnly(next);
+  const handleDifficultyChange = (next: DifficultyFilter) => {
+    setDifficultyFilter(next);
     if (typeof window !== "undefined") {
-      if (next) {
-        window.localStorage.setItem(HARD_ONLY_STORAGE_KEY, "1");
+      if (next === "all") {
+        window.localStorage.removeItem(DIFFICULTY_STORAGE_KEY);
       } else {
-        window.localStorage.removeItem(HARD_ONLY_STORAGE_KEY);
+        window.localStorage.setItem(DIFFICULTY_STORAGE_KEY, next);
       }
     }
   };
@@ -312,24 +328,40 @@ export function PracticeClient({
             </div>
           )}
 
-          {/* Difficulty filter — only advanced (hard, trap-style) questions. */}
-          <div className="mb-6 flex items-center justify-between gap-4 p-4 rounded-lg border border-border bg-card">
-            <div className="min-w-0">
-              <Label
-                htmlFor="hard-only-toggle"
-                className="font-medium text-foreground cursor-pointer"
-              >
-                Alleen geavanceerde vragen
-              </Label>
+          {/* Difficulty filter — Alle / Easy / Medium / Hard. */}
+          <div className="mb-6 p-4 rounded-lg border border-border bg-card">
+            <div className="mb-3">
+              <p className="font-medium text-foreground">Moeilijkheidsgraad</p>
               <p className="text-sm text-muted-foreground mt-0.5">
-                Toon enkel de 130 trap-stijl vragen voor extra exam-prep.
+                Easy = basis recall · Medium = trap-stijl · Hard = scenario, edge cases & best-practice valkuilen
               </p>
             </div>
-            <Switch
-              id="hard-only-toggle"
-              checked={hardOnly}
-              onCheckedChange={handleHardOnlyChange}
-            />
+            <div
+              role="radiogroup"
+              aria-label="Moeilijkheidsgraad"
+              className="inline-flex rounded-lg border border-border bg-background p-1 gap-1"
+            >
+              {DIFFICULTY_OPTIONS.map((opt) => {
+                const active = difficultyFilter === opt.value;
+                return (
+                  <button
+                    key={opt.value}
+                    type="button"
+                    role="radio"
+                    aria-checked={active}
+                    onClick={() => handleDifficultyChange(opt.value)}
+                    className={
+                      "px-3 py-1.5 text-sm rounded-md transition-colors " +
+                      (active
+                        ? "bg-primary text-primary-foreground"
+                        : "text-muted-foreground hover:text-foreground hover:bg-accent")
+                    }
+                  >
+                    {opt.label}
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
