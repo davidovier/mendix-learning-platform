@@ -15,7 +15,7 @@ const features = [
   },
   {
     title: "Practice Quiz",
-    description: "455 exam questions",
+    description: "650 exam questions",
     href: "/practice",
     icon: PenLine,
   },

@@ -6823,5 +6823,2930 @@
     "correctIndex": 1,
     "explanation": "Daily Scrum = short, fixed-time, team-internal sync. Sprint planning is separate (longer, sprint-start). Status reports to managers run counter to Scrum (the team self-organizes). Demos happen at sprint end. The standup is about coordination, not reporting.",
     "difficulty": "easy"
+  },
+  {
+    "id": "q-717",
+    "category": "domain-model",
+    "difficulty": "easy",
+    "knowledgePath": "Domain Model > Practical > Picking Entity Type",
+    "question": "You're modeling a temporary filter UI state that should not survive page reload. Which entity type fits?",
+    "options": [
+      "Persistable",
+      "Non-persistable",
+      "External",
+      "View"
+    ],
+    "correctIndex": 1,
+    "explanation": "NPEs live in memory only — exactly right for transient state. Persistable would needlessly write to the database; External is for remote data; View is for read-only OQL results."
+  },
+  {
+    "id": "q-718",
+    "category": "domain-model",
+    "difficulty": "easy",
+    "knowledgePath": "Domain Model > Practical > Money Storage",
+    "question": "You need to store product prices that may reach 9999.99 EUR. Which attribute type?",
+    "options": [
+      "Float",
+      "Decimal",
+      "Integer",
+      "String"
+    ],
+    "correctIndex": 1,
+    "explanation": "Decimal is purpose-built for high-precision money. Float doesn't exist in Mendix. Integer would force you to store cents and convert. String loses arithmetic ability."
+  },
+  {
+    "id": "q-719",
+    "category": "domain-model",
+    "difficulty": "easy",
+    "knowledgePath": "Domain Model > Practical > Tagging",
+    "question": "Each Article can have several Tags. Which multiplicity do you choose?",
+    "options": [
+      "1-to-1",
+      "1-to-*",
+      "*-to-*",
+      "No association needed"
+    ],
+    "correctIndex": 2,
+    "explanation": "Many-to-many: each Article has many Tags AND each Tag can apply to many Articles. 1-to-* would mean each Tag belongs to ONE Article — wrong. 1-to-1 limits to one Tag per Article."
+  },
+  {
+    "id": "q-720",
+    "category": "domain-model",
+    "difficulty": "easy",
+    "knowledgePath": "Domain Model > Practical > Audit Trail",
+    "question": "You want to record WHO last changed an Order. The simplest approach is:",
+    "options": [
+      "Add a String attribute LastChangedBy",
+      "Enable the System Member 'changedBy'",
+      "Create a separate AuditLog entity",
+      "Use a Java action"
+    ],
+    "correctIndex": 1,
+    "explanation": "System Member changedBy automatically references the System.User who committed the change — zero custom code. Manual attributes, separate audit entities, or Java actions are all more work for the same outcome."
+  },
+  {
+    "id": "q-721",
+    "category": "domain-model",
+    "difficulty": "easy",
+    "knowledgePath": "Domain Model > Practical > Inheritance",
+    "question": "You have Employee and Manager. Both share Name, Email, Department but Manager also has DirectReports. Best modeling approach?",
+    "options": [
+      "Two unrelated entities with copies of shared fields",
+      "Employee specializes Manager",
+      "Manager specializes Employee",
+      "One Person entity with a 'role' enum"
+    ],
+    "correctIndex": 2,
+    "explanation": "Manager is a more specific Employee — generalization Employee → specialization Manager. Inverting the inheritance would be wrong (Employee would inherit DirectReports). Copying fields breaks DRY; using an enum is fine for simple cases but loses type-safety for Manager-specific behavior."
+  },
+  {
+    "id": "q-722",
+    "category": "microflows",
+    "difficulty": "easy",
+    "knowledgePath": "Microflows > Practical > Activity Choice",
+    "question": "You need to log diagnostic information to the server log from a microflow. Which activity?",
+    "options": [
+      "Show Message",
+      "Log Message",
+      "Send Email",
+      "Custom Java action"
+    ],
+    "correctIndex": 1,
+    "explanation": "Log Message writes to the server log — exactly the requirement. Show Message produces a popup for the END USER. Email is unrelated. Java is overkill for a built-in operation."
+  },
+  {
+    "id": "q-723",
+    "category": "microflows",
+    "difficulty": "easy",
+    "knowledgePath": "Microflows > Practical > Loop Choice",
+    "question": "You need to iterate over every Order in a list and mark it as Archived. Which loop type?",
+    "options": [
+      "For Each (item in list)",
+      "While (condition is true)",
+      "Recursive sub-microflow",
+      "No loop needed — use Change List"
+    ],
+    "correctIndex": 0,
+    "explanation": "For Each over the Order list is the natural choice. While is for condition-based iteration. Recursion adds complexity. Change List adds or removes objects from a list but doesn't modify their attributes."
+  },
+  {
+    "id": "q-724",
+    "category": "microflows",
+    "difficulty": "easy",
+    "knowledgePath": "Microflows > Practical > Save Changes",
+    "question": "Your microflow uses Change Object to set Customer.Status = 'Active'. Without further action, will this persist after the microflow ends?",
+    "options": [
+      "Yes, automatically",
+      "No — you must call Commit to persist",
+      "Only if security is set to Production",
+      "Only for persistable entities"
+    ],
+    "correctIndex": 1,
+    "explanation": "Change Object modifies in memory only. Without Commit, the change is lost when the session ends. This is THE most common Mendix beginner trap: forgetting the Commit step."
+  },
+  {
+    "id": "q-725",
+    "category": "microflows",
+    "difficulty": "easy",
+    "knowledgePath": "Microflows > Practical > Page Navigation",
+    "question": "After a successful Order creation in a microflow, you want to navigate the user to the OrderDetail page. Which activity?",
+    "options": [
+      "Show Message",
+      "Show Page",
+      "Open URL",
+      "Set Variable"
+    ],
+    "correctIndex": 1,
+    "explanation": "Show Page sends the user to a specified page, passing the relevant object as parameter. Show Message displays text only; Open URL is for external URLs; Set Variable doesn't navigate."
+  },
+  {
+    "id": "q-726",
+    "category": "microflows",
+    "difficulty": "easy",
+    "knowledgePath": "Microflows > Practical > Sub-microflow Naming",
+    "question": "You're creating a microflow that calculates the total price of an Order — called only by other microflows. Recommended naming prefix?",
+    "options": [
+      "ACT_",
+      "DS_",
+      "SUB_",
+      "CAL_"
+    ],
+    "correctIndex": 2,
+    "explanation": "SUB_ marks reusable internal microflows called by others. CAL_ is specifically for calculated-attribute microflows (not the case here). ACT_ is for page actions. DS_ is for data source microflows on pages."
+  },
+  {
+    "id": "q-727",
+    "category": "nanoflows",
+    "difficulty": "easy",
+    "knowledgePath": "Nanoflows > Practical > Quick Validation",
+    "question": "You want to validate that an email field contains '@' before the form submits — without a server round-trip. Where do you implement this?",
+    "options": [
+      "A microflow on form submit",
+      "A nanoflow triggered by on-change",
+      "A Java action",
+      "A database trigger"
+    ],
+    "correctIndex": 1,
+    "explanation": "Nanoflows run client-side — instant validation without server hit. Microflow validation works but is slower (network round-trip). Java is server-only and overkill. Database triggers aren't a Mendix concept."
+  },
+  {
+    "id": "q-728",
+    "category": "nanoflows",
+    "difficulty": "easy",
+    "knowledgePath": "Nanoflows > Practical > Offline Sync",
+    "question": "An offline mobile field-worker app needs to push local changes to the server when WiFi is available. Which activity?",
+    "options": [
+      "Commit Object on every change",
+      "Synchronize",
+      "Call REST Service",
+      "Show Message"
+    ],
+    "correctIndex": 1,
+    "explanation": "Synchronize is purpose-built for offline-online data exchange. Individual Commits would each need network access (failing offline). REST is server-side only. Show Message is UI feedback, not data sync."
+  },
+  {
+    "id": "q-729",
+    "category": "nanoflows",
+    "difficulty": "easy",
+    "knowledgePath": "Nanoflows > Practical > Web App Calculation",
+    "question": "In an online app, you compute the total of three input fields and display it instantly. Where do you implement this?",
+    "options": [
+      "A microflow with a 'Recalculate' button",
+      "A nanoflow triggered by on-change on each field",
+      "A scheduled event",
+      "Pure JavaScript outside Mendix"
+    ],
+    "correctIndex": 1,
+    "explanation": "Pure UI math = nanoflow. No database = no network hit. Microflow + button is clunky UX. Scheduled events are time-triggered, not user-triggered. External JS bypasses Mendix needlessly."
+  },
+  {
+    "id": "q-730",
+    "category": "nanoflows",
+    "difficulty": "easy",
+    "knowledgePath": "Nanoflows > Practical > Browser Console Log",
+    "question": "You're debugging a nanoflow and add a Log Message activity. Where does the output appear?",
+    "options": [
+      "The Mendix server log",
+      "The browser console",
+      "An email to admin",
+      "A System.LogEntry row"
+    ],
+    "correctIndex": 1,
+    "explanation": "Nanoflow Log Message → browser console. For server logs you'd use a microflow's Log Message activity. People looking in the wrong place is a top debugging time-sink."
+  },
+  {
+    "id": "q-731",
+    "category": "nanoflows",
+    "difficulty": "easy",
+    "knowledgePath": "Nanoflows > Practical > JS Action",
+    "question": "You need to access the device's GPS coordinates inside a flow. Where do you implement this?",
+    "options": [
+      "A microflow with a REST call to a geolocation service",
+      "A nanoflow with a JavaScript action calling navigator.geolocation",
+      "A Java action",
+      "An XPath constraint"
+    ],
+    "correctIndex": 1,
+    "explanation": "Device APIs (camera, GPS, localStorage) are client-side — only nanoflows reach them, via JavaScript actions. Microflows can't access browser/device APIs. Java is server-side. XPath is a query language."
+  },
+  {
+    "id": "q-732",
+    "category": "modules",
+    "difficulty": "easy",
+    "knowledgePath": "Modules > Practical > Module Type",
+    "question": "You're building a payment-processing module you plan to sell on the Mendix Marketplace. Which module type?",
+    "options": [
+      "App module",
+      "Add-on module",
+      "Solution module",
+      "System module"
+    ],
+    "correctIndex": 1,
+    "explanation": "Add-on modules are designed for Marketplace distribution: reusable, protected. App modules are for primary app development. Solution modules are for packaged ISV solutions. System is built-in only."
+  },
+  {
+    "id": "q-733",
+    "category": "modules",
+    "difficulty": "easy",
+    "knowledgePath": "Modules > Practical > Module Sharing",
+    "question": "A teammate needs to inspect and modify the module's microflows you built. Which export format?",
+    "options": [
+      ".mxmodule",
+      "Both work equally",
+      ".mpk",
+      "No export needed, share via screenshare"
+    ],
+    "correctIndex": 2,
+    "explanation": ".mpk includes full editable source — perfect for team sharing. .mxmodule is protected/read-only for Marketplace distribution. Screensharing isn't a sharing format; it doesn't transfer the code."
+  },
+  {
+    "id": "q-734",
+    "category": "modules",
+    "difficulty": "easy",
+    "knowledgePath": "Modules > Practical > Cross Module Reference",
+    "question": "In your Reporting module you want to use the Customer entity defined in the Sales module. What's needed?",
+    "options": [
+      "Copy the Customer entity into Reporting",
+      "Add Sales as a dependency of Reporting",
+      "Use a REST call between the two modules",
+      "Cross-module references are not allowed"
+    ],
+    "correctIndex": 1,
+    "explanation": "Dependencies tab on Reporting adds Sales as a dependency. Then Sales.Customer is accessible (assuming the entity's Export Level allows it). Copying creates two diverging entities. REST between same-app modules is overkill."
+  },
+  {
+    "id": "q-735",
+    "category": "modules",
+    "difficulty": "easy",
+    "knowledgePath": "Modules > Practical > JAR Placement",
+    "question": "A Marketplace module you installed asks you to place a third-party JAR in your project. Where does it go?",
+    "options": [
+      "javasource/[module]/actions/",
+      "javasource/[module]/proxies/",
+      "userlib/",
+      "docs/"
+    ],
+    "correctIndex": 2,
+    "explanation": "External JARs go in the project-level userlib/ folder. actions/ is for your Java code; proxies/ is auto-generated and shouldn't be touched. docs/ isn't a build folder."
+  },
+  {
+    "id": "q-736",
+    "category": "modules",
+    "difficulty": "easy",
+    "knowledgePath": "Modules > Practical > Module Roles",
+    "question": "You want only Manager users in your app to see the Sales module's pages. Where do you configure this?",
+    "options": [
+      "App Security only",
+      "Module Security: define a Module Role with the right page access, then link it to the Manager User Role in App Security",
+      "On each page individually",
+      "Through a microflow"
+    ],
+    "correctIndex": 1,
+    "explanation": "Page access lives in Module Security via Module Roles. App Security composes those Module Roles into User Roles like Manager. Per-page settings exist but they're configured under module security, not directly on each page."
+  },
+  {
+    "id": "q-737",
+    "category": "security",
+    "difficulty": "easy",
+    "knowledgePath": "Security > Practical > Security Level",
+    "question": "You're deploying to Mendix Cloud's licensed production environment. Which app security level is required?",
+    "options": [
+      "Off",
+      "Prototype/Demo",
+      "Production",
+      "Maintenance"
+    ],
+    "correctIndex": 2,
+    "explanation": "Production is required for licensed Mendix Cloud. Off is for local/Free Apps only. Prototype/Demo applies auth but no entity rules — unsafe for real users. 'Maintenance' isn't a security level."
+  },
+  {
+    "id": "q-738",
+    "category": "security",
+    "difficulty": "easy",
+    "knowledgePath": "Security > Practical > Anonymous User Role",
+    "question": "You want unauthenticated users to be able to browse the public catalog but not submit orders. What do you configure?",
+    "options": [
+      "Disable anonymous access completely",
+      "Enable anonymous access and assign the single allowed user role with read-only catalog rights",
+      "Make every entity Read-only",
+      "Use a custom microflow to filter"
+    ],
+    "correctIndex": 1,
+    "explanation": "Anonymous = ONE user role with whatever rights you want them to have. Read-only on the catalog entity, no access on Order — exactly the pattern. Disabling anonymous would block browsing. Global read-only would block legit users from submitting orders."
+  },
+  {
+    "id": "q-739",
+    "category": "security",
+    "difficulty": "easy",
+    "knowledgePath": "Security > Practical > Calculated Attribute",
+    "question": "Calculated attribute TotalScore on Customer should be visible to admins but hidden from regular users. How?",
+    "options": [
+      "Set the access rule for Customer.TotalScore: Read for Admin, no access for Regular",
+      "Make the attribute non-calculated",
+      "Use a microflow to conditionally compute",
+      "Hide the attribute in the page only"
+    ],
+    "correctIndex": 0,
+    "explanation": "Access rules on calculated attributes work normally for Read — granting per role. Changing to stored is unnecessary. Conditional microflow logic is more work than declarative access. Page-level hiding is UX, not security (deeplinks bypass it)."
+  },
+  {
+    "id": "q-740",
+    "category": "security",
+    "difficulty": "easy",
+    "knowledgePath": "Security > Practical > XPath Constraint",
+    "question": "You want users to see only their own Orders. Which XPath constraint on the access rule?",
+    "options": [
+      "[Sales.Order_User = '[%CurrentUser%]']",
+      "[Customer = $currentUser]",
+      "[Sales.Order_User = 'CurrentUser']",
+      "[Sales.Order_User = $user]"
+    ],
+    "correctIndex": 0,
+    "explanation": "`[%CurrentUser%]` is the XPath token resolving to the System.User object. Note the brackets and percentages — strict syntax. Variables ($) and literal strings don't work as runtime user references in XPath constraints."
+  },
+  {
+    "id": "q-741",
+    "category": "security",
+    "difficulty": "easy",
+    "knowledgePath": "Security > Practical > Microflow Access",
+    "question": "You want to restrict who can execute the ACT_DeleteOrder microflow. Where do you configure this?",
+    "options": [
+      "Inside the microflow's first activity (an If check)",
+      "Module Security > Microflow access",
+      "App Security",
+      "On the page button calling it"
+    ],
+    "correctIndex": 1,
+    "explanation": "Microflow execution access lives in Module Security under Microflow access. App Security composes module roles into user roles but doesn't directly grant microflow access. In-microflow checks duplicate the framework; button-level checks are UX-only."
+  },
+  {
+    "id": "q-742",
+    "category": "pages",
+    "difficulty": "easy",
+    "knowledgePath": "Pages > Practical > Widget Choice",
+    "question": "You want a table showing all Customers, with paging and column sorting. Which widget?",
+    "options": [
+      "Data View",
+      "Data Grid",
+      "Reference Selector",
+      "List View"
+    ],
+    "correctIndex": 1,
+    "explanation": "Data Grid shows multiple objects with paging and column sort built-in. Data View is for one object. Reference Selector is for selecting an associated object. List View is for custom-rendered list items (no built-in paging UI like a grid)."
+  },
+  {
+    "id": "q-743",
+    "category": "pages",
+    "difficulty": "easy",
+    "knowledgePath": "Pages > Practical > Reference Selector vs Set",
+    "question": "On an Order edit form, the user needs to pick ONE Customer. Which widget?",
+    "options": [
+      "Reference Selector",
+      "Reference Set Selector",
+      "Data Grid",
+      "Drop-down for enums"
+    ],
+    "correctIndex": 0,
+    "explanation": "Reference Selector = pick ONE associated object (1-to-many association). Reference Set Selector handles MULTIPLE selections (many-to-many). Data Grid is overkill. Enum dropdowns are for enumerations, not entity references."
+  },
+  {
+    "id": "q-744",
+    "category": "pages",
+    "difficulty": "easy",
+    "knowledgePath": "Pages > Practical > Data Source",
+    "question": "A data view should display the Order that was passed from the previous page as a parameter. Which data source?",
+    "options": [
+      "Microflow",
+      "Database",
+      "Context",
+      "Listen to widget"
+    ],
+    "correctIndex": 2,
+    "explanation": "Context = 'use the object already provided to the page'. Microflow would re-fetch unnecessarily. Database is a grid source, not a data view source. Listen to widget is for selection-driven detail panes."
+  },
+  {
+    "id": "q-745",
+    "category": "pages",
+    "difficulty": "easy",
+    "knowledgePath": "Pages > Practical > Shared Component",
+    "question": "You're building a 'Customer summary card' that should appear identically on multiple pages. Which mechanism?",
+    "options": [
+      "Copy-paste the widget group on every page",
+      "Create a Snippet and embed it",
+      "Use a Layout",
+      "Use a Page Template"
+    ],
+    "correctIndex": 1,
+    "explanation": "Snippets are exactly for reusable widget groups. Layouts wrap pages (shared chrome). Page Templates are starting points for new pages. Copy-paste is the anti-pattern — changes require N edits."
+  },
+  {
+    "id": "q-746",
+    "category": "pages",
+    "difficulty": "easy",
+    "knowledgePath": "Pages > Practical > Editability",
+    "question": "On an Order detail page, an admin can edit; a regular user can only view. Best way?",
+    "options": [
+      "Two separate pages and conditional navigation",
+      "Editability = Conditionally with expression based on current user role",
+      "Hide the data view from regular users",
+      "Disable Save button manually"
+    ],
+    "correctIndex": 1,
+    "explanation": "Conditional Editability with an expression checking `$currentUser` role is declarative and clean. Two pages doubles maintenance. Hiding the data view leaves regulars with no view. Disabling Save manually is a half-measure."
+  },
+  {
+    "id": "q-747",
+    "category": "xpath",
+    "difficulty": "easy",
+    "knowledgePath": "XPath > Practical > Find by Name",
+    "question": "You need to retrieve Customers with the surname 'Jansen' inside a Studio Pro microflow XPath constraint. What do you write?",
+    "options": [
+      "//Sales.Customer[Name='Jansen']",
+      "[Name='Jansen']",
+      "Customer.Name = 'Jansen'",
+      "SELECT * WHERE Name = 'Jansen'"
+    ],
+    "correctIndex": 1,
+    "explanation": "Inside Studio Pro the entity is implicit — write only the bracketed constraint. Full //Sales.Customer[...] is for Java/service code. Dot notation and SQL are wrong dialects."
+  },
+  {
+    "id": "q-748",
+    "category": "xpath",
+    "difficulty": "easy",
+    "knowledgePath": "XPath > Practical > Boolean Filter",
+    "question": "Find Orders where IsPaid is true.",
+    "options": [
+      "[IsPaid = true]",
+      "[IsPaid = true()]",
+      "[IsPaid = 'true']",
+      "[IsPaid = 1]"
+    ],
+    "correctIndex": 1,
+    "explanation": "Boolean literals in XPath are functions: `true()` and `false()`. The bare keyword and string/integer comparisons are wrong."
+  },
+  {
+    "id": "q-749",
+    "category": "xpath",
+    "difficulty": "easy",
+    "knowledgePath": "XPath > Practical > Empty Check",
+    "question": "Find Customers without an Email value.",
+    "options": [
+      "[Email = null]",
+      "[Email = empty]",
+      "[Email = '']",
+      "[Email is not set]"
+    ],
+    "correctIndex": 1,
+    "explanation": "`= empty` is Mendix XPath's null/missing check. `= null` is SQL; empty-string `''` only matches truly empty strings (not null); 'is not set' isn't valid XPath."
+  },
+  {
+    "id": "q-750",
+    "category": "xpath",
+    "difficulty": "easy",
+    "knowledgePath": "XPath > Practical > Date Comparison",
+    "question": "Find Orders created in the last 7 days using XPath, where $sevenDaysAgo is a DateTime variable.",
+    "options": [
+      "[createdDate >= $sevenDaysAgo]",
+      "[createdDate >= 'last7days']",
+      "[createdDate WITHIN 7]",
+      "[createdDate ago 7]"
+    ],
+    "correctIndex": 0,
+    "explanation": "Compare directly with the typed variable. Mendix XPath uses standard comparison operators on dates. Special keywords like WITHIN or 'last7days' don't exist."
+  },
+  {
+    "id": "q-751",
+    "category": "xpath",
+    "difficulty": "easy",
+    "knowledgePath": "XPath > Practical > Combined Condition",
+    "question": "Find Orders that are Paid AND have Total > 100.",
+    "options": [
+      "[IsPaid = true() and Total > 100]",
+      "[IsPaid = true() AND Total > 100]",
+      "[IsPaid = true() && Total > 100]",
+      "[IsPaid = true(), Total > 100]"
+    ],
+    "correctIndex": 0,
+    "explanation": "XPath uses lowercase `and`. Uppercase AND and `&&` are wrong dialects. Comma-separation isn't AND in XPath."
+  },
+  {
+    "id": "q-752",
+    "category": "integration",
+    "difficulty": "easy",
+    "knowledgePath": "Integration > Practical > External API",
+    "question": "Your app needs to fetch weather data from a public REST API. Which activity in a microflow?",
+    "options": [
+      "Call Web Service",
+      "Call REST Service",
+      "Show Page with URL",
+      "Import with mapping"
+    ],
+    "correctIndex": 1,
+    "explanation": "Call REST Service is the activity for REST APIs. Call Web Service is SOAP. Show Page doesn't fetch data. Import with mapping converts already-fetched data."
+  },
+  {
+    "id": "q-753",
+    "category": "integration",
+    "difficulty": "easy",
+    "knowledgePath": "Integration > Practical > JSON to Mendix",
+    "question": "You receive JSON from a partner API and need to populate Mendix Customer entities. What artifact?",
+    "options": [
+      "Export Mapping",
+      "Import Mapping",
+      "Java action",
+      "Constant"
+    ],
+    "correctIndex": 1,
+    "explanation": "Import Mapping converts incoming JSON/XML into Mendix objects. Export Mapping goes the other way (Mendix → JSON/XML). Java is overkill. Constants are configuration values."
+  },
+  {
+    "id": "q-754",
+    "category": "integration",
+    "difficulty": "easy",
+    "knowledgePath": "Integration > Practical > Publishing API",
+    "question": "You want to expose your Customer data as a REST endpoint other apps can call. Steps?",
+    "options": [
+      "Right-click entity > Expose as REST resource, then configure authentication",
+      "Edit your app's Apache config",
+      "Write a Java servlet",
+      "Use a Marketplace REST module"
+    ],
+    "correctIndex": 0,
+    "explanation": "Right-click on the entity > Expose as REST resource is the built-in path. No Apache, servlets, or required Marketplace modules. Authentication is configured in the published service settings."
+  },
+  {
+    "id": "q-755",
+    "category": "integration",
+    "difficulty": "easy",
+    "knowledgePath": "Integration > Practical > Avoiding Duplicates",
+    "question": "Importing Customer data daily from a partner — you don't want to create duplicates if they already exist. Which Import Mapping option?",
+    "options": [
+      "Create object (always)",
+      "Find by key (using Email as key)",
+      "Skip",
+      "Custom logic in microflow"
+    ],
+    "correctIndex": 1,
+    "explanation": "Find by key matches incoming rows against existing objects by the chosen key (Email) — update if found, create otherwise. Create object always inserts (duplicates). Skip isn't an option. Custom logic works but reinvents the built-in pattern."
+  },
+  {
+    "id": "q-756",
+    "category": "integration",
+    "difficulty": "easy",
+    "knowledgePath": "Integration > Practical > Error Inspection",
+    "question": "A Call REST Service activity fails. To inspect the HTTP status code and response body in the error handler, you use:",
+    "options": [
+      "$latestError",
+      "$latestHttpResponse",
+      "$lastError",
+      "$response"
+    ],
+    "correctIndex": 1,
+    "explanation": "$latestHttpResponse holds the REST-specific response details. $latestError is the generic error variable (message, type, stacktrace). $lastError and $response don't exist."
+  },
+  {
+    "id": "q-757",
+    "category": "java",
+    "difficulty": "easy",
+    "knowledgePath": "Java > Practical > When to Use",
+    "question": "Your microflow needs to call a complex string-encryption algorithm not available in Mendix. Best approach?",
+    "options": [
+      "Implement the encryption inside a Java action and call it from the microflow",
+      "Write the algorithm as a nanoflow",
+      "Build it from microflow String activities",
+      "Avoid encryption"
+    ],
+    "correctIndex": 0,
+    "explanation": "Java actions extend microflow capability when modeler-level activities don't cover your need. Nanoflows are client-side (unsafe for encryption keys). String activities can't implement encryption from scratch. Avoiding encryption isn't an option for sensitive data."
+  },
+  {
+    "id": "q-758",
+    "category": "java",
+    "difficulty": "easy",
+    "knowledgePath": "Java > Practical > Where Code Goes",
+    "question": "You add a new line of Java code to a generated action class. Where do you put it so it survives the next 'Deploy for Eclipse'?",
+    "options": [
+      "Anywhere in the class",
+      "Between the //BEGIN USER CODE and //END USER CODE markers",
+      "In a comment",
+      "In javasource/[module]/proxies/"
+    ],
+    "correctIndex": 1,
+    "explanation": "Only code inside the USER CODE markers is preserved across regenerations. Outside them, code is overwritten. Comments aren't preserved either. proxies/ is auto-generated and should never be hand-edited."
+  },
+  {
+    "id": "q-759",
+    "category": "java",
+    "difficulty": "easy",
+    "knowledgePath": "Java > Practical > External Library",
+    "question": "Your Java action needs to use Apache POI for Excel parsing. Where does the JAR go?",
+    "options": [
+      "javasource/[module]/actions/",
+      "javasource/[module]/proxies/",
+      "userlib/",
+      "node_modules/"
+    ],
+    "correctIndex": 2,
+    "explanation": "External JARs go in userlib/. Studio Pro picks them up at build time. actions/ is for your Java code; proxies/ is auto-generated; node_modules/ is for JavaScript packages, not JARs."
+  },
+  {
+    "id": "q-760",
+    "category": "java",
+    "difficulty": "easy",
+    "knowledgePath": "Java > Practical > Calling From Microflow",
+    "question": "How do you add a Java action call to a microflow?",
+    "options": [
+      "Type `call MyJavaAction()` in a Decision expression",
+      "Drag the Java action from App Explorer onto the microflow as an activity",
+      "Use Call Web Service",
+      "Java actions can only be called from other Java"
+    ],
+    "correctIndex": 1,
+    "explanation": "Drag the Java action into the microflow — same as a sub-microflow. Decisions use expressions, not method calls. Call Web Service is for SOAP. Java actions are absolutely callable from microflows (that's their whole purpose)."
+  },
+  {
+    "id": "q-761",
+    "category": "java",
+    "difficulty": "easy",
+    "knowledgePath": "Java > Practical > Nanoflow Limit",
+    "question": "You need a client-side action with custom code. Which type do you create?",
+    "options": [
+      "Java action",
+      "JavaScript action",
+      "Microflow",
+      "Nanoflow without code"
+    ],
+    "correctIndex": 1,
+    "explanation": "JavaScript actions are the client-side counterpart of Java actions — used from nanoflows. Java actions are server-side only. A microflow runs server-side. Nanoflows host JS actions but aren't themselves 'custom code'."
+  },
+  {
+    "id": "q-762",
+    "category": "events",
+    "difficulty": "easy",
+    "knowledgePath": "Events > Practical > Auto-set on Create",
+    "question": "You want every new Order to automatically get OrderNumber = current count + 1 when created. Which event handler?",
+    "options": [
+      "After Create event handler",
+      "Before Create event handler — generate the number before commit",
+      "After Commit event handler",
+      "Validation rule"
+    ],
+    "correctIndex": 0,
+    "explanation": "After Create receives the new object and can modify it before commit. Before Create runs BEFORE the object exists (no parameter). After Commit is too late (already saved). Validation rules check, don't generate."
+  },
+  {
+    "id": "q-763",
+    "category": "events",
+    "difficulty": "easy",
+    "knowledgePath": "Events > Practical > Cancel Commit",
+    "question": "You want to prevent committing an Order with Total = 0. Which mechanism stops the commit?",
+    "options": [
+      "After Commit handler that rolls back",
+      "Before Commit handler returning false",
+      "A microflow assertion",
+      "A validation rule of type Range"
+    ],
+    "correctIndex": 3,
+    "explanation": "A Range validation rule on Total > 0 enforces this declaratively. A Before Commit returning false also works but is more code. After Commit can't prevent (commit already happened). Assertions aren't a Mendix-native concept."
+  },
+  {
+    "id": "q-764",
+    "category": "events",
+    "difficulty": "easy",
+    "knowledgePath": "Events > Practical > Required Field",
+    "question": "Customer.Email must never be empty. Quickest enforcement?",
+    "options": [
+      "Required validation rule on the Email attribute",
+      "Before Commit handler",
+      "Microflow check at every save",
+      "A JavaScript validation"
+    ],
+    "correctIndex": 0,
+    "explanation": "Required validation rule is one-click and declarative. Before Commit works but is more setup. Microflow checks at every save means modifying every save flow. JS validation is client-side and bypassed by direct DB writes."
+  },
+  {
+    "id": "q-765",
+    "category": "events",
+    "difficulty": "easy",
+    "knowledgePath": "Events > Practical > Unique Field",
+    "question": "Two customers shouldn't be able to use the same Email. Built-in enforcement?",
+    "options": [
+      "Unique validation rule on Email",
+      "Manual XPath check in Before Commit",
+      "Database constraint",
+      "Frontend check"
+    ],
+    "correctIndex": 0,
+    "explanation": "Unique validation rule. Mendix handles the underlying database index and uniqueness check. Manual XPath in Before Commit is what Unique does for you. DB constraints exist but you don't write them in Mendix. Frontend checks alone are bypassable."
+  },
+  {
+    "id": "q-766",
+    "category": "events",
+    "difficulty": "easy",
+    "knowledgePath": "Events > Practical > Naming",
+    "question": "You write a microflow that runs before an Order is committed. Recommended name?",
+    "options": [
+      "ACT_BeforeCommitOrder",
+      "BCO_Order",
+      "ValidateOrder",
+      "SUB_CommitOrder"
+    ],
+    "correctIndex": 1,
+    "explanation": "BCO_ = Before Commit (B + CO). The entity name follows the prefix. ACT_ is for page actions. Generic names like ValidateOrder lose role information. SUB_ is for general sub-microflows."
+  },
+  {
+    "id": "q-767",
+    "category": "enumerations",
+    "difficulty": "easy",
+    "knowledgePath": "Enumerations > Practical > Status",
+    "question": "An Order has statuses: Open, Processing, Closed. Best attribute type?",
+    "options": [
+      "String",
+      "Integer (0/1/2)",
+      "Enumeration with 3 values",
+      "Boolean (open/closed)"
+    ],
+    "correctIndex": 2,
+    "explanation": "Enumerations are purpose-built for fixed value sets. Strings allow typos. Integer codes lose readability. Boolean can't represent 3 states. Enumerations also support translation via captions."
+  },
+  {
+    "id": "q-768",
+    "category": "enumerations",
+    "difficulty": "easy",
+    "knowledgePath": "Enumerations > Practical > Display",
+    "question": "You want OrderStatus 'Open' to appear in Dutch as 'Open' and in English as 'Open' too. Where do you set this?",
+    "options": [
+      "Edit the Name to be localized",
+      "Translate the Caption per language via the Language Menu",
+      "Make 2 separate enumerations",
+      "It's automatic"
+    ],
+    "correctIndex": 1,
+    "explanation": "Captions are translatable per language; the Name stays as one technical identifier. Editing Names would invalidate stored data. Per-language enums duplicate the model. Translation isn't automatic — you do it through the Language Menu."
+  },
+  {
+    "id": "q-769",
+    "category": "enumerations",
+    "difficulty": "easy",
+    "knowledgePath": "Constants > Practical > API URL",
+    "question": "You have a partner API whose URL is 'https://api-prod.partner.com' in production and 'https://api-test.partner.com' in test. Best storage?",
+    "options": [
+      "Hardcode in the Call REST Service activity",
+      "A constant with environment-specific overrides",
+      "A microflow that picks based on conditions",
+      "An entity attribute"
+    ],
+    "correctIndex": 1,
+    "explanation": "Constants support per-environment overrides — set 'PartnerApiUrl' default to one and override in cloud env config. Hardcoding means rebuilding for prod vs test. Microflow branching is unnecessary. Entity attributes are for runtime data, not config."
+  },
+  {
+    "id": "q-770",
+    "category": "enumerations",
+    "difficulty": "easy",
+    "knowledgePath": "Constants > Practical > Feature Flag",
+    "question": "You add a constant 'NewSearchEnabled' (Boolean) that nanoflows on the search page check. Required property?",
+    "options": [
+      "Exposed to Client = Yes",
+      "Documentation must be filled",
+      "Default value = false",
+      "Export Level = Hidden"
+    ],
+    "correctIndex": 0,
+    "explanation": "Exposed to Client = Yes ships the value to nanoflows and page expressions. Without it, nanoflows can't read the constant. Documentation, default value, and export level are independent choices but Exposed to Client is the gating requirement."
+  },
+  {
+    "id": "q-771",
+    "category": "enumerations",
+    "difficulty": "easy",
+    "knowledgePath": "Enumerations > Practical > Comparison",
+    "question": "You compare $order/Status to the Open enum value in a Decision. Recommended form?",
+    "options": [
+      "$order/Status = 'Open'",
+      "$order/Status = OrderStatus.Open",
+      "$order/Status/getCaption() = 'Open'",
+      "$order/Status/getKey() = 'Open'"
+    ],
+    "correctIndex": 1,
+    "explanation": "Typed reference is build-time safe — rename or remove 'Open' and the Decision fails to compile. String forms only fail at runtime, and getCaption is locale-dependent."
+  },
+  {
+    "id": "q-772",
+    "category": "scheduled-events",
+    "difficulty": "easy",
+    "knowledgePath": "Scheduled Events > Practical > Daily Cleanup",
+    "question": "You want to delete old log entries every night at 2:00 AM UTC. What do you create?",
+    "options": [
+      "A scheduled event with Daily interval at 2:00 UTC",
+      "An After Commit handler",
+      "A nanoflow",
+      "A REST endpoint"
+    ],
+    "correctIndex": 0,
+    "explanation": "Scheduled events are exactly for time-based automatic execution. After Commit handlers fire on commits, not on a schedule. Nanoflows need a user trigger. REST endpoints need to be called."
+  },
+  {
+    "id": "q-773",
+    "category": "scheduled-events",
+    "difficulty": "easy",
+    "knowledgePath": "Scheduled Events > Practical > Disable",
+    "question": "During maintenance you want to stop a scheduled event for a week without deleting it. Action?",
+    "options": [
+      "Rename it with a 'DISABLED_' prefix",
+      "Toggle the Enabled property to false",
+      "Set interval to '99 years'",
+      "Delete and remember to recreate later"
+    ],
+    "correctIndex": 1,
+    "explanation": "Enabled toggle suspends execution cleanly. Renaming doesn't disable. Weird intervals are hacky. Deleting risks forgetting to recreate."
+  },
+  {
+    "id": "q-774",
+    "category": "scheduled-events",
+    "difficulty": "easy",
+    "knowledgePath": "Scheduled Events > Practical > Microflow Naming",
+    "question": "A scheduled event runs a microflow that cleans up old ProcessedQueueTask rows. Recommended microflow name?",
+    "options": [
+      "ACT_Cleanup",
+      "DS_Cleanup",
+      "SE_CleanupQueueTasks",
+      "CleanupQueue_Microflow"
+    ],
+    "correctIndex": 2,
+    "explanation": "There's no formal SE_ prefix in core docs but many teams use it for scheduled events for clarity. ACT_ is for page actions and DS_ for data sources — those would mislead readers. Naming for clarity is the point."
+  },
+  {
+    "id": "q-775",
+    "category": "scheduled-events",
+    "difficulty": "easy",
+    "knowledgePath": "Scheduled Events > Practical > Free App",
+    "question": "You deploy your app as a Free App on Mendix Cloud. What happens to scheduled events?",
+    "options": [
+      "They run as configured",
+      "They run but only once per day max",
+      "They don't run at all in Free Apps",
+      "They run twice as often"
+    ],
+    "correctIndex": 2,
+    "explanation": "Free Apps explicitly don't execute scheduled events. To run them in production you need licensed Mendix Cloud or another paid tier. Test locally to verify scheduled events work correctly."
+  },
+  {
+    "id": "q-776",
+    "category": "scheduled-events",
+    "difficulty": "easy",
+    "knowledgePath": "Scheduled Events > Practical > Daylight Switch",
+    "question": "Your daily report runs at 09:00 'server time'. Mendix Cloud runs on UTC. A user in Amsterdam expects it at their 09:00. What do you do?",
+    "options": [
+      "Set the schedule to 09:00 UTC",
+      "Set the schedule to 07:00 UTC so Amsterdam users see it at 09:00 (winter) — but accept DST drift",
+      "Configure server time per user",
+      "Use 09:00 'local time' setting in Mendix"
+    ],
+    "correctIndex": 1,
+    "explanation": "Mendix Cloud is UTC; Amsterdam is UTC+1 (winter) or UTC+2 (summer). Choose UTC-anchored schedules that approximate the local time you want, accepting DST shifts — or implement per-user fan-out at hourly granularity for true per-user delivery."
+  },
+  {
+    "id": "q-777",
+    "category": "agile",
+    "difficulty": "easy",
+    "knowledgePath": "Agile > Practical > Backlog",
+    "question": "A new feature request comes in mid-sprint. Where does it go?",
+    "options": [
+      "Add to the current sprint immediately",
+      "Add to the Product Backlog for the PO to prioritize for a future sprint",
+      "Reject it",
+      "Implement first, document later"
+    ],
+    "correctIndex": 1,
+    "explanation": "Mid-sprint scope changes break the sprint commitment. The PO triages backlog items for upcoming sprints. Rejecting all new ideas is unagile. Implementing without prioritization is chaos."
+  },
+  {
+    "id": "q-778",
+    "category": "agile",
+    "difficulty": "easy",
+    "knowledgePath": "Agile > Practical > Standup",
+    "question": "At your daily standup, what should you typically share?",
+    "options": [
+      "A full demo of your work",
+      "What you did yesterday, what you'll do today, any blockers",
+      "All your slack messages",
+      "Your timesheet entries"
+    ],
+    "correctIndex": 1,
+    "explanation": "The classic 3-part standup: progress, plan, blockers. Demos belong at sprint review. Slack messages and timesheets aren't standup content."
+  },
+  {
+    "id": "q-779",
+    "category": "agile",
+    "difficulty": "easy",
+    "knowledgePath": "Agile > Practical > User Story",
+    "question": "You're writing a story for a 'login button' feature. Best phrasing?",
+    "options": [
+      "Implement login button",
+      "As a registered user, I want to sign in with email and password so that I can access my dashboard",
+      "Login button UI ticket",
+      "Add JWT validation"
+    ],
+    "correctIndex": 1,
+    "explanation": "Stories follow 'As [role], I want [goal], so that [reason]'. Implementation details ('login button', 'JWT') belong in tasks underneath. The story format keeps user value central."
+  },
+  {
+    "id": "q-780",
+    "category": "agile",
+    "difficulty": "easy",
+    "knowledgePath": "Agile > Practical > Estimation",
+    "question": "Three story points means…",
+    "options": [
+      "Three hours of work",
+      "Three days of work",
+      "A relative size compared to other stories (e.g. slightly bigger than a 2-pointer)",
+      "Three developers needed"
+    ],
+    "correctIndex": 2,
+    "explanation": "Story points are RELATIVE — a 3 is bigger than a 2 and smaller than a 5. They factor complexity + effort + uncertainty. Absolute time mappings vary by team and person."
+  },
+  {
+    "id": "q-781",
+    "category": "agile",
+    "difficulty": "easy",
+    "knowledgePath": "Agile > Practical > Version Control",
+    "question": "Two developers branch from main: one works on the Sales module, the other on the Orders module. When both merge back, what's expected?",
+    "options": [
+      "Always conflicts because Mendix is monolithic",
+      "Clean auto-merge because the changes are in different modules",
+      "Manual conflict resolution always required",
+      "Only one merge is allowed at a time"
+    ],
+    "correctIndex": 1,
+    "explanation": "Mendix Team Server (Git underneath) auto-merges non-overlapping changes — different modules, different microflows. Conflicts only arise when both edit the same document. Branching is the standard parallel-work pattern."
+  },
+  {
+    "id": "q-782",
+    "category": "domain-model",
+    "difficulty": "medium",
+    "knowledgePath": "Domain Model > Practical > Generalization Tradeoff",
+    "question": "You need to model both Persons and Companies as customers in a CRM. Most flexible approach?",
+    "options": [
+      "Two unrelated entities Person and Company",
+      "Abstract Customer with specializations Person and Company",
+      "One entity with a 'type' enum and nullable fields per type",
+      "Reuse the same Customer entity for both"
+    ],
+    "correctIndex": 1,
+    "explanation": "Generalization Customer → Person, Company gives shared attributes (Email, Address) plus type-specific ones (DateOfBirth for Person, VATNumber for Company). Single entity with nullable fields creates data integrity gaps. Unrelated entities duplicate shared logic."
+  },
+  {
+    "id": "q-783",
+    "category": "domain-model",
+    "difficulty": "medium",
+    "knowledgePath": "Domain Model > Practical > Delete Behavior",
+    "question": "When deleting a Project, all associated Tasks should be removed too. When deleting a Task, the Project should remain. Which delete behaviors?",
+    "options": [
+      "Project → Task: cascade delete; Task → Project: keep",
+      "Both cascade",
+      "Project → Task: keep; Task → Project: cascade",
+      "Both prevent delete"
+    ],
+    "correctIndex": 0,
+    "explanation": "Cascade from Project to Task removes tasks when project is deleted. From Task to Project = keep, so deleting a task leaves the project intact. Delete behavior is set PER side of the association."
+  },
+  {
+    "id": "q-784",
+    "category": "domain-model",
+    "difficulty": "medium",
+    "knowledgePath": "Domain Model > Practical > Calculated vs Stored",
+    "question": "An Order has many OrderLines. You need Order.Total. The Total is shown on a list of 1000 Orders. Best approach for performance?",
+    "options": [
+      "Calculated attribute that sums OrderLines on every retrieve",
+      "Stored attribute updated by an After Commit handler on OrderLine",
+      "Compute on the page via expression",
+      "Use a microflow data source on the grid"
+    ],
+    "correctIndex": 1,
+    "explanation": "Stored is much faster for list views (no per-row microflow). Update it via OrderLine commit handlers to keep it in sync. Calculated would mean 1000 microflow executions per page load. Page expressions can't sum lists. Microflow data source still has to compute somehow."
+  },
+  {
+    "id": "q-785",
+    "category": "domain-model",
+    "difficulty": "medium",
+    "knowledgePath": "Domain Model > Practical > NPE in Microflow",
+    "question": "You want to gather user filter selections (date range, status) before retrieving Orders. Best modeling?",
+    "options": [
+      "A persistable FilterState entity per user",
+      "A non-persistable FilterState entity created in the microflow",
+      "Pass each filter value as a separate microflow parameter",
+      "Use multiple page parameters"
+    ],
+    "correctIndex": 1,
+    "explanation": "NPE bundles filter values into one object — clean parameter passing, no DB write, no cleanup needed. Persistable creates orphan rows. Many parameters get unwieldy. Page params alone work for simple cases but NPE scales better."
+  },
+  {
+    "id": "q-786",
+    "category": "domain-model",
+    "difficulty": "medium",
+    "knowledgePath": "Domain Model > Practical > Association Direction",
+    "question": "In a hospital app, Patient has up to 5 attending Doctors and a Doctor has many Patients. The association owner should be:",
+    "options": [
+      "Patient — fewer Doctors to track per Patient",
+      "Doctor — they are higher in the hierarchy",
+      "Many-to-many, owner Default (set in modeler)",
+      "Owner doesn't matter, modeler decides"
+    ],
+    "correctIndex": 2,
+    "explanation": "Many-to-many between Patient and Doctor with owner Default stores the association on Patient (the side you draw from). The modeler's recommendation: 'start from the side with more instances' — there are usually more patients than doctors per day."
+  },
+  {
+    "id": "q-787",
+    "category": "microflows",
+    "difficulty": "medium",
+    "knowledgePath": "Microflows > Practical > Bulk Update Performance",
+    "question": "You need to update 5000 Customers, setting LoyaltyTier based on TotalSpent. Best approach?",
+    "options": [
+      "For Each loop with Change Object + Commit per iteration",
+      "For Each loop with Change Object, then a single Commit Object(s) on the full list at the end",
+      "Recursive sub-microflow",
+      "Run a scheduled event instead"
+    ],
+    "correctIndex": 1,
+    "explanation": "Batching to a single Commit at the end is dramatically faster than 5000 commits — one transaction vs 5000. Recursion offers no perf benefit. A scheduled event might run the work but the same batching applies."
+  },
+  {
+    "id": "q-788",
+    "category": "microflows",
+    "difficulty": "medium",
+    "knowledgePath": "Microflows > Practical > Error Handling",
+    "question": "Your microflow imports CSV data row by row. If row 50 fails, you want rows 1-49 to be saved and the failure logged. Which error handling on the import sub-microflow call?",
+    "options": [
+      "Default (Rollback)",
+      "Custom with rollback",
+      "Custom without rollback — preserves rows 1-49 before the failure",
+      "Continue — silently skip failures"
+    ],
+    "correctIndex": 2,
+    "explanation": "Custom without rollback preserves changes made before the failure — exactly the requirement. Default rollback wipes all 49 successes. Custom with rollback also reverts. Continue silently swallows, making debugging harder."
+  },
+  {
+    "id": "q-789",
+    "category": "microflows",
+    "difficulty": "medium",
+    "knowledgePath": "Microflows > Practical > List Operation Choice",
+    "question": "You have a list of Orders. You need the ones with Total > 100 AND from this month. Most idiomatic?",
+    "options": [
+      "For Each loop, push to a new list per match",
+      "List Operation: Filter with both conditions in the expression",
+      "XPath retrieve with both conditions",
+      "Two sequential Filters"
+    ],
+    "correctIndex": 1,
+    "explanation": "Filter with a combined boolean expression is one step, readable, fast. If the list comes from the database, XPath at retrieve time is even better. Loops are imperative noise. Two filters is just one filter split."
+  },
+  {
+    "id": "q-790",
+    "category": "microflows",
+    "difficulty": "medium",
+    "knowledgePath": "Microflows > Practical > Object Type Decision",
+    "question": "You have a list of Vehicles. Cars need fuel cost calculations; Trucks need cargo-weight calculations. Inside a For Each loop, how do you branch?",
+    "options": [
+      "Decision based on a 'Type' attribute",
+      "Object Type Decision with paths for Car and Truck",
+      "Cast Object on every iteration",
+      "Two separate microflows called sequentially"
+    ],
+    "correctIndex": 1,
+    "explanation": "Object Type Decision branches on the specialization automatically AND gives you a typed reference per branch (no manual Cast). Attribute-based decisions need a Cast follow-up. Casting unconditionally is wasteful. Two microflows would re-iterate the list."
+  },
+  {
+    "id": "q-791",
+    "category": "microflows",
+    "difficulty": "medium",
+    "knowledgePath": "Microflows > Practical > Sub-Microflow Context",
+    "question": "From a button on a page, ACT_PlaceOrder calls SUB_ValidateInventory. The user lacks access to SUB_ValidateInventory but has access to ACT_PlaceOrder. What happens?",
+    "options": [
+      "The call to SUB_ fails with a permission error",
+      "Both run — internal microflow calls aren't re-checked for role",
+      "SUB_ silently aborts",
+      "The button is hidden at deploy time"
+    ],
+    "correctIndex": 1,
+    "explanation": "Role checks apply only to client-initiated invocations. Once a microflow is running, internal calls bypass role checks. This is intentional — but it means microflow access alone isn't a security boundary."
+  },
+  {
+    "id": "q-792",
+    "category": "nanoflows",
+    "difficulty": "medium",
+    "knowledgePath": "Nanoflows > Practical > Online Performance",
+    "question": "You build a nanoflow that, on page load, retrieves the user's Orders from the database. The page feels slow. Why?",
+    "options": [
+      "Nanoflows are slow on web",
+      "Retrieving persistable entities in an online nanoflow triggers a network round-trip — same cost as a microflow plus extra overhead",
+      "Browsers cache nanoflow results",
+      "Mendix prevents nanoflows from accessing the database in browsers"
+    ],
+    "correctIndex": 1,
+    "explanation": "Online nanoflows that touch persistable entities phone home for every Create/Retrieve/Commit. The 'fast because client-side' advantage only applies when there's no database work. For Order retrieval, use a microflow data source on the page; reserve nanoflows for pure UI logic."
+  },
+  {
+    "id": "q-793",
+    "category": "nanoflows",
+    "difficulty": "medium",
+    "knowledgePath": "Nanoflows > Practical > JS Action Promise",
+    "question": "Your JavaScript action calls fetch() and returns a Promise that resolves in 2 seconds. The nanoflow then calls Show Message with the result. What does the user see during those 2 seconds?",
+    "options": [
+      "A frozen UI",
+      "The page remains responsive; Show Message appears after the Promise resolves",
+      "An error",
+      "Nothing — Show Message runs immediately with empty data"
+    ],
+    "correctIndex": 1,
+    "explanation": "JavaScript actions are async-aware. The nanoflow waits for the Promise without blocking the UI. Show Message fires once the result is ready. Treating JS actions as synchronous is a common misconception."
+  },
+  {
+    "id": "q-794",
+    "category": "nanoflows",
+    "difficulty": "medium",
+    "knowledgePath": "Nanoflows > Practical > NPE Without Network",
+    "question": "You want to build a nanoflow that creates many NPE objects without server round-trips for filtering UI state. What must you avoid on the NPE?",
+    "options": [
+      "Validation rules",
+      "Event handlers, calculated attributes, and read-only attributes",
+      "Required attributes",
+      "Generalization"
+    ],
+    "correctIndex": 1,
+    "explanation": "NPE Create stays client-side ONLY if the NPE has no event handlers, calculated attributes, or read-only attributes. Adding any of these forces the runtime to involve the server. Other features (validation rules don't apply to NPEs; required is fine; generalization is fine) don't trigger this."
+  },
+  {
+    "id": "q-795",
+    "category": "nanoflows",
+    "difficulty": "medium",
+    "knowledgePath": "Nanoflows > Practical > Synchronize Strategy",
+    "question": "Your offline mobile app has 50,000 Customer rows on the server. The first Synchronize call downloads ALL of them, making startup slow. Best fix?",
+    "options": [
+      "Live with it — first sync is always slow",
+      "Add offline access rules with XPath constraints so each user syncs only their own subset",
+      "Compress the data",
+      "Run sync in the background after login"
+    ],
+    "correctIndex": 1,
+    "explanation": "Offline access rules with XPath narrow what each user syncs (e.g. their assigned customers only). 50K → maybe 100 customers per user = fast. Compression doesn't reduce row count; background sync still pulls 50K. Constrain the data."
+  },
+  {
+    "id": "q-796",
+    "category": "nanoflows",
+    "difficulty": "medium",
+    "knowledgePath": "Nanoflows > Practical > Page Object Passing",
+    "question": "A nanoflow on page A opens page B via Show Page, passing $Order. After Show Page, the nanoflow does Commit Object on $Order. Will page B see the committed change?",
+    "options": [
+      "No — Show Page captures a snapshot",
+      "Yes — objects pass by reference; page B holds the same object reference and sees the update",
+      "Only if page B refreshes manually",
+      "Depends on the data source of page B's data view"
+    ],
+    "correctIndex": 1,
+    "explanation": "Mendix passes objects by reference. Subsequent mutations to $Order are visible on page B because both screens share the same in-memory object. The data source choice affects initial load behavior but not subsequent reference-based updates."
+  },
+  {
+    "id": "q-797",
+    "category": "modules",
+    "difficulty": "medium",
+    "knowledgePath": "Modules > Practical > Extending Add-on",
+    "question": "A Marketplace add-on module exposes Customer entity at Usable level. You need a CustomerExtended with extra fields. Approach?",
+    "options": [
+      "Edit the add-on module directly",
+      "Create a specialization CustomerExtended in your own module that extends the add-on's Customer",
+      "Fork the module",
+      "Re-implement Customer from scratch"
+    ],
+    "correctIndex": 1,
+    "explanation": "Specialization works because Usable allows reference and inheritance. Editing the add-on is impossible (.mxmodule is protected) and breaks updates. Forking diverges you from upstream. Re-implementing loses the add-on's functionality."
+  },
+  {
+    "id": "q-798",
+    "category": "modules",
+    "difficulty": "medium",
+    "knowledgePath": "Modules > Practical > Java Dependency Conflict",
+    "question": "You install Marketplace module A using guava 30.x. Now you install module B that requires guava 32.x. What's expected?",
+    "options": [
+      "Both versions coexist transparently",
+      "Studio Pro keeps the newer version; you must verify A still works with 32.x",
+      "Build fails immediately",
+      "Module B is rejected"
+    ],
+    "correctIndex": 1,
+    "explanation": "Studio Pro deduplicates JARs to the newer version. The Mendix runtime has ONE classpath — so A's code runs against guava 32 even though it was built against 30. If A relies on 30-only methods, you get runtime errors. Always test after JAR upgrades."
+  },
+  {
+    "id": "q-799",
+    "category": "modules",
+    "difficulty": "medium",
+    "knowledgePath": "Modules > Practical > Marketplace Publishing",
+    "question": "You want to share a module with another team within your org, source-included, so they can adapt it. Export format?",
+    "options": [
+      ".mxmodule",
+      ".mpk",
+      ".zip",
+      "Email screenshot"
+    ],
+    "correctIndex": 1,
+    "explanation": ".mpk = full source for internal sharing. .mxmodule is protected/read-only (for Marketplace where you don't want consumers reading source). .zip and screenshots aren't valid module export formats."
+  },
+  {
+    "id": "q-800",
+    "category": "modules",
+    "difficulty": "medium",
+    "knowledgePath": "Modules > Practical > Module Versioning",
+    "question": "Your add-on module is at version 1.2.0. You add a breaking change (renaming an entity). New version should be?",
+    "options": [
+      "1.2.1 — small fix",
+      "1.3.0 — minor version",
+      "2.0.0 — major bump for breaking change",
+      "No version change needed"
+    ],
+    "correctIndex": 2,
+    "explanation": "Semantic versioning: breaking changes bump the major (2.0.0). Minor adds backward-compatible features (1.3.0). Patch fixes bugs (1.2.1). Renaming an entity breaks references in consuming apps — explicitly major."
+  },
+  {
+    "id": "q-801",
+    "category": "modules",
+    "difficulty": "medium",
+    "knowledgePath": "Modules > Practical > Cross-Module Security",
+    "question": "Module Sales has access rules on Customer. You import a new module Reporting that needs to query Customer. What works?",
+    "options": [
+      "Reporting auto-inherits Sales's access rules",
+      "Reporting must declare module roles compatible with Sales's, then link them at app level",
+      "Reporting bypasses security",
+      "Reporting cannot query Customer at all"
+    ],
+    "correctIndex": 1,
+    "explanation": "Each module declares its own roles. App Security composes them into User Roles. Access rules respect the composed user role's combined module rights. Reporting can't auto-inherit (that'd bypass the composition pattern)."
+  },
+  {
+    "id": "q-802",
+    "category": "security",
+    "difficulty": "medium",
+    "knowledgePath": "Security > Practical > XPath Performance",
+    "question": "Access rule XPath: `[Project/Sales.Project_Member/Sales.Member[Member_User='[%CurrentUser%]']]`. The table has 5M rows. Performance is poor. First fix?",
+    "options": [
+      "Disable security on the entity",
+      "Restructure data so the User reference lives directly on the entity, eliminating the 3-hop join",
+      "Add a microflow that pre-filters",
+      "Limit page size to 10"
+    ],
+    "correctIndex": 1,
+    "explanation": "Each '/' in XPath is a JOIN. 3-hop joins on millions of rows are expensive. Restructuring to a single direct reference dramatically reduces query cost. Disabling security is dangerous; microflow pre-filtering breaks security guarantees; page size doesn't help indexed/joined queries."
+  },
+  {
+    "id": "q-803",
+    "category": "security",
+    "difficulty": "medium",
+    "knowledgePath": "Security > Practical > Run With All Rights",
+    "question": "In an Order workflow, you want a normal User to trigger a microflow that internally needs to create an Audit row. The User has no Create access on Audit. What enables this?",
+    "options": [
+      "Add Create access to User for Audit",
+      "Set 'Run with all rights' on the microflow that creates the Audit",
+      "Bypass security in a sub-microflow",
+      "Use a Java action"
+    ],
+    "correctIndex": 1,
+    "explanation": "'Run with all rights' on a sub-microflow lets it perform DB operations the calling user can't — useful for system-level invariants. Grant the user Create on Audit and you'd allow them to create arbitrary audit rows. Java actions also have an elevated context but a microflow setting is simpler."
+  },
+  {
+    "id": "q-804",
+    "category": "security",
+    "difficulty": "medium",
+    "knowledgePath": "Security > Practical > Page vs Entity Security",
+    "question": "You hide page 'AdminPanel' from regular users via Module Security. A regular user crafts a deeplink URL to it. What protects the data?",
+    "options": [
+      "Mendix blocks the deeplink automatically",
+      "Page hide blocks rendering",
+      "Only the entity access rules on the data displayed by the page",
+      "Module Security alone is sufficient"
+    ],
+    "correctIndex": 2,
+    "explanation": "Page hide only removes from navigation menus — deeplinks bypass it. Real data protection requires entity-level access rules. The pattern is BOTH: page hide for UX + entity rules for security."
+  },
+  {
+    "id": "q-805",
+    "category": "security",
+    "difficulty": "medium",
+    "knowledgePath": "Security > Practical > Anonymous Authentication",
+    "question": "You want public visitors to browse the product catalog without signing in, AND signed-in users to see prices. How?",
+    "options": [
+      "Two separate apps",
+      "Enable Anonymous access with read-only role; restrict price visibility to signed-in roles via entity access rules",
+      "Force everyone to sign in",
+      "Use IP filtering"
+    ],
+    "correctIndex": 1,
+    "explanation": "Anonymous user gets the public catalog access (one role). Signed-in users get additional role granting price visibility. Entity access rules per role decide who sees what attributes. Two apps duplicates everything; forcing sign-in blocks public browsing."
+  },
+  {
+    "id": "q-806",
+    "category": "security",
+    "difficulty": "medium",
+    "knowledgePath": "Security > Practical > Create Constraints",
+    "question": "An access rule on Project: Create=true with XPath `[Owner = '[%CurrentUser%]']`. Customer A tries to create a Project setting Owner=Customer B. What happens?",
+    "options": [
+      "Rejected — XPath blocks the Create",
+      "Allowed — XPath constraints don't apply to Create operations",
+      "Allowed only with admin override",
+      "Rejected after commit"
+    ],
+    "correctIndex": 1,
+    "explanation": "XPath constraints filter Read/Write/Delete on EXISTING rows but don't apply to Create. To enforce 'Owner must be current user' on creation, use a Before Create event handler that sets Owner explicitly. This rule trips up many access-control designers."
+  },
+  {
+    "id": "q-807",
+    "category": "pages",
+    "difficulty": "medium",
+    "knowledgePath": "Pages > Practical > Data Grid Source",
+    "question": "You have a grid showing Orders with search and column-sort. You want fast filtering on millions of rows. Best data source?",
+    "options": [
+      "Microflow — total control",
+      "Database — search and sort pushed to SQL",
+      "Association — follows the link",
+      "XPath datasource on a nanoflow"
+    ],
+    "correctIndex": 1,
+    "explanation": "Database source pushes search/sort to the database, fast and indexed. Microflow source returns a fully-materialized list; search/sort happens in-memory in the runtime, slow on millions. Association is for related-object lists, not free-form queries."
+  },
+  {
+    "id": "q-808",
+    "category": "pages",
+    "difficulty": "medium",
+    "knowledgePath": "Pages > Practical > Nested Data View",
+    "question": "You have a tabbed Order Edit page with a nested data view showing CustomerProfile inside one tab. You want save/cancel buttons in that nested view. Where do they go?",
+    "options": [
+      "The nested data view's footer",
+      "Inside the nested data view's body (e.g. a container at the bottom)",
+      "The outer data view's footer",
+      "Outside the tab entirely"
+    ],
+    "correctIndex": 1,
+    "explanation": "Nested data view footers are ALWAYS invisible — you can't make them appear. Place buttons in the body as a regular container. The outer footer works but interferes with the overall page save/cancel."
+  },
+  {
+    "id": "q-809",
+    "category": "pages",
+    "difficulty": "medium",
+    "knowledgePath": "Pages > Practical > Editability",
+    "question": "On a Customer detail page, only admins should be able to edit. Best UI pattern?",
+    "options": [
+      "Two separate pages, navigate based on role",
+      "Data view Editability = Conditionally with expression based on $currentUser/role",
+      "Hide save button only",
+      "Use App Security to block the page"
+    ],
+    "correctIndex": 1,
+    "explanation": "Conditional Editability with expression `member of role 'Admin'` is declarative and centralized. Two pages doubles maintenance. Hiding save only is incomplete (form still appears editable). Blocking the page entirely prevents view-only access."
+  },
+  {
+    "id": "q-810",
+    "category": "pages",
+    "difficulty": "medium",
+    "knowledgePath": "Pages > Practical > Snippet Parameter",
+    "question": "You build a snippet 'OrderSummary' that requires an Order parameter. You want to embed it on a page whose context is Customer. How?",
+    "options": [
+      "Snippets read context automatically",
+      "Wrap the snippet in a data view that retrieves the Order from Customer via a microflow source",
+      "Change the snippet to take Customer",
+      "Add a button that opens a popup with the snippet"
+    ],
+    "correctIndex": 1,
+    "explanation": "Snippet parameters must be supplied. Wrapping in a data view sourced from a microflow that returns Customer→Order satisfies the parameter without changing the snippet. Changing the snippet's signature defeats reuse. Auto context reading isn't supported for snippets."
+  },
+  {
+    "id": "q-811",
+    "category": "pages",
+    "difficulty": "medium",
+    "knowledgePath": "Pages > Practical > Mobile Migration",
+    "question": "You're migrating a classic web app to native mobile and React. Your pages use classic Data Grid. Replacement?",
+    "options": [
+      "Data Grid 2 — designed for React client and offers similar functionality",
+      "Gallery — same widget type",
+      "List View — same paging behavior",
+      "Don't migrate — use a compatibility shim"
+    ],
+    "correctIndex": 0,
+    "explanation": "Data Grid 2 is the React-client replacement with comparable features plus virtualization. Gallery is a card-style layout, not a grid. List View has different rendering. Compatibility shims for classic Data Grid don't exist."
+  },
+  {
+    "id": "q-812",
+    "category": "xpath",
+    "difficulty": "medium",
+    "knowledgePath": "XPath > Practical > Performance",
+    "question": "You filter Customers by `[contains(Name, 'jansen')]` and the query is slow on millions of rows. Why?",
+    "options": [
+      "Mendix doesn't support contains()",
+      "contains() translates to SQL LIKE '%jansen%' which cannot use an index — full table scan",
+      "Strings shorter than 8 chars can't be matched",
+      "contains() is restricted to admins"
+    ],
+    "correctIndex": 1,
+    "explanation": "LIKE '%pattern%' bypasses btree indexes. Alternatives: index-friendly startsWith(), or full-text search via database extensions. Mendix does support contains() — it's just expensive at scale."
+  },
+  {
+    "id": "q-813",
+    "category": "xpath",
+    "difficulty": "medium",
+    "knowledgePath": "XPath > Practical > Association Path",
+    "question": "You want Orders whose Customer's Name starts with 'A'. The association is Sales.Customer_Order between Order and Customer. XPath?",
+    "options": [
+      "[Customer.Name like 'A%']",
+      "[Sales.Customer_Order/Sales.Customer/Name = 'A%']",
+      "[Sales.Customer_Order/Sales.Customer[startsWith(Name, 'A')]]",
+      "//Sales.Order WHERE Customer.Name LIKE 'A%'"
+    ],
+    "correctIndex": 2,
+    "explanation": "XPath navigates via association name + target entity. startsWith() is the right function for prefix matching. Dot notation isn't valid XPath. SQL syntax doesn't apply."
+  },
+  {
+    "id": "q-814",
+    "category": "xpath",
+    "difficulty": "medium",
+    "knowledgePath": "XPath > Practical > Token Use",
+    "question": "In an access rule on Project, you want projects whose Manager equals the current user. Constraint?",
+    "options": [
+      "[Manager = '$currentUser']",
+      "[Sales.Project_Manager/System.User = '[%CurrentUser%]']",
+      "[Manager = currentUser()]",
+      "[Manager = '[%User%]']"
+    ],
+    "correctIndex": 1,
+    "explanation": "Navigate via the association name to the System.User and compare with the `[%CurrentUser%]` token. `$currentUser` is for microflow expressions, not XPath constraints. `currentUser()` and `[%User%]` aren't real tokens."
+  },
+  {
+    "id": "q-815",
+    "category": "xpath",
+    "difficulty": "medium",
+    "knowledgePath": "XPath > Practical > Empty Association",
+    "question": "Find Orders that have NO associated Invoice (Sales.Order_Invoice association exists).",
+    "options": [
+      "[Sales.Order_Invoice = null]",
+      "[Sales.Order_Invoice = empty]",
+      "[not(Sales.Order_Invoice/Sales.Invoice)]",
+      "Both B and C work"
+    ],
+    "correctIndex": 3,
+    "explanation": "`= empty` and `not(association/target)` are both valid ways to check for absence. `= null` is SQL. Knowing both forms is useful — different patterns read more naturally in different contexts."
+  },
+  {
+    "id": "q-816",
+    "category": "xpath",
+    "difficulty": "medium",
+    "knowledgePath": "XPath > Practical > Case Sensitivity",
+    "question": "XPath `[Name = 'jansen']` finds nothing, even though 'Jansen' exists. What's happening?",
+    "options": [
+      "XPath is case-sensitive — 'jansen' ≠ 'Jansen'",
+      "Mendix indexes are case-sensitive",
+      "Both A and B describe the issue. Fix: `[toLowerCase(Name) = 'jansen']` or use contains()",
+      "Mendix encodes Names as UTF-16, breaking comparison"
+    ],
+    "correctIndex": 2,
+    "explanation": "XPath string equality is case-sensitive. Fix by normalizing both sides with toLowerCase() or using contains() (still case-sensitive by default, but you can pair with toLowerCase). UTF-16 encoding is not the issue."
+  },
+  {
+    "id": "q-817",
+    "category": "integration",
+    "difficulty": "medium",
+    "knowledgePath": "Integration > Practical > Pagination",
+    "question": "You consume a partner REST API that returns 100 records per page with `?page=N` parameter and a `next_page` field. Your microflow needs ALL results. Approach?",
+    "options": [
+      "Call once with page=1 and assume that's all",
+      "Call with page=ALL",
+      "Loop: call REST, accumulate, while next_page is non-empty, increment page; recurrence terminates when next_page is empty",
+      "Use a recursive sub-microflow"
+    ],
+    "correctIndex": 2,
+    "explanation": "Standard pagination = loop until exhausted. Accumulate results into a list. `next_page` empty ends the loop. There's no ?page=ALL convention. Recursion works but offers no advantage over a loop and risks stack overflow on many pages."
+  },
+  {
+    "id": "q-818",
+    "category": "integration",
+    "difficulty": "medium",
+    "knowledgePath": "Integration > Practical > REST Timeout",
+    "question": "A REST call to a slow partner takes up to 120 seconds. You hit a 30-second timeout. Fix?",
+    "options": [
+      "Switch to SOAP",
+      "Configure the timeout property on the Call REST Service activity to allow 120s+",
+      "Catch the timeout and retry",
+      "Move to a nanoflow"
+    ],
+    "correctIndex": 1,
+    "explanation": "Call REST has configurable timeouts. Default may be conservative; raising it for legitimately-slow services is the fix. Retrying without raising the timeout would still timeout. SOAP has timeouts too. Nanoflows can't call REST directly."
+  },
+  {
+    "id": "q-819",
+    "category": "integration",
+    "difficulty": "medium",
+    "knowledgePath": "Integration > Practical > Idempotency",
+    "question": "You call a payment-create REST endpoint. The network drops mid-request — you didn't get a response. Your error handler retries. Risk?",
+    "options": [
+      "The retry safely overwrites the original",
+      "If the original actually succeeded, the retry creates a second payment — a double-charge",
+      "Mendix automatically deduplicates",
+      "REST calls are idempotent by definition"
+    ],
+    "correctIndex": 1,
+    "explanation": "Dropped response doesn't mean dropped request — the server may have processed it. Naive retries create duplicates. Mitigation: use an Idempotency-Key header (if API supports), or query before retry. This is a top distributed-systems pitfall, not a Mendix one — but it bites you in Mendix integrations."
+  },
+  {
+    "id": "q-820",
+    "category": "integration",
+    "difficulty": "medium",
+    "knowledgePath": "Integration > Practical > Find by Key",
+    "question": "Daily import of 1000 customer rows. 200 already exist by email; 800 are new. Object Handling = Find by key on Email. After import?",
+    "options": [
+      "200 updated, 800 inserted",
+      "All 1000 inserted",
+      "200 skipped, 800 inserted",
+      "The import is rejected"
+    ],
+    "correctIndex": 0,
+    "explanation": "Find by key is upsert. Match → update; no match → insert. 200 existing emails get updated; 800 fresh ones get inserted. Create object always would have inserted 200 duplicates."
+  },
+  {
+    "id": "q-821",
+    "category": "integration",
+    "difficulty": "medium",
+    "knowledgePath": "Integration > Practical > Anonymous + REST",
+    "question": "You publish a REST endpoint with both Anonymous user enabled and Basic auth available. A request arrives without credentials. What context applies?",
+    "options": [
+      "Rejected with 401",
+      "Treated as Anonymous, runs under the Anonymous user role's access rules",
+      "Treated as System user",
+      "Queued until credentials arrive"
+    ],
+    "correctIndex": 1,
+    "explanation": "With Anonymous enabled, missing creds fall through to the Anonymous role. The endpoint runs under that role's permissions — so configure those rules tightly. 401 only fires if Anonymous isn't enabled."
+  },
+  {
+    "id": "q-822",
+    "category": "java",
+    "difficulty": "medium",
+    "knowledgePath": "Java > Practical > Resource Cleanup",
+    "question": "A Java action opens a JDBC connection to an external database, runs a query, returns. Memory grows over time. Likely cause?",
+    "options": [
+      "Connection pool exhaustion is expected",
+      "The action doesn't close the Connection/ResultSet; use try-with-resources or finally-close",
+      "JDBC is incompatible with Mendix",
+      "Mendix's GC is slow"
+    ],
+    "correctIndex": 1,
+    "explanation": "Classic resource leak — connections and result sets must be closed. try-with-resources is the idiomatic Java fix. Mendix doesn't manage external JDBC connections for you. GC speed isn't the issue."
+  },
+  {
+    "id": "q-823",
+    "category": "java",
+    "difficulty": "medium",
+    "knowledgePath": "Java > Practical > Sudo Context",
+    "question": "You need a Java action that reads Customer rows even when the calling user lacks Read access. Approach?",
+    "options": [
+      "Refactor the action to take pre-loaded data as parameter",
+      "Use the Core API's system/sudo context to retrieve with elevated rights",
+      "Disable Customer's access rules globally",
+      "Wrap the call in try/catch"
+    ],
+    "correctIndex": 1,
+    "explanation": "Sudo context lets your Java action perform privileged operations explicitly. Use sparingly and audit. Disabling rules globally is dangerous. try/catch suppresses errors but doesn't elevate. Refactoring to take data avoids the issue but isn't always feasible."
+  },
+  {
+    "id": "q-824",
+    "category": "java",
+    "difficulty": "medium",
+    "knowledgePath": "Java > Practical > USER CODE Markers",
+    "question": "You add a private helper method inside the generated MyJavaAction.java OUTSIDE the //BEGIN USER CODE markers. What happens on next deploy?",
+    "options": [
+      "Studio Pro preserves it as a sibling method",
+      "The helper is overwritten by code generation",
+      "Studio Pro warns you about non-marker code",
+      "Studio Pro creates a new marker around it"
+    ],
+    "correctIndex": 1,
+    "explanation": "Code outside USER CODE markers is unconditionally overwritten on regeneration. No warnings, no auto-marker. Put helpers INSIDE the markers or in a separate utility class."
+  },
+  {
+    "id": "q-825",
+    "category": "java",
+    "difficulty": "medium",
+    "knowledgePath": "Java > Practical > Type Safety",
+    "question": "You write Java code using proxy classes to read Customer.Email. The domain model is later changed to rename Email → ContactEmail. What happens to your Java code?",
+    "options": [
+      "It auto-renames",
+      "It compiles successfully but fails at runtime",
+      "It fails to compile — proxies regenerate to match the new domain model, removing the old getter",
+      "It silently uses ContactEmail"
+    ],
+    "correctIndex": 2,
+    "explanation": "Type-safe proxy access is a strength: rename surfaces as a compile error, not a silent runtime bug. You then update Java to match. Without proxies (raw XPath strings) the breakage would only show at runtime, harder to find."
+  },
+  {
+    "id": "q-826",
+    "category": "java",
+    "difficulty": "medium",
+    "knowledgePath": "Java > Practical > Java vs JavaScript",
+    "question": "You need custom code that reads the device's microphone. Java or JavaScript action?",
+    "options": [
+      "Java action",
+      "JavaScript action — device APIs are accessible only client-side",
+      "Both work",
+      "Neither — Mendix doesn't support hardware APIs"
+    ],
+    "correctIndex": 1,
+    "explanation": "Microphone, camera, GPS — device hardware lives on the client. JavaScript actions called from nanoflows reach navigator.mediaDevices. Java runs server-side and can't touch client hardware."
+  },
+  {
+    "id": "q-827",
+    "category": "events",
+    "difficulty": "medium",
+    "knowledgePath": "Events > Practical > After Commit Side Effect",
+    "question": "Your Order's After Commit handler sends a confirmation email via REST. The commit succeeds and the email is sent. Then the calling microflow throws and rolls back. What's the database state?",
+    "options": [
+      "Both the Order commit and the email are rolled back",
+      "The Order is rolled back; the email was already sent — external side effects aren't transactional",
+      "Mendix retries the email send",
+      "The After Commit handler is re-triggered"
+    ],
+    "correctIndex": 1,
+    "explanation": "After Commit fires inside the transaction, but external side effects (emails, REST) bypass transactional semantics. Rollback undoes DB state but not what's already left the system. Defer external work to AFTER the commit completes for guaranteed consistency."
+  },
+  {
+    "id": "q-828",
+    "category": "events",
+    "difficulty": "medium",
+    "knowledgePath": "Events > Practical > Before Commit Recursion",
+    "question": "Your Before Commit handler on Order conditionally modifies an attribute and calls Commit on Order. What happens?",
+    "options": [
+      "The second Commit is a no-op",
+      "Infinite loop: each Commit fires Before Commit, which Commits, which fires Before Commit...",
+      "Mendix detects and aborts",
+      "A second transaction starts"
+    ],
+    "correctIndex": 1,
+    "explanation": "Before Commit fires on every commit — including ones triggered from inside the handler. Infinite recursion. Mendix does NOT auto-detect this. The fix is to use Change Object inside the handler (no explicit Commit) so the OUTER commit persists the modified state."
+  },
+  {
+    "id": "q-829",
+    "category": "events",
+    "difficulty": "medium",
+    "knowledgePath": "Events > Practical > Validation Inheritance",
+    "question": "Person has a Required rule on Email. You create Employee specializing Person. A microflow creates Employee without setting Email and commits. What happens?",
+    "options": [
+      "The commit succeeds — Employee skips Person's rules",
+      "The commit fails — validation rules ARE inherited (unlike access rules)",
+      "Mendix warns but commits",
+      "Employee must redefine the rule"
+    ],
+    "correctIndex": 1,
+    "explanation": "Validation rules inherit downward. Employee gets all of Person's rules automatically. Confusing this with access rules (NOT inherited) is a common trap. Validation = inherited; Access = explicit per entity."
+  },
+  {
+    "id": "q-830",
+    "category": "events",
+    "difficulty": "medium",
+    "knowledgePath": "Events > Practical > Soft Delete",
+    "question": "You want 'deletes' on Order to actually mark IsDeleted=true (soft delete). Implementation?",
+    "options": [
+      "Override Delete in the System module",
+      "Before Delete handler: set IsDeleted=true on the object, then return false to cancel the physical delete",
+      "After Delete handler that re-inserts a tombstone",
+      "Hide the Delete button only"
+    ],
+    "correctIndex": 1,
+    "explanation": "Before Delete returning false cancels the actual delete. Set IsDeleted=true and return false. Pair with XPath constraints `[IsDeleted = false()]` everywhere to hide soft-deleted rows. After Delete fires AFTER actual delete — too late."
+  },
+  {
+    "id": "q-831",
+    "category": "events",
+    "difficulty": "medium",
+    "knowledgePath": "Events > Practical > Performance Bulk Import",
+    "question": "You're bulk-importing 100k rows. Validation rules on each row run on every commit, slowing things massively. Acceptable optimization?",
+    "options": [
+      "Remove all validation rules",
+      "Use the 'without events and without validation' commit variant during the import, then run validation as a one-off review afterwards",
+      "Disable security during import",
+      "Increase server RAM"
+    ],
+    "correctIndex": 1,
+    "explanation": "Mendix offers a commit variant that skips events and validation — for trusted bulk imports. Validate post-import in a review microflow to catch issues. Removing rules permanently isn't safe; disabling security creates exposure; RAM helps but isn't structural."
+  },
+  {
+    "id": "q-832",
+    "category": "enumerations",
+    "difficulty": "medium",
+    "knowledgePath": "Enumerations > Practical > Migration",
+    "question": "You have an enum OrderStatus with value 'Open'. After 6 months, you want to rename 'Open' to 'Active'. Safe approach?",
+    "options": [
+      "Edit the Name from 'Open' to 'Active'",
+      "Add 'Active' as a new value, write a migration microflow updating rows from 'Open' to 'Active', then remove 'Open'",
+      "Edit the Caption only",
+      "Delete 'Open' and re-add as 'Active'"
+    ],
+    "correctIndex": 1,
+    "explanation": "Names are immutable once data references them. Add new, migrate data, remove old. Captions can be renamed but the Name (stored value) is fixed. Deleting then re-adding loses references."
+  },
+  {
+    "id": "q-833",
+    "category": "enumerations",
+    "difficulty": "medium",
+    "knowledgePath": "Constants > Practical > Sensitive Data",
+    "question": "Your app has an API key constant for an external service. You set Exposed to Client = Yes for convenience. Security implication?",
+    "options": [
+      "No issue — Exposed only affects which flows can access it",
+      "Major issue — exposed constants ship to the browser; anyone with dev tools can read the API key",
+      "No issue — Mendix encrypts exposed constants",
+      "No issue — clients can only read constants in admin mode"
+    ],
+    "correctIndex": 1,
+    "explanation": "Exposed constants are shipped to client devices. Browser dev tools reveal them. NEVER expose secrets — API keys, passwords, tokens — even temporarily. Use Exposed only for non-sensitive feature flags or display preferences."
+  },
+  {
+    "id": "q-834",
+    "category": "enumerations",
+    "difficulty": "medium",
+    "knowledgePath": "Enumerations > Practical > Logging Locale",
+    "question": "You log `$order/Status/getCaption()` to the server log for diagnostics. After adding Dutch translations, logs become mixed-language. Why? Fix?",
+    "options": [
+      "Server logs are always English",
+      "getCaption() returns the locale-specific text — use getKey() instead for language-independent logs",
+      "Mendix randomly picks a language",
+      "Re-enable English-only logging"
+    ],
+    "correctIndex": 1,
+    "explanation": "getCaption() is locale-sensitive (English for English users, Dutch for Dutch users). For diagnostics use getKey() — always the technical Name, language-independent. Simple fix once you know the distinction."
+  },
+  {
+    "id": "q-835",
+    "category": "enumerations",
+    "difficulty": "medium",
+    "knowledgePath": "Constants > Practical > Environment Override",
+    "question": "In production you need PartnerApiUrl = 'https://prod.partner.com', in test = 'https://test.partner.com'. Setup?",
+    "options": [
+      "Two constants, switch between them",
+      "One constant with default = 'https://test.partner.com', override per environment in cloud config to prod URL",
+      "Hardcode the URL in the microflow",
+      "Use a microflow that picks based on context"
+    ],
+    "correctIndex": 1,
+    "explanation": "One constant, per-environment override. Cloud env configuration sets the value at deploy time. Two constants doubles management. Hardcoding requires rebuild per environment. Conditional microflow logic reinvents constants."
+  },
+  {
+    "id": "q-836",
+    "category": "scheduled-events",
+    "difficulty": "medium",
+    "knowledgePath": "Scheduled Events > Practical > Long-Running",
+    "question": "A scheduled event runs every 10 minutes but sometimes takes 15 minutes. Default behavior?",
+    "options": [
+      "The 10-minute slot during the long run is queued and starts immediately after",
+      "The 10-minute slot is skipped; the next attempted run is the next nominal 10-minute mark",
+      "Mendix runs both in parallel",
+      "An error is logged and the event is disabled"
+    ],
+    "correctIndex": 1,
+    "explanation": "Default = Skip Next. Long runs cause subsequent scheduled fires to be skipped until the current one finishes. After that, the next nominal time fires. Skip Next is conservative; 'Delay Next' is the alternative that queues."
+  },
+  {
+    "id": "q-837",
+    "category": "scheduled-events",
+    "difficulty": "medium",
+    "knowledgePath": "Scheduled Events > Practical > Idempotency",
+    "question": "A nightly emails-summary scheduled event sends emails to 1000 users. Mendix Cloud restarts halfway through. Best design?",
+    "options": [
+      "Trust the scheduler to resume",
+      "Track per-user 'last_summary_sent_date' so retries skip already-emailed users — idempotent",
+      "Run twice nightly for safety",
+      "Disable the event until manually resumed"
+    ],
+    "correctIndex": 1,
+    "explanation": "Scheduled events don't checkpoint mid-run. A restart aborts the in-flight execution; the next fire starts fresh. Without idempotency, half your users get double emails. Track per-user state to detect already-done work."
+  },
+  {
+    "id": "q-838",
+    "category": "scheduled-events",
+    "difficulty": "medium",
+    "knowledgePath": "Scheduled Events > Practical > Cluster",
+    "question": "Your app runs on a Mendix Cloud cluster with 3 nodes. A daily scheduled event is configured. How many fires per day across the cluster?",
+    "options": [
+      "3 — one per node",
+      "1 — Mendix scheduler is cluster-aware",
+      "Depends on load balancing",
+      "Configurable"
+    ],
+    "correctIndex": 1,
+    "explanation": "Mendix's scheduler coordinates across nodes — daily means once globally, not per node. Per-node concurrency limit (10) is separate from how often an event fires. Without cluster awareness, daily cleanup would run 3x and corrupt data."
+  },
+  {
+    "id": "q-839",
+    "category": "scheduled-events",
+    "difficulty": "medium",
+    "knowledgePath": "Scheduled Events > Practical > Error Handling",
+    "question": "A scheduled event microflow throws an uncaught exception. What happens at the next scheduled time?",
+    "options": [
+      "The scheduled event is disabled",
+      "The error is logged but the next fire happens normally",
+      "Mendix retries immediately",
+      "All scheduled events in the module are paused"
+    ],
+    "correctIndex": 1,
+    "explanation": "Failures are logged but don't pause future runs. Design scheduled events to be self-healing: catch errors inside, log appropriately, and ensure subsequent runs can recover from previous failures."
+  },
+  {
+    "id": "q-840",
+    "category": "scheduled-events",
+    "difficulty": "medium",
+    "knowledgePath": "Scheduled Events > Practical > UTC vs Local",
+    "question": "You want a daily report at 9:00 AM Amsterdam time (CET, UTC+1 in winter, UTC+2 in summer). Best schedule configuration?",
+    "options": [
+      "Daily at 9:00 UTC",
+      "Daily at 7:00 UTC (Amsterdam summer time)",
+      "Daily at 8:00 UTC (Amsterdam winter time) — accept ±1 hour during DST transitions",
+      "Schedule via app logic, not the scheduler"
+    ],
+    "correctIndex": 2,
+    "explanation": "Mendix Cloud runs UTC. Choose UTC time that approximates Amsterdam 9 AM in the dominant season. Winter (UTC+1) → 8:00 UTC. Summer (UTC+2) → 7:00 UTC. Accept ±1 hour shift during DST changes. For true per-user time, fan out hourly and filter."
+  },
+  {
+    "id": "q-841",
+    "category": "agile",
+    "difficulty": "medium",
+    "knowledgePath": "Agile > Practical > Sprint Planning",
+    "question": "Sprint planning: PO wants 15 story points worth of work. The team's recent velocity is 12. Best response?",
+    "options": [
+      "Commit to 15 to satisfy the PO",
+      "Commit to ~12 based on actual velocity; pick the highest-priority items",
+      "Commit to 20 to push harder",
+      "Skip sprint planning"
+    ],
+    "correctIndex": 1,
+    "explanation": "Velocity is your honest predictor. Committing more leads to burnout and incomplete work. The PO chooses WHICH items based on priority; the team chooses HOW MUCH based on capacity. Padding for politics breaks trust."
+  },
+  {
+    "id": "q-842",
+    "category": "agile",
+    "difficulty": "medium",
+    "knowledgePath": "Agile > Practical > Story Splitting",
+    "question": "A story is estimated at 13 points. What should you do?",
+    "options": [
+      "Accept and commit",
+      "Split it — large stories carry high risk and usually contain multiple smaller increments of value",
+      "Reassign to a senior developer",
+      "Re-estimate as 8 to fit a sprint"
+    ],
+    "correctIndex": 1,
+    "explanation": "13 points is a smell. Almost always splittable. Smaller increments reduce risk, ship value sooner, allow course correction. Reassigning doesn't reduce risk. Re-estimating downward is dishonest."
+  },
+  {
+    "id": "q-843",
+    "category": "agile",
+    "difficulty": "medium",
+    "knowledgePath": "Agile > Practical > Retrospective",
+    "question": "Three sprints in a row the retro produces 'merge conflicts on shared microflows' as an action item. What does this signal?",
+    "options": [
+      "The team needs more git training",
+      "The action item isn't being addressed — try a structural fix (e.g. split frequently-edited microflows into smaller sub-microflows)",
+      "Add coding standards forbidding shared microflows",
+      "Pause parallel work"
+    ],
+    "correctIndex": 1,
+    "explanation": "Recurring action items mean the structural fix isn't tried. In Mendix specifically, large microflows are merge magnets — split them up. Coding standards alone can't enforce architecture; pausing parallel work kills velocity."
+  },
+  {
+    "id": "q-844",
+    "category": "agile",
+    "difficulty": "medium",
+    "knowledgePath": "Agile > Practical > Definition of Done",
+    "question": "For a Mendix project, what should the Definition of Done include?",
+    "options": [
+      "Just 'tests pass'",
+      "Code reviewed, security access rules verified, deployed to test env, accepted by PO, documented per team standards",
+      "All entities are persistable",
+      "100% test coverage"
+    ],
+    "correctIndex": 1,
+    "explanation": "DoD is the team's quality bar. For Mendix specifically, security verification (access rules!) is essential — defaults can drift from policy. Test coverage targets vary by team. Persistability is a design choice, not a DoD criterion."
+  },
+  {
+    "id": "q-845",
+    "category": "agile",
+    "difficulty": "medium",
+    "knowledgePath": "Agile > Practical > MVP Discipline",
+    "question": "While building an MVP, a team starts implementing a sophisticated user-permissions matrix because 'we'll need it eventually'. Agile critique?",
+    "options": [
+      "Fine — agile encourages thoroughness",
+      "Speculative scope delays validation. Defer non-essential complexity until the core hypothesis is validated",
+      "It's a PO decision; not a critique",
+      "Permissions are foundational; this is correct"
+    ],
+    "correctIndex": 1,
+    "explanation": "MVP discipline: ship the smallest thing that validates the hypothesis. Sophisticated permissions might be needed in v2 but block v1 learnings. 'We'll need it eventually' is the most expensive sentence in product development."
+  },
+  {
+    "id": "q-846",
+    "category": "agile",
+    "difficulty": "medium",
+    "knowledgePath": "Agile > Practical > Continuous Deployment",
+    "question": "Your team wants to auto-deploy main to production every commit. Safest Mendix pattern?",
+    "options": [
+      "Auto-deploy commits straight to production",
+      "Auto-deploy to staging, run tests, then a manual approval gate to production",
+      "Deploy from Studio Pro on Fridays",
+      "CD isn't supported in Mendix"
+    ],
+    "correctIndex": 1,
+    "explanation": "Mature CD: auto-deploy to staging, run automated tests, manual approval to prod. Pure commit-to-prod is risky for business apps. Friday deploys are the meme; Mendix supports CD with proper guardrails."
+  },
+  {
+    "id": "q-847",
+    "category": "domain-model",
+    "difficulty": "hard",
+    "knowledgePath": "Domain Model > Practical > Modeling Tradeoff",
+    "question": "A platform supports thousands of tenant orgs. Each tenant has Customers, Products, etc. Best multi-tenant model?",
+    "options": [
+      "One Mendix app per tenant",
+      "All tenants share the same entities; every entity has a Tenant association; access rules constrain by current user's Tenant",
+      "Schema-per-tenant in the database, configured manually",
+      "Use Mendix for Platforms"
+    ],
+    "correctIndex": 3,
+    "explanation": "Mendix for Platforms is purpose-built for multi-tenant scenarios. Option B (single-app multi-tenancy via Tenant association + access rules) is the DIY pattern and works for moderate scale, but Mendix for Platforms handles isolation, scaling, billing per tenant — recommended for serious multi-tenancy."
+  },
+  {
+    "id": "q-848",
+    "category": "domain-model",
+    "difficulty": "hard",
+    "knowledgePath": "Domain Model > Practical > Hot Attribute Update",
+    "question": "Customer.LastSeenAt should update on every user activity. With 100K users daily, you risk row-level contention. Best approach?",
+    "options": [
+      "Update LastSeenAt synchronously on every request",
+      "Throttle: track last update per user in memory, write to DB at most every 60 seconds",
+      "Drop LastSeenAt — it's not worth the cost",
+      "Use a calculated attribute"
+    ],
+    "correctIndex": 1,
+    "explanation": "Hot rows under heavy update cause lock contention. Throttling (write-coalescing) cuts writes 60x with minimal accuracy loss. Synchronous on every request scales poorly. Dropping data is loss of capability. Calculated attributes are read-only and don't solve the problem."
+  },
+  {
+    "id": "q-849",
+    "category": "domain-model",
+    "difficulty": "hard",
+    "knowledgePath": "Domain Model > Practical > Polymorphic Storage",
+    "question": "You have Events: ClickEvent, PurchaseEvent, ViewEvent. Each has different attributes but you query them together for analytics. Best model?",
+    "options": [
+      "Three unrelated entities and three separate queries",
+      "Single Event entity with JSON-blob attribute for type-specific data",
+      "Abstract Event generalization with specializations per type",
+      "Single Event entity with all possible attributes nullable"
+    ],
+    "correctIndex": 2,
+    "explanation": "Generalization gives queryable polymorphism: retrieve Event to get all types; retrieve a specific specialization for type-aware logic. Three unrelated entities lose the unified queryability. JSON-blob attributes lose type safety. Wide-nullable schemas waste space and obscure intent."
+  },
+  {
+    "id": "q-850",
+    "category": "domain-model",
+    "difficulty": "hard",
+    "knowledgePath": "Domain Model > Practical > Time-Series Data",
+    "question": "You log sensor readings: 10 sensors × 1 reading/second × 1 year = ~300M rows. Best design?",
+    "options": [
+      "A SensorReading entity with index on (sensor, timestamp)",
+      "Offload time-series to a specialized database (InfluxDB, TimescaleDB) accessed via REST/External Entity; keep aggregates in Mendix",
+      "One big SensorReading entity; let Mendix optimize",
+      "Multiple SensorReading entities, one per sensor"
+    ],
+    "correctIndex": 1,
+    "explanation": "Mendix's relational backing isn't tuned for time-series. 300M+ rows with complex aggregation crushes traditional RDBMS. Specialized TSDBs handle this elegantly. Mendix integrates via REST or External Entities. Indexed approach helps but won't match a TSDB at scale; multi-entity workarounds explode the model."
+  },
+  {
+    "id": "q-851",
+    "category": "domain-model",
+    "difficulty": "hard",
+    "knowledgePath": "Domain Model > Practical > Auditing",
+    "question": "Regulatory compliance requires you to audit every change to Patient records: who changed what, when, with old/new values, immutable. Approach?",
+    "options": [
+      "Use the changedBy + changedDate system members",
+      "After Commit handler that copies the object to a PatientHistory entity with versioning",
+      "Use Mendix Cloud's built-in audit log",
+      "Java action that diffs and persists to a write-once table"
+    ],
+    "correctIndex": 3,
+    "explanation": "True audit requires diff capture and write-once semantics. Java actions plus a write-only Audit entity with database-level append-only constraints fit best. System members capture WHO/WHEN but not WHAT changed. After Commit copy works for full snapshots but lacks fine-grained diff. Mendix Cloud audit is for platform events, not data changes."
+  },
+  {
+    "id": "q-852",
+    "category": "microflows",
+    "difficulty": "hard",
+    "knowledgePath": "Microflows > Practical > Long-Running Job",
+    "question": "You need to process 100K Orders. Synchronous microflow takes 30+ minutes and times out. Best architectural pattern?",
+    "options": [
+      "Increase the timeout",
+      "Batch into chunks (e.g. 100 orders each) and use Mendix Queues / Task Queue for async processing with retries",
+      "Recursive sub-microflow",
+      "Java action with threading"
+    ],
+    "correctIndex": 1,
+    "explanation": "Long-running synchronous work doesn't fit a request-response model. Chunking + a task queue gives observability, retries, parallelism. Mendix Queues (beta) or community queue modules support this. Java threading is fragile and ignores Mendix's runtime model. Recursion still runs in one transaction."
+  },
+  {
+    "id": "q-853",
+    "category": "microflows",
+    "difficulty": "hard",
+    "knowledgePath": "Microflows > Practical > Optimistic Concurrency",
+    "question": "Two users edit the same Customer simultaneously. User A saves first. User B tries to save 30 seconds later — overwrites A's changes. How to detect/prevent?",
+    "options": [
+      "Use a Lock entity to serialize access",
+      "Use the System.changedDate: include it as a version stamp and reject saves where the stored value is newer",
+      "Always show a confirm dialog before save",
+      "First-write-wins is acceptable for non-financial data"
+    ],
+    "correctIndex": 1,
+    "explanation": "Optimistic concurrency: each save includes the version (e.g. changedDate when loaded), server compares with current stored version, rejects stale saves. Lock entities (pessimistic) work but block legitimate concurrent reads. First-write-wins (lost updates) is a real data integrity hazard. Confirm dialogs depend on the user noticing."
+  },
+  {
+    "id": "q-854",
+    "category": "microflows",
+    "difficulty": "hard",
+    "knowledgePath": "Microflows > Practical > Distributed Transaction",
+    "question": "Your microflow creates a local Order, then calls an external Payment API to charge the customer. Payment succeeds but the Mendix commit fails. Now what?",
+    "options": [
+      "Mendix transactions extend to external systems",
+      "No automatic rollback of the payment — you need to either implement a compensation (refund) flow OR ensure the local commit happens BEFORE the payment (with idempotency)",
+      "Retry the local commit",
+      "Mendix automatically refunds"
+    ],
+    "correctIndex": 1,
+    "explanation": "Distributed transactions are out of Mendix's scope (and impossible in many setups). Choose: (a) commit local first, then payment with idempotency key — if payment fails, you can retry; (b) implement explicit compensation (refund) microflows for failure cases. Naive retries can cause double-charges."
+  },
+  {
+    "id": "q-855",
+    "category": "microflows",
+    "difficulty": "hard",
+    "knowledgePath": "Microflows > Practical > Hot Path Performance",
+    "question": "A microflow called on every page load takes 200ms, dominated by a 'Retrieve All Configurations' query that returns 50 rows. Best optimization?",
+    "options": [
+      "Switch to a nanoflow",
+      "Cache configuration in app-level constants or a single retrieve at startup; subsequent calls read from memory",
+      "Add an index on the Configuration table",
+      "Run the microflow asynchronously"
+    ],
+    "correctIndex": 1,
+    "explanation": "Configurations rarely change but are read constantly. Cache once at startup (or first read) in a singleton-style holder. Constants only work for static values. Indexes help but per-page DB retrieval is still wasteful. Async doesn't help if downstream depends on the result."
+  },
+  {
+    "id": "q-856",
+    "category": "microflows",
+    "difficulty": "hard",
+    "knowledgePath": "Microflows > Practical > Workflow vs Microflow",
+    "question": "A 'request approval' process involves: user submits → manager reviews (may take days) → approves/denies → notifications. Right tool?",
+    "options": [
+      "A single long-running microflow",
+      "Mendix Workflow (WDK) — designed for durable, multi-step, multi-actor processes",
+      "A scheduled event polling status",
+      "A series of pages with conditional navigation"
+    ],
+    "correctIndex": 1,
+    "explanation": "Workflow Devkit (WDK) is purpose-built for durable, pausable processes spanning days/weeks with multiple actors. Microflows are stateless per-request. Polling is brittle. Page-conditional navigation lacks audit, retries, and timer-based escalation."
+  },
+  {
+    "id": "q-857",
+    "category": "nanoflows",
+    "difficulty": "hard",
+    "knowledgePath": "Nanoflows > Practical > Offline Conflict",
+    "question": "Two field workers edit the same Customer offline. Both reconnect and Synchronize. What does Mendix do?",
+    "options": [
+      "Last-write-wins automatically",
+      "First write succeeds; the second commit is rejected as a sync conflict; the app must handle the conflict UX",
+      "Mendix merges field-level changes",
+      "Both writes succeed; Mendix logs a warning"
+    ],
+    "correctIndex": 1,
+    "explanation": "Default optimistic concurrency: second sync hits a version mismatch and is rejected. The app must catch this and present a conflict-resolution UX. Last-write-wins requires opt-in. Field-level merging is not built in. Treating sync as magic causes silent data loss."
+  },
+  {
+    "id": "q-858",
+    "category": "nanoflows",
+    "difficulty": "hard",
+    "knowledgePath": "Nanoflows > Practical > Progress Bar Loop",
+    "question": "In a nanoflow you loop 100 iterations, calling Show Progress Bar each iteration. The UI doesn't visibly update. Why?",
+    "options": [
+      "Show Progress Bar requires a microflow",
+      "JS runs synchronously by default; the loop completes in one tick without yielding to the renderer. Insert an async pause (Promise-returning JS action) inside the loop to yield",
+      "Progress bars only show 0%, 50%, 100%",
+      "Mendix throttles progress updates"
+    ],
+    "correctIndex": 1,
+    "explanation": "Synchronous JS doesn't repaint until it yields. The loop runs in one tick, then the final state shows. Adding `await new Promise(r => setTimeout(r, 0))` between iterations gives the browser a chance to repaint. This is general JS behavior — surfaces in nanoflows because they run as JS."
+  },
+  {
+    "id": "q-859",
+    "category": "nanoflows",
+    "difficulty": "hard",
+    "knowledgePath": "Nanoflows > Practical > Service Worker",
+    "question": "Your offline mobile app needs to silently sync data while in background. Approach?",
+    "options": [
+      "A regular nanoflow with a setInterval",
+      "A JavaScript action that registers a Service Worker (PWA) handling background sync events",
+      "A microflow scheduled event",
+      "Just use synchronize on app open"
+    ],
+    "correctIndex": 1,
+    "explanation": "Background sync requires platform-level capability (Service Workers in web, background tasks on mobile). Nanoflows can register them via JS actions. setInterval works only while the app is in foreground. Scheduled events run server-side, irrelevant to client background work."
+  },
+  {
+    "id": "q-860",
+    "category": "nanoflows",
+    "difficulty": "hard",
+    "knowledgePath": "Nanoflows > Practical > Online Validation Race",
+    "question": "On a form, a nanoflow validates the email format AND a microflow checks if it's already taken in the database. Both run on field-blur. Race condition possible?",
+    "options": [
+      "No — Mendix serializes them",
+      "Yes — the microflow's async result might arrive after the user has moved to the next field; design with proper async sequencing or debouncing",
+      "Only on slow networks",
+      "Mendix prevents async UI updates"
+    ],
+    "correctIndex": 1,
+    "explanation": "Async validation has classic race risks: by the time the server responds, the UI may have moved on. Debounce input, cancel pending checks on new input, and clearly indicate the field's validation state. Mendix doesn't auto-serialize concurrent async work."
+  },
+  {
+    "id": "q-861",
+    "category": "nanoflows",
+    "difficulty": "hard",
+    "knowledgePath": "Nanoflows > Practical > Memory Pressure",
+    "question": "An offline app processes large lists of NPEs without committing. Over time, the device runs out of memory. Why?",
+    "options": [
+      "NPEs auto-garbage-collect",
+      "NPEs persist as long as anything references them; long-lived references (e.g. on the session or global state) prevent GC. Explicitly null out references when done",
+      "Mendix limits NPE memory to 100MB",
+      "JavaScript GC is disabled in nanoflows"
+    ],
+    "correctIndex": 1,
+    "explanation": "GC reclaims unreferenced objects. If your code holds NPEs in a session-scoped variable, they live forever. Audit references, clear lists after use, use scoped variables. Mendix doesn't impose arbitrary memory limits; GC is normal JavaScript behavior."
+  },
+  {
+    "id": "q-862",
+    "category": "modules",
+    "difficulty": "hard",
+    "knowledgePath": "Modules > Practical > Dependency Cycle",
+    "question": "Module A depends on B. New requirement needs A's microflow used by B too. Solution?",
+    "options": [
+      "Add B to A's dependencies (circular)",
+      "Refactor: extract the shared microflow to a third Module C; both A and B depend on C",
+      "Use a published REST service within the same app",
+      "Inline-copy the microflow into B"
+    ],
+    "correctIndex": 1,
+    "explanation": "Mendix forbids circular dependencies, and circular dependencies are an architecture smell anyway. Extract to a shared module C with no app-specific opinions. REST-within-app is a hack with real overhead. Inline-copying breaks DRY and lets two implementations drift."
+  },
+  {
+    "id": "q-863",
+    "category": "modules",
+    "difficulty": "hard",
+    "knowledgePath": "Modules > Practical > Renaming a Public API",
+    "question": "You ship an add-on module v1.5 with entity Customer. v2 renames it to Account. Consumer apps reference Customer in pages and microflows. Best release strategy?",
+    "options": [
+      "Just rename — consumers can use Find & Replace",
+      "Provide v2 as a major version bump with migration guide; document the breaking change clearly; consider keeping Customer as a deprecated alias for one minor version",
+      "Don't rename; keep both Customer and Account forever",
+      "Rename and force everyone to upgrade simultaneously"
+    ],
+    "correctIndex": 1,
+    "explanation": "Public APIs deserve respect for downstream impact. Major version bump signals breaking change; migration guides reduce friction; transitional aliases (when feasible) ease upgrades. Forcing immediate upgrade or living with two names indefinitely both have costs."
+  },
+  {
+    "id": "q-864",
+    "category": "modules",
+    "difficulty": "hard",
+    "knowledgePath": "Modules > Practical > Add-on Customization",
+    "question": "You use Marketplace add-on Encryption module. Its encrypt() microflow uses AES-128. You need AES-256 for compliance. The module is .mxmodule (protected). How to customize?",
+    "options": [
+      "Edit the .mxmodule directly",
+      "Override in your own module: wrap the add-on's encrypt() in your own microflow that calls AES-256 via a Java action",
+      "Decompile the .mxmodule",
+      "Ask Mendix to ship a v2"
+    ],
+    "correctIndex": 1,
+    "explanation": "Protected modules can't be edited. The pattern is to compose around them: your own wrapping microflow calling a Java action for AES-256, bypassing the add-on for the specific use case. Decompilation isn't supported; waiting for upstream is too slow."
+  },
+  {
+    "id": "q-865",
+    "category": "modules",
+    "difficulty": "hard",
+    "knowledgePath": "Modules > Practical > Solution Module Scope",
+    "question": "You're an ISV shipping a 'CRM Solution' as a Solution module to multiple customers, each with custom needs. Architectural concern?",
+    "options": [
+      "Solution modules don't support customization — sell App modules instead",
+      "Design extension points: declare microflows as Usable so customers can override them; use specializations as customization mechanism; consider configuration entities customers set per deploy",
+      "Allow customers to fork your module",
+      "Lock everything to prevent customer changes"
+    ],
+    "correctIndex": 1,
+    "explanation": "Successful Solution modules predict customization needs. Public-facing microflows at Usable export level let customers override; specializations extend entities; configuration entities parameterize behavior. Forking destroys upgrade paths; locking everything limits adoption."
+  },
+  {
+    "id": "q-866",
+    "category": "modules",
+    "difficulty": "hard",
+    "knowledgePath": "Modules > Practical > Module Bloat",
+    "question": "Your CRM module now has 50 entities, 200 microflows, 30 pages. Compilation is slow, navigation is hard. Strategic response?",
+    "options": [
+      "Live with it — modularization isn't worth the effort",
+      "Split into 3-5 focused modules: e.g. CRM_Domain (entities), CRM_API (REST services), CRM_UI (pages), CRM_Workflow (orchestration). Compile time improves and maintainability skyrockets",
+      "Move some to System module",
+      "Buy faster hardware"
+    ],
+    "correctIndex": 1,
+    "explanation": "Mendix modules have a sweet spot in size. Bloat slows compile, hurts navigability, hides architectural intent. Split by concern. Hardware doesn't fix structural issues. System module is for built-ins, off-limits."
+  },
+  {
+    "id": "q-867",
+    "category": "security",
+    "difficulty": "hard",
+    "knowledgePath": "Security > Practical > JWT Authentication",
+    "question": "Your published REST API authenticates via JWT in Authorization header. Implementation in Mendix?",
+    "options": [
+      "Basic & Active Session with custom logic",
+      "Anonymous access plus JWT validation inside each microflow",
+      "Custom Microflow authentication: Mendix passes the request to your microflow, you parse and verify JWT, return a System.User",
+      "OAuth — Mendix has built-in JWT validation"
+    ],
+    "correctIndex": 2,
+    "explanation": "Custom Microflow auth is the path for token-based schemes. Mendix doesn't ship a built-in JWT validator (community modules exist). Anonymous + in-microflow checks bypass the published auth contract. Basic auth doesn't parse JWTs."
+  },
+  {
+    "id": "q-868",
+    "category": "security",
+    "difficulty": "hard",
+    "knowledgePath": "Security > Practical > Field-Level Encryption",
+    "question": "You store credit card numbers temporarily for retry purposes. Compliance requires encryption at rest, AND access to clear-text only via specific microflows. Approach?",
+    "options": [
+      "Trust Mendix's transport-layer encryption",
+      "Encrypt the attribute using a Java action on Before Commit; decrypt only inside authorized microflows; pair with strict access rules so the encrypted attribute is never displayed raw",
+      "Use Mendix Cloud's automatic encryption",
+      "Hashed string attribute"
+    ],
+    "correctIndex": 1,
+    "explanation": "Encryption-at-rest requires explicit logic. Encrypt on commit, decrypt only when needed via authorized microflows. Access rules hide the encrypted blob. Transport encryption protects data in motion, not at rest. Hashed string is one-way (can't decrypt). Mendix Cloud encrypts the database but app-level access still sees clear values."
+  },
+  {
+    "id": "q-869",
+    "category": "security",
+    "difficulty": "hard",
+    "knowledgePath": "Security > Practical > Audit Trail Resilience",
+    "question": "You log security-sensitive events to an Audit entity. You discover Audit rows are sometimes missing when the original microflow fails. Why?",
+    "options": [
+      "Mendix audit is unreliable",
+      "The Audit insert is rolled back along with the failing transaction — wrap Audit logging in a 'Custom without rollback' error handler, or commit Audit BEFORE the main transaction",
+      "Database constraints reject duplicate audit rows",
+      "Audit needs higher security clearance"
+    ],
+    "correctIndex": 1,
+    "explanation": "Transactions are atomic — if the main operation rolls back, so does the Audit insert (because it's in the same transaction). For tamper-evident audit, commit Audit FIRST (or use a separate service that doesn't participate in the main transaction). 'Custom without rollback' preserves the Audit creation across failures."
+  },
+  {
+    "id": "q-870",
+    "category": "security",
+    "difficulty": "hard",
+    "knowledgePath": "Security > Practical > Mass Assignment",
+    "question": "A REST endpoint accepts Customer data. A malicious client POSTs extra fields like `isAdmin: true`. Mass assignment bypass?",
+    "options": [
+      "Mendix's mapping ignores unmapped fields automatically",
+      "Define an explicit Import Mapping that lists only allowed attributes; extra fields in JSON are ignored. Never use 'Map all attributes' for security-sensitive entities",
+      "REST is inherently safe",
+      "Use HTTPS"
+    ],
+    "correctIndex": 1,
+    "explanation": "Explicit attribute mapping is your whitelist. Mendix Import Mappings only set attributes you've mapped — extra JSON fields are dropped. 'Map all attributes' is dangerous because new attributes added later are auto-included. HTTPS protects transport but doesn't prevent mass assignment."
+  },
+  {
+    "id": "q-871",
+    "category": "security",
+    "difficulty": "hard",
+    "knowledgePath": "Security > Practical > Privilege Escalation",
+    "question": "User Role 'Manager' includes Module Role A_Editor and Module Role B_Viewer. Both rules apply to Shared.Item — A_Editor allows Write, B_Viewer is Read-only. Effective access?",
+    "options": [
+      "Read-only — most restrictive wins",
+      "Read+Write — access rules are additive across module roles",
+      "Conflict; deploy fails",
+      "Depends on order"
+    ],
+    "correctIndex": 1,
+    "explanation": "Access rules combine via UNION across module roles in a user role. Manager gets Write because A_Editor allows it. To restrict, narrow A_Editor's rule itself. This OPPOSITE-of-Unix-permissions behavior trips up many access designers."
+  },
+  {
+    "id": "q-872",
+    "category": "pages",
+    "difficulty": "hard",
+    "knowledgePath": "Pages > Practical > Virtualization",
+    "question": "You display a list of 10K rows that all need to be visible at once (no paging). Performance is terrible. Strategic fix?",
+    "options": [
+      "Increase 'Number of Rows' to 10000",
+      "Use Data Grid 2 or a List View with virtualization — only visible rows render to DOM",
+      "Paginate to 100 per page",
+      "Render to an external HTML widget"
+    ],
+    "correctIndex": 1,
+    "explanation": "DOM with 10K rows kills any browser. Virtualization renders only visible rows + buffer. Data Grid 2 supports it. Classic Data Grid does not. Pagination changes UX. External widgets work but lose Mendix's integration."
+  },
+  {
+    "id": "q-873",
+    "category": "pages",
+    "difficulty": "hard",
+    "knowledgePath": "Pages > Practical > Performance Cascade",
+    "question": "A page has 200 Conditional Visibility expressions. Typing feels sluggish. Why?",
+    "options": [
+      "Browsers are slow",
+      "Each keystroke triggers re-evaluation of all 200 expressions client-side. Group fields under shared conditional containers, simplify expressions, or move logic to computed attributes",
+      "Mendix limits conditional logic",
+      "Disable JavaScript in the browser"
+    ],
+    "correctIndex": 1,
+    "explanation": "Conditional expressions run on every state change. 200 expressions × every keystroke = perceptible lag. Structural fix: fewer, broader conditionals; precomputed attributes for complex logic; container-level conditionals over field-level."
+  },
+  {
+    "id": "q-874",
+    "category": "pages",
+    "difficulty": "hard",
+    "knowledgePath": "Pages > Practical > Lazy Loading",
+    "question": "A heavy admin page has 5 tabs, each with its own data view and microflow data source. Page load is slow because all 5 microflows fire on render. Optimization?",
+    "options": [
+      "Combine all 5 into one microflow",
+      "Use 'Lazy load' on the tabs so each microflow fires only when its tab is activated",
+      "Move to native mobile",
+      "Cache aggressively"
+    ],
+    "correctIndex": 1,
+    "explanation": "Lazy loading tabs defers microflow execution until needed. 5 separate flows running upfront wastes time on tabs the user might not visit. Combining microflows compounds the latency. Native mobile is irrelevant. Caching helps but lazy load is the structural fix."
+  },
+  {
+    "id": "q-875",
+    "category": "pages",
+    "difficulty": "hard",
+    "knowledgePath": "Pages > Practical > Snippet Reuse",
+    "question": "You have a complex 'OrderSummary' snippet used on 10 different pages. Each page has different surrounding actions. How do you keep the snippet generic?",
+    "options": [
+      "Make 10 variants of the snippet",
+      "Pass an Action object (microflow reference) as a snippet parameter — each page configures its own behavior",
+      "Hardcode all 10 actions inside the snippet with conditional visibility",
+      "Don't reuse — copy the snippet per page"
+    ],
+    "correctIndex": 1,
+    "explanation": "Snippets can receive object parameters; microflow references via parameters let callers inject behavior. 10 variants violates DRY. Conditional visibility for 10 actions is brittle. Copy-paste defeats the purpose of snippets."
+  },
+  {
+    "id": "q-876",
+    "category": "pages",
+    "difficulty": "hard",
+    "knowledgePath": "Pages > Practical > Custom Widget",
+    "question": "You need a Gantt chart in your app. No Mendix-native widget. Approach?",
+    "options": [
+      "Build a Mendix Pluggable Widget using React; render a Gantt library (e.g. dhtmlx-gantt); expose props for data and event handlers",
+      "Use a Show Page hack",
+      "Generate as PDF",
+      "Implement entirely via standard widgets"
+    ],
+    "correctIndex": 0,
+    "explanation": "Pluggable Widgets are the proper extension mechanism for custom UI. React-based, well-documented, integrate with Mendix's data flow. Show Page hacks don't render charts; PDFs aren't interactive; standard widgets can't replicate complex visualizations."
+  },
+  {
+    "id": "q-877",
+    "category": "xpath",
+    "difficulty": "hard",
+    "knowledgePath": "XPath > Practical > Complex Subselect",
+    "question": "You want Customers who have at least one Order whose Total > 1000 in the last 30 days. Single XPath?",
+    "options": [
+      "[Sales.Customer_Order/Sales.Order[Total > 1000 and createdDate > $thirtyDaysAgo]]",
+      "Two separate queries",
+      "Java action with custom SQL",
+      "Sub-microflow that loops"
+    ],
+    "correctIndex": 0,
+    "explanation": "XPath supports compound predicates inside association paths. The single query is efficient — translated to a JOIN with WHERE at the database level. Multiple queries lose this optimization; Java SQL bypasses Mendix abstractions; loops are O(N) on the client."
+  },
+  {
+    "id": "q-878",
+    "category": "xpath",
+    "difficulty": "hard",
+    "knowledgePath": "XPath > Practical > Inheritance Filter",
+    "question": "`//Vehicle.Vehicle` returns Cars and Trucks too. You want ONLY base Vehicles (not specializations). How?",
+    "options": [
+      "[type = 'Vehicle']",
+      "[not(Car) and not(Truck)] — but only works if you know all specializations and they're directly nested",
+      "Retrieve all then filter in microflow via Object Type Decision",
+      "XPath has no built-in type filter; refactor your model to use an enum 'Kind' on Vehicle instead of inheritance"
+    ],
+    "correctIndex": 2,
+    "explanation": "Mendix XPath doesn't expose a type filter. The pragmatic approach is to retrieve all Vehicles then drop specializations via Object Type Decision. Option D (refactor) is heavier but sometimes the right call. Option B works only with explicit enumeration."
+  },
+  {
+    "id": "q-879",
+    "category": "xpath",
+    "difficulty": "hard",
+    "knowledgePath": "XPath > Practical > Self-Reference",
+    "question": "Inside a microflow that processes a List of Orders, you want to constrain a Retrieve so the result excludes the current Order being processed. XPath?",
+    "options": [
+      "[id != $currentOrder/id]",
+      "[Sales.Order != $currentOrder]",
+      "[not(. = $currentOrder)]",
+      "XPath doesn't support self-exclusion; filter post-retrieve"
+    ],
+    "correctIndex": 1,
+    "explanation": "Direct entity comparison: `[Sales.Order != $currentOrder]` excludes the specific row. Comparing by id requires accessing the system id; not always exposed. The `.` self-reference isn't standard. Post-filtering is wasteful."
+  },
+  {
+    "id": "q-880",
+    "category": "xpath",
+    "difficulty": "hard",
+    "knowledgePath": "XPath > Practical > Multi-Level Filter",
+    "question": "Find Projects where the assigned Manager has more than 5 direct reports. Manager has association `DirectReports` to Employee.",
+    "options": [
+      "[Project_Manager/Sales.Manager[count(DirectReports) > 5]]",
+      "[Project_Manager/Sales.Manager/DirectReports > 5]",
+      "[count(Project_Manager/Sales.Manager/DirectReports/Sales.Employee) > 5]",
+      "Both A and C are equivalent (count usable in Java contexts)"
+    ],
+    "correctIndex": 3,
+    "explanation": "Both forms express the same idea. Inside Java/service XPath, count() can be used in predicates. Inside Studio Pro, aggregate functions are limited so workarounds may be needed. Option B compares the association reference to 5, syntactically wrong."
+  },
+  {
+    "id": "q-881",
+    "category": "xpath",
+    "difficulty": "hard",
+    "knowledgePath": "XPath > Practical > Performance Trade",
+    "question": "You have an access rule with a 4-hop XPath. The table is 10M rows. Adding the appropriate composite indexes improved things to 200ms per query, but you need sub-50ms. Architectural next step?",
+    "options": [
+      "Add more indexes",
+      "Denormalize: maintain a direct attribute that captures the result of the 4-hop join, updated by event handlers",
+      "Cache the query",
+      "Reduce row count by archiving"
+    ],
+    "correctIndex": 1,
+    "explanation": "Denormalization trades write cost (event handlers maintain the direct attribute) for blazing-fast reads. At sub-50ms targets on big tables, joins inherently cost too much. Indexes help but plateau. Caching has invalidation issues. Archiving reduces scope but doesn't solve query design."
+  },
+  {
+    "id": "q-882",
+    "category": "integration",
+    "difficulty": "hard",
+    "knowledgePath": "Integration > Practical > Eventual Consistency",
+    "question": "App A publishes an event when an Order is placed. App B subscribes and creates a corresponding shipment record. The network is unreliable. Architectural pattern for guaranteed delivery?",
+    "options": [
+      "Synchronous REST call from A to B",
+      "Mendix Business Events on a durable queue with at-least-once delivery; B's subscriber is idempotent",
+      "Polling: B polls A every minute",
+      "Email notifications"
+    ],
+    "correctIndex": 1,
+    "explanation": "Business Events on a durable queue persist events on the producer side; the broker retries delivery to subscribers. Subscribers must be idempotent because at-least-once means duplicates are possible. Synchronous REST couples reliability across services. Polling has freshness issues. Email is not an integration mechanism."
+  },
+  {
+    "id": "q-883",
+    "category": "integration",
+    "difficulty": "hard",
+    "knowledgePath": "Integration > Practical > Saga Pattern",
+    "question": "A purchase workflow needs to: (1) reserve inventory, (2) charge payment, (3) create shipping label, (4) confirm to user. Each can fail. Best pattern?",
+    "options": [
+      "A single microflow with all 4 calls and rollback on any failure",
+      "Saga: each step is a separate transaction with a corresponding compensation step (release inventory, refund, etc.); orchestrate via Workflow Devkit",
+      "Make all 4 services synchronous",
+      "Use distributed XA transactions"
+    ],
+    "correctIndex": 1,
+    "explanation": "Saga is the gold-standard for distributed transactions across systems that can't share a transaction boundary. Each step has a compensation. WDK orchestrates the saga with durability. Single-microflow rollback only works for local DB state — external calls don't roll back. XA transactions aren't supported across heterogeneous systems."
+  },
+  {
+    "id": "q-884",
+    "category": "integration",
+    "difficulty": "hard",
+    "knowledgePath": "Integration > Practical > Rate Limiting",
+    "question": "A partner API allows 100 requests per minute. Your app needs to call it 10K times to process a backlog. Approach?",
+    "options": [
+      "Send all 10K calls in parallel",
+      "Implement a token-bucket rate limiter: process at 100/minute, using a queue (Mendix Queues or similar) to throttle; total time ~100 minutes",
+      "Ignore the limit; the API will accept some",
+      "Request a higher limit from the partner before designing"
+    ],
+    "correctIndex": 1,
+    "explanation": "Respect API rate limits via throttled queue consumers. Mendix Queues (beta) or community queue modules enable this. Bursting causes 429s and possibly bans. Negotiating higher limits is sometimes possible but the design should still respect declared limits."
+  },
+  {
+    "id": "q-885",
+    "category": "integration",
+    "difficulty": "hard",
+    "knowledgePath": "Integration > Practical > Schema Evolution",
+    "question": "A partner releases v2 of their REST API with breaking schema changes. v1 will be deprecated in 6 months. Migration strategy?",
+    "options": [
+      "Hot-cut to v2 on a release day",
+      "Run v1 and v2 side by side: dual-import-mapping period where new data flows through v2, while v1 data is migrated by a one-off batch; phase out v1 calls over the deprecation window",
+      "Wait until v1 is shut down",
+      "Maintain a fork of v1 forever"
+    ],
+    "correctIndex": 1,
+    "explanation": "Schema migrations need overlap: dual flows let you validate v2 in production before fully cutting. Hot-cut is high-risk. Waiting until shut-off creates a forced migration with no rollback. Forks aren't an option for third-party APIs."
+  },
+  {
+    "id": "q-886",
+    "category": "java",
+    "difficulty": "hard",
+    "knowledgePath": "Java > Practical > Thread Context",
+    "question": "A Java action spawns a background thread to do async work. Inside the thread you call Core.retrieveXPathQuery(). It fails or returns null. Why?",
+    "options": [
+      "Spawned threads can't reach the database",
+      "IContext is request-scoped and doesn't propagate to your thread. Capture data BEFORE spawning, or create a Sudo context inside the thread for any DB calls",
+      "Mendix forbids background threads",
+      "The thread is terminated by Mendix"
+    ],
+    "correctIndex": 1,
+    "explanation": "Context (security, transaction) is tied to the request. Spawned threads need explicit context — either copy what you need into local variables before launching, or construct a sudo context inside the thread for DB work. This is a classic threading-with-Mendix pitfall."
+  },
+  {
+    "id": "q-887",
+    "category": "java",
+    "difficulty": "hard",
+    "knowledgePath": "Java > Practical > Memory Profiling",
+    "question": "A Java action processes large XML files. Heap memory spikes badly. Optimization?",
+    "options": [
+      "Use String.intern() everywhere",
+      "Switch to streaming SAX or StAX parsing instead of loading the whole DOM into memory; the file processes incrementally",
+      "Increase JVM heap",
+      "Compress the XML before parsing"
+    ],
+    "correctIndex": 1,
+    "explanation": "DOM holds the entire document in memory — fatal for large files. Streaming parsers (SAX/StAX) process tokens as they arrive, keeping memory bounded. Intern() saves on duplicate Strings but doesn't help bulk parsing. Heap increases delay the problem. Compression doesn't reduce in-memory size."
+  },
+  {
+    "id": "q-888",
+    "category": "java",
+    "difficulty": "hard",
+    "knowledgePath": "Java > Practical > External Library Version Conflict",
+    "question": "You add slf4j-api-2.0 to userlib/. Your action compiles fine. At runtime: NoClassDefFoundError on an slf4j class. Why?",
+    "options": [
+      "userlib JARs aren't loaded",
+      "Mendix runtime bundles its own slf4j; the classpath has a version conflict and the wrong version wins. Audit what JARs Mendix ships with, avoid duplicating, or use shaded/relocated versions",
+      "slf4j is incompatible",
+      "File permissions"
+    ],
+    "correctIndex": 1,
+    "explanation": "Mendix ships its own logging libs. Adding conflicting versions causes classpath collisions. Audit (jar tf, jar -tf) what's in Mendix's classpath; avoid duplicating popular libs (slf4j, jackson, guava) or shade your dependencies to a unique package."
+  },
+  {
+    "id": "q-889",
+    "category": "java",
+    "difficulty": "hard",
+    "knowledgePath": "Java > Practical > Microflow Transaction Boundary",
+    "question": "A Java action commits objects via Core API inside a microflow. The microflow then throws and rolls back. What happens to the Java action's commits?",
+    "options": [
+      "Java commits are independent and survive",
+      "They roll back along with the microflow's transaction — Java actions participate in the calling transaction by default",
+      "Java actions cannot commit",
+      "An error is thrown"
+    ],
+    "correctIndex": 1,
+    "explanation": "Java actions called from microflows participate in the SAME transaction. Rollback undoes their DB work too (Mendix's DB, not external systems). To bypass, use a separate context with its own transaction explicitly — but only when truly needed."
+  },
+  {
+    "id": "q-890",
+    "category": "java",
+    "difficulty": "hard",
+    "knowledgePath": "Java > Practical > Custom Logging",
+    "question": "You want a Java action to log to Mendix's runtime log at INFO level, but performance is tight. Best logging pattern?",
+    "options": [
+      "Always log eagerly",
+      "Use lazy evaluation: pass a supplier or guard with `isInfoEnabled()` to avoid building expensive log messages when INFO is disabled",
+      "Disable logging entirely",
+      "Write directly to System.LogEntry"
+    ],
+    "correctIndex": 1,
+    "explanation": "Logging APIs evaluate arguments BEFORE deciding to log. Lazy suppliers / level guards skip the work when logging is disabled. Eager always pays the message-build cost. Disabling logging loses observability. Direct LogEntry inserts duplicate Mendix's built-in logging."
+  },
+  {
+    "id": "q-891",
+    "category": "events",
+    "difficulty": "hard",
+    "knowledgePath": "Events > Practical > Conditional Audit",
+    "question": "Audit only when sensitive fields (Salary, SSN) on Employee change. Plain After Commit handler audits EVERY commit. Smart design?",
+    "options": [
+      "Audit always — storage is cheap",
+      "Compare old vs new in a Before Commit handler (capture old values), then conditionally audit in After Commit if sensitive fields changed",
+      "Use validation rules",
+      "Audit only specific microflows that touch sensitive data"
+    ],
+    "correctIndex": 1,
+    "explanation": "Before Commit can capture old values (the object in memory still has them); After Commit then logs only when sensitive fields differ. Audit-always wastes storage and dilutes audit utility. Validation rules don't audit. Per-microflow audit misses unexpected paths."
+  },
+  {
+    "id": "q-892",
+    "category": "events",
+    "difficulty": "hard",
+    "knowledgePath": "Events > Practical > Cascading Triggers",
+    "question": "Order has After Commit handler that triggers a Customer commit; Customer has After Commit handler that commits an Address. A single Order commit kicks off 3 commits. Architectural concern?",
+    "options": [
+      "Performance: cascading commits multiply transaction cost; visibility: hard to reason about which microflow triggers which side effect; risk: a small change can recurse unexpectedly",
+      "Looks fine",
+      "Mendix optimizes cascading commits",
+      "After Commit cascades are prevented automatically"
+    ],
+    "correctIndex": 0,
+    "explanation": "Cascading event-driven commits are an architecture smell: hidden coupling, hard-to-debug, easy to recurse. Prefer explicit orchestration in the calling microflow OR use sub-microflow calls so the chain is visible. Event handlers should encode invariants, not workflow."
+  },
+  {
+    "id": "q-893",
+    "category": "events",
+    "difficulty": "hard",
+    "knowledgePath": "Events > Practical > Rollback in Handler",
+    "question": "After Commit handler tries to call Rollback on the just-committed object. What happens?",
+    "options": [
+      "The just-committed change is undone",
+      "After Commit fires AFTER the transaction commits; rollback at this point only affects current-microflow state, not the database — the commit has already happened",
+      "Mendix detects and re-rolls back",
+      "Rollback is queued for next transaction"
+    ],
+    "correctIndex": 1,
+    "explanation": "After Commit runs inside the transaction but after the COMMIT step. By the time it fires, the data is persisted. Rollback in After Commit only affects the in-memory object state for the rest of the current execution — the database row stays. This is one of the trickiest event-handler semantics."
+  },
+  {
+    "id": "q-894",
+    "category": "events",
+    "difficulty": "hard",
+    "knowledgePath": "Events > Practical > Inheritance and Handlers",
+    "question": "Person has Before Commit handler X. You create Employee specializing Person. You define ANOTHER Before Commit handler Y on Employee. Which fires on Employee commit?",
+    "options": [
+      "Both, X then Y",
+      "Only X (parent wins)",
+      "Only Y (child overrides) — only one handler per timing per entity; Employee's overrides Person's",
+      "An error at deploy"
+    ],
+    "correctIndex": 2,
+    "explanation": "Each entity has at most ONE handler per event timing. Employee's Y replaces Person's X for Employee commits. Person commits still use X. If you need parent logic too, Y must call X explicitly. People expect inheritance to compose handlers; it doesn't."
+  },
+  {
+    "id": "q-895",
+    "category": "events",
+    "difficulty": "hard",
+    "knowledgePath": "Events > Practical > Validation Performance",
+    "question": "Order has 12 validation rules. Bulk imports of 100K Orders are slow because every row triggers all 12. Production-grade solution?",
+    "options": [
+      "Remove validation rules",
+      "Use the 'without events without validation' commit variant for trusted bulk imports; run a separate review microflow afterwards that re-validates and flags invalid rows for cleanup",
+      "Disable security",
+      "Lower the row count"
+    ],
+    "correctIndex": 1,
+    "explanation": "Mendix provides a commit variant that skips events and validation — for performance-critical bulk operations. Post-import review catches issues. Removing rules permanently is unsafe; security and row count don't address the validation overhead."
+  },
+  {
+    "id": "q-896",
+    "category": "enumerations",
+    "difficulty": "hard",
+    "knowledgePath": "Enumerations > Practical > i18n Pitfall",
+    "question": "You compare $order/Status to 'Open' using String comparison. Your app is translated to 5 languages. What goes wrong?",
+    "options": [
+      "Nothing — comparison is locale-independent",
+      "Comparing to a string literal 'Open' works in English but fails when getCaption() is used; the right pattern is to compare via typed enum reference OR via getKey() which is locale-independent",
+      "Mendix auto-translates string literals",
+      "Boolean false is returned in non-English"
+    ],
+    "correctIndex": 1,
+    "explanation": "String-literal comparison is fragile across locales (especially with getCaption). Typed enum references are locale-independent and build-time safe. getKey() returns the technical Name. Auto-translation isn't a thing for code."
+  },
+  {
+    "id": "q-897",
+    "category": "enumerations",
+    "difficulty": "hard",
+    "knowledgePath": "Constants > Practical > Caching",
+    "question": "You change a Constant's value in Mendix Cloud's environment config. Running microflows continue using the old value. Why?",
+    "options": [
+      "Mendix caches Constants at startup; environment-config changes require a restart of the app process",
+      "Constants are read fresh on every invocation",
+      "Changes propagate within 60 seconds",
+      "You must call Refresh in Studio Pro"
+    ],
+    "correctIndex": 0,
+    "explanation": "Constants are loaded into runtime memory at app startup. Changing the environment override doesn't propagate until the app process restarts. This is a frequent surprise for engineers expecting hot-reload."
+  },
+  {
+    "id": "q-898",
+    "category": "enumerations",
+    "difficulty": "hard",
+    "knowledgePath": "Enumerations > Practical > Removal Migration",
+    "question": "An enum value 'Deprecated_Status' has 8 historical rows. You want to remove it cleanly. Plan?",
+    "options": [
+      "Remove from the enum; existing rows auto-migrate",
+      "Migration script: 1) find rows with 'Deprecated_Status', 2) update them to a current value, 3) remove the enum value (Mendix refuses to remove while data references it)",
+      "Remove from the enum; rows become null",
+      "Mark as deprecated and ignore"
+    ],
+    "correctIndex": 1,
+    "explanation": "Enum value removal is blocked while data references the value. Migration steps are required: scan, update, then remove. Mendix doesn't auto-migrate enum data because the right target isn't inferable. Marking as deprecated without removal leaves clutter."
+  },
+  {
+    "id": "q-899",
+    "category": "enumerations",
+    "difficulty": "hard",
+    "knowledgePath": "Constants > Practical > Secret Management",
+    "question": "Production needs SmtpPassword for outbound emails. Constraints: not in source control, rotatable without redeploy, scoped to a few microflows. Solution?",
+    "options": [
+      "Constant with Exposed to Client = false, environment-set in Mendix Cloud",
+      "Hardcode in microflow",
+      "Store in an entity with security restrictions",
+      "User input field that admin updates"
+    ],
+    "correctIndex": 0,
+    "explanation": "Secrets-as-constants with non-exposed mode work, set per environment via Mendix Cloud (not in source). Rotation = config change + restart. Hardcoding leaks via source control. Entity storage risks exposure via access rules. User input is operationally awkward."
+  },
+  {
+    "id": "q-900",
+    "category": "enumerations",
+    "difficulty": "hard",
+    "knowledgePath": "Enumerations > Practical > Database Storage",
+    "question": "You renamed an enum value from 'Active' to 'A' to save storage. Performance impact?",
+    "options": [
+      "Major — Mendix stores enum values as the Name string; shorter Names slightly reduce storage but not enough to matter for most apps",
+      "Major — shorter is much faster",
+      "No impact",
+      "Indexes break"
+    ],
+    "correctIndex": 0,
+    "explanation": "Mendix persists enum Names as VARCHAR. Yes, 'A' is shorter than 'Active' but at typical row counts the savings are marginal. Premature optimization. Renames also require data migration. Indexes don't break. Pick descriptive names for code clarity; storage cost is rarely the bottleneck."
+  },
+  {
+    "id": "q-901",
+    "category": "scheduled-events",
+    "difficulty": "hard",
+    "knowledgePath": "Scheduled Events > Practical > Long-Running Lock",
+    "question": "A nightly scheduled event holds a table-level lock for 30 minutes. Daytime users see slow responses. Fix?",
+    "options": [
+      "Move to a faster server",
+      "Refactor: break the work into smaller batches with intermediate Commits, releasing locks frequently. Total time may rise slightly but contention drops significantly",
+      "Schedule at 3am only",
+      "Disable security"
+    ],
+    "correctIndex": 1,
+    "explanation": "Long-held locks block concurrent users. Smaller batched commits release locks frequently. Total work goes slightly up but contention drops dramatically. Bigger servers and night-only schedules are partial mitigations; security is unrelated."
+  },
+  {
+    "id": "q-902",
+    "category": "scheduled-events",
+    "difficulty": "hard",
+    "knowledgePath": "Scheduled Events > Practical > Distributed Lock",
+    "question": "Two scheduled events update the same data concurrently. They occasionally interfere. Pattern?",
+    "options": [
+      "Hope they don't overlap",
+      "Distributed lock: introduce a Lock entity, acquire it at start of each event, release on completion. Use Skip strategy or guards if locks are held",
+      "Run them on different nodes",
+      "Disable one event"
+    ],
+    "correctIndex": 1,
+    "explanation": "Mendix's scheduler doesn't serialize different events. Lock entities provide explicit mutual exclusion across the cluster. Hope is not a strategy; node assignment isn't controllable; disabling loses functionality."
+  },
+  {
+    "id": "q-903",
+    "category": "scheduled-events",
+    "difficulty": "hard",
+    "knowledgePath": "Scheduled Events > Practical > Idempotency",
+    "question": "A scheduled event sends invoices monthly. Mendix restarts mid-batch. The next run double-sends to the customers already processed. Architecture fix?",
+    "options": [
+      "Don't worry, accept the duplicates",
+      "Track per-customer 'last_invoice_sent_period' before sending; the next run skips customers already in this period. Idempotency makes restarts safe",
+      "Run twice a month to dilute the issue",
+      "Wrap in transaction"
+    ],
+    "correctIndex": 1,
+    "explanation": "Scheduled events lack mid-run checkpointing. Track per-target completion state, check on resume, skip already-done work. Transactions don't help across emails (external side effects)."
+  },
+  {
+    "id": "q-904",
+    "category": "scheduled-events",
+    "difficulty": "hard",
+    "knowledgePath": "Scheduled Events > Practical > Audit",
+    "question": "You need an audit trail of every scheduled event run with start, end, duration, status, items processed. Approach?",
+    "options": [
+      "System.ProcessedQueueTask is sufficient",
+      "Implement a custom RunLog entity. Inside each event, create a RunLog on start, update on completion (success/failure). ProcessedQueueTask is opaque for custom metrics",
+      "Mendix Cloud's audit log",
+      "Trace-level logging"
+    ],
+    "correctIndex": 1,
+    "explanation": "ProcessedQueueTask is minimal — name, start, end. For rich custom audit (items processed, error messages), implement your own entity. Mendix Cloud audit is for platform events. Trace logs are too verbose and not queryable as a data set."
+  },
+  {
+    "id": "q-905",
+    "category": "scheduled-events",
+    "difficulty": "hard",
+    "knowledgePath": "Scheduled Events > Practical > Migration",
+    "question": "A scheduled event runs hourly and is critical. You need to deploy a major schema change requiring 30 minutes of database migration. Strategy?",
+    "options": [
+      "Disable the event during migration; re-enable after; design the migration to be backward-compatible if possible (additive changes first, removals later in a follow-up release)",
+      "Run the migration with the event still firing",
+      "Use the Skip Next setting",
+      "Hope nothing breaks"
+    ],
+    "correctIndex": 0,
+    "explanation": "Critical events should be paused for non-trivial migrations to avoid mid-flight failures. Additive-first migrations let the event keep working during deploy: add new columns, deploy, backfill, then remove old columns in a later release. Skip Next won't disable; running both simultaneously risks corruption."
+  },
+  {
+    "id": "q-906",
+    "category": "agile",
+    "difficulty": "hard",
+    "knowledgePath": "Agile > Practical > Technical Debt",
+    "question": "Velocity has steadily decreased over 6 sprints. Investigation reveals 40% of new work touches legacy code with no tests. Strategic action?",
+    "options": [
+      "Increase team size",
+      "Allocate a portion of each sprint to paying down debt (e.g. 20%); track 'debt sprints' separately if needed; refactor as you touch code",
+      "Push for more story points",
+      "Outsource the legacy work"
+    ],
+    "correctIndex": 1,
+    "explanation": "Sustained velocity decline often indicates accumulated debt. Allocating capacity each sprint is the proven approach — pure debt sprints can become political. Adding people to a struggling project rarely helps short-term (Brooks's law). Outsourcing without architectural understanding makes it worse."
+  },
+  {
+    "id": "q-907",
+    "category": "agile",
+    "difficulty": "hard",
+    "knowledgePath": "Agile > Practical > Mendix Architecture Review",
+    "question": "Your team's app has grown to 50 modules and is slow to compile. Refactoring is needed. Where do you start?",
+    "options": [
+      "Random module merging",
+      "Map module dependencies; identify modules with the most incoming dependencies (high-impact) and the most outgoing dependencies (entangled); consolidate or split based on cohesion",
+      "Buy faster hardware",
+      "Avoid refactoring entirely"
+    ],
+    "correctIndex": 1,
+    "explanation": "Architecture refactoring is data-driven. Dependency graphs reveal which modules carry too much responsibility or sprawl. Split or merge based on functional cohesion. Hardware doesn't fix architecture; avoidance ensures continued degradation."
+  },
+  {
+    "id": "q-908",
+    "category": "agile",
+    "difficulty": "hard",
+    "knowledgePath": "Agile > Practical > Cross-Functional Dependencies",
+    "question": "Your sprint depends on backend team B finishing their API by mid-sprint. They miss the deadline. Best response?",
+    "options": [
+      "Block all related stories and absorb the velocity loss",
+      "Build against a mock or stub API contract during the dependency window; integrate when B delivers. Document the contract upfront in collaboration with B",
+      "Pull the stories from the sprint",
+      "Escalate to management"
+    ],
+    "correctIndex": 1,
+    "explanation": "Cross-team dependencies need explicit contracts negotiated upfront. Mocking lets you make progress against the contract. Pulling stories costs sprint goal achievement; escalation should be a last resort. Mendix's REST mapping makes mock-driven development tractable."
+  },
+  {
+    "id": "q-909",
+    "category": "agile",
+    "difficulty": "hard",
+    "knowledgePath": "Agile > Practical > Production Incident",
+    "question": "A critical production bug surfaces during a sprint. Process for handling it?",
+    "options": [
+      "Halt the sprint immediately",
+      "Diagnose severity; if critical (data loss, security, downtime), pause sprint and address; otherwise add to backlog for next sprint. Always document the incident, root cause, and prevention in a postmortem",
+      "Push to the next sprint",
+      "Have the on-call engineer handle alone"
+    ],
+    "correctIndex": 1,
+    "explanation": "Sev-driven response: critical bugs interrupt, others queue. Postmortems convert incidents into learning. Solo response is risky; sprint-pause for every bug breaks predictability."
+  },
+  {
+    "id": "q-910",
+    "category": "agile",
+    "difficulty": "hard",
+    "knowledgePath": "Agile > Practical > Vendor Module Trust",
+    "question": "A Marketplace module you depend on for 30% of features hasn't been updated in 18 months. The maintainer doesn't respond. Strategy?",
+    "options": [
+      "Keep using it indefinitely",
+      "Risk assessment: fork into a Module you maintain (if license permits) OR migrate to an alternative OR build the functionality natively. Track this as technical debt; act before forced migration",
+      "Wait for an update",
+      "Force the maintainer through legal"
+    ],
+    "correctIndex": 1,
+    "explanation": "Abandoned dependencies are debt. Fork if license allows (gives short-term control); migrate to actively-maintained alternatives; or rebuild critical pieces in-house. Waiting and ignoring leaves you exposed. Legal action is rarely productive for open-source/marketplace modules."
+  },
+  {
+    "id": "q-911",
+    "category": "agile",
+    "difficulty": "hard",
+    "knowledgePath": "Agile > Practical > Release Strategy",
+    "question": "Your team ships an app to 100K users monthly. A new feature might cause regression but has high upside. Release approach?",
+    "options": [
+      "Ship to everyone immediately",
+      "Feature flag + canary rollout: deploy to 1% of users, monitor, expand to 10%, 50%, 100% as metrics confirm safety. Mendix supports this via Rolling Releases and feature-flag constants",
+      "Ship at midnight on Friday",
+      "Don't ship until 100% certainty"
+    ],
+    "correctIndex": 1,
+    "explanation": "Gradual rollout limits blast radius. Mendix supports Rolling Releases (GA) for canary deployments. Feature flags via constants enable per-user toggles. Big-bang releases gamble; Friday-night deploys are notorious. Waiting for certainty is a road to never shipping."
   }
 ]
