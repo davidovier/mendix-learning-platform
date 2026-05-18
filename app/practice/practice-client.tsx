@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import {
   BookOpen,
   Database,
@@ -25,6 +25,10 @@ import { QuestionCard } from "@/components/practice/question-card";
 import { trackAttempt } from "@/lib/db/actions";
 import { checkAndIncrementQuestionUsage, type UsageStatus } from "@/lib/stripe/usage-actions";
 import { UpgradePrompt, UsageLimitBanner } from "@/components/upgrade-prompt";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+
+const HARD_ONLY_STORAGE_KEY = "practice:hardOnly";
 
 type ViewState = "select" | "quiz" | "results";
 
@@ -37,6 +41,8 @@ function shuffle<T>(input: T[]): T[] {
   return out;
 }
 
+export type Difficulty = "easy" | "medium" | "hard";
+
 export interface Question {
   id: string;
   category: string;
@@ -44,6 +50,7 @@ export interface Question {
   options: string[];
   correctIndex: number;
   explanation?: string;
+  difficulty?: Difficulty;
 }
 
 // Serializable topic data (no icon functions)
@@ -99,6 +106,35 @@ export function PracticeClient({
   // Bumped on every (re)entry into a quiz to force a fresh shuffle.
   const [sessionNonce, setSessionNonce] = useState(0);
   const [filteredQuestions, setFilteredQuestions] = useState<Question[]>([]);
+  // When true, restrict the pool to difficulty === "hard" (the new trap-style set).
+  const [hardOnly, setHardOnly] = useState(false);
+
+  // Restore the toggle from localStorage so the preference survives reloads.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.localStorage.getItem(HARD_ONLY_STORAGE_KEY) === "1") {
+      setHardOnly(true);
+    }
+  }, []);
+
+  // Pool of questions after applying the difficulty toggle but before topic filter.
+  const difficultyFilteredQuestions = useMemo(
+    () => (hardOnly ? questions.filter((q) => q.difficulty === "hard") : questions),
+    [questions, hardOnly],
+  );
+
+  // Per-topic counts that reflect the current difficulty filter so the cards
+  // display accurate numbers (and topics with zero hard questions disappear
+  // from `availableTopics` further down).
+  const visibleCountByTopic = useMemo(() => {
+    const counts: Record<string, number> = {};
+    for (const q of difficultyFilteredQuestions) {
+      counts[q.category] = (counts[q.category] || 0) + 1;
+    }
+    return counts;
+  }, [difficultyFilteredQuestions]);
+
+  const visibleTotalCount = difficultyFilteredQuestions.length;
 
   // Shuffle on the client only — avoids SSR/hydration determinism issues and
   // guarantees a new order each time a quiz session starts.
@@ -116,8 +152,8 @@ export function PracticeClient({
     }
     const pool =
       selectedTopic === "all"
-        ? questions
-        : questions.filter((q) => q.category === selectedTopic);
+        ? difficultyFilteredQuestions
+        : difficultyFilteredQuestions.filter((q) => q.category === selectedTopic);
     const seen = new Set<string>();
     const unique = pool.filter((q) => {
       const key = q.question.trim().toLowerCase();
@@ -218,8 +254,19 @@ export function PracticeClient({
 
   const isPassing = scorePercentage >= 70;
 
-  // Filter topics that have questions
-  const availableTopics = topics.filter((t) => questionCountByTopic[t.id] > 0);
+  // Filter topics that have questions under the current difficulty filter.
+  const availableTopics = topics.filter((t) => (visibleCountByTopic[t.id] ?? 0) > 0);
+
+  const handleHardOnlyChange = (next: boolean) => {
+    setHardOnly(next);
+    if (typeof window !== "undefined") {
+      if (next) {
+        window.localStorage.setItem(HARD_ONLY_STORAGE_KEY, "1");
+      } else {
+        window.localStorage.removeItem(HARD_ONLY_STORAGE_KEY);
+      }
+    }
+  };
 
   if (view === "select") {
     // Check if user has reached their daily limit
@@ -265,6 +312,26 @@ export function PracticeClient({
             </div>
           )}
 
+          {/* Difficulty filter — only advanced (hard, trap-style) questions. */}
+          <div className="mb-6 flex items-center justify-between gap-4 p-4 rounded-lg border border-border bg-card">
+            <div className="min-w-0">
+              <Label
+                htmlFor="hard-only-toggle"
+                className="font-medium text-foreground cursor-pointer"
+              >
+                Alleen geavanceerde vragen
+              </Label>
+              <p className="text-sm text-muted-foreground mt-0.5">
+                Toon enkel de 130 trap-stijl vragen voor extra exam-prep.
+              </p>
+            </div>
+            <Switch
+              id="hard-only-toggle"
+              checked={hardOnly}
+              onCheckedChange={handleHardOnlyChange}
+            />
+          </div>
+
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {/* All Topics Card */}
             <button
@@ -279,7 +346,7 @@ export function PracticeClient({
                     20 random questions from all categories
                   </p>
                   <Badge variant="secondary" className="mt-3 text-xs">
-                    {totalQuestionCount} questions
+                    {visibleTotalCount} questions
                   </Badge>
                 </div>
               </div>
@@ -288,7 +355,7 @@ export function PracticeClient({
             {/* Individual Topic Cards */}
             {availableTopics.map((topic) => {
               const Icon = topicIcons[topic.id] || BookOpen;
-              const questionCount = questionCountByTopic[topic.id] || 0;
+              const questionCount = visibleCountByTopic[topic.id] || 0;
 
               return (
                 <button
