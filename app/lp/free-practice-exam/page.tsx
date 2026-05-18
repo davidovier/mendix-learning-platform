@@ -7,7 +7,7 @@ import { JsonLd, faqSchema } from "@/lib/structured-data";
 export const metadata: Metadata = {
   title: "Free Mendix Practice Exam - Start Now",
   description:
-    "Practice for your Mendix Intermediate Certification with 261 free exam questions. Instant feedback, progress tracking, and AI explanations.",
+    "Practice for your Mendix Intermediate Certification with 391 free exam questions. Instant feedback, progress tracking, and AI explanations.",
   robots: {
     index: true,
     follow: true,
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 const features = [
   {
     icon: BookOpen,
-    title: "261 Practice Questions",
+    title: "391 Practice Questions",
     description: "Real exam-style questions covering all topics",
   },
   {
@@ -62,7 +62,7 @@ export default function FreePracticeExamLandingPage() {
             Free Mendix Practice Exam
           </h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-xl mx-auto">
-            261 exam-style questions to help you pass the Mendix Intermediate
+            391 exam-style questions to help you pass the Mendix Intermediate
             Developer Certification
           </p>
           <Button size="lg" className="text-lg px-8 py-6" render={<Link href="/signup" />}>

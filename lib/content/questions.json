@@ -3618,5 +3618,1825 @@
     ],
     "correctIndex": 0,
     "explanation": "`toString()` converts an integer into a string in a Mendix expression. Names like `intToString` or `integerToString` sound plausible from other languages but are not the Mendix expression function used here. This matters when combining numbers into messages, labels, or integration payloads."
+  },
+  {
+    "id": "q-262",
+    "category": "domain-model",
+    "knowledgePath": "Domain Model > Associations > Delete Behavior",
+    "question": "Which set correctly describes ALL the delete behavior options Mendix offers on an association?",
+    "options": [
+      "Cascading delete, and Prevention of delete",
+      "Keep associated object(s), Delete associated object(s) as well, and Delete object only if not associated",
+      "Cascade, Restrict, Set null, and No action",
+      "Delete on commit, Delete on rollback, and Keep"
+    ],
+    "correctIndex": 1,
+    "explanation": "Mendix exposes three delete behaviors per association side: 'Keep associated object(s)' (the default), 'Delete associated object(s) as well' (cascade), and 'Delete object only if not associated' (prevent). The first distractor leaves out the default 'Keep' option — a common mistake because study materials often only show the two non-default ones. The third option lists SQL/ORM vocabulary (Restrict, Set null, No action) that Mendix does not use. Knowing 'Keep' exists matters because it is what runs unless you explicitly change it."
+  },
+  {
+    "id": "q-263",
+    "category": "domain-model",
+    "knowledgePath": "Domain Model > Associations > Ownership",
+    "question": "In a One-to-Many association between Customer (1) and Order (*), where is the association reference stored by default?",
+    "options": [
+      "Only in the Order entity, because the many-side owner stores the reference",
+      "Only in the Customer entity, because the one-side is the parent",
+      "In both Customer and Order, mirrored automatically",
+      "In a separate join table that Mendix generates"
+    ],
+    "correctIndex": 0,
+    "explanation": "With Default ownership on a One-to-Many, the owner is the entity on the many-side (Order), and the association reference is stored only there. People often assume the 'parent' side (Customer) holds the link because it feels conceptually like the parent, but that is incorrect. Mendix only creates a join table for Many-to-Many associations — not One-to-Many."
+  },
+  {
+    "id": "q-264",
+    "category": "domain-model",
+    "knowledgePath": "Domain Model > Associations > Persistable & Non-Persistable",
+    "question": "You need an association between a persistable entity Order and a non-persistable entity ShoppingCartLine. How must this association be configured?",
+    "options": [
+      "Start the association from Order (persistable) with owner set to Default",
+      "Start the association from ShoppingCartLine (non-persistable) with owner set to Default",
+      "Start from either side, but set owner to Both",
+      "It is not possible — you must make ShoppingCartLine persistable first"
+    ],
+    "correctIndex": 1,
+    "explanation": "Mendix requires that any association between a persistable and non-persistable entity must originate from the NON-persistable entity and use owner = Default. Choosing the persistable side as the start (first option) or using dual ownership (third option) is rejected by the modeler. The non-persistable entity can absolutely own a reference to a persistable one — you do not need to convert it."
+  },
+  {
+    "id": "q-265",
+    "category": "domain-model",
+    "knowledgePath": "Domain Model > Entities > System Members",
+    "question": "Which statement about the system members createdDate, changedDate, owner, and changedBy is correct?",
+    "options": [
+      "They are always present on every persistable entity and update automatically",
+      "They are optional and disabled by default; each must be enabled individually in the entity properties",
+      "They are enabled by default but can be disabled in the project settings",
+      "Only createdDate and owner are enabled by default; changedDate and changedBy must be turned on"
+    ],
+    "correctIndex": 1,
+    "explanation": "All four system members are optional and default to FALSE — you have to enable each one explicitly on the entity. The trap here is that they FEEL like things Mendix would track automatically, especially createdDate. They are not project-wide settings; they are per-entity opt-ins. Enabling them later on an existing entity will leave historic rows with null values."
+  },
+  {
+    "id": "q-266",
+    "category": "domain-model",
+    "knowledgePath": "Domain Model > Associations > Reversing Direction",
+    "question": "An existing One-to-Many association from Customer to Order has been in production for months. A developer reverses the association direction. What happens?",
+    "options": [
+      "Nothing — ownership flips but the data is preserved",
+      "All Order objects are deleted and must be recreated",
+      "The association links between objects are lost, but the Customer and Order objects themselves remain",
+      "The reversal is rejected by the modeler if any links already exist"
+    ],
+    "correctIndex": 2,
+    "explanation": "Reversing an association exchanges ownership and, as a side effect, drops the existing LINKS between objects — but the entity rows themselves stay intact. Customers and Orders survive; the references between them are wiped. The modeler does not refuse the change, and Mendix will not delete the entity data."
+  },
+  {
+    "id": "q-267",
+    "category": "domain-model",
+    "knowledgePath": "Domain Model > Entities > Entity Types",
+    "question": "While reviewing a domain model you see an entity colored ORANGE. What does that tell you?",
+    "options": [
+      "It is an external entity sourced from the Mendix Catalog",
+      "It is a view entity backed by an OQL query",
+      "It is a non-persistable entity — instances live only in runtime memory",
+      "It is a persistable entity with system members enabled"
+    ],
+    "correctIndex": 2,
+    "explanation": "Colors map deterministically: blue = persistable, orange = non-persistable, purple = external, green = view. Orange specifically signals non-persistable, meaning no database table is created and objects evaporate at session end. People often confuse orange with external because both are 'unusual,' but external entities are purple."
+  },
+  {
+    "id": "q-268",
+    "category": "domain-model",
+    "knowledgePath": "Domain Model > Attributes > Calculated Attributes",
+    "question": "Which of the following is NOT a limitation of a calculated attribute?",
+    "options": [
+      "It cannot be used in a sort bar",
+      "It cannot be used in an XPath constraint",
+      "It cannot be displayed on a page",
+      "Microflows that calculate it cannot retrieve uncommitted associated objects"
+    ],
+    "correctIndex": 2,
+    "explanation": "Calculated attributes CAN be displayed on a page — that is in fact their whole purpose. The genuine limitations are: not sortable, not filterable (no XPath constraints), not stored in the database, and the calculating microflow cannot reach uncommitted associated objects. Watch out for 'NOT' in the question stem — the correct answer is the one that is FALSE."
+  },
+  {
+    "id": "q-269",
+    "category": "domain-model",
+    "knowledgePath": "Domain Model > Attributes > Attribute Types",
+    "question": "You are modelling a financial application that stores monetary amounts. Which attribute type should you use?",
+    "options": [
+      "Integer — it avoids floating point issues by storing cents as whole numbers",
+      "Long — it has the largest numeric range and therefore the most precision",
+      "Decimal — it is designed for high-precision calculations",
+      "Float — it is the standard numeric type for money in most platforms"
+    ],
+    "correctIndex": 2,
+    "explanation": "Decimal is the right choice for money: it is built for high-precision arithmetic without binary-floating-point rounding errors. Integer trades precision for awkward cents-storage hacks. Long is bigger in range but not more precise. Float does NOT exist as a Mendix attribute type — if you saw it in code you were probably looking at a non-Mendix system."
+  },
+  {
+    "id": "q-270",
+    "category": "domain-model",
+    "knowledgePath": "Domain Model > Entities > Generalization",
+    "question": "Vehicle is a generalization with two specializations, Car and Truck. A microflow retrieves objects of Vehicle. What is returned?",
+    "options": [
+      "Only objects directly created as Vehicle (excluding Car and Truck instances)",
+      "All objects of Vehicle, Car, and Truck — specializations are included when retrieving the generalization",
+      "Only Car and Truck objects — retrieving a generalization returns its leaves",
+      "An error — you must retrieve specializations explicitly, not the generalization"
+    ],
+    "correctIndex": 1,
+    "explanation": "Retrieving the generalization includes its specializations: querying Vehicle returns Vehicle, Car, and Truck instances. The reverse is asymmetric — querying Car returns only Cars, not their parent Vehicle rows. People often invert this rule. Mendix does NOT throw an error; the retrieve is perfectly valid."
+  },
+  {
+    "id": "q-271",
+    "category": "domain-model",
+    "knowledgePath": "Domain Model > Attributes > Hashed String",
+    "question": "Which combination of limitations applies to a Hashed string attribute?",
+    "options": [
+      "Non-sortable and non-filterable",
+      "Non-filterable only — it can still be used in sort bars",
+      "Non-sortable only — it can still appear in XPath constraints",
+      "No limitations — it behaves like a regular String"
+    ],
+    "correctIndex": 1,
+    "explanation": "Hashed strings are non-filterable (you cannot put them in an XPath constraint, because comparing hashes against plaintext input is meaningless), but they ARE sortable. Binary attributes, by contrast, are BOTH non-sortable and non-filterable — do not let the two blend together. Hashed strings also use the algorithm configured in the app's security settings, not a per-attribute setting."
+  },
+  {
+    "id": "q-272",
+    "category": "microflows",
+    "knowledgePath": "Microflows > List Operations > Return Types",
+    "question": "Which list operation in a microflow returns a single object (not a list and not a boolean)?",
+    "options": [
+      "Filter",
+      "Find",
+      "Contains",
+      "Sort"
+    ],
+    "correctIndex": 1,
+    "explanation": "Find returns the FIRST matching object — a single object. Filter looks similar but returns ALL matches as a LIST. Contains returns a boolean indicating whether an object is present. Sort returns a list, never a single object. Knowing which operation returns what is one of the most exam-tested microflow facts."
+  },
+  {
+    "id": "q-273",
+    "category": "microflows",
+    "knowledgePath": "Microflows > Error Handling",
+    "question": "How many error handling options does Mendix offer on microflow activities, and what are they?",
+    "options": [
+      "Two: Rollback and Continue",
+      "Three: Rollback, Custom with rollback, Continue",
+      "Four: Rollback, Custom with rollback, Custom without rollback, Continue",
+      "Four: Rollback, Retry, Skip, Continue"
+    ],
+    "correctIndex": 2,
+    "explanation": "There are four options: Rollback (default), Custom with rollback, Custom without rollback, and Continue. People often forget 'Custom without rollback', which is the recommended choice over Continue because it preserves data made before the failure point but does not silently hide the error. There is no built-in 'Retry' or 'Skip' option."
+  },
+  {
+    "id": "q-274",
+    "category": "microflows",
+    "knowledgePath": "Microflows > Loops",
+    "question": "Inside a loop iterating over a list of OrderLine objects, what does `$currentIndex` give you on the very first iteration?",
+    "options": [
+      "1 — the index of the first element",
+      "0 — indexes start at zero",
+      "The total number of items in the list",
+      "The OrderLine object itself"
+    ],
+    "correctIndex": 1,
+    "explanation": "`$currentIndex` is a zero-based counter, so the first iteration gives 0 (not 1). It is a number, not the loop object itself — the loop object is accessed through whatever you named it on the loop's 'Loop object name' property. This trips people up because most natural languages count from 1."
+  },
+  {
+    "id": "q-275",
+    "category": "microflows",
+    "knowledgePath": "Microflows > Loops > Break & Continue",
+    "question": "Where in a microflow can a Break event or Continue event be placed?",
+    "options": [
+      "Anywhere in the microflow, including the top-level flow",
+      "Only inside a loop",
+      "Only inside a decision branch",
+      "Only inside a sub-microflow called from a loop"
+    ],
+    "correctIndex": 1,
+    "explanation": "Break and Continue events are loop-only — the modeler will not let you place them at the top level of a microflow or inside a sub-microflow. Continue exits the current iteration; Break exits the loop entirely. The distractor about sub-microflows is the trap: even if a sub-microflow is called from inside a loop, the sub-microflow itself cannot host a Break."
+  },
+  {
+    "id": "q-276",
+    "category": "microflows",
+    "knowledgePath": "Microflows > Naming Conventions",
+    "question": "You see a microflow named `ACT_SubmitOrder` in a module. What does the prefix tell you about its role?",
+    "options": [
+      "It is an After Commit event handler for an Order entity",
+      "It is an action microflow invoked from a page (e.g. by a button click)",
+      "It is a Java action wrapper",
+      "It is an automated test microflow"
+    ],
+    "correctIndex": 1,
+    "explanation": "ACT_ stands for an action microflow triggered from a page widget (button click, on-change, etc.). The After Commit event-handler prefix is ACO_, not ACT_. People often confuse the two because both start with 'AC' — but ACT is for client-side ACTions while ACO is for After COmmit handlers."
+  },
+  {
+    "id": "q-277",
+    "category": "microflows",
+    "knowledgePath": "Microflows > Activities > Cast Object",
+    "question": "When is the Cast Object activity appropriate?",
+    "options": [
+      "To change a Customer object into a Product object at runtime",
+      "To re-type a generalized object reference into one of its specializations (e.g. Vehicle → Car)",
+      "To copy an object so the original stays unchanged",
+      "To convert an attribute from String to Integer"
+    ],
+    "correctIndex": 1,
+    "explanation": "Cast Object re-types an existing object reference from a generalization to one of its specializations — for example, a Vehicle reference that you know is actually a Car. It does NOT change unrelated entity types, does NOT clone data, and does NOT convert attributes. People sometimes think of it as a copy operation; it is purely a typed view of the same object."
+  },
+  {
+    "id": "q-278",
+    "category": "microflows",
+    "knowledgePath": "Microflows > Activities > Commit vs Change",
+    "question": "A microflow calls Change Object on a Customer's Email attribute, then ends. The microflow does NOT call Commit. What is the state of the change after the microflow finishes?",
+    "options": [
+      "The new Email value is automatically saved to the database",
+      "The change is kept in memory on the object but never persisted to the database",
+      "The change is discarded immediately because no commit occurred",
+      "An error is thrown because Change Object always requires a follow-up Commit"
+    ],
+    "correctIndex": 1,
+    "explanation": "Change Object modifies the object in memory but does NOT persist anything until you explicitly call Commit. The change is real — anyone holding that object reference sees the new value — but the database row still has the old value. Many candidates incorrectly assume changes auto-save or auto-discard."
+  },
+  {
+    "id": "q-279",
+    "category": "microflows",
+    "knowledgePath": "Microflows > Error Handling > Continue",
+    "question": "On which microflow activities is the Continue error-handling option available?",
+    "options": [
+      "On every activity that can fail",
+      "Only on Call Microflow activities and loops",
+      "Only on REST and Java action calls",
+      "Only on Commit and Create activities"
+    ],
+    "correctIndex": 1,
+    "explanation": "The Continue option is restricted to Call Microflow activities and loop containers. It cannot be selected on a Create, Commit, REST call, or any other generic activity — for those, the strongest non-rollback choice is 'Custom without rollback'. Misremembering Continue as available everywhere is a common trap."
+  },
+  {
+    "id": "q-280",
+    "category": "microflows",
+    "knowledgePath": "Microflows > Debugging",
+    "question": "Which scenario CANNOT be debugged using breakpoints in Studio Pro?",
+    "options": [
+      "A microflow triggered by a button click on a page",
+      "A microflow used as a data source for a data view",
+      "A microflow that runs during application startup",
+      "A scheduled event microflow firing on its interval"
+    ],
+    "correctIndex": 2,
+    "explanation": "Breakpoint debugging is explicitly NOT supported for microflows that run during application startup — by the time you would attach the debugger, the startup logic has already executed. Page actions, data sources, and scheduled events all support breakpoints normally. To investigate startup logic, fall back to Log Message activities."
+  },
+  {
+    "id": "q-281",
+    "category": "microflows",
+    "knowledgePath": "Microflows > Decisions",
+    "question": "What distinguishes an Object Type Decision from a regular Decision?",
+    "options": [
+      "Object Type Decision can have only two outgoing paths; regular Decision can have many",
+      "Object Type Decision branches based on the specialization of an object; regular Decision branches based on a boolean/value condition",
+      "Object Type Decision is async; regular Decision is synchronous",
+      "Object Type Decision returns a list of objects; regular Decision returns a boolean"
+    ],
+    "correctIndex": 1,
+    "explanation": "An Object Type Decision branches on the runtime type of an object — useful when you have a Vehicle that might really be a Car or a Truck and need to take a different path per specialization. A regular Decision evaluates a boolean expression. Both can have multiple outgoing paths; both are synchronous. The distinguishing feature is what they branch on."
+  },
+  {
+    "id": "q-282",
+    "category": "nanoflows",
+    "knowledgePath": "Nanoflows > Activities Availability",
+    "question": "Which of the following activities is available in a nanoflow but NOT in a microflow?",
+    "options": [
+      "Call REST service",
+      "Call Java action",
+      "Call JavaScript action",
+      "Generate document"
+    ],
+    "correctIndex": 2,
+    "explanation": "JavaScript actions are nanoflow-only — they execute in the browser/device. Java actions are the inverse: microflow-only. REST calls and document generation are also server-side, so microflow-only. The trap here is confusing JavaScript and Java actions; they live on opposite sides of the runtime."
+  },
+  {
+    "id": "q-283",
+    "category": "nanoflows",
+    "knowledgePath": "Nanoflows > Online Apps > Network Requests",
+    "question": "Your nanoflow runs in an online app and includes a Create Object activity on a PERSISTABLE entity. What is the performance implication?",
+    "options": [
+      "No network traffic — nanoflows always run locally",
+      "A network request is sent to the server for the create operation",
+      "The activity is rejected by the modeler",
+      "The object is created in IndexedDB only and never leaves the device"
+    ],
+    "correctIndex": 1,
+    "explanation": "In an online app, Create/Commit/Retrieve/Rollback on a persistable entity each trigger a network round-trip from the nanoflow to the server — defeating much of the speed advantage. The exception is Create on a non-persistable entity with no event handlers, which stays client-side. Nanoflows are not always purely local."
+  },
+  {
+    "id": "q-284",
+    "category": "nanoflows",
+    "knowledgePath": "Nanoflows > NPE Create Without Network",
+    "question": "Under which condition can a nanoflow create a non-persistable entity object without sending a network request?",
+    "options": [
+      "Always — non-persistable entities never trigger network requests",
+      "Only if the NPE has no event handlers, no calculated attributes, and no read-only attributes",
+      "Only if the user is currently offline",
+      "Only if the NPE is in the System module"
+    ],
+    "correctIndex": 1,
+    "explanation": "An NPE Create stays client-side only when the entity has NO event handlers, NO calculated attributes, and NO read-only attributes. Any of those features pushes the create to the server because the server needs to evaluate them. 'NPEs never hit the server' is a popular myth — they often do."
+  },
+  {
+    "id": "q-285",
+    "category": "nanoflows",
+    "knowledgePath": "Nanoflows > Security Context",
+    "question": "What user context does a nanoflow execute in?",
+    "options": [
+      "System user with full administrative rights",
+      "The currently signed-in end user — operations the user is unauthorized for will fail",
+      "Anonymous user, regardless of who is signed in",
+      "A configurable role chosen on the nanoflow properties"
+    ],
+    "correctIndex": 1,
+    "explanation": "Nanoflows run in the current user's security context — if the user lacks permission to read or write an entity, the nanoflow call fails. Microflows ALSO use the current user's roles by default but can be configured to run with all rights (scheduled events, for example, always do). The phrase 'with all rights' does not apply to nanoflows."
+  },
+  {
+    "id": "q-286",
+    "category": "nanoflows",
+    "knowledgePath": "Nanoflows > Synchronization",
+    "question": "Which activity is exclusive to nanoflows for offline mobile apps?",
+    "options": [
+      "Commit Object",
+      "Synchronize",
+      "Retrieve Object",
+      "Show Page"
+    ],
+    "correctIndex": 1,
+    "explanation": "Synchronize (and its sibling 'Synchronize to device') is a nanoflow-only activity for moving data between the local offline database and the server. Commit, Retrieve, and Show Page all exist in both microflows and nanoflows. Synchronization is the defining offline-app capability."
+  },
+  {
+    "id": "q-287",
+    "category": "nanoflows",
+    "knowledgePath": "Nanoflows > When To Choose",
+    "question": "You need to call an external SOAP web service. Where should you implement the call?",
+    "options": [
+      "In a nanoflow — client-side calls are faster",
+      "In a microflow — SOAP/REST calls cannot be made from nanoflows",
+      "In a JavaScript action invoked from a nanoflow",
+      "Either microflow or nanoflow — both support the activity"
+    ],
+    "correctIndex": 1,
+    "explanation": "Call Web Service and Call REST Service activities do not exist in nanoflows; integration with external services must happen server-side via a microflow. JavaScript actions can technically perform HTTP calls but bypass Mendix's authentication and mapping machinery and are not the recommended path for SOAP. Network calls and integration activities are microflow territory."
+  },
+  {
+    "id": "q-288",
+    "category": "nanoflows",
+    "knowledgePath": "Nanoflows > Log Activities",
+    "question": "Where does a 'Log message' activity in a nanoflow write its output?",
+    "options": [
+      "To the Mendix runtime server log",
+      "To the browser console (or device console)",
+      "To both the server log and the browser console simultaneously",
+      "To System.LogEntry rows in the database"
+    ],
+    "correctIndex": 1,
+    "explanation": "A nanoflow's log message activity writes to the client console — browser console on the web, native logs on mobile. It does NOT reach the server log. To log server-side, use a microflow's Log Message activity. Mixing these up makes debugging frustrating because you check the wrong place."
+  },
+  {
+    "id": "q-289",
+    "category": "nanoflows",
+    "knowledgePath": "Nanoflows > Conversion",
+    "question": "You right-click a nanoflow and choose 'Convert to microflow'. What is the most likely consequence?",
+    "options": [
+      "The conversion completes silently with no impact",
+      "All client-only activities (JavaScript actions, progress bars, etc.) become invalid and warnings appear",
+      "The original nanoflow is preserved alongside a new microflow copy",
+      "The conversion is rejected because nanoflows cannot be converted"
+    ],
+    "correctIndex": 1,
+    "explanation": "Convert replaces the nanoflow with a microflow, but client-only activities such as Call JavaScript action, Show progress bar, and synchronize have no microflow equivalent and become errors/warnings. The Mendix tooling does allow the conversion and explicitly warns about non-replaceable usages. 'Duplicate as microflow' creates a copy alongside; Convert replaces in place."
+  },
+  {
+    "id": "q-290",
+    "category": "nanoflows",
+    "knowledgePath": "Nanoflows > Offline Apps",
+    "question": "In a true offline-first mobile app, which statement about database operations in nanoflows is correct?",
+    "options": [
+      "Database activities are blocked entirely when the device is offline",
+      "Database activities run against the local offline database and execute fast — no network needed",
+      "All database activities are queued until the device reconnects",
+      "Database activities throw because nanoflows cannot reach a database"
+    ],
+    "correctIndex": 1,
+    "explanation": "Offline-first apps maintain a LOCAL device-side database that nanoflow activities operate against directly — no network involvement. Synchronization with the server happens via explicit Synchronize activities, not implicitly per-operation. The 'each activity creates a network request' rule applies to ONLINE nanoflows, not offline mobile."
+  },
+  {
+    "id": "q-291",
+    "category": "nanoflows",
+    "knowledgePath": "Nanoflows > UI Validations",
+    "question": "What is the recommended use case for nanoflows in an online (non-offline) app?",
+    "options": [
+      "Any operation that involves persistable entities",
+      "Pure UI logic — validations, navigation, calculations, formatting — with no database activities",
+      "Long-running batch jobs",
+      "Integration with REST services"
+    ],
+    "correctIndex": 1,
+    "explanation": "In online apps, nanoflows shine for client-side concerns that DON'T hit the database: form validations before submission, page navigation, on-the-fly calculations, formatting display values. Once you reach for Create/Retrieve/Commit on a persistable entity you are paying network costs anyway — a microflow is then more honest."
+  },
+  {
+    "id": "q-292",
+    "category": "modules",
+    "knowledgePath": "Modules > Module Types",
+    "question": "Which set lists the three module types you can choose when creating a module in Studio Pro?",
+    "options": [
+      "App, Theme, Layout",
+      "App module, Add-on module, Solution module",
+      "App, Library, Marketplace",
+      "Standard, Reusable, Protected"
+    ],
+    "correctIndex": 1,
+    "explanation": "The three real types are App module (standard development), Add-on module (reusable, often Marketplace), and Solution module (ISV-style packaged solutions). 'Theme' and 'Layout' are document categories inside a module, not module types. The other distractors mix up Mendix terms with generic packaging vocabulary."
+  },
+  {
+    "id": "q-293",
+    "category": "modules",
+    "knowledgePath": "Modules > Export Formats",
+    "question": "What is the key difference between exporting a module as `.mpk` versus `.mxmodule`?",
+    "options": [
+      ".mpk is for native mobile; .mxmodule is for web apps",
+      ".mpk includes the full source and is editable; .mxmodule is protected/compiled and read-only",
+      ".mpk is smaller; .mxmodule contains additional metadata",
+      "They are identical — `.mxmodule` is just an older extension"
+    ],
+    "correctIndex": 1,
+    "explanation": ".mpk = full source, editable, ideal for team sharing or backup. .mxmodule = protected/compiled, read-only, used for Marketplace distribution where you do not want consumers to see or change your logic. They are not interchangeable, and platform (web vs mobile) plays no role."
+  },
+  {
+    "id": "q-294",
+    "category": "modules",
+    "knowledgePath": "Modules > Export Levels",
+    "question": "An add-on module exposes its Customer entity at Export Level 'Usable'. What can a consumer of this module do?",
+    "options": [
+      "View and modify the Customer entity, including changing attributes",
+      "Use the Customer entity in their app, but neither view nor modify its definition",
+      "Only see the entity name in the module tree, with no usage allowed",
+      "Nothing — Usable means hidden in this context"
+    ],
+    "correctIndex": 1,
+    "explanation": "Usable lets a consumer USE the entity (drag it into pages, reference it in microflows) but blocks viewing or modifying its internal definition. Hidden goes further: the entity does not appear at all. The names are confusing — 'Usable' sounds like full access but it is specifically the middle tier."
+  },
+  {
+    "id": "q-295",
+    "category": "modules",
+    "knowledgePath": "Modules > Java Folder Structure",
+    "question": "Studio Pro generates files into `javasource/MyModule/proxies/`. Which statement is true?",
+    "options": [
+      "You can edit these files freely — they are your custom Java action code",
+      "They are auto-generated entity proxy classes; manual edits will be overwritten on the next deploy",
+      "They contain external JAR dependencies",
+      "They are reserved for unit tests"
+    ],
+    "correctIndex": 1,
+    "explanation": "Files in `proxies/` are auto-generated when the domain model changes. Editing them by hand is futile — Studio Pro regenerates them on deploy. Your custom code goes into the sibling `actions/` folder, between BEGIN/END USER CODE markers. External JARs live in `userlib/` outside the module."
+  },
+  {
+    "id": "q-296",
+    "category": "modules",
+    "knowledgePath": "Modules > Module Settings > Java Dependencies",
+    "question": "Where should an external JAR file required by a module be placed?",
+    "options": [
+      "Inside `javasource/[module]/actions/`",
+      "Inside `javasource/[module]/proxies/`",
+      "In the project's `userlib/` folder",
+      "Anywhere on the developer's machine, referenced via absolute path"
+    ],
+    "correctIndex": 2,
+    "explanation": "External JARs go in the project-level `userlib/` folder where Studio Pro picks them up during deploy. `actions/` is for your own Java code, `proxies/` is auto-generated and off-limits, and absolute machine paths are not portable to teammates or to the cloud."
+  },
+  {
+    "id": "q-297",
+    "category": "modules",
+    "knowledgePath": "Modules > Module Security",
+    "question": "In Mendix, what is the relationship between Module Roles and User Roles?",
+    "options": [
+      "They are the same thing under different names",
+      "User Roles aggregate one or more Module Roles, letting modules stay self-contained while users get a combined set of rights",
+      "Module Roles override User Roles when both apply",
+      "Module Roles are deprecated in favour of User Roles"
+    ],
+    "correctIndex": 1,
+    "explanation": "Module Roles describe what someone can do INSIDE a single module. User Roles compose those Module Roles into an app-level identity. This indirection is what makes modules portable — the same module can be reused in multiple apps with each app composing the Module Roles into User Roles its own way."
+  },
+  {
+    "id": "q-298",
+    "category": "modules",
+    "knowledgePath": "Modules > Module Type Conversion",
+    "question": "A developer changes an existing App module's type to Add-on module. What is the main risk?",
+    "options": [
+      "Nothing — the conversion is purely metadata",
+      "Module-specific settings such as export levels may be reset or removed; back up first",
+      "All entities in the module are deleted",
+      "The change is irreversible and locks the module"
+    ],
+    "correctIndex": 1,
+    "explanation": "Converting between module types CAN reset module-specific settings and cause partial 'data loss' at the model level — for example, export levels you had set. The fix is to take a backup before converting. Entities themselves are not deleted, and the change is reversible (with the same caveat)."
+  },
+  {
+    "id": "q-299",
+    "category": "modules",
+    "knowledgePath": "Modules > Marketplace Versioning",
+    "question": "What is required on a module before it can be published to the Mendix Marketplace?",
+    "options": [
+      "A signed digital certificate from Mendix",
+      "Module version (e.g. 1.0.0) and a Minimum Supported Mendix Version configured under the Version tab",
+      "All entities must be Persistable",
+      "The module must contain at least one published REST service"
+    ],
+    "correctIndex": 1,
+    "explanation": "Publishing requires semantic versioning and a stated minimum Studio Pro version so consumers know which apps can install the module. Certificates, persistability, and REST publishing are not Marketplace prerequisites. Versioning is the gating requirement."
+  },
+  {
+    "id": "q-300",
+    "category": "modules",
+    "knowledgePath": "Modules > Domain Model Across Modules",
+    "question": "Two modules each have their own domain model. Module Sales has an Order entity; Module CRM has a Customer entity. Can a microflow in Sales reference Customer?",
+    "options": [
+      "Yes, but only if Sales adds CRM as a dependency and CRM exports Customer at Usable or above",
+      "No — entities are strictly scoped to their own module",
+      "Yes, automatically — all modules share a single global namespace",
+      "Only via a published REST service between the modules"
+    ],
+    "correctIndex": 0,
+    "explanation": "Cross-module references work when the consuming module declares a dependency and the providing module's entity is exported at Usable. Entities are NOT globally shared, but they are also not strictly isolated — that is the whole purpose of the Dependencies tab and Export Levels. A REST round-trip between two modules of the SAME app is overkill."
+  },
+  {
+    "id": "q-301",
+    "category": "modules",
+    "knowledgePath": "Modules > Module Security > Dataset Access",
+    "question": "Module Security exposes three dataset access levels. Which list is correct?",
+    "options": [
+      "Public, Internal, Private",
+      "Full access, Limited access, No access",
+      "Read, Write, Delete",
+      "Visible, Hidden, Locked"
+    ],
+    "correctIndex": 1,
+    "explanation": "Datasets have three access levels: Full (no constraints), Limited (at least one constraint applies), and No access. Read/Write/Delete are CRUD verbs used for entity access, not datasets. Public/Internal/Private and Visible/Hidden/Locked are from other ecosystems."
+  },
+  {
+    "id": "q-302",
+    "category": "security",
+    "knowledgePath": "Security > Anonymous Users",
+    "question": "How many user roles can be assigned to anonymous users?",
+    "options": [
+      "Zero — anonymous users have no role",
+      "Exactly one",
+      "Up to three",
+      "Unlimited, like any other user"
+    ],
+    "correctIndex": 1,
+    "explanation": "Anonymous users get exactly ONE user role. They are not 'no role' (then they could not access anything) and they are not unlimited (a deliberate constraint to keep public access narrowly scoped). This is one of the most precise rules to remember on the exam."
+  },
+  {
+    "id": "q-303",
+    "category": "security",
+    "knowledgePath": "Security > Access Rules > XPath",
+    "question": "An access rule on the Order entity has the XPath constraint `[System.owner = '[%CurrentUser%]']`. Which operations does this constraint affect?",
+    "options": [
+      "Create, Read, Write, Delete",
+      "Read, Write, Delete only — Create is NOT constrained by XPath",
+      "Read only — XPath cannot affect modifications",
+      "Create and Read only"
+    ],
+    "correctIndex": 1,
+    "explanation": "XPath constraints filter which existing rows a user can see/edit/delete (Read, Write, Delete) — but they cannot constrain Create because a new object does not yet exist to compare against. To restrict who can create an Order, use the Create flag on the access rule itself, not the XPath."
+  },
+  {
+    "id": "q-304",
+    "category": "security",
+    "knowledgePath": "Security > Access Rules > Additive Behaviour",
+    "question": "Two access rules apply to the same module role on the same entity. Rule A grants Read on attribute Email; Rule B grants Read and Write on attribute Email. What is the effective access?",
+    "options": [
+      "Read only — the most restrictive rule wins",
+      "Read and Write — access rules are additive across rules for the same module role",
+      "Write only — the latest defined rule wins",
+      "Access is undefined and the deploy fails"
+    ],
+    "correctIndex": 1,
+    "explanation": "Access rules are additive (union) for a single module role: take the maximum across rules. People expect 'least privilege wins' from other security systems, but in Mendix the rules combine. To genuinely restrict access, you must remove or tighten the more permissive rule."
+  },
+  {
+    "id": "q-305",
+    "category": "security",
+    "knowledgePath": "Security > Production Mode",
+    "question": "Which app security level is required to deploy to licensed Mendix Cloud?",
+    "options": [
+      "Off",
+      "Prototype/Demo",
+      "Production",
+      "Any level is acceptable"
+    ],
+    "correctIndex": 2,
+    "explanation": "Licensed Mendix Cloud requires Production security. Off is for local testing and Free Apps only. Prototype/Demo applies authentication and forms but allows access to all data — not safe for real users. Access rules in the modeler only appear once Production mode is selected."
+  },
+  {
+    "id": "q-306",
+    "category": "security",
+    "knowledgePath": "Security > Microflow Access",
+    "question": "Microflow A is configured 'Allowed roles: Administrator'. Microflow B has 'Allowed roles: User'. A signed-in User triggers B from a button, and B calls A. What happens?",
+    "options": [
+      "An access error — the user lacks rights to A",
+      "A executes normally — microflow-to-microflow calls are not subject to role checks",
+      "A is silently skipped",
+      "The user is logged out for attempting privilege escalation"
+    ],
+    "correctIndex": 1,
+    "explanation": "Role checks on microflows apply only to CLIENT-side invocation (a page button, a published service). When one microflow calls another, the runtime trusts the calling microflow and does NOT re-check roles. This is intentional but worth knowing because it changes how you reason about security boundaries."
+  },
+  {
+    "id": "q-307",
+    "category": "security",
+    "knowledgePath": "Security > Page Access",
+    "question": "Page Welcome is hidden from the Customer role in module security. Which statement is correct?",
+    "options": [
+      "A Customer cannot reach Welcome by any means",
+      "A Customer cannot navigate to Welcome through menus, but a deeplink or forced-visible button could still open it",
+      "Welcome is automatically encrypted for Customer sessions",
+      "Welcome cannot be deployed until the conflict is resolved"
+    ],
+    "correctIndex": 1,
+    "explanation": "Page visibility settings hide a page from menus and standard navigation widgets, but they do not enforce hard access control — a hand-crafted URL or a button with 'visible for' logic can still send the user there. Real data protection must come from ENTITY access rules and microflow access, not page visibility."
+  },
+  {
+    "id": "q-308",
+    "category": "security",
+    "knowledgePath": "Security > Inheritance",
+    "question": "Entity Vehicle has access rules. You create a specialization Car. What access rules apply to Car?",
+    "options": [
+      "Car automatically inherits all of Vehicle's access rules",
+      "Car has no access rules until you explicitly define them — access rules are NOT inherited",
+      "Only Read rules are inherited; Write/Delete must be redefined",
+      "Inheritance depends on whether Car overrides any attributes"
+    ],
+    "correctIndex": 1,
+    "explanation": "Access rules are NOT inherited between generalization and specialization. You must define rules on Car explicitly — otherwise it defaults to inaccessible. People expect rules to inherit because attributes do; the security model deliberately diverges to force explicit decisions per entity."
+  },
+  {
+    "id": "q-309",
+    "category": "security",
+    "knowledgePath": "Security > Calculated Attributes",
+    "question": "Can an access rule grant 'Write' on a calculated attribute?",
+    "options": [
+      "Yes, but the value is never actually persisted",
+      "No — Write access cannot be set on calculated attributes",
+      "Only if the attribute's microflow allows it",
+      "Only for non-persistable entities"
+    ],
+    "correctIndex": 1,
+    "explanation": "Calculated attributes are derived from a microflow each time they are read; there is nothing to write to. The modeler blocks Write access on them entirely. People sometimes assume access rules can override this — they cannot. If you need writeable behavior, the attribute should be Stored, not Calculated."
+  },
+  {
+    "id": "q-310",
+    "category": "security",
+    "knowledgePath": "Security > Where Configured",
+    "question": "Where do you configure WHICH roles can run a given microflow?",
+    "options": [
+      "App Security — under User Roles",
+      "Module Security — under Microflow access for each module role",
+      "On the microflow's General properties pane",
+      "In navigation profile settings"
+    ],
+    "correctIndex": 1,
+    "explanation": "Microflow access (which module roles may execute it) lives in Module Security. App Security composes module roles into user roles; the microflow itself does not carry a 'role' property in its own pane; navigation profiles only configure menus. Knowing where each setting lives is heavily tested."
+  },
+  {
+    "id": "q-311",
+    "category": "security",
+    "knowledgePath": "Security > User Roles vs Module Roles",
+    "question": "Which entity is responsible for assigning a user a User Role, and which is responsible for granting access through Module Roles?",
+    "options": [
+      "Administrators assign Module Roles; developers assign User Roles",
+      "Administrators assign User Roles; developers assign Module Roles to User Roles in App Security",
+      "Both are assigned automatically at sign-in by Mendix",
+      "Only Module Roles exist; User Roles are deprecated"
+    ],
+    "correctIndex": 1,
+    "explanation": "Administrators (or microflows acting as admin) assign User Roles to actual end-users. Developers in Studio Pro link Module Roles into User Roles under App Security > User Roles. Confusing 'who configures what' is a popular trap because both pieces sound developer-driven, but role assignment to a person is an admin/runtime concern."
+  },
+  {
+    "id": "q-312",
+    "category": "pages",
+    "knowledgePath": "Pages > Data View > Source",
+    "question": "Which data view data source uses an object ALREADY available on the page (e.g. passed in as a parameter)?",
+    "options": [
+      "Microflow",
+      "Database",
+      "Context",
+      "Listen to widget"
+    ],
+    "correctIndex": 2,
+    "explanation": "Context means 'use the object I already have' — typically a page parameter handed in from the previous page. Microflow and Nanoflow sources EXECUTE a flow to obtain the object. 'Listen to widget' reacts to selection in a list widget on the same page. 'Database' is a data grid source, not a data view source."
+  },
+  {
+    "id": "q-313",
+    "category": "pages",
+    "knowledgePath": "Pages > Reference Selectors",
+    "question": "An Order has a 1-to-* association to Tag (one order has many tags). Which widget should you use on the Order's edit page to let the user select tags?",
+    "options": [
+      "Reference Selector — for single associated objects",
+      "Reference Set Selector — for multi-object associations",
+      "Drop-down widget bound to the Tag enumeration",
+      "Data grid with selection mode 'Multi'"
+    ],
+    "correctIndex": 1,
+    "explanation": "Reference Set Selector handles the * side — multiple Tags per Order. Reference Selector is for the single-object case (e.g. one Customer per Order). Tag is an entity here, not an enumeration. A Data grid would WORK but is overkill and is not the recommended widget for setting an association on an edit form."
+  },
+  {
+    "id": "q-314",
+    "category": "pages",
+    "knowledgePath": "Pages > Data Grid > Selection",
+    "question": "What is the DEFAULT selection mode on a data grid in Mendix?",
+    "options": [
+      "No selection",
+      "Single selection",
+      "Multi-selection (Ctrl+click)",
+      "Single selection with mandatory selection"
+    ],
+    "correctIndex": 1,
+    "explanation": "The default is Single selection — exactly one row at a time can be selected. People often guess 'No selection' because rows look unselected initially, or 'Multi-selection' because that feels more powerful. The default is the simplest functional choice."
+  },
+  {
+    "id": "q-315",
+    "category": "pages",
+    "knowledgePath": "Pages > Snippets",
+    "question": "Which statement about snippet parameters is correct?",
+    "options": [
+      "They support all the same types as page parameters",
+      "They support entities but NOT primitive types, and they cannot be made optional",
+      "They are always optional and always primitive",
+      "They are limited to a single parameter per snippet"
+    ],
+    "correctIndex": 1,
+    "explanation": "Snippet parameters accept entity objects but not primitive types (Integer, String, Boolean), and they are always required — there is no 'optional' toggle. Page parameters have broader support. People assume snippet and page parameters work identically; they do not."
+  },
+  {
+    "id": "q-316",
+    "category": "pages",
+    "knowledgePath": "Pages > Nested Data Views",
+    "question": "A page contains a data view with a nested data view inside it. What is true about the nested data view's footer?",
+    "options": [
+      "It displays normally, just like the parent's footer",
+      "It is always invisible",
+      "It can be shown but only if the parent's footer is hidden",
+      "It must contain a Save and Cancel button or it fails validation"
+    ],
+    "correctIndex": 1,
+    "explanation": "The footer of a NESTED data view is always invisible — you cannot make it appear. This is a small but specific exam fact. Save/Cancel buttons should live on the outer data view's footer, or on action buttons inside the inner data view's body."
+  },
+  {
+    "id": "q-317",
+    "category": "pages",
+    "knowledgePath": "Pages > Data Grid > Compatibility",
+    "question": "Where is the classic Data Grid widget NOT supported, requiring you to choose an alternative?",
+    "options": [
+      "Web (desktop browser)",
+      "Native mobile pages and React-client pages",
+      "Pop-up pages",
+      "Pages reachable via deeplink"
+    ],
+    "correctIndex": 1,
+    "explanation": "Classic Data Grid is web-only and is not supported on native mobile or in the React client. For native mobile, use Gallery or List View; for React, use Data Grid 2. The trap is assuming any visible widget works everywhere — Mendix has platform-specific widget compatibility."
+  },
+  {
+    "id": "q-318",
+    "category": "pages",
+    "knowledgePath": "Pages > Layouts",
+    "question": "Which content type CANNOT be placed directly inside a Layout?",
+    "options": [
+      "A snippet call",
+      "Structure widgets such as containers and tabs",
+      "A data display widget like a data view bound to an entity",
+      "Layout grids and navigation widgets"
+    ],
+    "correctIndex": 2,
+    "explanation": "Layouts host structure-defining widgets (containers, navigation, layout grids) and snippet calls, but they exclude data display widgets directly. To get data-bound widgets into a layout, put them in a snippet and call the snippet from the layout. This is a deliberate constraint to keep layouts page-agnostic."
+  },
+  {
+    "id": "q-319",
+    "category": "pages",
+    "knowledgePath": "Pages > Editability",
+    "question": "A data view has Editability = 'Conditionally'. What does this enable?",
+    "options": [
+      "The data view is editable only when the user has administrator role",
+      "Editability is determined dynamically from attribute values or expressions on the page",
+      "Only the first attribute is editable; the rest are read-only",
+      "The view is editable until the first commit and then locks"
+    ],
+    "correctIndex": 1,
+    "explanation": "Conditionally editability lets you tie edit state to an expression — e.g. `$Order/Status != 'Closed'` keeps the form editable only while the order is open. It is NOT a role check (that lives in security), and it is NOT a one-shot-then-lock toggle. Conditional editability is the right tool for state-dependent UIs."
+  },
+  {
+    "id": "q-320",
+    "category": "pages",
+    "knowledgePath": "Pages > Data Grid > Source Types",
+    "question": "Which data grid data source supports built-in searching and sorting on attributes WITHOUT writing additional logic?",
+    "options": [
+      "Database source",
+      "Microflow source",
+      "Association source",
+      "All three behave identically"
+    ],
+    "correctIndex": 0,
+    "explanation": "Database source gives free server-side search and sort because Mendix translates the search bar and column-sort clicks into SQL/XPath. Microflow source returns whatever the microflow returns — you have to write search/sort logic yourself. Association source follows a fixed relationship and is similarly limited."
+  },
+  {
+    "id": "q-321",
+    "category": "pages",
+    "knowledgePath": "Pages > SPA Behaviour",
+    "question": "Mendix apps are Single Page Applications. What is the practical consequence on navigation between pages with the same layout?",
+    "options": [
+      "Both pages are reloaded entirely",
+      "Only the page content is refreshed; the shared layout chrome is not re-rendered",
+      "Navigation requires a manual browser refresh",
+      "The new page opens in a new browser tab"
+    ],
+    "correctIndex": 1,
+    "explanation": "Because the app is an SPA, navigation between pages with the same layout only swaps the inner content; the header, footer, sidebar, etc. remain mounted. This is what makes Mendix navigation feel fast. Full page reloads only happen when the layout itself changes."
+  },
+  {
+    "id": "q-322",
+    "category": "xpath",
+    "knowledgePath": "XPath > Aggregates",
+    "question": "Which aggregate function is available in Studio Pro XPath constraints?",
+    "options": [
+      "avg",
+      "sum",
+      "count",
+      "None — aggregate functions are Java-only"
+    ],
+    "correctIndex": 3,
+    "explanation": "Aggregate functions (avg, count, max, min, sum) work in Java/web-service contexts where you write the full XPath including the entity. Inside Studio Pro constraint expressions you only write the filter clauses — aggregates have no place. This is one of the most surprising XPath rules on the exam."
+  },
+  {
+    "id": "q-323",
+    "category": "xpath",
+    "knowledgePath": "XPath > Tokens",
+    "question": "Inside an XPath constraint, what does the token `[%CurrentUser%]` evaluate to at runtime?",
+    "options": [
+      "The literal string 'CurrentUser'",
+      "The username of the currently signed-in user",
+      "A reference to the System.User object representing the signed-in user",
+      "An XPath expression that the developer must complete"
+    ],
+    "correctIndex": 2,
+    "explanation": "`[%CurrentUser%]` resolves to the System.User OBJECT of the signed-in user — not their username string. Because it is an object reference, you compare it against associations: `[System.owner = '[%CurrentUser%]']`. Treating it as a username string would compare an object to a string and never match."
+  },
+  {
+    "id": "q-324",
+    "category": "xpath",
+    "knowledgePath": "XPath > Booleans",
+    "question": "How do you write a constraint that selects only objects where the IsPaid boolean attribute is TRUE?",
+    "options": [
+      "[IsPaid = 'true']",
+      "[IsPaid = true]",
+      "[IsPaid = true()]",
+      "[IsPaid = 1]"
+    ],
+    "correctIndex": 2,
+    "explanation": "Boolean literals in XPath are FUNCTIONS: `true()` and `false()` with the parentheses. The string 'true' would compare a boolean to a string and fail. The bare keyword `true` is not valid XPath. Numeric 1 is not the way Mendix represents booleans."
+  },
+  {
+    "id": "q-325",
+    "category": "xpath",
+    "knowledgePath": "XPath > Empty Check",
+    "question": "Which XPath constraint selects Order objects that have NO associated Invoice?",
+    "options": [
+      "[CRM.Order_Invoice = null]",
+      "[CRM.Order_Invoice = empty]",
+      "[not(CRM.Order_Invoice/CRM.Invoice)]",
+      "Both 'B' and 'C' are valid"
+    ],
+    "correctIndex": 3,
+    "explanation": "`= empty` and `not(...)` traversing the association are both valid ways to check for an absent association. `= null` is SQL syntax and not Mendix XPath. Knowing 'empty' and not() are both available — and equivalent here — is useful because different patterns read more naturally in different contexts."
+  },
+  {
+    "id": "q-326",
+    "category": "xpath",
+    "knowledgePath": "XPath > Studio Pro vs Java",
+    "question": "Inside a Studio Pro XPath constraint editor on the Customer entity, what should the expression look like to find customers named 'Jansen'?",
+    "options": [
+      "//Sales.Customer[Name='Jansen']",
+      "[Name='Jansen']",
+      "Sales.Customer.Name = 'Jansen'",
+      "SELECT * FROM Customer WHERE Name = 'Jansen'"
+    ],
+    "correctIndex": 1,
+    "explanation": "Inside Studio Pro the entity context is already known — you write ONLY the bracketed constraint: `[Name='Jansen']`. The full `//Sales.Customer[...]` form is used in Java code or generic XPath APIs. Studio Pro will reject the full form with a syntax error and SQL has no place here."
+  },
+  {
+    "id": "q-327",
+    "category": "xpath",
+    "knowledgePath": "XPath > Division Operator",
+    "question": "In a Mendix expression you want to divide one number by another. Which operator do you use?",
+    "options": [
+      "/",
+      "div",
+      "\\",
+      "÷"
+    ],
+    "correctIndex": 1,
+    "explanation": "Division uses `div` (or `:` in some contexts), NOT `/`. The slash is reserved for navigating object/attribute paths (e.g. `$customer/Name`) — using it for division would create ambiguity. People reflexively type `/` from other languages and hit silent errors."
+  },
+  {
+    "id": "q-328",
+    "category": "xpath",
+    "knowledgePath": "XPath > Empty-Object Evaluation",
+    "question": "Consider: `$emptyObject/attribute != $validObject/attribute or $emptyObject = empty`. What is the issue?",
+    "options": [
+      "Nothing — it is correct",
+      "Accessing a member on an empty object raises an exception that returns false, so the second clause never runs; reorder the check",
+      "`!=` is not allowed in expressions",
+      "You cannot mix `or` with attribute comparisons"
+    ],
+    "correctIndex": 1,
+    "explanation": "When you try to dereference an empty object Mendix raises an exception that the surrounding boolean treats as false, and short-circuits onward. The fix is to test for empty FIRST: `$emptyObject = empty or $emptyObject/attribute != $validObject/attribute`. This is identical to defensive null checks in other languages."
+  },
+  {
+    "id": "q-329",
+    "category": "xpath",
+    "knowledgePath": "XPath > Date Comparisons",
+    "question": "How do you constrain on 'records created today or later' inside an access-rule XPath?",
+    "options": [
+      "[CreatedDate >= now()]",
+      "[CreatedDate >= '[%CurrentDateTime%]']",
+      "[CreatedDate >= TODAY]",
+      "[CreatedDate >= DateTime.now()]"
+    ],
+    "correctIndex": 1,
+    "explanation": "Inside XPath constraints, the current date/time comes from the token `[%CurrentDateTime%]`. `now()` and `DateTime.now()` are expression-context functions, not XPath tokens. `TODAY` is not a Mendix keyword at all. Mixing expression-side and XPath-side syntax is a frequent trap."
+  },
+  {
+    "id": "q-330",
+    "category": "xpath",
+    "knowledgePath": "XPath > And/Or Combining",
+    "question": "Which constraint selects orders where Status equals 'Open' AND TotalPrice is greater than 100?",
+    "options": [
+      "[Status='Open' AND TotalPrice > 100]",
+      "[Status='Open' and TotalPrice > 100]",
+      "[Status='Open' && TotalPrice > 100]",
+      "[Status='Open'][TotalPrice > 100]"
+    ],
+    "correctIndex": 1,
+    "explanation": "XPath uses lowercase `and` / `or` / `not`. Uppercase AND/OR and the `&&` operator come from SQL or programming languages and are invalid. While you CAN write two adjacent bracketed constraints in some XPath dialects, Mendix expects a single bracket with `and` joining clauses."
+  },
+  {
+    "id": "q-331",
+    "category": "xpath",
+    "knowledgePath": "XPath > Path Through Association",
+    "question": "An Order belongs to a Customer via Sales.Customer_Order. Which XPath retrieves orders whose Customer's Name is 'Jansen'?",
+    "options": [
+      "//Sales.Order[Customer.Name='Jansen']",
+      "//Sales.Order[Sales.Customer_Order/Sales.Customer/Name='Jansen']",
+      "//Sales.Order[Customer = '/Sales.Customer[Name=\"Jansen\"]']",
+      "//Sales.Order WHERE Customer.Name = 'Jansen'"
+    ],
+    "correctIndex": 1,
+    "explanation": "XPath path navigation uses the association name FOLLOWED BY the target entity name, separated by slashes: `[Sales.Customer_Order/Sales.Customer/Name='Jansen']`. Dot notation across associations (`Customer.Name`) does NOT work in Mendix XPath; that is C#/Java style. SQL syntax (`WHERE`) is wrong. Embedded XPath subqueries are unnecessary here."
+  },
+  {
+    "id": "q-332",
+    "category": "integration",
+    "knowledgePath": "Integration > Import Mappings > Object Handling",
+    "question": "An import mapping's Object Handling option 'Find by key' does what?",
+    "options": [
+      "Always creates a new object regardless of existing data",
+      "Looks up an existing object by the configured key attribute(s); if not found, creates a new one",
+      "Skips the row entirely if a matching object exists",
+      "Updates ONLY the key attribute, leaving other attributes unchanged"
+    ],
+    "correctIndex": 1,
+    "explanation": "Find by key prevents duplicate object creation: if a row in the incoming JSON/XML matches an existing object by the chosen key, that object is updated; otherwise a new one is created. This is the upsert pattern. 'Create object' would always insert, leading to duplicates."
+  },
+  {
+    "id": "q-333",
+    "category": "integration",
+    "knowledgePath": "Integration > REST > Published Services",
+    "question": "Where do you find the auto-generated Swagger/OpenAPI documentation for a published REST service in a Mendix app?",
+    "options": [
+      "Inside Studio Pro under Services > Documentation",
+      "At the URL path `/rest-doc/` on the running application",
+      "In a separate .swagger file in the project directory",
+      "Mendix does not auto-generate REST documentation"
+    ],
+    "correctIndex": 1,
+    "explanation": "Each running app serves an interactive Swagger UI at `/rest-doc/`. There is also `/ws-doc/` for SOAP services. Production hardening guides recommend disabling these endpoints in public environments. Mendix DOES generate the documentation — that is a common myth among newcomers."
+  },
+  {
+    "id": "q-334",
+    "category": "integration",
+    "knowledgePath": "Integration > REST > Authentication",
+    "question": "Which authentication option for a published REST service requires NO user account but still enforces app-level security?",
+    "options": [
+      "Basic authentication",
+      "Custom microflow",
+      "Anonymous user (when enabled app-wide)",
+      "No authentication"
+    ],
+    "correctIndex": 2,
+    "explanation": "'Anonymous user' lets unauthenticated callers in while applying the constraints of the anonymous role (so they only see what that role allows). 'No authentication' goes further — no role context is applied. Basic and Custom microflow both involve identifying a user. The distinction between 'Anonymous' and 'No authentication' is a common exam trap."
+  },
+  {
+    "id": "q-335",
+    "category": "integration",
+    "knowledgePath": "Integration > Web Service Users",
+    "question": "A published REST endpoint requires authentication. A traditional 'web service user' tries to access it. What happens?",
+    "options": [
+      "Access is granted as long as the credentials are valid",
+      "Access is denied — web service users cannot access REST services",
+      "Access is granted but read-only",
+      "Access depends on whether the endpoint is OData or REST"
+    ],
+    "correctIndex": 1,
+    "explanation": "Web service users are scoped to SOAP services, not REST. To call a REST endpoint, the caller must authenticate as a normal System.User or via a custom microflow. This separation is easy to miss because the term 'web service' is sometimes used loosely to mean any HTTP API."
+  },
+  {
+    "id": "q-336",
+    "category": "integration",
+    "knowledgePath": "Integration > Mappings > Direction",
+    "question": "Which mapping converts incoming JSON into Mendix objects?",
+    "options": [
+      "Export mapping",
+      "Import mapping",
+      "Either — Mendix mappings are bidirectional",
+      "Neither — that conversion uses Java only"
+    ],
+    "correctIndex": 1,
+    "explanation": "Import mapping = external data (JSON/XML) INTO Mendix objects. Export mapping = Mendix objects OUT to JSON/XML. The names are intuitive once internalised, but on the exam under pressure people swap them. A handy memory aid: 'import' means bringing IN to Mendix; 'export' means sending OUT."
+  },
+  {
+    "id": "q-337",
+    "category": "integration",
+    "knowledgePath": "Integration > REST > Call Activity",
+    "question": "Which system entities are involved in the Call REST Service activity in a microflow?",
+    "options": [
+      "RestRequest and RestResponse",
+      "HttpRequest and HttpResponse",
+      "Request and Response",
+      "WebRequest and WebResponse"
+    ],
+    "correctIndex": 1,
+    "explanation": "Mendix uses HttpRequest and HttpResponse system entities. Their names reflect that REST is just HTTP under the hood. The other names sound plausible but do not exist in the System module — being precise about system entity names saves real debugging time."
+  },
+  {
+    "id": "q-338",
+    "category": "integration",
+    "knowledgePath": "Integration > OData",
+    "question": "Which protocol does Mendix Catalog primarily use to expose datasets for cross-app integration?",
+    "options": [
+      "SOAP/XML",
+      "OData",
+      "GraphQL",
+      "Plain JSON over a custom REST endpoint"
+    ],
+    "correctIndex": 1,
+    "explanation": "Mendix Catalog (formerly Mendix Connect) is built around OData — a standardized protocol for queryable data services that pairs naturally with External Entities. GraphQL is offered too but as an experimental option. SOAP is legacy. The plain-REST distractor sounds reasonable but is not the catalog's mechanism."
+  },
+  {
+    "id": "q-339",
+    "category": "integration",
+    "knowledgePath": "Integration > Error Handling",
+    "question": "After a Call REST Service activity fails with HTTP 500, which variable contains the response body and status code for inspection?",
+    "options": [
+      "$latestError",
+      "$latestHttpResponse",
+      "$latestSoapFault",
+      "$httpException"
+    ],
+    "correctIndex": 1,
+    "explanation": "`$latestHttpResponse` is set on REST failures and carries the body, status code, and headers — perfect for branching on error type. `$latestError` carries general error info (message, type, stacktrace) that applies across any failure. `$latestSoapFault` is SOAP-specific. `$httpException` is not a real variable."
+  },
+  {
+    "id": "q-340",
+    "category": "integration",
+    "knowledgePath": "Integration > Logging",
+    "question": "You need detailed logs for inbound REST requests during troubleshooting. What is the recommended approach?",
+    "options": [
+      "Add Log Message activities to every published microflow",
+      "Set the log level of the 'REST Publish' log node to Trace",
+      "Increase application-wide log verbosity to Debug",
+      "There is no built-in REST logging — only third-party tools work"
+    ],
+    "correctIndex": 1,
+    "explanation": "Mendix provides a dedicated 'REST Publish' log node. Setting it to Trace gives request/response detail without flooding logs from unrelated areas. Manual Log Message activities give less detail (no request body, headers) and app-wide Debug is noisy. Knowing the log node names is useful for ops scenarios."
+  },
+  {
+    "id": "q-341",
+    "category": "integration",
+    "knowledgePath": "Integration > External Entities",
+    "question": "Which statement about External Entities is correct?",
+    "options": [
+      "They are stored in the Mendix database but flagged as external",
+      "Their structure is defined by the source system and accessed via the Mendix Catalog",
+      "They behave identically to non-persistable entities at runtime",
+      "They support full CRUD without restrictions"
+    ],
+    "correctIndex": 1,
+    "explanation": "External Entities point to datasets owned by ANOTHER system, surfaced through the Mendix Catalog (typically over OData). Their schema is defined externally. They are not stored in your local DB, they differ meaningfully from NPEs, and write support depends on what the source system allows — full unrestricted CRUD is not guaranteed."
+  },
+  {
+    "id": "q-342",
+    "category": "java",
+    "knowledgePath": "Java > Folder Structure",
+    "question": "A teammate asks where to add the JAR for a new third-party library used by a custom Java action. Where do you tell them to put it?",
+    "options": [
+      "Inside `javasource/[module]/proxies/`",
+      "Inside `javasource/[module]/actions/`",
+      "In the project's `userlib/` folder",
+      "In Studio Pro's installation directory"
+    ],
+    "correctIndex": 2,
+    "explanation": "Project-level `userlib/` is where external JARs go. It is checked into source control and Studio Pro picks the JARs up at deploy time. Adding them inside `proxies/` or `actions/` puts them in the wrong namespace, and Studio Pro's install directory is per-machine and absolutely wrong for team collaboration."
+  },
+  {
+    "id": "q-343",
+    "category": "java",
+    "knowledgePath": "Java > Proxies",
+    "question": "When are proxy classes in `javasource/[module]/proxies/` updated?",
+    "options": [
+      "Manually whenever the developer chooses",
+      "Automatically when the domain model changes and you deploy",
+      "Once at project creation; never again",
+      "Only when a Java action is added or removed"
+    ],
+    "correctIndex": 1,
+    "explanation": "Proxies are regenerated automatically on deploy whenever the domain model has shifted — that is exactly why you must NOT edit them by hand. Manual edits would be discarded on the next deploy and silently break code that depended on them. Adding/removing Java actions affects the `actions/` folder, not `proxies/`."
+  },
+  {
+    "id": "q-344",
+    "category": "java",
+    "knowledgePath": "Java > User Code Markers",
+    "question": "Where in a generated Java action class is it safe to add your own implementation logic?",
+    "options": [
+      "Anywhere in the file — Studio Pro preserves all edits",
+      "Between the `//BEGIN USER CODE` and `//END USER CODE` markers",
+      "Only in the constructor",
+      "In a separate utility class — never in the generated file"
+    ],
+    "correctIndex": 1,
+    "explanation": "Generated Java files include `//BEGIN USER CODE` / `//END USER CODE` markers. Code inside is preserved across regenerations; code outside will be overwritten. Putting logic outside the markers — even with the best intentions — leads to silent loss of work."
+  },
+  {
+    "id": "q-345",
+    "category": "java",
+    "knowledgePath": "Java > Calling Java Actions",
+    "question": "How do you invoke a Java action from a microflow?",
+    "options": [
+      "Use a Call Web Service activity pointing at the action",
+      "Drag the Java action from the App Explorer onto the microflow as an activity",
+      "Embed `import com.mendix...; myAction();` inside a Java expression",
+      "Java actions are only callable from other Java code, not from microflows"
+    ],
+    "correctIndex": 1,
+    "explanation": "Java actions are first-class microflow activities — dragging one in from the App Explorer creates a Call Java Action step. They are NOT invoked through web services, NOT embedded as code snippets, and they are absolutely usable from microflows (that is their primary purpose; nanoflows are the ones that cannot call Java)."
+  },
+  {
+    "id": "q-346",
+    "category": "java",
+    "knowledgePath": "Java > Microflows vs Nanoflows",
+    "question": "Can a nanoflow call a Java action?",
+    "options": [
+      "Yes — Java actions are available in both microflows and nanoflows",
+      "No — Java actions are server-side and not available in nanoflows; use JavaScript actions there",
+      "Yes, but only if the nanoflow runs in an online context",
+      "Yes, but the call is asynchronous"
+    ],
+    "correctIndex": 1,
+    "explanation": "Java actions run in the JVM on the server, which nanoflows cannot reach. Nanoflows offer JavaScript actions as the client-side equivalent. The trap is symmetry-thinking — nanoflows and microflows look similar, but the runtime/language split is strict for action types."
+  },
+  {
+    "id": "q-347",
+    "category": "java",
+    "knowledgePath": "Java > Return Types",
+    "question": "Which return type is NOT supported by a Java action?",
+    "options": [
+      "String",
+      "An entity object (e.g. Customer)",
+      "A list of objects",
+      "A Mendix microflow reference (to call later)"
+    ],
+    "correctIndex": 3,
+    "explanation": "Java actions return data — primitives, strings, entity objects, lists, dates, booleans, etc. They do NOT return executable references to microflows; microflow invocation is a model-level concept, not a runtime value you can pass back. The other options are all standard return types."
+  },
+  {
+    "id": "q-348",
+    "category": "java",
+    "knowledgePath": "Java > Object Retrieval",
+    "question": "You are writing Java action code that retrieves Customer objects. Which approach is recommended?",
+    "options": [
+      "Build raw XPath strings concatenated from user input",
+      "Use the proxy classes generated by Studio Pro for type-safe access",
+      "Call Mendix's internal undocumented database driver directly",
+      "Open a JDBC connection and write SQL"
+    ],
+    "correctIndex": 1,
+    "explanation": "Generated proxy classes give compile-time type safety: when your domain model changes, your Java code stops compiling instead of silently breaking at runtime. Raw XPath strings work but are brittle and easy to mistype. Internal APIs and direct JDBC are unsupported and bypass Mendix security."
+  },
+  {
+    "id": "q-349",
+    "category": "java",
+    "knowledgePath": "Java > Deploy For Eclipse",
+    "question": "Why is 'Deploy for Eclipse' important when working with custom Java?",
+    "options": [
+      "It uploads the project to Mendix Cloud",
+      "It synchronises Studio Pro's generated code with your Eclipse workspace so proxies and action skeletons match the current model",
+      "It compiles JARs in `userlib/` into a single shaded artifact",
+      "It runs unit tests on your Java actions"
+    ],
+    "correctIndex": 1,
+    "explanation": "Deploy for Eclipse regenerates the proxies and action skeletons so Eclipse sees the latest domain-model-derived classes. Without it, your IDE shows stale types and refuses to compile. It does NOT upload, does NOT bundle JARs, and does NOT run tests. It is purely a local synchronisation step."
+  },
+  {
+    "id": "q-350",
+    "category": "java",
+    "knowledgePath": "Java > Input Validation",
+    "question": "What is the recommended treatment of input parameters inside a Java action?",
+    "options": [
+      "Trust them — Mendix has already validated everything",
+      "Check and sanitise them defensively to prevent exceptions or injection attempts",
+      "Wrap every parameter in `Optional` to avoid nulls",
+      "Cast them to Object first to avoid type errors"
+    ],
+    "correctIndex": 1,
+    "explanation": "Inputs reaching Java actions can come from microflows that have their own user-input chain — sanitise and check defensively. Mendix's modeller validates types but not semantic content (a String can still be SQL-poison, or null). Wrapping in Optional or casting to Object is busywork that does not address the actual risk."
+  },
+  {
+    "id": "q-351",
+    "category": "java",
+    "knowledgePath": "Java > Community Commons",
+    "question": "When working with complex XPath queries inside Java actions, what is a recommended helper?",
+    "options": [
+      "The Community Commons module's XPath helpers",
+      "Apache Commons Lang3",
+      "java.util.regex.Pattern",
+      "javax.persistence.Query"
+    ],
+    "correctIndex": 0,
+    "explanation": "Community Commons offers prebuilt XPath utilities that perform null/permission checks and reduce boilerplate. Apache Commons Lang3 is great for string/array utilities but does not know about Mendix. Regex and javax.persistence belong to other ecosystems and do not integrate with Mendix's runtime."
+  },
+  {
+    "id": "q-352",
+    "category": "events",
+    "knowledgePath": "Event Handlers > Before vs After",
+    "question": "A BEFORE Commit event handler microflow returns FALSE. What happens?",
+    "options": [
+      "The commit proceeds; the return value is informational only",
+      "The commit is cancelled — Before handlers can veto the event by returning false",
+      "The handler is re-run until it returns true, with a maximum of three retries",
+      "An error is shown and the user is logged out"
+    ],
+    "correctIndex": 1,
+    "explanation": "Before handlers return a boolean: true means 'go ahead with the event', false means 'cancel it'. AFTER handlers cannot cancel anything because the event has already happened. Knowing which side of the event you have control over decides whether to put validation logic in a Before or simply observation in an After."
+  },
+  {
+    "id": "q-353",
+    "category": "events",
+    "knowledgePath": "Event Handlers > Parameter Passing",
+    "question": "Which event handler does NOT receive the entity object as a parameter?",
+    "options": [
+      "After Create",
+      "Before Create",
+      "Before Commit",
+      "Before Delete"
+    ],
+    "correctIndex": 1,
+    "explanation": "Before Create runs before the object EXISTS — there is no object to hand the microflow yet. After Create runs once the object has been instantiated, and all other event types operate on existing objects, so they all receive the object as a parameter. This is a precise rule that trips a lot of candidates."
+  },
+  {
+    "id": "q-354",
+    "category": "events",
+    "knowledgePath": "Event Handlers > Prefix",
+    "question": "A microflow is named `ACO_Order`. Which event does it most likely handle?",
+    "options": [
+      "Action triggered on Order (page button)",
+      "After Commit of Order",
+      "After Cancel of Order",
+      "Asynchronous Order processing"
+    ],
+    "correctIndex": 1,
+    "explanation": "ACO = After Commit. ACR = After Create. BCO = Before Commit. BCR = Before Create. The 'O' is for Commit (not Order) and the 'A' is for After. The ACT_ prefix (page action) is distinct. Mastering these prefixes pays off because their meaning is highly testable."
+  },
+  {
+    "id": "q-355",
+    "category": "events",
+    "knowledgePath": "Validation Rules > Required",
+    "question": "Validation rules apply to which kind of entity?",
+    "options": [
+      "Persistable entities only",
+      "Non-persistable entities only",
+      "Both equally",
+      "Only entities with at least one association"
+    ],
+    "correctIndex": 0,
+    "explanation": "Validation rules exist to enforce DATABASE integrity, so they apply to persistable entities only. NPEs live in memory and have no database row to integrity-check at commit time — validation rules are disabled for them. The associations distractor sounds plausible but is unrelated."
+  },
+  {
+    "id": "q-356",
+    "category": "events",
+    "knowledgePath": "Validation Rules > Unique",
+    "question": "Can you define a Unique validation rule on an inherited attribute in a specialized entity?",
+    "options": [
+      "Yes — uniqueness applies across specializations automatically",
+      "No — unique validation rules cannot be defined on attributes inherited from a generalization",
+      "Yes, but only if the generalization also has the same rule",
+      "Yes, but only when security is set to Production"
+    ],
+    "correctIndex": 1,
+    "explanation": "Unique rules can only be defined where the attribute is FIRST declared. Trying to set Unique on an inherited attribute in a specialized entity fails by design. To enforce uniqueness across all specializations, place the rule on the GENERALIZATION's attribute."
+  },
+  {
+    "id": "q-357",
+    "category": "events",
+    "knowledgePath": "Event Handlers > After Handlers",
+    "question": "Why is it generally NOT a good idea to put expensive logic in an After Commit handler?",
+    "options": [
+      "After handlers cannot run for more than 50 ms",
+      "After handlers cannot return values, so debugging is impossible",
+      "They run for EVERY commit on the entity, so the cost is incurred on every save — even unrelated ones",
+      "They are blocked from running in Production environments"
+    ],
+    "correctIndex": 2,
+    "explanation": "After handlers fire on EVERY commit on the entity — including commits driven by unrelated microflows or batch imports. Putting heavy logic there silently slows down every save anywhere in the app. Use After handlers for things that genuinely need to happen on EVERY commit, and prefer explicit calls in the relevant flows otherwise."
+  },
+  {
+    "id": "q-358",
+    "category": "events",
+    "knowledgePath": "Validation Rules > Execution Order",
+    "question": "What is the order in which validation rules execute on an entity at commit time?",
+    "options": [
+      "All rules run in parallel; first error wins",
+      "Rules execute in defined order; uniqueness checks run separately AFTER the other validations pass",
+      "Rules execute alphabetically by attribute name",
+      "Only the first failing rule's error is reported"
+    ],
+    "correctIndex": 1,
+    "explanation": "Mendix runs validation rules sequentially in the order you defined them, and gathers ALL their violations to display together. Uniqueness checks are deferred to run after all other validations pass — a performance optimization, since unique checks hit the database. Hence the error UI can show several rule failures at once."
+  },
+  {
+    "id": "q-359",
+    "category": "events",
+    "knowledgePath": "Event Handlers > Validation in Before",
+    "question": "A Before Commit handler validates Order.Total > 0. If invalid, what is the cleanest way to signal a validation error to the user?",
+    "options": [
+      "Throw an exception with Continue error handling",
+      "Use a Validation Feedback activity inside the Before handler, then return false",
+      "Log the failure and return true so the commit proceeds",
+      "Show a Message activity then call Rollback Object"
+    ],
+    "correctIndex": 1,
+    "explanation": "Validation Feedback attaches a user-facing message to the form field, and returning false cancels the commit so the bad data never persists. Throwing exceptions is heavier and looks like a bug to users. Returning true lets bad data through. Manual Show Message + Rollback duplicates what Validation Feedback already does cleanly."
+  },
+  {
+    "id": "q-360",
+    "category": "events",
+    "knowledgePath": "Event Handlers > Multiple Handlers",
+    "question": "Can an entity have multiple Before Commit handlers attached at once?",
+    "options": [
+      "No — only one handler per event type per entity",
+      "Yes — multiple handlers can be configured per event type, and they all run",
+      "Yes, but only if security is set to Off",
+      "Multiple handlers exist but only the most recent is invoked"
+    ],
+    "correctIndex": 0,
+    "explanation": "Each entity has at most ONE handler per event timing (one Before Commit, one After Commit, one Before Delete, etc.). If you need composite logic, the handler microflow itself calls multiple sub-microflows. This single-handler rule keeps event ordering simple and predictable."
+  },
+  {
+    "id": "q-361",
+    "category": "events",
+    "knowledgePath": "Event Handlers > Use Sparingly",
+    "question": "Why does the Mendix documentation recommend using event handlers sparingly?",
+    "options": [
+      "Mendix charges per event handler invocation",
+      "Event handlers always commit data, causing performance hits",
+      "Handlers fire on EVERY occurrence of the event, so unintended side effects on unrelated flows become hard to predict and debug",
+      "Handlers cannot be unit tested"
+    ],
+    "correctIndex": 2,
+    "explanation": "The trade-off with handlers is invisibility: code reviewers looking at a microflow that calls Commit do not see the event handler being triggered. As handlers accumulate, behavior becomes harder to reason about. Reserve them for invariants you want enforced EVERY time, not for occasional side-effects."
+  },
+  {
+    "id": "q-362",
+    "category": "enumerations",
+    "knowledgePath": "Enumerations > Name vs Caption",
+    "question": "Which statement about enumeration value Names and Captions is correct?",
+    "options": [
+      "Names can contain spaces; Captions cannot",
+      "Names cannot contain spaces and cannot be changed after creation; Captions can contain any characters and are editable",
+      "Both Name and Caption can be freely edited at any time",
+      "Captions are the technical identifiers used in microflows; Names are user-facing labels"
+    ],
+    "correctIndex": 1,
+    "explanation": "Name = technical identifier (no spaces, starts with a letter, immutable once data exists). Caption = user-facing text (any characters, translatable, freely editable). Changing the Name would invalidate existing database rows storing that value. People often swap which one is technical."
+  },
+  {
+    "id": "q-363",
+    "category": "enumerations",
+    "knowledgePath": "Enumerations > Reserved Names",
+    "question": "Which proposed enumeration value Name is INVALID?",
+    "options": [
+      "OrderPlaced",
+      "OrderPlaced_2024",
+      "class",
+      "OPEN"
+    ],
+    "correctIndex": 2,
+    "explanation": "Reserved words such as `class`, `enum`, `boolean`, `abstract` cannot be used as enumeration value Names because they conflict with the Java code Mendix generates. Underscores, digits after the first character, and all-caps are all fine. The reserved-word constraint is unique to Names; Captions can be anything."
+  },
+  {
+    "id": "q-364",
+    "category": "enumerations",
+    "knowledgePath": "Enumerations > Localization",
+    "question": "You want 'Open' to appear as 'Ouvert' for French users. Where do you make the change?",
+    "options": [
+      "Edit the enumeration value's Name from 'Open' to 'Ouvert'",
+      "Edit the enumeration value's Caption via the Language Menu translation",
+      "Add a second enumeration value 'Ouvert' alongside 'Open'",
+      "Override at runtime through a microflow"
+    ],
+    "correctIndex": 1,
+    "explanation": "Captions are translatable through the Language Menu; you keep one technical value with multiple language-specific captions. Changing the Name would break database compatibility, adding parallel values explodes your model, and runtime overrides are unnecessary when localization is built in."
+  },
+  {
+    "id": "q-365",
+    "category": "enumerations",
+    "knowledgePath": "Enumerations > Functions",
+    "question": "Inside an expression, you have `$Order/Status` (an enum attribute). Which function returns the user-facing display text?",
+    "options": [
+      "getName()",
+      "getKey()",
+      "getCaption()",
+      "toString()"
+    ],
+    "correctIndex": 2,
+    "explanation": "`getCaption()` returns the translated, user-facing Caption. `getKey()` returns the technical Name. `getName()` and `toString()` are not specific to enumerations in Mendix expressions. Confusing getCaption and getKey leads to bugs where the wrong text shows up in UI vs logs."
+  },
+  {
+    "id": "q-366",
+    "category": "enumerations",
+    "knowledgePath": "Constants > Client Exposure",
+    "question": "A constant has 'Exposed to Client' set to YES. What MUST you NOT put in its value?",
+    "options": [
+      "An environment-specific URL for an upstream service",
+      "Sensitive data such as passwords, API secrets, or private keys",
+      "Boolean flags toggling features",
+      "Anything — exposed constants are read-only and safe"
+    ],
+    "correctIndex": 1,
+    "explanation": "Exposing a constant to the client makes its value visible in browser and offline app contexts — anyone with developer tools can read it. Use this for feature flags or display preferences, never for secrets. Even 'read-only' from the server's view, the value still travels to the device."
+  },
+  {
+    "id": "q-367",
+    "category": "enumerations",
+    "knowledgePath": "Constants > Expression Reference",
+    "question": "How do you reference a constant named `Sales.DefaultDiscount` in an expression?",
+    "options": [
+      "$Sales.DefaultDiscount",
+      "@Sales.DefaultDiscount",
+      "#Sales.DefaultDiscount",
+      "const(Sales.DefaultDiscount)"
+    ],
+    "correctIndex": 1,
+    "explanation": "Constants use the `@` prefix in expressions. `$` is for variables and objects. The other prefixes are not Mendix syntax. Mixing up `@` (constant) and `$` (variable) is one of the most reflexive errors when writing expressions."
+  },
+  {
+    "id": "q-368",
+    "category": "enumerations",
+    "knowledgePath": "Constants > Environment Overrides",
+    "question": "Where do you set a constant's value differently per environment on licensed Mendix Cloud?",
+    "options": [
+      "By editing the constant's Default Value in Studio Pro",
+      "Through the 'Model Options' tab in the environment details on the developer portal",
+      "By creating one constant per environment and switching between them",
+      "Through a microflow that runs at startup"
+    ],
+    "correctIndex": 1,
+    "explanation": "Per-environment constant values live in the cloud environment configuration ('Model Options' tab), not in Studio Pro. The Default Value in Studio Pro only applies locally and to Free Apps. Hand-rolling parallel constants or startup microflows misses the built-in mechanism."
+  },
+  {
+    "id": "q-369",
+    "category": "enumerations",
+    "knowledgePath": "Enumerations > Image",
+    "question": "When does the Image property on an enumeration value actually appear in the UI?",
+    "options": [
+      "Always — anywhere the enumeration is displayed",
+      "Only when the data grid column or widget displaying the enumeration is set to format 'Image'",
+      "Only on mobile pages",
+      "Never — Image is an internal development hint"
+    ],
+    "correctIndex": 1,
+    "explanation": "Images attached to enumeration values render only when the displaying widget (e.g. data grid column) is configured with format 'Image'. The default text format ignores them. People configure the image and wonder why nothing appears — the widget setting is the missing piece."
+  },
+  {
+    "id": "q-370",
+    "category": "enumerations",
+    "knowledgePath": "Constants > Data Types",
+    "question": "Which data type is NOT supported for a Mendix Constant?",
+    "options": [
+      "String",
+      "Boolean",
+      "Object reference to an entity",
+      "Decimal"
+    ],
+    "correctIndex": 2,
+    "explanation": "Constants are primitive: String, Boolean, Integer/Long, Decimal, Date and Time. They cannot hold an object reference to a domain-model entity (that would couple deployment-time config to runtime data). For dynamic per-environment data, use a startup microflow that retrieves objects via a key constant."
+  },
+  {
+    "id": "q-371",
+    "category": "enumerations",
+    "knowledgePath": "Enumerations > Renaming Values",
+    "question": "Why does Mendix refuse to let you rename the Name of an existing enumeration value once data exists?",
+    "options": [
+      "It would slow down the modeler",
+      "It would invalidate stored data — existing rows reference the old Name and would orphan",
+      "Name is automatically derived from Caption and cannot be edited",
+      "Renaming would break translations"
+    ],
+    "correctIndex": 1,
+    "explanation": "Enum attribute values are persisted as the Name string in the database. Renaming 'Open' to 'Opened' would leave every existing row pointing at a Name no longer defined — orphaned data. Mendix protects you from this. Captions can be renamed freely because they are display-only."
+  },
+  {
+    "id": "q-372",
+    "category": "scheduled-events",
+    "knowledgePath": "Scheduled Events > Free Apps",
+    "question": "What happens to scheduled events when the app is deployed as a Free App?",
+    "options": [
+      "They run normally on the Mendix Free Apps tier",
+      "They can be tested locally but will NOT run when deployed as a Free App",
+      "They run, but with a maximum of one execution per day",
+      "They are disabled in Studio Pro entirely on Free Apps"
+    ],
+    "correctIndex": 1,
+    "explanation": "Free Apps deliberately do not execute scheduled events — to encourage upgrade for production-style workloads. You can debug them locally, but once deployed to the Free App tier the scheduler is dormant. Many candidates forget this and waste time troubleshooting on Free Apps."
+  },
+  {
+    "id": "q-373",
+    "category": "scheduled-events",
+    "knowledgePath": "Scheduled Events > Microflow Constraints",
+    "question": "Which property is true of the microflow attached to a scheduled event?",
+    "options": [
+      "It can declare parameters that come from cron metadata",
+      "It takes NO parameters and executes with ALL rights",
+      "It runs as the user who deployed the app",
+      "It must return a Boolean indicating success or failure"
+    ],
+    "correctIndex": 1,
+    "explanation": "Scheduled-event microflows are parameterless and execute with all rights (no role checks). They have no concept of a current user. Return values are ignored — nothing checks them. Treating these microflows like normal user-triggered ones is a common source of bugs (e.g. assuming `$currentUser` is meaningful)."
+  },
+  {
+    "id": "q-374",
+    "category": "scheduled-events",
+    "knowledgePath": "Scheduled Events > Overlap Strategy",
+    "question": "A scheduled event configured to run every 5 minutes regularly takes 7 minutes to finish. With the default overlap strategy, what happens to the run that 'should' fire at minute 5?",
+    "options": [
+      "It runs in parallel with the still-executing one",
+      "It is skipped; the next attempted run will be at minute 10 (or later, if the previous one is still ongoing)",
+      "It is queued and runs immediately after the current one finishes",
+      "It causes an immediate error and halts the scheduler"
+    ],
+    "correctIndex": 1,
+    "explanation": "Default = 'Skip next'. If the previous run is still active when the next scheduled fire-time arrives, that next run is skipped — not queued. The alternative is 'Delay next' which starts immediately after the previous one finishes (and risks drifting from the schedule). Choose whichever matches your data freshness vs. ordering needs."
+  },
+  {
+    "id": "q-375",
+    "category": "scheduled-events",
+    "knowledgePath": "Scheduled Events > Concurrency Limits",
+    "question": "What is the maximum number of scheduled events that can run CONCURRENTLY on a single cluster node?",
+    "options": [
+      "1",
+      "5",
+      "10",
+      "Unlimited — the cluster scales as needed"
+    ],
+    "correctIndex": 2,
+    "explanation": "A cluster node can run up to TEN scheduled events concurrently. If you have more than ten events firing at once, the excess waits. This is a hard platform limit; horizontal scaling adds nodes but does not increase per-node concurrency."
+  },
+  {
+    "id": "q-376",
+    "category": "scheduled-events",
+    "knowledgePath": "Scheduled Events > Time Zone",
+    "question": "What time zone do Mendix Cloud servers use for scheduled events?",
+    "options": [
+      "The customer's billing time zone",
+      "Server local time, which varies by region",
+      "UTC — all Mendix Cloud servers operate on UTC",
+      "Eastern Standard Time, regardless of region"
+    ],
+    "correctIndex": 2,
+    "explanation": "All Mendix Cloud servers run on UTC. Scheduled events can be configured to interpret times in UTC or server time, but the underlying server clock is UTC. Forgetting this leads to events firing at unexpected local times for users in non-UTC regions."
+  },
+  {
+    "id": "q-377",
+    "category": "scheduled-events",
+    "knowledgePath": "Scheduled Events > Interval Divisors",
+    "question": "You configure a scheduled event with an interval of 'every 7 hours'. What happens?",
+    "options": [
+      "It runs every 7 hours starting at deploy time",
+      "It is rejected — hour and minute intervals must be integer divisors of 24 and 60 respectively",
+      "It runs at the closest legal interval (8 hours)",
+      "It runs every 7 hours but skips weekends"
+    ],
+    "correctIndex": 1,
+    "explanation": "Hour intervals must divide evenly into 24 (1, 2, 3, 4, 6, 8, 12, 24) and minute intervals must divide 60. 7 hours does not divide 24, so the modeler rejects it. This rule keeps each calendar day's schedule consistent."
+  },
+  {
+    "id": "q-378",
+    "category": "scheduled-events",
+    "knowledgePath": "Scheduled Events > Logging Table",
+    "question": "Each scheduled event execution creates a row in which system entity?",
+    "options": [
+      "System.LogEntry",
+      "System.ProcessedQueueTask",
+      "System.ScheduledEventLog",
+      "System.AuditTrail"
+    ],
+    "correctIndex": 1,
+    "explanation": "`System.ProcessedQueueTask` records each scheduled-event execution. Over time it grows; documentation explicitly recommends a cleanup mechanism (often itself a scheduled event). LogEntry, ScheduledEventLog, and AuditTrail are not the correct entity names — being precise about system entity naming saves debugging frustration."
+  },
+  {
+    "id": "q-379",
+    "category": "scheduled-events",
+    "knowledgePath": "Scheduled Events > Disable",
+    "question": "You want to temporarily stop a scheduled event from running without deleting it. What is the simplest approach?",
+    "options": [
+      "Delete and re-create it when needed again",
+      "Toggle the 'Enabled' property to false",
+      "Set the interval to 99 years",
+      "Remove the microflow reference"
+    ],
+    "correctIndex": 1,
+    "explanation": "Each scheduled event has an 'Enabled' boolean — flipping it false suspends execution without losing the configuration. Deleting throws away the schedule, weird intervals are hacky, and removing the microflow reference creates a broken state. Use the obvious switch."
+  },
+  {
+    "id": "q-380",
+    "category": "scheduled-events",
+    "knowledgePath": "Scheduled Events > Daily Cleanup",
+    "question": "What is a common best-practice use case for a scheduled event with a 'Daily' interval?",
+    "options": [
+      "Validating each new user signup",
+      "Sending a real-time notification when an order is placed",
+      "Cleaning up old System.ProcessedQueueTask records or aging temporary data",
+      "Rendering pages for visitors"
+    ],
+    "correctIndex": 2,
+    "explanation": "Daily scheduled events are well-suited to housekeeping: archiving old data, pruning logs, recalculating daily reports. Real-time signup validation or per-order notifications belong in event handlers / microflows. Page rendering is on-demand and has nothing to do with the scheduler."
+  },
+  {
+    "id": "q-381",
+    "category": "scheduled-events",
+    "knowledgePath": "Scheduled Events > Error Handling",
+    "question": "If the microflow of a scheduled event throws an uncaught error, what happens on the next scheduled fire?",
+    "options": [
+      "The scheduler retries the failed run immediately",
+      "The scheduled event is automatically disabled until a developer re-enables it",
+      "The next run fires on schedule as usual — failures do not pause the schedule",
+      "All scheduled events in the module are disabled"
+    ],
+    "correctIndex": 2,
+    "explanation": "A failed run is logged but does NOT pause the schedule — the next fire happens normally. This is why error handling INSIDE the microflow matters: log the failure, alert if appropriate, and design idempotent logic. The scheduler is intentionally simple about failures."
+  },
+  {
+    "id": "q-382",
+    "category": "agile",
+    "knowledgePath": "Agile > Scrum Roles",
+    "question": "In Scrum, who is responsible for maximising the value of the product and managing the Product Backlog?",
+    "options": [
+      "Scrum Master",
+      "Product Owner",
+      "Development Team",
+      "Stakeholder"
+    ],
+    "correctIndex": 1,
+    "explanation": "The Product Owner owns backlog prioritisation and value optimisation. The Scrum Master facilitates the process and removes impediments — they do not own priorities. The Development Team builds increments. Stakeholders inform the PO but do not have decision authority over the backlog."
+  },
+  {
+    "id": "q-383",
+    "category": "agile",
+    "knowledgePath": "Agile > Sprint Length",
+    "question": "What is the typical maximum length of a Scrum sprint?",
+    "options": [
+      "One week",
+      "Two weeks",
+      "One month (four weeks)",
+      "One quarter"
+    ],
+    "correctIndex": 2,
+    "explanation": "Sprints are time-boxed to one MONTH at most. Two weeks is common in practice, one week appears for very fast-cycle teams, and three or four weeks is the upper bound. A quarter is far too long for the feedback loops Scrum is built around."
+  },
+  {
+    "id": "q-384",
+    "category": "agile",
+    "knowledgePath": "Agile > User Stories",
+    "question": "Which is a well-formed user story format?",
+    "options": [
+      "'Implement the login button using Mendix sign-in widget'",
+      "'As a <role>, I want <goal>, so that <reason>'",
+      "'Story #142 — login flow improvements'",
+      "'TODO: add login'"
+    ],
+    "correctIndex": 1,
+    "explanation": "The classic user story template centers the user's role, the goal, and the value. Implementation-level descriptions ('use Mendix sign-in widget') belong in tasks. Ticket IDs and TODO blurbs lack the context needed for a story. The 'why' clause is often skipped but is what makes prioritisation meaningful."
+  },
+  {
+    "id": "q-385",
+    "category": "agile",
+    "knowledgePath": "Agile > Story Points",
+    "question": "What do story points primarily measure?",
+    "options": [
+      "Hours of effort",
+      "Relative complexity, effort, and uncertainty of a story compared to others",
+      "Lines of code",
+      "Number of acceptance criteria"
+    ],
+    "correctIndex": 1,
+    "explanation": "Story points are RELATIVE — they compare stories to one another in complexity, effort, and risk. Time estimates feel obvious but vary by person. Lines of code are an output metric, not a planning input. Acceptance criteria count tells you completeness rules, not size."
+  },
+  {
+    "id": "q-386",
+    "category": "agile",
+    "knowledgePath": "Agile > MVP",
+    "question": "What is the primary purpose of a Minimum Viable Product (MVP)?",
+    "options": [
+      "Ship the cheapest possible version to maximize profit margins",
+      "Get usable functionality in front of users quickly to validate assumptions with real feedback",
+      "Build a perfect feature set on the smallest possible team",
+      "Deliver a polished demo for stakeholders without real users"
+    ],
+    "correctIndex": 1,
+    "explanation": "An MVP validates assumptions in the marketplace — it is fundamentally a learning vehicle. 'Cheapest' or 'smallest team' miss the point: an MVP can be substantial as long as it is the smallest thing that produces real-user feedback. Polished demos without users yield no learning."
+  },
+  {
+    "id": "q-387",
+    "category": "agile",
+    "knowledgePath": "Agile > UX Research",
+    "question": "Which technique is BEST suited for understanding how users emotionally experience an application throughout their journey?",
+    "options": [
+      "A/B testing of button colors",
+      "User journey mapping with empathy considerations",
+      "Code reviews",
+      "Burndown chart analysis"
+    ],
+    "correctIndex": 1,
+    "explanation": "Journey mapping captures the user's emotional state, pain points, and 'aha' moments across an end-to-end interaction. A/B testing surfaces preferences on isolated choices but misses the holistic experience. Code reviews and burndown charts are engineering hygiene, not user experience."
+  },
+  {
+    "id": "q-388",
+    "category": "agile",
+    "knowledgePath": "Agile > Card Sorting",
+    "question": "A user-research technique where participants group items into categories that make sense to them is called:",
+    "options": [
+      "Wireframing",
+      "Card sorting",
+      "Customer Value Curve",
+      "Heuristic evaluation"
+    ],
+    "correctIndex": 1,
+    "explanation": "Card sorting reveals users' natural mental models — invaluable for information architecture decisions like menu structures. Wireframing communicates layout intent. A Customer Value Curve plots feature value against competitors. Heuristic evaluations are expert reviews against usability rules — none involves grouping items by participants."
+  },
+  {
+    "id": "q-389",
+    "category": "agile",
+    "knowledgePath": "Agile > Wireframes vs Prototypes",
+    "question": "What is the key difference between a wireframe and a prototype?",
+    "options": [
+      "Wireframes are colored; prototypes are grayscale",
+      "A wireframe is a static layout sketch; a prototype simulates interactivity and can be paper, low-fi, or high-fi",
+      "Wireframes are made in code; prototypes are made on paper only",
+      "There is no difference — the terms are interchangeable"
+    ],
+    "correctIndex": 1,
+    "explanation": "A wireframe shows STRUCTURE statically. A prototype demonstrates BEHAVIOUR — a sequence of screens you can click through, or even paper screens swapped by hand. Prototypes can be low or high fidelity. Color and tooling are not what defines the distinction; interactivity is."
+  },
+  {
+    "id": "q-390",
+    "category": "agile",
+    "knowledgePath": "Agile > Version Control > Team Server",
+    "question": "Which statement about Mendix Team Server is correct?",
+    "options": [
+      "It is a Git-based hosted version-control service for Mendix projects",
+      "It is a deployment environment for staging builds",
+      "It is the runtime that executes scheduled events",
+      "It is a desktop tool replacing Studio Pro"
+    ],
+    "correctIndex": 0,
+    "explanation": "Team Server is the hosted version-control system for Mendix apps, backed by Git. Studio Pro commits/pulls against it. The other distractors confuse Team Server with deployment, runtime, or Studio Pro itself. Knowing it is just Git underneath helps when troubleshooting branching issues."
+  },
+  {
+    "id": "q-391",
+    "category": "agile",
+    "knowledgePath": "Agile > Customer Value Curve",
+    "question": "What is the main aim of constructing a Customer Value Curve?",
+    "options": [
+      "To track sales over time",
+      "To plot how a product's offerings compare to competitors on customer-perceived value dimensions, exposing under- and over-investments",
+      "To map software architecture layers",
+      "To set story-point budgets per sprint"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Customer Value Curve (a strategy tool, sometimes called a 'strategy canvas') plots competing offerings along customer-valued attributes — revealing where to differentiate or save effort. It is not a sales tracker, not an architecture artefact, and not a sprint-planning device. It informs WHAT to build relative to the market."
   }
 ]
